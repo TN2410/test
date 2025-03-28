@@ -11,5 +11,6 @@ import streamlit as st
 df=pd.DataFrame(np.random.rand(100,2)/[20,20]+[35.19,138.80],columns=["lat","lon"])
 
 st.text("test")
-st.slider("testrrrst",0,50,100)
+st.slider("testrrrst",0,100,50)
 st.map(df)
+st.slider("testtest",0,10,5)
