@@ -11,7 +11,7 @@ import streamlit as st
 dirname = r'C:\Users\1219829\OneDrive - トヨタ自動車株式会社\○開発資料\WEC\FFT\DYNO_TEST\P0053\202503_PdSFTFr差\317_Dyno_File_0005_404_2025_HPP RH Z_accum_400.csv'
 
 #df=pd.read_csv(dirname, encoding='utf-8',skiprows=0)#ベースデータの読み込み
-print(len(df.columns))
+#print(len(df.columns))
 
 #t =0.8 * np.array(range(len(df.columns)-1))
 #最上行のカラム名を数値化し　neと定義する
