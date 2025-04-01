@@ -2,6 +2,8 @@
 
 
 import streamlit as st
+import pandas as pd
+
 
 age = st.slider("ファイルを選択してください", 0, 100, 20)
 
