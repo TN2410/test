@@ -6,5 +6,13 @@ import os
 
 
 age = st.slider("ファイルを選択してください", 0, 100, 20)
-plt.plot(33,3)
-plt.show()
+
+st.title("データフレームの表示")
+
+df = pd.DataFrame(
+    np.random.rand(20, 3),
+    columns=['Column A', 'Column B', 'Column C']
+)
+
+st.write("▼DataFrameの表示例")
+st.dataframe(df)  # データフレーム表示
