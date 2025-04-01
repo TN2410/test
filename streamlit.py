@@ -6,9 +6,7 @@ sys.path.append(r'C:\Users\1219829\AppData\Local\Programs\Python\Python312\Scrip
                 
 import os
 import numpy as np
-import matplotlib.pyplot as plt
-import IPython.display
-from IPython.display import display
+#import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 
@@ -21,8 +19,8 @@ t =0.8 * np.array(range(len(df.columns)-1))
 #最上行のカラム名を数値化し　neと定義する
 ne=df.columns[1:].astype(float)
 #回転数×時間のグラフ
-plt.plot(t,ne)
-plt.show()
+#plt.plot(t,ne)
+#plt.show()
 
 st.slider(0,int(t))
 
