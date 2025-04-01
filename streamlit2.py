@@ -13,4 +13,4 @@ if os.path.exists(dirname):
 else:
 	print("File does not exist!")
 
-age = st.slider("ファイルを選択してください", 0, 100, 20)
+age = st.slider("ファイルを選択してください", 0, 40, 20)
