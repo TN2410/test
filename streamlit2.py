@@ -3,5 +3,5 @@
 
 import streamlit as st
 
-st.slider(0,500,500)
+age = st.slider("ファイルを選択してください", 0, 100, 20)
 
