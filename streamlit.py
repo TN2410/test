@@ -5,7 +5,6 @@ sys.path.append(r'C:\Users\1219829\python\Py312\Scripts')
 sys.path.append(r'C:\Users\1219829\AppData\Local\Programs\Python\Python312\Scripts')
                 
 import os
-import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 
@@ -21,7 +20,7 @@ ne=df.columns[1:].astype(float)
 #plt.plot(t,ne)
 #plt.show()
 
-st.slider(0,int(t))
+st.slider(0,int(y))
 
 #全時間窓の代表回転数と周波数分析結果
 for j in range(1,len(df.columns)):
@@ -29,8 +28,8 @@ for j in range(1,len(df.columns)):
     x=df.iloc[:,0]
     y=df.iloc[:,j]
     
-    plt.plot(x,y)
-    plt.show()
+#    plt.plot(x,y)
+#    plt.show()
 
 # st.session_state
 # st.write
