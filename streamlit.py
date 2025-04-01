@@ -5,7 +5,6 @@ sys.path.append(r'C:\Users\1219829\python\Py312\Scripts')
 sys.path.append(r'C:\Users\1219829\AppData\Local\Programs\Python\Python312\Scripts')
                 
 import os
-import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
@@ -15,7 +14,7 @@ dirname = r'C:\Users\1219829\OneDrive - トヨタ自動車株式会社\○開発
 df=pd.read_csv(dirname, encoding='utf-8',skiprows=0)#ベースデータの読み込み
 print(len(df.columns))
 
-t =0.8 * np.array(range(len(df.columns)-1))
+#t =0.8 * np.array(range(len(df.columns)-1))
 #最上行のカラム名を数値化し　neと定義する
 ne=df.columns[1:].astype(float)
 #回転数×時間のグラフ
