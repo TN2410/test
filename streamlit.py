@@ -20,7 +20,7 @@ dirname = r'C:\Users\1219829\OneDrive - トヨタ自動車株式会社\○開発
 #plt.plot(t,ne)
 #plt.show()
 
-st.slider(0,500)
+st.sliderbar(0,500)
 
 #全時間窓の代表回転数と周波数分析結果
 #for j in range(1,len(df.columns)):
