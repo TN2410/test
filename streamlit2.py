@@ -6,3 +6,5 @@ import os
 
 
 age = st.slider("ファイルを選択してください", 0, 100, 20)
+plt.plot(33,3)
+plt.show()
