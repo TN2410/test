@@ -5,7 +5,6 @@ sys.path.append(r'C:\Users\1219829\python\Py312\Scripts')
 sys.path.append(r'C:\Users\1219829\AppData\Local\Programs\Python\Python312\Scripts')
                 
 import os
-from tqdm import tqdm
 import numpy as np
 import matplotlib.pyplot as plt
 import IPython.display
