@@ -4,7 +4,6 @@ import os
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 filename=r"C:\Users\1219829\Desktop\python\streamlit\317_Dyno_File_0003_404_520wk_HPP LH X_accum_400.csv"
@@ -34,10 +33,7 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file , encoding="utf-8")
     st.scatter_chart(df, x=df.iloc[0,:], y=df.iloc[1,:])
 
-    # matplotlibで図を用意する
-    fig = plt.figure()
     # streamlit plot
-    st.pyplot(fig)
 
  
     st.write(f'中央値：{median}')
