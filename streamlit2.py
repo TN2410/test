@@ -24,7 +24,7 @@ age = st.slider("ファイルを選択してください",0,100,20)
 
 
 # ファイルアップローダーの準備
-uploaded_file = st.file_uploader("C:\Users\1219829\Desktop\python\streamlit\317_Dyno_File_0003_404_520wk_HPP LH X_accum_400.csv", type="csv")
+uploaded_file = st.file_uploader(r"C:\Users\1219829\Desktop\python\streamlit\317_Dyno_File_0003_404_520wk_HPP LH X_accum_400.csv", type="csv")
 
 # uploadファイルが存在するときだけ、csvファイルの読み込みがされる。
 if uploaded_file is not None:
