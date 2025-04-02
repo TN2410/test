@@ -1,3 +1,9 @@
+import sys
+
+sys.path.append(r'c:\users\1219829\python\py38\lib\site-packages')
+sys.path.append(r'C:\Users\1219829\python\Py38\Scripts')
+sys.path.append(r'C:\Users\1219829\AppData\Local\Programs\Python\Python312\Lib\site-packages')
+
 import streamlit as st
 import librosa
 import librosa.display
@@ -7,11 +13,6 @@ from datetime import time
 import datetime
 import plotly.graph_objects as go
 import plotly.express as px
-import sys
-
-sys.path.append(r'c:\users\1219829\python\py38\lib\site-packages')
-sys.path.append(r'C:\Users\1219829\python\Py38\Scripts')
-sys.path.append(r'C:\Users\1219829\AppData\Local\Programs\Python\Python312\Lib\site-packages')
 
 plt.rcParams["font.size"] = 18
 HOP = 1000
