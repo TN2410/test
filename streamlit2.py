@@ -21,3 +21,21 @@ age = st.slider("ファイルを選択してください",0,40,20)
 
 age = st.slider("ファイルを選択してください",0,800,20)
 age = st.slider("ファイルを選択してください",0,100,20)
+
+
+# ファイルアップローダーの準備
+uploaded_file = st.file_uploader("C:\Users\1219829\Desktop\python\streamlit\317_Dyno_File_0003_404_520wk_HPP LH X_accum_400.csv", type="csv")
+
+# uploadファイルが存在するときだけ、csvファイルの読み込みがされる。
+if uploaded_file is not None:
+    # データファイルの読み込み
+    df = pd.read_csv(uploaded_file , encoding="utf-8")
+   
+    # matplotlibで図を用意する
+    fig = plt.figure()
+    # streamlit plot
+    st.pyplot(fig)
+
+ 
+    st.write(f'中央値：{median}')
+    st.write(f'平均値：{mean}')
