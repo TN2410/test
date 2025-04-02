@@ -6,14 +6,13 @@ import pandas as pd
 
 filename = r'C:\Users\1219829\Desktop\python\streamlit\317_Dyno_File_0003_404_520wk_HPP LH X_accum_400.csv'
 
-if os.path.exists(filename):
-	df = pd.read_csv(filename, encoding="utf-8", skiprows=0)
-	print(df.columns)
-	st.title(df.columns)
-	age = st.slider("ファイルを選択してください",0,40,20)
-else:
-	st.title(filename)
-	print(df.columns)
+df = pd.read_csv(filename, encoding="utf-8", skiprows=0)
 
-	age = st.slider("ファイルを選択してください",0,800,20)
-	age = st.slider("ファイルを選択してください",0,100,20)
+st.dataframe(df)
+	
+st.title(df.columns)
+age = st.slider("ファイルを選択してください",0,40,20)
+
+
+age = st.slider("ファイルを選択してください",0,800,20)
+age = st.slider("ファイルを選択してください",0,100,20)
