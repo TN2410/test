@@ -31,7 +31,7 @@ uploaded_file = st.file_uploader(r"C:\Users\1219829\Desktop\python\streamlit\317
 if uploaded_file is not None:
     # データファイルの読み込み
     df = pd.read_csv(uploaded_file , encoding="utf-8")
-    st.scatter_chart(df, x=df.["freq"], y=df.["max"])
+    st.scatter_chart(df, x=df["freq"], y=df["max"])
 
     # streamlit plot
 
