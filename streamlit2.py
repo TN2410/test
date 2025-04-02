@@ -4,9 +4,9 @@ import os
 import streamlit as st
 import pandas as pd
 
-filename = r'C:\Users\1219829\Desktop\python\streamlit\317_Dyno_File_0003_404_520wk_HPP LH X_accum_400.csv'
+filename = r"C:\Users\1219829\Desktop\python\streamlit\317_Dyno_File_0003_404_520wk_HPP LH X_accum_400.csv"
 
-df = pd.read_csv(filename, encoding="utf-8", skiprows=0)
+df = pd.read_csv(filename, encoding='CP932', skiprows=0)
 #st.dataframe(df.columns)
 	
 st.title("filename")
