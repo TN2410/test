@@ -13,5 +13,7 @@ if os.path.exists(filename):
 	age = st.slider("ファイルを選択してください",0,40,20)
 else:
 	st.title(filename)
+	print(df.columns)
+
 	age = st.slider("ファイルを選択してください",0,800,20)
 	age = st.slider("ファイルを選択してください",0,100,20)
