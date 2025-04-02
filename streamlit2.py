@@ -6,7 +6,13 @@ import pandas as pd
 
 filename=r"C:\Users\1219829\Desktop\python\streamlit\317_Dyno_File_0003_404_520wk_HPP LH X_accum_400.csv"
 
-df = pd.read_csv(filename, encoding='utf-8', skiprows=0)
+data = pd.DataFrame({
+    'weight': np.random.normal(150, 10, 100),
+    'height': np.random.normal(50, 5, 100)
+})
+st.scatter_chart(data, x="weight", y="height")
+
+#df = pd.read_csv(filename, encoding='utf-8', skiprows=0)
 #st.dataframe(df.columns)
 	
 st.title("filename")
