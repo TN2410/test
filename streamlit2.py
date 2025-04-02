@@ -3,6 +3,7 @@
 import os
 import streamlit as st
 import pandas as pd
+import numpy as np
 
 filename=r"C:\Users\1219829\Desktop\python\streamlit\317_Dyno_File_0003_404_520wk_HPP LH X_accum_400.csv"
 
