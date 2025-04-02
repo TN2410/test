@@ -33,8 +33,7 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file , encoding="utf-8")
     st.scatter_chart(df, x=df["freq"], y=df["max"])
 
-    # streamlit plot
-
- 
-    st.write(f'中央値：{median}')
-    st.write(f'平均値：{mean}')
+column = st.selectbox('フィルタリングする列を選択してください', data.columns)
+min_val, max_val = st.slider('値の範囲を選択してください', min(df[column]), max(df[column]), (min(df[column]), max(df[column])))
+filtered_df = df[(df[column] >= min_val) & (df[column] <= max_val)]
+st.dataframe(filtered_df)
