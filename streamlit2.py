@@ -9,7 +9,7 @@ dirname = r'C:\Users\1219829\Desktop\python\streamlit\317_Dyno_File_0003_404_520
 if os.path.exists(dirname):
 	df = pd.read_csv(dirname, encoding="utf-8", skiprows=0)
 	print(df.columns)
-	st.title("exist data")
+	st.title(df.columns)
 	age = st.slider("ファイルを選択してください",0,40,20)
 else:
 	st.title("not exist data")
