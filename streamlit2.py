@@ -14,7 +14,7 @@ import os
 import streamlit as st
 import pandas as pd
 
-dirname = r'C:\Users\1219829\Desktop\python\streamlit\fft_P0053-00-02_0230_07416rpm_520kW_Tc_trd1__38分割.csv'
+dirname = r'C:\Users\1219829\Desktop\python\streamlit\ff.csv'
 
 if os.path.exists(dirname):
 	df = pd.read_csv(dirname, encoding="utf-8", skiprows=0)
