@@ -10,7 +10,7 @@ import os
 f = st.file_uploader("CSVファイルをアップロードしてください", type="csv")
 
 # ファイルがアップロードされた場合
-if uploaded_file is not None:
+if f is not None:
     df = pd.read_csv(f,index_col=0)
     filename= os.path.basename(f)
     filename_no_extension = os.path.splitext(filename)[0]
