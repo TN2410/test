@@ -15,9 +15,9 @@ uploaded_file = st.file_uploader("CSVファイルをアップロードしてく�
 
 # ファイルがアップロードされた場合
 if uploaded_file is not None:
-   	df = pd.read_csv(uploaded_file)
-   	st.write("アップロードされたデータフレーム:")
-	st.write(df)
+    df = pd.read_csv(uploaded_file)
+    st.write("アップロードされたデータフレーム:")
+    st.write(df)
 	st.title("not exist data")
 	age = st.slider("ファイルを選択してください",0,800,20)
 	age = st.slider("ファイルを選択してください",0,100,20)
