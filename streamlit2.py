@@ -16,7 +16,6 @@ if f is not None:
     st.write(df)
 
     # matplotlibで図を用意する
-    fig = plt.figure()
     time=np.arrange(0,len(df.columns),1)
     plt.plot(time, df.columns, marker='.', markersize=10)
     #plt.xlim(0.5, 12.5)
