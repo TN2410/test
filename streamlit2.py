@@ -9,10 +9,8 @@ data = pd.DataFrame({
 st.scatter_chart(data, x="weight", y="height")
 
 #FFT 累積データをstreamlitで表示する
-
-
-
 # ファイルアップロード
+
 uploaded_file = st.file_uploader("CSVファイルをアップロードしてください", type="csv")
 
 # ファイルがアップロードされた場合
@@ -20,9 +18,6 @@ if uploaded_file is not None:
    	df = pd.read_csv(uploaded_file)
    	st.write("アップロードされたデータフレーム:")
 	st.write(df)
-
-
-
 
 st.title("not exist data")
 age = st.slider("ファイルを選択してください",0,800,20)
