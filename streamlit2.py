@@ -29,7 +29,7 @@ if f is not None:
     st.write(df)
 
     # matplotlibで図を用意する
-    time=np.arange(0,len(df.columns),1)
+    time=np.arange(0,8192,1)
 
     st.scatter_chart(df,x=time , y=time)
 	
