@@ -1,29 +1,21 @@
 import sys
 
-sys.path.append('C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\python312.zip',
- 'C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\DLLs',
- 'C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\Lib',
- 'C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312',
- '',
- 'C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages',
- 'C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\win32',
- 'C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\win32\\lib',
- 'C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\Pythonwin')
+sys.path.append('C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\python312.zip')
+sys.path.append('C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\DLLs')
+sys.path.append('C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\Lib')
+sys.path.append('C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312')
+sys.path.append('C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages')
+sys.path.append('C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\win32')
+sys.path.append('C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\python312.zip')
+sys.path.append('C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\win32\\lib')
+sys.path.append('C:\\Users\\1219829\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\Pythonwin')
+
 
 import streamlit as st
 import pandas as pd
 import numpy as np
 import os
 import matplotlib.pyplot as plt
-
-
-
-
-
-
-
-
-
 
 
 #FFT 累積データをstreamlitで表示する
