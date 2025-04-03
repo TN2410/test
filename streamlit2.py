@@ -28,7 +28,9 @@ if f is not None:
     st.write("アップロードされたデータフレーム:")
     st.write(df)
 
-    # matplotlibで図を用意する
+    fig = plt.figure()
+    plt.plot(df.iloc[:,0],df.iloc[:,1])
+    st.pyplot(fig)
     time=np.arange(0,8192,1)
 
     st.scatter_chart(df,x=time , y=time)
