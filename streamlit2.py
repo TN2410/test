@@ -14,7 +14,6 @@ if f is not None:
     df = pd.read_csv(f,index_col=0)
     st.write("アップロードされたデータフレーム:")
     st.write(df)
-    st.title(filename_no_extension)
 
     # matplotlibで図を用意する
     fig = plt.figure()
