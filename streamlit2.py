@@ -31,17 +31,12 @@ if f is not None:
 
     # matplotlibで図を用意する
     time=np.arrange(0,len(df.columns),1)
-    plt.plot(time, df.columns, marker='.', markersize=10)
+
+    st.scatter_chart(df,x=time , y=time)
+
+
     #plt.xlim(0.5, 12.5)
     #plt.ylim(0, 40)
-    plt.title('Average Temperature at Kyoto in 2018', fontsize=15)
-    plt.xlabel('month', fontsize=10)
-    plt.ylabel('average temperature (deg)', fontsize=10)
-
-    # streamlit plot
-    st.pyplot(fig)
-
-
 
 
     age = st.slider("ファイルを選択してください",0,800,20)
