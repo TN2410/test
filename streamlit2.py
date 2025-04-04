@@ -14,7 +14,7 @@ if f is not None:
     df = pd.read_csv(f,index_col=0)
     st.write("アップロードされたデータフレーム:")
 
-    df = pd.DataFrame(np.random.rand(20, 3),columns=['a', 'b', 'c'])
+    df = pd.DataFrame(np.random.randint(20, 3),columns=['a', 'b', 'c'])
 
     max_value=int(df['a'].max())
 
