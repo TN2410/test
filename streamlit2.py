@@ -15,12 +15,12 @@ if f is not None:
     st.write("アップロードされたデータフレーム:")
     max_value=int(df["freq"].max())
     min_value=int(df["freq"].min())
-    slider=st.slider("指定範囲", min_value, max_value, max_value, 1)
-    slider2=st.slider("指定範囲", min_value, max_value, max_value, 1)
+    slider=st.slider("下限範囲", min_value, max_value, max_value, 10)
+    slider2=st.slider("上限範囲", min_value, max_value, max_value, 10)
 
 #上記スライダにて以下データをフィルタリング
 
     df = df[df["freq"] >=slider]
     df2 = df[df["freq"] <=slider2]
 
-    st.scatter_chart(df,x=df["freq"],y=df["max"])
+    st.scatter_chart(df2,x=df2["fre],y=df2["max"])
