@@ -15,7 +15,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
-import matplotlib.pyplot as plt
 
 
 #FFT 累積データをstreamlitで表示する
@@ -29,15 +28,11 @@ if f is not None:
     st.write("アップロードされたデータフレーム:")
     st.write(df)
 
-    fig = plt.figure()
-    plt.plot(df.iloc[:,0],df.iloc[:,1])
-    st.pyplot(fig)
     time=np.arange(0,8192,1)
 
-    st.scatter_chart(df,x=time , y=time)
+    st.scatter_chart(df,x=df.iloc[:,0] , y=x=df.iloc[:,2])
 	
-    fig=plt.figure()
-    plt.plot(df.iloc[:,1])
+
     #plt.xlim(0.5, 12.5)
     #plt.ylim(0, 40)
 
