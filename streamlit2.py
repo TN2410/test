@@ -11,7 +11,7 @@ f = st.file_uploader("CSVファイルをアップロードしてください", t
 
 # ファイルがアップロードされた場合
 if f is not None:
-    df = pd.read_csv(f,index=0)
+    df = pd.read_csv(f,index_col=0)
     st.write("アップロードされたデータフレーム:")
     
     st.write(df)
