@@ -13,17 +13,35 @@ f = st.file_uploader("CSVファイルをアップロードしてください", t
 # ファイルがアップロードされた場合
 if f is not None:
     df = pd.read_csv(f,index_col=0)
-    df.loc["test"]=0
-    st.title(df.columns)
     st.write("アップロードされたデータフレーム:")
-    st.write(df)
+　　x=np.arange(0,100,1)
+    y=np.arange(0,200,2)
 
-    time=np.arange(0,8192,1)
+    max_value=x.max()
 
-    st.scatter_chart(df,x="freq",y="max")	
+    min_value=y.min()
+    slider=st.slider("指定範囲", min_value, max_value, max_value, 1)
 
-    #plt.xlim(0.5, 12.5)
-    #plt.ylim(0, 40)
+#上記スライダにて以下データをフィルタリング
 
-    age = st.slider("ファイルを選択してください",0,800,20)
-    age = st.slider("ファイルを選択してください",0,100,20)
+    x = [x <=slider]
+
+
+
+    plt.plot(x, y)
+    plt.title('Matplotlib and Streamlit')
+    plt.xlabel('X-axis')
+    plt.ylabel('Y-axis')
+
+# Streamlitで表示
+    st.pyplot(plt)
+
+
+
+
+
+
+
+##メダルの色と数の棒グラフを作成する##
+st.write(
+    px.bar(df, x='medal', y='count')
