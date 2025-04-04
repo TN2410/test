@@ -14,7 +14,7 @@ f = st.file_uploader("CSVファイルをアップロードしてください", t
 if f is not None:
     df = pd.read_csv(f,index_col=0)
     st.write("アップロードされたデータフレーム:")
-　　x=np.arange(0,100,1)
+    x=np.arange(0,100,1)
     y=np.arange(0,200,2)
 
     max_value=x.max()
