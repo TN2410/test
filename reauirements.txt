@@ -134,12 +134,13 @@ packaging==24.1
 pandas==2.2.2
 pandocfilters==1.5.1
 parsedatetime==2.6
-parso==0.8.4
+parso==0.8.4=
 pathmagic==0.3.14
 patsy==1.0.1
 pillow==10.4.0
 platformdirs==4.2.2
 plotly==6.0.1
+plotly.express=0.4.1
 pooch==1.8.2
 prettierfier==1.0.3
 proglog==0.1.10
