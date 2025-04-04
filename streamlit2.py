@@ -13,12 +13,15 @@ f = st.file_uploader("CSVファイルをアップロードしてください", t
 if f is not None:
     df = pd.read_csv(f)
     st.write("アップロードされたデータフレーム:")
+    
+    st.write(df)
     max_value=int(df["freq"].max())
     min_value=int(df["freq"].min())
 
     slider=st.slider("下限範囲", min_value, max_value, min_value, 1)
     df = df[df["freq"] >= slider]
     
+
     st.scatter_chart(df,x=df["freq"],y=df["max"])
 
 #    slider2=st.slider("上限範囲", min_value, max_value, max_value, 1)
