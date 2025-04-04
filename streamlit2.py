@@ -14,8 +14,7 @@ if f is not None:
     df = pd.read_csv(f,index_col=0)
     st.write("アップロードされたデータフレーム:")
     
-    df = pd.DataFrame(np.arange(100),reshape(10, 10),
-                  columns=['col_0', 'col_1', 'col_2', 'col_3'])
+    df = pd.DataFrame(data={'col_0': np.arange(0,100,1), 'col_1': np.arange(0,200,2)})
 
     max_value=df["col0"].max()
 
