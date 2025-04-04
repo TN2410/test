@@ -30,7 +30,7 @@ if f is not None:
 
     time=np.arange(0,8192,1)
 
-    st.scatter_chart(df,x=df.iloc[:,0] , y=df.iloc[:,2])
+    st.scatter_chart(df,x="freq".y="max")
 	
 
     #plt.xlim(0.5, 12.5)
