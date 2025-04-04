@@ -98,7 +98,7 @@ lxml_html_clean==0.4.1
 Markdown==3.7
 markdown-it-py==3.0.0
 MarkupSafe==2.1.5
-matplotlib==3.9.1
+matplotlib==3.10.1
 matplotlib-inline==0.1.7
 maybe-else==0.2.1
 mbstrdecoder==1.1.4
