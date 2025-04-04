@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
+import plotly.express as px
 
 
 #FFT 累積データをstreamlitで表示する
