@@ -13,7 +13,9 @@ f = st.file_uploader("CSVファイルをアップロードしてください", t
 if f is not None:
     df = pd.read_csv(f,index_col=0)
     st.write("アップロードされたデータフレーム:")
-
+    row = 5
+    cols = 5
+    
     Random = np.random.randint(low=0, high=100, size=(row, cols))
 
     df = pd.DataFrame(Random)
