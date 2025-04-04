@@ -26,8 +26,6 @@ if f is not None:
 
     x = [x <=slider]
 
-
-
     plt.plot(x, y)
     plt.title('Matplotlib and Streamlit')
     plt.xlabel('X-axis')
@@ -35,13 +33,3 @@ if f is not None:
 
 # Streamlitで表示
     st.pyplot(plt)
-
-
-
-
-
-
-
-##メダルの色と数の棒グラフを作成する##
-st.write(
-    px.bar(df, x='medal', y='count')
