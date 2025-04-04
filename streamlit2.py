@@ -20,9 +20,9 @@ if f is not None:
 
     df = pd.DataFrame(Random)
     
-    max_value=int(df['1'].max())
+    max_value=int(df.iloc[:,1].max())
 
-    min_value=int(df['1'].min())
+    min_value=int(df.iloc[:,1].min())
     slider=st.slider("指定範囲", min_value, max_value, max_value, 1)
 
     st.line_chart(df)
@@ -30,5 +30,5 @@ if f is not None:
 
 #上記スライダにて以下データをフィルタリング
 
-    df = df[df['1'] <=slider]
+    df = df[df.iloc[:,1] <=slider]
     st.line_chart(df)
