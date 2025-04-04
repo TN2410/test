@@ -20,4 +20,4 @@ if f is not None:
 #上記スライダにて以下データをフィルタリング
 
     df = df[df["freq"] <=slider]
-    st.line_chart(df)
+    st.scatter_chart(df,x=df["freq"],y=df["max"])
