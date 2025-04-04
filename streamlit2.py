@@ -19,5 +19,5 @@ if f is not None:
 
 #上記スライダにて以下データをフィルタリング
 
-    df = df[df[freq] <=slider]
+    df = df[df["freq"] <=slider]
     st.line_chart(df)
