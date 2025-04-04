@@ -11,7 +11,7 @@ f = st.file_uploader("CSVファイルをアップロードしてください", t
 
 # ファイルがアップロードされた場合
 if f is not None:
-    df = pd.read_csv(f,index_col=0)
+    df = pd.read_csv(f)
     st.write("アップロードされたデータフレーム:")
     max_value=int(df["freq"].max())
     min_value=int(df["freq"].min())
