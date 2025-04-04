@@ -16,7 +16,7 @@ if f is not None:
     max_value=int(df["freq"].max())
     min_value=int(df["freq"].min())
 
-    slider=st.slider("下限範囲", min_value, max_value, max_value, 10)
+    slider=st.slider("下限範囲", min_value, max_value, min_value, 10)
     df = df[df["freq"] >= slider]
     
     slider2=st.slider("上限範囲", min_value, max_value, max_value, 10)
