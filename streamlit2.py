@@ -19,7 +19,7 @@ if f is not None:
     min_value=int(df["freq"].min())
 
     slider=st.slider("下限範囲", min_value, max_value, min_value, 1)
-    df = df[df.["freq"] >= slider]
+    df = df[df["freq"] >= slider]
     
     st.write(df)
 
