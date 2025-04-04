@@ -16,9 +16,9 @@ if f is not None:
 
     df = pd.DataFrame(np.random.rand(20, 3),columns=['a', 'b', 'c'])
 
-    max_value=df['a'].max()
+    max_value=int(df['a'].max())
 
-    min_value=df['a'].min()
+    min_value=int(df['a'].min())
     slider=st.slider("指定範囲", min_value, max_value, max_value, 1)
 
     st.line_chart(df)
