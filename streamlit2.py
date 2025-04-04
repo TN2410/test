@@ -14,11 +14,13 @@ if f is not None:
     df = pd.read_csv(f,index_col=0)
     st.write("アップロードされたデータフレーム:")
 
-    df = pd.DataFrame(np.random.randint(20, 3),columns=['a', 'b', 'c'])
+    Random = np.random.randint(low=0, high=100, size=(row, cols))
 
-    max_value=int(df['a'].max())
+    df = pd.DataFrame(Random)
+    
+    max_value=int(df['1'].max())
 
-    min_value=int(df['a'].min())
+    min_value=int(df['1'].min())
     slider=st.slider("指定範囲", min_value, max_value, max_value, 1)
 
     st.line_chart(df)
@@ -26,5 +28,5 @@ if f is not None:
 
 #上記スライダにて以下データをフィルタリング
 
-    df = df[df['a'] <=slider]
+    df = df[df['1'] <=slider]
     st.line_chart(df)
