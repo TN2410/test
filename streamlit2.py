@@ -25,9 +25,6 @@ if f is not None:
     min_value=int(df.iloc[:,1].min())
     slider=st.slider("指定範囲", min_value, max_value, max_value, 1)
 
-    st.line_chart(df)
-
-
 #上記スライダにて以下データをフィルタリング
 
     df = df[df.iloc[:,1] <=slider]
