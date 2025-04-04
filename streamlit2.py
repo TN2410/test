@@ -25,4 +25,4 @@ if f is not None:
 
     df2 = df[df["freq"] <=slider2]
 
-    st.scatter_chart(df2,x=df2["fre],y=df2["max"])
+    st.scatter_chart(df2,x=df2["freq"],y=df2["max"])
