@@ -140,7 +140,7 @@ patsy==1.0.1
 pillow==10.4.0
 platformdirs==4.2.2
 plotly==6.0.1
-plotly.express=0.4.1
+plotly-express=0.4.1
 pooch==1.8.2
 prettierfier==1.0.3
 proglog==0.1.10
