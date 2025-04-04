@@ -28,6 +28,3 @@ if f is not None:
 st.write(
     px.bar(df, x=df['col_0'], y=df['col_1'] ,title='sample figure')
 )
-
-
-'
