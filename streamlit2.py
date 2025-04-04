@@ -13,19 +13,14 @@ f = st.file_uploader("CSVファイルをアップロードしてください", t
 if f is not None:
     df = pd.read_csv(f,index_col=0)
     st.write("アップロードされたデータフレーム:")
-row = 5
-cols = 5
-    
-Random = np.random.randint(low=0, high=100, size=(row, cols))
 
-df = pd.DataFrame(Random)
     
-max_value=int(df.iloc[:,1].max())
+　　max_value=int(df["freq"].max())
 
-min_value=int(df.iloc[:,1].min())
+　　min_value=int(df["freq"].min())
 slider=st.slider("指定範囲", min_value, max_value, max_value, 1)
 
 #上記スライダにて以下データをフィルタリング
 
-df = df[df.iloc[:,1] <=slider]
+df = df[df[freq] <=slider]
 st.line_chart(df)
