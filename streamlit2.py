@@ -24,9 +24,9 @@ if f is not None:
 
 #上記スライダにて以下データをフィルタリング
 
-    df = df[df["col_0"] <=slider]
+    df_n = df[df["col_0"] <=slider]
 st.write(
-    px.scatter(df, x=df['col_0'], y=df['col_1'] ,title="sample figure",color='nation')
+    px.bar(df_n, x=df['col_0'], y=df['col_1'] ,title="sample figure",color='nation')
 )
 
 
