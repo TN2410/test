@@ -13,7 +13,7 @@ f = st.file_uploader("CSVファイルをアップロードしてください", t
 if f is not None:
     df = pd.read_csv(f,index_col=0)
     df.loc["test"]=0
-    st.title(df.iloc[1,1] )
+    st.title(df.columns)
     st.write("アップロードされたデータフレーム:")
     st.write(df)
 
