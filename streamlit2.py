@@ -31,11 +31,3 @@ st.write(
 )
 
 
-
-    plt.plot(x, y)
-    plt.title('Matplotlib and Streamlit')
-    plt.xlabel('X-axis')
-    plt.ylabel('Y-axis')
-
-# Streamlitで表示
-    st.pyplot(plt)
