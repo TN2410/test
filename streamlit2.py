@@ -23,7 +23,7 @@ if f is not None:
     
     st.write(df)
 
-    st.scatter_chart(df,x=df["freq"],y=df["max"])
+    st.scatter_chart(df,x=df['freq'],y=df['max'])
 
 #    slider2=st.slider("上限範囲", min_value, max_value, max_value, 1)
 #    df2 = df[df["freq"] <= slider2]
