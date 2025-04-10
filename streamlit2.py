@@ -21,7 +21,7 @@ if f is not None:
     df.loc['time'] = np.arange(0,len(df.columns))
 
  
-    st.scatter_chart(df,y=df.columns.tolist())
+    st.scatter_chart(df,x=df.loc['time'],y=df.columns.tolist())
     st.write("アップロードされたデータフレーム:")
     #slider=st.slider("下限範囲", min_value, max_value, max_value, 1)
     #df = df[df["freq"] <= slider]
