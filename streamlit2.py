@@ -7,7 +7,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
-import matplotlib.pyplot as plt
 
 #FFT 累積データをstreamlitで表示する
 # ファイルアップロード
@@ -21,15 +20,6 @@ if f is not None:
 
     df.loc['time'] = np.arange(0,len(df.columns))
 
-    print(df)
-    
-    figure=plt.figure()
-    y = df.columns.tolist()
-    x = df.loc['time'] 
-    plt.plot(x,y)
-    plt.show()
-    
-    plt.savefig(r'C:\Users\1219829\Desktop\python\streamlit\figure01.jpg')
  
     st.scatter_chart(df,y=df.columns.tolist())
     st.write("アップロードされたデータフレーム:")
