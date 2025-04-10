@@ -23,6 +23,7 @@ if f is not None:
     df=df.T
     df['time'] = np.arange(0,len(df))
     df['ne'] = df.index.tolist()
+    print(df)
 
     # x = df['time'] 
     # y = df['ne'] 
@@ -30,7 +31,7 @@ if f is not None:
     # plt.show()
     #plt.savefig(r'C:\Users\1219829\Desktop\python\streamlit\figure01.jpg')
  
-    st.scatter_chart(df,x="time",y="ne")
+    st.scatter_chart(df,x='time',y='ne')
     st.write("アップロードされたデータフレーム:")
 
 
