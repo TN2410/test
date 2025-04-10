@@ -20,7 +20,21 @@ if f is not None:
 
     df.loc['time'] = np.arange(0,len(df.columns))
 
+    df=df.T
+    df['time'] = np.arange(0,len(df))
+    df['ne'] = df.index.tolist()
+
+    # x = df['time'] 
+    # y = df['ne'] 
+    # plt.plot(x,y)
+    # plt.show()
+    #plt.savefig(r'C:\Users\1219829\Desktop\python\streamlit\figure01.jpg')
  
+    st.scatter_chart(df,x="time",y="ne")
+    st.write("アップロードされたデータフレーム:")
+
+
+
     st.scatter_chart(df,x=df.loc['time'],y=df.columns.tolist())
     st.write("アップロードされたデータフレーム:")
     #slider=st.slider("下限範囲", min_value, max_value, max_value, 1)
