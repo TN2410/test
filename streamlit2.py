@@ -25,6 +25,8 @@ if f is not None:
     df["NE"][1:] = df["NE"][1:].astype(float)
     df['Time'] = df['Time'].astype(int)
 
+    df=df.astype(float)
+
     max_value=df['Time'].max()
     min_value=df['Time'].min()
 
