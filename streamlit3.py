@@ -18,5 +18,6 @@ rpm=[]
 if f is not None:
     df = pd.read_csv(f,sep="[\t\0]",index_col=0)
 #    slider=st.slider("範囲", min_value, max_value, max_value, 10)
+    df["Time"]=np.arange(len(df))
     st.scatter_chart(df,x='Time',y='NE')
     print(slider)
