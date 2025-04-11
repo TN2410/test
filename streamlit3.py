@@ -19,4 +19,4 @@ if f is not None:
     df = pd.read_csv(f,sep="[\t\0]",index_col=0)
     
 #    slider=st.slider("範囲", min_value, max_value, max_value, 10)
-    st.scatter_chart(df,x='NE',y='NE')
+    st.scatter_chart(df,x='Time',y='NE')
