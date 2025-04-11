@@ -18,7 +18,7 @@ rpm=[]
 # ファイルがアップロードされた場合
 if f is not None:
     df = pd.read_csv(f,sep="[\t\0]",index_col=0)
-    df["NE"][1:] = df["NE"][1:].astype(float)
+    df["NE"][1:] = df["NE"][1:].astype(int)
 
     max_value = df["NE"][1:].max()
     min_value = df["NE"][1:].min()
