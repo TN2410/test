@@ -18,10 +18,10 @@ rpm=[]
 # ファイルがアップロードされた場合
 if f is not None:
     df = pd.read_csv(f,sep="[\t\0]",index_col=0)
-    df["NE"] = df["NE"].astype(float)
+    df["NE"][1:] = df["NE"][1:].astype(float)
 
-    max_value = df["NE"].max()
-    min_value = df["NE"].min()
+    max_value = df["NE"][1:].max()
+    min_value = df["NE"][1:].min()
 
     slider=st.slider("範囲", min_value, max_value, max_value, 10)
     df["Time"]=np.arange(len(df)).astype(float)
