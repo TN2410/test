@@ -31,5 +31,4 @@ if f is not None:
 
     df= df[df['Time'] <=slider]
 
-    
-    st.scatter_chart(df,x='time',y='ne')
+    st.scatter_chart(df,x='Time',y='NE')
