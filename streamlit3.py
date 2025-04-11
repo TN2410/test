@@ -23,6 +23,8 @@ if f is not None:
     max_value = df["NE"][1:].max()
     min_value = df["NE"][1:].min()
 
+    st.line_chart(df.set_index('NE'))
+
     slider=st.slider("範囲", min_value, max_value, max_value, 10)
     df["Time"]=np.arange(len(df)).astype(float)
     x=df["Time"][1:]
@@ -31,7 +33,7 @@ if f is not None:
 
 
     plt.plot(x, y)
-    plt.title('Matplotlib and Streamlit')
+    plt.title("testtest")
     plt.xlabel('X-axis')  
     plt.ylabel('Y-axis')
 
