@@ -22,7 +22,7 @@ if f is not None:
 
     df['Time'] = np.arange(0,len(df))
     df['NE'] = df.index.tolist()
-    df["NE"] = df.["NE"].astype(int)
+    df["NE"] = df["NE"].astype(int)
     df['Time'] = df['Time'].astype(int)
 
     max_value=df['Time'].max()
