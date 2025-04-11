@@ -25,6 +25,15 @@ if f is not None:
 
     slider=st.slider("範囲", min_value, max_value, max_value, 10)
     df["Time"]=np.arange(len(df)).astype(float)
-
-    st.scatter_chart(df,x='Time',y='NE')
+    x=df["Time"][1:]
+    y=df["NE"][1:]
 #    print(slider)
+
+
+    plt.plot(x, y)
+    plt.title('Matplotlib and Streamlit')
+    plt.xlabel('X-axis')  
+    plt.ylabel('Y-axis')
+
+# Streamlitで表示
+    st.pyplot(plt)
