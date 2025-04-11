@@ -27,8 +27,9 @@ if f is not None:
     max_value=df['Time'].max()
     min_value=df['Time'].min()
 
+    slider=st.slider("範囲", min_value, max_value, max_value, 10)
+
     df= df[df['Time'] <=slider]
 
     
-    slider=st.slider("範囲", min_value, max_value, max_value, 10)
     st.scatter_chart(df,x='time',y='ne')
