@@ -20,10 +20,9 @@ if f is not None:
     df = pd.read_csv(f,index_col=0)
     df=df.T
 
-    df['time'] = np.arange(0,len(df))
-    df['ne'] = df.index.tolist()
-    df['ne'] = df['ne'].astype(float)
-    print(df['ne'])
+    df['Time'] = np.arange(0,len(df))
+    df['NE'] = df.index.tolist()
+    df['Time'] = df['Time'].astype(int)
 
     max_value=df['Time'].max()
     min_value=df['Time'].min()
