@@ -26,7 +26,6 @@ if f is not None:
 
     max_value=df['ne'].max()
     min_value=df['ne'].min()
-
+    
+    slider=st.slider("範囲", min_value, max_value, max_value, 10)
     st.scatter_chart(df,x='time',y='ne')
-    st.write("アップロードされたデータフレーム:")
-    slider=st.slider("範囲", min_value, max_value, max_value, 1)
