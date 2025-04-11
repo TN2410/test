@@ -33,6 +33,6 @@ if f is not None:
     slider=st.slider("範囲", min_value, max_value, max_value, 10)
 
     df= df[df['Time'] <=slider]
-    st.line_chart(df)
+    st.line_chart(df.T)
     #st.scatter_chart(df,x='Time',y='NE')
     
