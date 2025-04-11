@@ -22,7 +22,7 @@ if f is not None:
     df['time'] = np.arange(0,len(df))
     df['ne'] = df.index.tolist()
     df['ne'] = df['ne'].astype(float)
-    print(df)
+    print(df['ne'])
 
     st.scatter_chart(df,x='time',y='ne')
     st.write("アップロードされたデータフレーム:")
