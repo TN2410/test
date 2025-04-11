@@ -7,6 +7,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import matplotlib.pyplot as plt
 
 #FFT 累積データをstreamlitで表示する
 # ファイルアップロード
@@ -17,7 +18,13 @@ rpm=[]
 # ファイルがアップロードされた場合
 if f is not None:
     df = pd.read_csv(f,sep="[\t\0]",index_col=0)
-#    slider=st.slider("範囲", min_value, max_value, max_value, 10)
-    df["Time"]=np.arange(len(df))
+    df["NE"] = df["NE"].astype(float)
+
+    max_value = df["NE"].max()
+    min_value = df["NE"].min()
+
+    slider=st.slider("範囲", min_value, max_value, max_value, 10)
+    df["Time"]=np.arange(len(df)).astype(float)
+
     st.scatter_chart(df,x='Time',y='NE')
-    print(slider)
+#    print(slider)
