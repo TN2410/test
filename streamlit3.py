@@ -23,7 +23,8 @@ if f is not None:
     max_value = df["NE"][1:].max()
     min_value = df["NE"][1:].min()
 
-    st.line_chart(df.set_index('NE'))
+    df["Time"] = np.arange(len(df))
+    st.scatter_chart(df,x="Time",y="NE")
 
     slider=st.slider("範囲", min_value, max_value, max_value, 10)
     df["Time"]=np.arange(len(df)).astype(float)
