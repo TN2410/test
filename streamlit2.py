@@ -34,12 +34,13 @@ if f is not None:
     df["FREQ"]=list(df.index)
     df["Final"] =  df.iloc[1:,slider]
 
+    fig=plt.figure()
+
     x=df["FREQ"]
     y=df["Final"]
 
-    fig=plt.figure()
 
-    plt.scatter(x,y)
+    plt.scatter(1,1)
     plt.xlim(-8200, 0)
     
     plt.show()
