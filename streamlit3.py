@@ -15,7 +15,7 @@ f = st.file_uploader("txtファイルをアップロードしてください", t
 if f is not None:
 #フォルダ名とチェックボックスを表示
     df = pd.read_csv(f,sep="[\t\0]",index_col=0)
-    selected_data = data[st.multiselect('列を選択してください', df.columns)]
+    selected_data = df[st.multiselect('列を選択してください', df.columns)]
     st.line_chart(selected_data)
 #smpファイルよりチェックRAM名を読み取り
 #結果表示
