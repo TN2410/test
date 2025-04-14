@@ -30,6 +30,12 @@ if f is not None:
     #指定回転数の色を分ける
     st.scatter_chart(df,x='Time',y="NE",color=color)
 
+    df=df.T
+　　df["FREQ"]=list(df.index)
+    time = 10
+    rpm =  df.columns[time]
+　　
+    st.scatter_chart(df,x='FREQ',y=rpm　,color=color)
 
 
     
