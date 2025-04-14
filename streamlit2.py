@@ -39,10 +39,9 @@ if f is not None:
     x=df["FREQ"]
     y=df["Final"]
 
-
     plt.scatter(1,1)
     plt.xlim(-8200, 0)
     
-    plt.show()
+    st.pyplot(fib)
 
     
