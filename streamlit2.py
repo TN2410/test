@@ -32,14 +32,13 @@ if f is not None:
 
     df=df.T
     df["FREQ"]=list(df.index)
-    df["Final"] =  df.iloc[1:,slider]
-
-    fig=plt.figure()
+    df["Final"] =  
 
     x=df["FREQ"]
     y=df["Final"]
 
-    plt.scatter(x,y)
+    plt.scatter(df.index,df[slider])
+    fig=plt.figure()
     plt.xlim(-8200, 0)
     
     st.pyplot(fig)
