@@ -34,7 +34,14 @@ if f is not None:
     df["FREQ"]=list(df.index)
     df["Final"] =  df.iloc[:-1,slider]
 
-    st.scatter_chart(df,x='FREQ',y="Final",color=color)
+    x=df["FREQ"]
+    y=df["Final"]
 
+    fig=plt.figure()
+
+    plt.scatter(x,y)
+    plt.xlim(-8200, 0)
+    
+    plt.show()
 
     
