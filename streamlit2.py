@@ -16,14 +16,12 @@ f = st.file_uploader("accumCSVファイルをアップロードしてくださ�
 # ファイルがアップロードされた場合
 if f is not None:
     df = pd.read_csv(f,index_col=0)#8192までがindex　#カラム名は回転数
-    df = df.T
-    df['Time'] = np.arange(0,len(df))
-    df = df.T    
-
-    df["NE"] = df["NE"].astype(float)
-    df['Time'] = df['Time'].astype(int)
-
     df=df.astype(float)
+    
+    df['Time'] = np.arange(0,len(df))
+    df['Time'] = df['Time'].astype(int)   df = df.T
+    
+    df = df.T    
     print(df)
     #option = st.selectbox('日付',list(range(1, 32)))
 
