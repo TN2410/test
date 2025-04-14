@@ -34,6 +34,6 @@ if f is not None:
     #plt.plot(df[["Time"]],df[["NE"]])
 
     plt.plot(df.columns[:-2].tolist(),df.iloc[slider,:-2].tolist())
-    #plt.xlim(-8200, 0)
+    plt.xlim(0, 4096)
     
     st.pyplot(fig)
