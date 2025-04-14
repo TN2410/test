@@ -32,7 +32,7 @@ if f is not None:
 
     df=df.T
     df["FREQ"]=list(df.index)
-    df["Final"] =  df.iloc[:-1,slider]
+    df["Final"] =  df.iloc[1:,slider]
 
     x=df["FREQ"]
     y=df["Final"]
