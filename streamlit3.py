@@ -47,7 +47,7 @@ if f is not None:
     plt.title("testtest")
     plt.xlabel('X-axis')  
     plt.ylabel('Y-axis')
-    if st.checkbox('グラフ表示'):
+    if st.checkbox(df.columns):
         st.write('グラフを表示する')
         st.pyplot(fig)
 
