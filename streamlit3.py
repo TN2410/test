@@ -25,14 +25,19 @@ if f is not None:
 
     df["Time"] = np.arange(len(df))
 
-
+    if st.checkbox('詳細を表示する'):
+        st.write('testtest')
+#スライダの値は一つのみ
     slider=st.slider("範囲", min_value, max_value, max_value, 10)
     slider2=st.slider("範囲", min_value, max_value, 0, 10)
     slider3=st.slider("範囲", min_value, max_value, max_value, 100)
     slider4=st.slider("範囲", min_value, max_value, 0, 100)
-#    df=df[df["NE"][1:]<slider]
 
+    df_ne=df[df["NE"][1:]<slider]
+#　　データフレーム操作必要
+#
  #   st.scatter_chart(df,x="Time",y="NE")
+#グラフの表示変更はOK
 
     df["Time"]=np.arange(len(df)).astype(float)
     x=df["Time"][1:]
