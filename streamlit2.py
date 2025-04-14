@@ -26,8 +26,8 @@ if f is not None:
     #option = st.selectbox('日付',list(range(1, 32)))
 
     slider=st.slider("範囲", 0, len(df), 0, 10)
-
-    st.scatter_chart(df,x='Time',y="NE")
+    #指定回転数の色を分ける
+    st.scatter_chart(df,x='Time',y="NE"、color="r")
 
 
 
