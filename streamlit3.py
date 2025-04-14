@@ -1,5 +1,4 @@
-#FFT 累積データをstreamlitで表示する
-# ファイルアップロード
+#FFT 累積データをフォルダ選択で自動計算する
 
 #%matplotlib inline
 import os,time,gc,math,glob
@@ -9,16 +8,18 @@ import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
 
-#FFT 累積データをstreamlitで表示する
 # ファイルアップロード
-
 f = st.file_uploader("txtファイルをアップロードしてください", type="txt")
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
-rpm=[]
 # ファイルがアップロードされた場合
 if f is not None:
+#フォルダ名とチェックボックスを表示
     df = pd.read_csv(f,sep="[\t\0]",index_col=0)
-    df["NE"][1:] = df["NE"][1:].astype(int)
+    selected_data = data[st.multiselect('列を選択してください', df.columns)]
+    st.line_chart(selected_data)
+#smpファイルよりチェックRAM名を読み取り
+#結果表示
+#    df["NE"][1:] = df["NE"][1:].astype(int)
 
     max_value = df["NE"][1:].max()
     min_value = df["NE"][1:].min()
@@ -32,8 +33,9 @@ if f is not None:
     y=df["NE"][1:]
 #    print(slider)
 
-
     plt.plot(x, y)
+    plt.ylim(min_value, max_value)
+
     plt.title("testtest")
     plt.xlabel('X-axis')  
     plt.ylabel('Y-axis')
