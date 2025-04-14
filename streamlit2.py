@@ -30,9 +30,7 @@ if f is not None:
     #指定回転数の色を分ける
     st.scatter_chart(df,x='Time',y="NE",color=(60,0,255))
 
-    df=df.T
-
-    plt.scatter(df.index[1:],df.iloc[1:,slider])
+    plt.scatter(df.columns[:-2],df.iloc[slider,:-2])
     fig=plt.figure()
     plt.xlim(-8200, 0)
     
