@@ -28,7 +28,7 @@ if f is not None:
 
     slider=st.slider("範囲", 0, len(df), 0, 1)
     #指定回転数の色を分ける
-    #st.scatter_chart(df,x='Time',y="NE",color=color)
+    st.scatter_chart(df,x='Time',y="NE",color=color)
 
     df=df.T
     df["FREQ"]=list(df.index)
