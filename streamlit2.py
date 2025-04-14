@@ -26,14 +26,13 @@ if f is not None:
     df["NE"] = df["NE"].astype(float)
     #option = st.selectbox('日付',list(range(1, 32)))
 
-    slider=st.slider("範囲", 0, len(df), 0, 10)
+    slider=st.slider("範囲", 0, len(df), 0, 1)
     #指定回転数の色を分ける
     #st.scatter_chart(df,x='Time',y="NE",color=color)
 
     df=df.T
     df["FREQ"]=list(df.index)
-    time = 10
-    rpm =  df.columns[time]
+    rpm =  df.columns[slider]
     print(rpm)
 
     st.scatter_chart(df,x='FREQ',y=rpm,color=color)
