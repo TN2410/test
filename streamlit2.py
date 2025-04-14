@@ -26,7 +26,7 @@ if f is not None:
 
     slider=st.slider("範囲", 0, len(df), 0, 10)
 
-    st.scatter_chart(df,x='Time',y='NE')
+    st.scatter_chart(df,x='Time',y=df.columns)
 
 
 
