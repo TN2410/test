@@ -28,7 +28,8 @@ if f is not None:
 
     slider=st.slider("範囲", min_value, max_value, max_value, 10)
     slider2=st.slider("範囲", min_value, max_value, 0, 10)
-
+    slider3=st.slider("範囲", min_value, max_value, max_value, 100)
+    slider4=st.slider("範囲", min_value, max_value, 0, 100)
 #    df=df[df["NE"][1:]<slider]
 
  #   st.scatter_chart(df,x="Time",y="NE")
@@ -39,6 +40,7 @@ if f is not None:
     fig=plt.figure()
     plt.plot(x, y)
     plt.ylim(slider2, slider)
+    plt.xlim(slider4, slider3)
 
     plt.title("testtest")
     plt.xlabel('X-axis')  
