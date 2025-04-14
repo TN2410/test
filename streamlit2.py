@@ -32,7 +32,7 @@ if f is not None:
 
     df=df.T
 
-    plt.scatter(df.index,df[slider])
+    plt.scatter(df.index,df.iloc[:,slider])
     fig=plt.figure()
     plt.xlim(-8200, 0)
     
