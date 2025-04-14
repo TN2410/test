@@ -39,7 +39,7 @@ if f is not None:
     x=df["FREQ"]
     y=df["Final"]
 
-    plt.scatter(1,1)
+    plt.scatter(x,y)
     plt.xlim(-8200, 0)
     
     st.pyplot(fig)
