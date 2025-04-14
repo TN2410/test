@@ -19,7 +19,7 @@ if f is not None:
     st.line_chart(selected_data)
 #smpファイルよりチェックRAM名を読み取り
 #結果表示
-#    df["NE"][1:] = df["NE"][1:].astype(int)
+    df["NE"][1:] = df["NE"][1:].astype(int)
 
     max_value = df["NE"][1:].max()
     min_value = df["NE"][1:].min()
