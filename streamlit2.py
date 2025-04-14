@@ -34,6 +34,7 @@ if f is not None:
     df["FREQ"]=list(df.index)
     time = 10
     rpm =  df.columns[time]
+    print(rpm)
 
     st.scatter_chart(df,x='FREQ',y=rpm,color=color)
 
