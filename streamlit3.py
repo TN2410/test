@@ -13,7 +13,7 @@ f = st.file_uploader("txtファイルをアップロードしてください", t
 
 if f is not None:
     for file in f:
-        df = pd.read_csv(f)
+        df = pd.read_csv(file)
         st.write("アップロードされたファイル:")
         st.write(df)
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
