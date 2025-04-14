@@ -27,7 +27,7 @@ if f is not None:
 
     slider=st.slider("範囲", 0, len(df), 0, 10)
     #指定回転数の色を分ける
-    st.scatter_chart(df,x='Time',y="NE"、color="r")
+    st.scatter_chart(df,x='Time',y="NE",color="r")
 
 
 
