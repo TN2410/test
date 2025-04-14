@@ -25,10 +25,11 @@ if f is not None:
 
     df["Time"] = np.arange(len(df))
 
-    #df=df["NE"]<slider
     st.scatter_chart(df,x="Time",y="NE")
 
     slider=st.slider("範囲", min_value, max_value, max_value, 10)
+    df=df[df["NE"]<slider]
+
     df["Time"]=np.arange(len(df)).astype(float)
     x=df["Time"][1:]
     y=df["NE"][1:]
