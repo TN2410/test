@@ -20,25 +20,25 @@ if f is not None:
 #smpファイルよりチェックRAM名を読み取り
 #結果表示
     df["NE"][1:] = df["NE"][1:].astype(int)
-
     max_value = df["NE"][1:].max()
     min_value = df["NE"][1:].min()
 
     df["Time"] = np.arange(len(df))
+
+    df=df["NE"]<slider
     st.scatter_chart(df,x="Time",y="NE")
 
     slider=st.slider("範囲", min_value, max_value, max_value, 10)
     df["Time"]=np.arange(len(df)).astype(float)
     x=df["Time"][1:]
     y=df["NE"][1:]
-#    print(slider)
-
+    print(slider)
+    fig=plt.figure()
     plt.plot(x, y)
     plt.ylim(min_value, max_value)
 
     plt.title("testtest")
     plt.xlabel('X-axis')  
     plt.ylabel('Y-axis')
+    st.pyplot(fig)
 
-# Streamlitで表示
-    st.pyplot(plt)
