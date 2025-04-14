@@ -27,7 +27,7 @@ if f is not None:
 
 
     slider=st.slider("範囲", min_value, max_value, max_value, 10)
-    slider2=st.slider("範囲", min_value, max_value, max_value, 10)
+    slider2=st.slider("範囲", min_value, max_value, 0, 10)
 
 #    df=df[df["NE"][1:]<slider]
 
