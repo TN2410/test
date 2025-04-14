@@ -25,9 +25,7 @@ if f is not None:
 
     df["Time"] = np.arange(len(df))
 
-    if st.checkbox('詳細を表示する'):
-        st.write('testtest')
-#スライダの値は一つのみ
+
     slider=st.slider("範囲", min_value, max_value, max_value, 10)
     slider2=st.slider("範囲", min_value, max_value, 0, 10)
     slider3=st.slider("範囲", min_value, max_value, max_value, 100)
@@ -50,5 +48,7 @@ if f is not None:
     plt.title("testtest")
     plt.xlabel('X-axis')  
     plt.ylabel('Y-axis')
-    st.pyplot(fig)
+    if st.checkbox('グラフ表示'):
+        st.write('グラフを表示する')
+        st.pyplot(fig)
 
