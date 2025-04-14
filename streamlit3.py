@@ -9,7 +9,7 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 
 # ファイルアップロード
-f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True))
+f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 
 if uploaded_files:
     for uploaded_file in uploaded_files:
