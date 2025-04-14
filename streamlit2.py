@@ -13,19 +13,24 @@ import matplotlib.pyplot as plt
 # ファイルアップロード
 
 f = st.file_uploader("accumCSVファイルをアップロードしてください", type="csv")
-#f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
-rpm=[]
+
+df2=pd.DataFrame()
+
 # ファイルがアップロードされた場合
 if f is not None:
-    df = pd.read_csv(f,index_col=0)
-    df=df.T
 
-    df['Time'] = np.arange(0,len(df))
-    df['NE'] = df.index.tolist()
-    df["NE"][1:] = df["NE"][1:].astype(float)
+    df = pd.read_csv(f,index_col=0)#8192までがindex　#カラム名は回転数
+　　
+    df2.['Time'] = np.arange(0,len(df.columns))
+    df2.['NE'] = df.columns.tolist()
+
+    df2["NE"] = df["NE"].astype(float)
+    df2['Time'] = df['Time'].astype(int)
 
     df=df.astype(float)
-    df['Time'] = df['Time'].astype(int)
+
+    option = st.selectbox('日付',list(range(1, 32)))
+
 
     max_value=df['Time'].max()
     min_value=df['Time'].min()
@@ -33,6 +38,7 @@ if f is not None:
     slider=st.slider("範囲", min_value, max_value, max_value, 10)
 
     df= df[df['Time'] <=slider]
-    st.line_chart(df.T)
-    #st.scatter_chart(df,x='Time',y='NE')
+    st.line_chart(df,)
+    st.scatter_chart(df2,x='Time',y='NE')
+
     
