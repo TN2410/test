@@ -32,10 +32,9 @@ if f is not None:
 
     df=df.T
     df["FREQ"]=list(df.index)
-    rpm =  df.columns[slider]
-    print(rpm)
+    df["Final"] =  df.iloc[:-1,slider]
 
-    st.scatter_chart(df,x='FREQ',y=df[rpm],color=color)
+    st.scatter_chart(df,x='FREQ',y="Final",color=color)
 
 
     
