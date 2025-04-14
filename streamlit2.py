@@ -42,6 +42,4 @@ if f is not None:
     plt.scatter(1,1)
     plt.xlim(-8200, 0)
     
-    st.pyplot(fib)
-
-    
+    st.pyplot(fig)
