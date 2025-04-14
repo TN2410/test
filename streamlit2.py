@@ -34,6 +34,6 @@ if f is not None:
 
     #plt.plot(df.columns[:-2].tolist(),df.iloc[slider,:-2].tolist())
     fig = plt.figure()
-    plt.xlim(-8200, 0)
+    #plt.xlim(-8200, 0)
     
     st.pyplot(fig)
