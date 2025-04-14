@@ -31,11 +31,6 @@ if f is not None:
     st.scatter_chart(df,x='Time',y="NE",color=(60,0,255))
 
     df=df.T
-    df["FREQ"]=list(df.index)
-    df["Final"] =  
-
-    x=df["FREQ"]
-    y=df["Final"]
 
     plt.scatter(df.index,df[slider])
     fig=plt.figure()
