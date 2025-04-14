@@ -35,7 +35,7 @@ if f is not None:
     time = 10
     rpm =  df.columns[time]
 
-    st.scatter_chart(df,x='FREQ',y=rpm　,color=color)
+    st.scatter_chart(df,x='FREQ',y=rpm,color=color)
 
 
     
