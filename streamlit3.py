@@ -14,8 +14,8 @@ f = st.file_uploader("txtファイルをアップロードしてください", t
 if uploaded_files:
     for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file)
-        st.write(f"アップロードされたファイル: {uploaded_file.name}")
-        st.write(df、、)
+        st.write("アップロードされたファイル:")
+        st.write(df)
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
 # ファイルがアップロードされた場合
         if f is not None:
