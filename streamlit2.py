@@ -17,7 +17,8 @@ f = st.file_uploader("accumCSVファイルをアップロードしてくださ�
 if f is not None:
     df = pd.read_csv(f,index_col=0)#8192までがindex　#カラム名は回転数
     df=df.astype(float)
-    
+    color = st.color_picker('Pick A Color', '#00f900')
+
     df = df.T
     df['Time'] = np.arange(0,len(df))
     df['Time'] = df['Time'].astype(int)
@@ -27,7 +28,7 @@ if f is not None:
 
     slider=st.slider("範囲", 0, len(df), 0, 10)
     #指定回転数の色を分ける
-    st.scatter_chart(df,x='Time',y="NE",color="r")
+    st.scatter_chart(df,x='Time',y="NE",color=colorcolor)
 
 
 
