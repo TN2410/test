@@ -18,8 +18,9 @@ if f is not None:
     df = pd.read_csv(f,index_col=0)#8192までがindex　#カラム名は回転数
     df=df.astype(float)
     
+    df = df.T
     df['Time'] = np.arange(0,len(df))
-    df['Time'] = df['Time'].astype(int)   df = df.T
+    df['Time'] = df['Time'].astype(int)
     
     df = df.T    
     print(df)
