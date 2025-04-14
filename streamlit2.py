@@ -31,10 +31,10 @@ if f is not None:
     #st.scatter_chart(df,x='Time',y="NE",color=color)
 
     df=df.T
-　　df["FREQ"]=list(df.index)
+    df["FREQ"]=list(df.index[:-1])
     time = 10
     rpm =  df.columns[time]
-　　
+
     st.scatter_chart(df,x='FREQ',y=rpm　,color=color)
 
 
