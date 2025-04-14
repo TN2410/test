@@ -4,7 +4,7 @@
 import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd
-import numpy as np
+import numpy a np
 import plotly.express as px
 import matplotlib.pyplot as plt
 
@@ -20,8 +20,8 @@ if f is not None:
     df['Time'] = np.arange(0,len(df))
     df = df.T    
 
-    df2["NE"] = df["NE"].astype(float)
-    df2['Time'] = df['Time'].astype(int)
+    df["NE"] = df["NE"].astype(float)
+    df['Time'] = df['Time'].astype(int)
 
     df=df.astype(float)
     print(df)
