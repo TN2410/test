@@ -25,13 +25,12 @@ if f is not None:
 
     df["Time"] = np.arange(len(df))
 
-
     slider=st.slider("範囲", min_value, max_value, max_value, 10)
     slider2=st.slider("範囲", min_value, max_value, 0, 10)
     slider3=st.slider("範囲", min_value, max_value, max_value, 100)
     slider4=st.slider("範囲", min_value, max_value, 0, 100)
 
-    df_ne=df[df["NE"][1:]<slider]
+#    df_ne=df[df["NE"][1:]<slider]
 #　　データフレーム操作必要
 #
  #   st.scatter_chart(df,x="Time",y="NE")
