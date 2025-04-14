@@ -35,7 +35,7 @@ if f is not None:
     rpm =  df.columns[slider]
     print(rpm)
 
-    st.scatter_chart(df,x='FREQ',y=rpm,color=color)
+    st.scatter_chart(df,x='FREQ',y=df[rpm],color=color)
 
 
     
