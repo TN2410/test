@@ -37,7 +37,7 @@ if f is not None:
  #   st.scatter_chart(df,x="Time",y="NE")
 #グラフの表示変更はOK
 
-    df["Time"]=np.arange(len(df)).astype(float)SS
+    df["Time"]=np.arange(len(df)).astype(float)
     x=df["Time"][1:]
     y=df["NE"][1:]
     fig=plt.figure()
