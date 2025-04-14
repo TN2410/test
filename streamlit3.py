@@ -15,6 +15,7 @@ f = st.file_uploader("txtファイルをアップロードしてください", t
 if f is not None:
 #フォルダ名とチェックボックスを表示
     df = pd.read_csv(f,sep="[\t\0]",index_col=0)
+    testtest=df.columns[33]
     selected_data = df[st.multiselect('列を選択してください', df.columns)]
     st.line_chart(selected_data)
 #smpファイルよりチェックRAM名を読み取り
@@ -36,7 +37,7 @@ if f is not None:
  #   st.scatter_chart(df,x="Time",y="NE")
 #グラフの表示変更はOK
 
-    df["Time"]=np.arange(len(df)).astype(float)
+    df["Time"]=np.arange(len(df)).astype(float)SS
     x=df["Time"][1:]
     y=df["NE"][1:]
     fig=plt.figure()
@@ -47,7 +48,7 @@ if f is not None:
     plt.title("testtest")
     plt.xlabel('X-axis')  
     plt.ylabel('Y-axis')
-    if st.checkbox(df.columns):
+    if st.checkbox(testtest):
         st.write('グラフを表示する')
         st.pyplot(fig)
 
