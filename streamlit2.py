@@ -22,18 +22,11 @@ if f is not None:
     df['Time'] = np.arange(0,len(df))
     df['Time'] = df['Time'].astype(int)
     
-    df = df.T    
-    print(df)
     #option = st.selectbox('日付',list(range(1, 32)))
 
-    max_value=df['Time'].max()
-    min_value=df['Time'].min()
+    slider=st.slider("範囲", 0, len(df), 0, 10)
 
-    slider=st.slider("範囲", min_value, max_value, max_value, 10)
-
-    df= df[df['Time'] <=slider]
-    st.line_chart(df,)
-    st.scatter_chart(df2,x='Time',y='NE')
+    st.scatter_chart(df,x='Time',y='NE')
 
 
 
