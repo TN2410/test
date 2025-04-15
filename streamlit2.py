@@ -38,7 +38,6 @@ if f is not None:
 
     st.pyplot(fig)
     plt.clf()
-    df.columns=df.columns*1.25
     plt.plot(df.columns[:-2].tolist(),df.iloc[slider,:-2].tolist())
     plt.xlim(0, 2048)
     plt.ylim(0,amax)    
