@@ -20,6 +20,7 @@ if f is not None:
     color = st.color_picker('Pick A Color', '#00f900')
 
     df = df.T
+    #グラフ用に振幅最大値を算出
     amax = df.max().max()
     df['Time'] = np.arange(0,len(df))
     df['Time'] = df['Time'].astype(int)
@@ -37,8 +38,7 @@ if f is not None:
 
     st.pyplot(fig)
     plt.clf()
-
-
+    df.columns=df.columns*1.25
     plt.plot(df.columns[:-2].tolist(),df.iloc[slider,:-2].tolist())
     plt.xlim(0, 2048)
     plt.ylim(0,amax)    
