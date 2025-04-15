@@ -35,10 +35,13 @@ if f is not None:
     fig = plt.figure(figsize=(8, 4))
     plt.plot(df[["Time"]],df[["NE"]])
     plt.scatter(df["Time"][slider],df["NE"][slider])
+    plt.xlabel("time(s)")
+    plt.ylabel("NE(rpm)")
 
     st.pyplot(fig)
     plt.clf()
     plt.plot(df.columns[:-2].tolist(),df.iloc[slider,:-2].tolist())
+    plt.xlabel("freq(Hz)")
     plt.xlim(0, 2048)
     plt.ylim(0,amax)    
     st.pyplot(fig)
