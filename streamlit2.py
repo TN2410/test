@@ -20,6 +20,7 @@ if f is not None:
     color = st.color_picker('Pick A Color', '#00f900')
 
     df = df.T
+    amax = df.max().max()
     df['Time'] = np.arange(0,len(df))
     df['Time'] = df['Time'].astype(int)
     df["NE"] =list(df.index)
@@ -40,5 +41,5 @@ if f is not None:
 
     plt.plot(df.columns[:-2].tolist(),df.iloc[slider,:-2].tolist())
     plt.xlim(0, 4096)
-    plt.ylim(0,df.iloc[:,:-3].max())    
+    plt.ylim(0,amax)    
     st.pyplot(fig)
