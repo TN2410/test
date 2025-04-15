@@ -40,6 +40,6 @@ if f is not None:
 
 
     plt.plot(df.columns[:-2].tolist(),df.iloc[slider,:-2].tolist())
-    plt.xlim(0, 4096)
+    plt.xlim(0, 2048)
     plt.ylim(0,amax)    
     st.pyplot(fig)
