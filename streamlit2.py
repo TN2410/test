@@ -31,7 +31,7 @@ if f is not None:
     st.scatter_chart(df,x='Time',y="NE",color=(60,0,255))
 
     fig = plt.figure()
-    #plt.plot(df[["Time"]],df[["NE"]])
+    plt.plot(df[["Time"]],df[["NE"]])
 
     plt.plot(df.columns[:-2].tolist(),df.iloc[slider,:-2].tolist())
     plt.xlim(0, 4096)
