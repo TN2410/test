@@ -32,7 +32,7 @@ if f is not None:
 
     fig = plt.figure()
     plt.plot(df[["Time"]],df[["NE"]])
-    plt.plot(df[["Time"][slider]],df[["NE"][slider]])
+    plt.scatter(df["Time"][slider],df["NE"][slider])
 
     st.pyplot(fig)
     plt.clf()
