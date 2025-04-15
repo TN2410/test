@@ -32,8 +32,9 @@ if f is not None:
 
     fig = plt.figure()
     plt.plot(df[["Time"]],df[["NE"]])
+    plt.clr()
     st.pyplot(fig)
-    
+
     plt.plot(df.columns[:-2].tolist(),df.iloc[slider,:-2].tolist())
     plt.xlim(0, 4096)
     
