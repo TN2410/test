@@ -30,6 +30,8 @@ if f is not None:
 
     slider=st.slider("範囲", 0, len(df), 0, 1)
     slider2=st.slider("上限周波数", 0, 5000, 0, 100)
+    slider3=st.slider("下限周波数", 0, 5000, 0, 100)
+
 
     #指定回転数の色を分ける
     st.scatter_chart(df,x='Time',y="NE",color=(60,0,255))
@@ -44,6 +46,6 @@ if f is not None:
     plt.clf()
     plt.plot(df.columns[:-2].tolist(),df.iloc[slider,:-2].tolist())
     plt.xlabel("freq(Hz)")
-    plt.xlim(0, slider2)
+    plt.xlim(slider3, slider2)
     plt.ylim(0,amax)    
     st.pyplot(fig)
