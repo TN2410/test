@@ -45,7 +45,7 @@ if f is not None:
     plt.clf()
     plt.plot(df.columns[int(slider2/19.53125):int(slider3/19.53125)-2].tolist(),df.iloc[slider,int(slider2/19.53125):int(slider3/19.53125)-2].tolist())#一窓分の周波数
   
-    amax = df.iloc[slider,int(slider2/19.53125):int(slider3/19.53125)-2].tolist().max()
+    amax = df.iloc[slider,int(slider2/19.53125):int(slider3/19.53125)-2].max()
     plt.xlabel("freq(Hz)")
     plt.xlim(slider3, slider2)
     plt.ylim(0,amax)    
