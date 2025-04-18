@@ -43,7 +43,7 @@ if f is not None:
 
     st.pyplot(fig)
     plt.clf()
-    plt.plot(df.columns[int(slider2/19.53125):int(slider33/19.53125)-2].tolist(),df.iloc[slider,int(slider2/19.53125):int(slider33/19.53125)-2].tolist())#一窓分の周波数
+    plt.plot(df.columns[int(slider2/19.53125):int(slider3/19.53125)-2].tolist(),df.iloc[slider,int(slider2/19.53125):int(slider33/19.53125)-2].tolist())#一窓分の周波数
   
     amax = df.iloc[slider,:-2].tolist().max()
     plt.xlabel("freq(Hz)")
