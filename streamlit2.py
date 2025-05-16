@@ -22,7 +22,7 @@ if f is not None:
     df = df.T
     #グラフ用に振幅最大値を算出
     amax = df.max().max()#周波数と時間軸のスライダに応じて最大値を出したい
-    df['Time'] = np.arange(0,len(df))
+    df['Time'] = np.arange(0,int((len(df)*1))#時間軸は窓長さに変化する必要あり
     df['Time'] = df['Time'].astype(int)
     df["NE"] =list(df.index)
     df["NE"] = df["NE"].astype(float)
