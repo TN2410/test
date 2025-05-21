@@ -39,7 +39,7 @@ if f is not None:
    
         fig=plt.figure()
         plt.scatter(x, y)
-        plt.title(file)
+        plt.title(file.name)
         plt.xlabel(x_pal)
         plt.ylabel(y_pal)
         st.pyplot(fig)
