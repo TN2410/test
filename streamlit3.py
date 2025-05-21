@@ -21,8 +21,6 @@ y_pal=st.multiselect('y列を選択してください', ["NE","EXT_R"])
 f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 
 if f is not None:
-
-
     for file in f:
         df = pd.read_csv(file,sep="[\t\0]",index_col=0)
         st.write("アップロードされたファイル:")
@@ -41,7 +39,7 @@ if f is not None:
    
         fig=plt.figure()
         plt.scatter(x, y)
-        plt.title("scatter")
+        plt.title(file)
         plt.xlabel(x_pal)
         plt.ylabel(y_pal)
         st.pyplot(fig)
