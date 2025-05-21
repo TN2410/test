@@ -21,11 +21,11 @@ if f is not None:
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
 # ファイルがアップロードされた場合
     #フォルダ名とチェックボックスを表示
-        selected_data = st.multiselect('列を選択してください', df.columns)
+        selected_data = st.multiselect('列を選択してください', df.columns))
 
         df["Time"]=np.arange(len(df)).astype(float)
         x=df["Time"][1:]
-        y=df[select_data][1:].astype(float)
+        y=df[selected_data][1:].astype(float)
         fig=plt.figure()
         plt.plot(x, y)
         plt.ylim(slider2, slider)
