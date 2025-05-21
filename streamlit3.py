@@ -40,9 +40,9 @@ if f is not None:
         fig=plt.figure()
         plt.scatter(x, y)
         plt.title(file.name)
-    plt.xlabel(x_pal)
-    plt.ylabel(y_pal)
-    st.pyplot(fig)
+plt.xlabel(x_pal)
+plt.ylabel(y_pal)
+st.pyplot(fig)
 
 st.button("Process A", on_click=process_a)
 st.button("Process B", on_click=process_b)
