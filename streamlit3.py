@@ -22,9 +22,9 @@ if f is not None:
 # ファイルがアップロードされた場合
     #フォルダ名とチェックボックスを表示
         selected_data = st.multiselect('列を選択してください', df.columns)
-        df["Time"]=np.arange(len(df)).astype(float)
+        df["Time0"]=np.arange(len(df)).astype(float)
         print(selected_data)
-        x=df["Time"][1:]
+        x=df["Time0"][1:]
         y=df[selected_data][1:].astype(float)
         print(x)
         print(y)
