@@ -7,8 +7,12 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
-import process_a
-import process_b
+
+def process_a():
+    st.write("Processing A...")
+
+def process_b():
+    st.write("Processing B...")
 
 # ファイルアップロード
 # 複数のファイルを読み込んでから処理する
@@ -39,15 +43,6 @@ if f is not None:
         st.pyplot(fig)
         st.button("Process A", on_click=process_a)
         st.button("Process B", on_click=process_b)
-
-def process_a():
-    st.write("Processing A...")
-
-def process_b():
-    st.write("Processing B...")
-
-
-
 
 
     #     plt.ylim(slider2, slider)
