@@ -31,7 +31,7 @@ if f is not None:
         y_pal=st.multiselect('y列を選択してください', df.columns)
 
         selected_xdata = df[x_pal]
-        selected_ydata = df[y]_pal
+        selected_ydata = df[y_pal]
         df["Time0"]=np.arange(len(df)).astype(float)
         #st.line_chart(selected_data)
         x=selected_xdata[1:].astype(float)
