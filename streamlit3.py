@@ -31,7 +31,6 @@ if f is not None:
 # ファイルがアップロードされた場合
     #フォルダ名とチェックボックスを表示
 
-
         selected_xdata = df[x_pal]
         selected_ydata = df[y_pal]
         df["Time0"]=np.arange(len(df)).astype(float)
@@ -42,11 +41,11 @@ if f is not None:
         plt.scatter(x, y,label=file.name)
         #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
+        st.button(file.name)
 
 plt.xlabel(x_pal)
 plt.ylabel(y_pal)
 st.pyplot(fig)
-
 st.button("Process A", on_click=process_a)
 st.button("Process B", on_click=process_b)
 
