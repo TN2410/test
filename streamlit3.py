@@ -23,7 +23,7 @@ if f is not None:
     #フォルダ名とチェックボックスを表示
         selected_data = df[st.multiselect('列を選択してください', df.columns)][1:].astype(float)
         df["Time0"]=np.arange(len(df)).astype(float)
-        st.line_chart(selected__data)
+        st.line_chart(selected_data)
         print(selected_data)
         x=df["Time0"][1:]
         y=df[selected_data][1:].astype(float)
