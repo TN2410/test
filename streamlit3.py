@@ -27,9 +27,11 @@ if f is not None:
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
 # ファイルがアップロードされた場合
     #フォルダ名とチェックボックスを表示
-        selected_xdata = df[st.multiselect('x列を選択してください', df.columns)]
-        selected_ydata = df[st.multiselect('y列を選択してください', df.columns)]
-        print(st.multiselect('x列を選択してください', df.columns))
+        x_pal=st.multiselect('x列を選択してください', df.columns)
+        y_pal=st.multiselect('y列を選択してください', df.columns)
+
+        selected_xdata = df[x]
+        selected_ydata = df[y]
         df["Time0"]=np.arange(len(df)).astype(float)
         #st.line_chart(selected_data)
         x=selected_xdata[1:].astype(float)
@@ -38,8 +40,8 @@ if f is not None:
         fig=plt.figure()
         plt.scatter(x, y)
         plt.title("scatter")
-        # plt.xlabel(st.multiselect('x列を選択してください', df.columns))
-        # plt.ylabel(st.multiselect('y列を選択してください', df.columns))
+        plt.xlabel(x_pal)
+        plt.ylabel(y_pal)
         st.pyplot(fig)
         st.button("Process A", on_click=process_a)
         st.button("Process B", on_click=process_b)
