@@ -55,8 +55,8 @@ if f is not None:
         y=df["NE"][1:]
         fig=plt.figure()
         plt.plot(x, y)
-        plt.ylim(slider2, slider)
-        plt.xlim(slider4, slider3)
+        # plt.ylim(slider2, slider)
+        # plt.xlim(slider4, slider3)
 
         plt.title("testtest")
         plt.xlabel('X-axis')  
