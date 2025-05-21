@@ -15,8 +15,8 @@ def process_b():
     st.write("Processing B...")
 
 # 複数のファイルを読み込んでから処理する
-x_pal=st.multiselect('x列を選択してください', ["NE","EXT_R"])
-y_pal=st.multiselect('y列を選択してください', ["NE","EXT_R"])
+x_pal=st.multiselect('x列を選択してください', ["NE","EXT_R","T_WAT_O","P_FuelHP1"])
+y_pal=st.multiselect('y列を選択してください', ["NE","EXT_R","T_WAT_O","P_FuelHP1"])
 
 f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 
