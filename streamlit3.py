@@ -34,7 +34,8 @@ if f is not None:
         plt.plot(x, y)
         plt.title("testtest")
         plt.xlabel('X-axis')  
-        plt.ylabel('Y-axis')     st.pyplot(fig)
+        plt.ylabel('Y-axis')
+        st.pyplot(fig)
     #     plt.ylim(slider2, slider)
     #     plt.xlim(slider4, slider3)
 
