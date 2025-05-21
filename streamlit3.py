@@ -21,20 +21,20 @@ if f is not None:
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
 # ファイルがアップロードされた場合
     #フォルダ名とチェックボックスを表示
-        selected_data = df[st.multiselect('列を選択してください', df.columns)]
+        selected_xdata = df[st.multiselect('x列を選択してください', df.columns)]
+        selected_ydata = df[st.multiselect('y列を選択してください', df.columns)]
+
         df["Time0"]=np.arange(len(df)).astype(float)
         #st.line_chart(selected_data)
         print(selected_data)
-        x=df["Time0"][1:]
-        y=selected_data[1:].astype(float)
-        print(x)
-        print(y)
-        plt.title("testtest")
-        plt.xlabel('X-axis')  
-        plt.ylabel('Y-axis')
+        x=selected_xdata[1:].astype(float)
+        y=selected_ydata[1:].astype(float)
+   
         fig=plt.figure()
         plt.plot(x, y)
-        st.pyplot(fig)
+        plt.title("testtest")
+        plt.xlabel('X-axis')  
+        plt.ylabel('Y-axis')     st.pyplot(fig)
     #     plt.ylim(slider2, slider)
     #     plt.xlim(slider4, slider3)
 
