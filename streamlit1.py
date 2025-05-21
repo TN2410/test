@@ -8,6 +8,6 @@ pref_list = [
 ]
 
 st.map(pref_list)
-x=1
-if st.button(x, key='my_button', help='このボタンをクリックしてアクションを実行します'):
+
+if st.button("test", key='my_button', help='このボタンをクリックしてアクションを実行します'):
    st.write('ボタンがクリックされました！')
