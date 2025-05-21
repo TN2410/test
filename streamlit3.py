@@ -29,7 +29,7 @@ if f is not None:
     #フォルダ名とチェックボックスを表示
         selected_xdata = df[st.multiselect('x列を選択してください', df.columns)]
         selected_ydata = df[st.multiselect('y列を選択してください', df.columns)]
-
+        print(st.multiselect('x列を選択してください', df.columns))
         df["Time0"]=np.arange(len(df)).astype(float)
         #st.line_chart(selected_data)
         x=selected_xdata[1:].astype(float)
@@ -37,8 +37,8 @@ if f is not None:
    
         fig=plt.figure()
         plt.scatter(x, y)
-        plt.title("testtest")
-        plt.xlabel(st.multiselect('x列を選択してください', df.columns)  
+        plt.title("scatter")
+        plt.xlabel(st.multiselect('x列を選択してください', df.columns)
         plt.ylabel(st.multiselect('y列を選択してください', df.columns)
         st.pyplot(fig)
         st.button("Process A", on_click=process_a)
