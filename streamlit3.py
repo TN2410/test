@@ -36,14 +36,13 @@ if f is not None:
         y=selected_ydata[1:].astype(float)
    
         fig=plt.figure()
-        plt.plot(x, y)
+        plt.scatter(x, y)
         plt.title("testtest")
         plt.xlabel('X-axis')  
         plt.ylabel('Y-axis')
         st.pyplot(fig)
         st.button("Process A", on_click=process_a)
         st.button("Process B", on_click=process_b)
-
 
     #     plt.ylim(slider2, slider)
     #     plt.xlim(slider4, slider3)
