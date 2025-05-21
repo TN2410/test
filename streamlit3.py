@@ -28,21 +28,21 @@ if f is not None:
         y=df[selected_data][1:].astype(float)
         fig=plt.figure()
         plt.plot(x, y)
-        plt.ylim(slider2, slider)
-        plt.xlim(slider4, slider3)
+    #     plt.ylim(slider2, slider)
+    #     plt.xlim(slider4, slider3)
 
-    #smpファイルよりチェックRAM名を読み取り
-    #結果表示
-        df["NE"][1:] = df["NE"][1:].astype(int)
-        max_value = df["NE"][1:].max()
-        min_value = df["NE"][1:].min()
+    # #smpファイルよりチェックRAM名を読み取り
+    # #結果表示
+    #     df["NE"][1:] = df["NE"][1:].astype(int)
+    #     max_value = df["NE"][1:].max()
+    #     min_value = df["NE"][1:].min()
 
-        df["Time"] = np.arange(len(df))
+    #     df["Time"] = np.arange(len(df))
 
-        slider=st.slider("範囲", min_value, max_value, max_value, 10)
-        slider2=st.slider("範囲", min_value, max_value, 0, 10)
-        slider3=st.slider("範囲", min_value, max_value, max_value, 100)
-        slider4=st.slider("範囲", min_value, max_value, 0, 100)
+    #     slider=st.slider("範囲", min_value, max_value, max_value, 10)
+    #     slider2=st.slider("範囲", min_value, max_value, 0, 10)
+    #     slider3=st.slider("範囲", min_value, max_value, max_value, 100)
+    #     slider4=st.slider("範囲", min_value, max_value, 0, 100)
 
     #    df_ne=df[df["NE"][1:]<slider]
     #　　データフレーム操作必要
