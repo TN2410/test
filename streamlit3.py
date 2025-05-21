@@ -21,8 +21,9 @@ if f is not None:
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
 # ファイルがアップロードされた場合
     #フォルダ名とチェックボックスを表示
-        selected_data = st.multiselect('列を選択してください', df.columns)
+        selected_data = df[st.multiselect('列を選択してください', df.columns)][1:].astype(float)
         df["Time0"]=np.arange(len(df)).astype(float)
+        st.line_chart(selected__data)
         print(selected_data)
         x=df["Time0"][1:]
         y=df[selected_data][1:].astype(float)
