@@ -21,6 +21,7 @@ y_pal=st.multiselect('y列を選択してください', ["NE","EXT_R","T_WAT_O",
 f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 
 if f is not None:
+    fig=plt.figure()
     for file in f:
         df = pd.read_csv(file,sep="[\t\0]",index_col=0)
         st.write("アップロードされたファイル:")
@@ -37,12 +38,11 @@ if f is not None:
         x=selected_xdata[1:].astype(float)
         y=selected_ydata[1:].astype(float)
    
-        fig=plt.figure()
         plt.scatter(x, y)
         plt.title(file.name)
-        plt.xlabel(x_pal)
-        plt.ylabel(y_pal)
-        st.pyplot(fig)
+    plt.xlabel(x_pal)
+    plt.ylabel(y_pal)
+    st.pyplot(fig)
 
 st.button("Process A", on_click=process_a)
 st.button("Process B", on_click=process_b)
