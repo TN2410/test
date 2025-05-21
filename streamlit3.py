@@ -17,11 +17,10 @@ if f is not None:
     for file in f:
         df = pd.read_csv(file,sep="[\t\0]",index_col=0)
         st.write("アップロードされたファイル:")
-        st.write(df)
+        ＃＃st.write(df)
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
 # ファイルがアップロードされた場合
     #フォルダ名とチェックボックスを表示
-        testtest=df.columns[33]
         selected_data = df[st.multiselect('列を選択してください', df.columns)]
         st.line_chart(selected_data)
     #smpファイルよりチェックRAM名を読み取り
