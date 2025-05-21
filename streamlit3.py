@@ -29,6 +29,12 @@ if f is not None:
         y=selected_data
         print(x)
         print(y)
+
+        
+
+        plt.title("testtest")
+        plt.xlabel('X-axis')  
+        plt.ylabel('Y-axis')
         fig=plt.figure()
         plt.plot(x, y)
         st.pyplot(fig)
@@ -54,17 +60,7 @@ if f is not None:
     #   st.scatter_chart(df,x="Time",y="NE")
     #グラフの表示変更はOK
 
-        df["Time"]=np.arange(len(df)).astype(float)
-        x=df["Time"][1:]
-        y=df["NE"][1:]
-        fig=plt.figure()
-        plt.plot(x, y)
-        # plt.ylim(slider2, slider)
-        # plt.xlim(slider4, slider3)
 
-        plt.title("testtest")
-        plt.xlabel('X-axis')  
-        plt.ylabel('Y-axis')
         # if st.checkbox(testtest):
         #     st.write('グラフを表示する')
         #     st.pyplot(fig)
