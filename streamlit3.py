@@ -26,7 +26,7 @@ if f is not None:
         st.line_chart(selected_data)
         print(selected_data)
         x=df["Time0"][1:]
-        y=df[selected_data][1:].astype(float)
+        y=selected_data
         print(x)
         print(y)
         fig=plt.figure()
