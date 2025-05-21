@@ -41,7 +41,7 @@ if f is not None:
    
         plt.scatter(x, y,label=file.name)
         #plt.title(file.name)
-        plt.legend()
+        plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
 
 plt.xlabel(x_pal)
 plt.ylabel(y_pal)
