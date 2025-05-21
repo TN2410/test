@@ -23,6 +23,17 @@ if f is not None:
     #フォルダ名とチェックボックスを表示
         selected_data = df[st.multiselect('列を選択してください', df.columns)]
         st.line_chart(selected_data)
+
+        df["Time"]=np.arange(len(df)).astype(float)
+        x=df["Time"][1:]
+        y=select_data[1:]
+        fig=plt.figure()
+        plt.plot(x, y)
+        plt.ylim(slider2, slider)
+        plt.xlim(slider4, slider3)
+
+
+
     #smpファイルよりチェックRAM名を読み取り
     #結果表示
         df["NE"][1:] = df["NE"][1:].astype(int)
