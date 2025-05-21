@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 # ファイルアップロード
 # 複数のファイルを読み込んでから処理する
 
-f = st.file_uploader("txtファイルをアップロードしてください", type="csv",accept_multiple_files=True)
+f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 
 if f is not None:
     for file in f:

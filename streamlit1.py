@@ -13,3 +13,9 @@ st.number_input("input_your_number")
 st.checkbox("CHECK") 
 if st.button("bot", key='my_button', help='このボタンをクリックしてアクションを実行します'):
    st.write('ボタンがクリックされました！')
+
+
+#入力値でカラム名を指定し、グラフを書く。dpuとのメリット複数のファイルを表示可能か？。
+year=st.number_input('年(1952~5年おき)',1952,2007,1952,step=5)
+df_px=df[df['year'] ==year]
+
