@@ -15,13 +15,14 @@ def process_b():
     st.write("Processing B...")
 
 # 複数のファイルを読み込んでから処理する
+x_pal=st.multiselect('x列を選択してください', ["NE","EXT_R"])
+y_pal=st.multiselect('y列を選択してください', ["NE","EXT_R"])
 
 f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 
 if f is not None:
 
-    x_pal=st.multiselect('x列を選択してください', ["NE","EXT_R"])
-    y_pal=st.multiselect('y列を選択してください', ["NE","EXT_R"])
+
     for file in f:
         df = pd.read_csv(file,sep="[\t\0]",index_col=0)
         st.write("アップロードされたファイル:")
