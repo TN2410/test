@@ -35,6 +35,8 @@ if f is not None:
         plt.xlabel('X-axis')  
         plt.ylabel('Y-axis')
         st.pyplot(fig)
+        st.button("Process A", on_click=process_a)
+        st.button("Process B", on_click=process_b)
 
 def process_a():
     st.write("Processing A...")
@@ -42,8 +44,7 @@ def process_a():
 def process_b():
     st.write("Processing B...")
 
-        st.button("Process A", on_click=process_a)
-        st.button("Process B", on_click=process_b)
+
 
 
 
