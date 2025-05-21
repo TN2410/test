@@ -7,6 +7,8 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
+import process_a
+import process_b
 
 # ファイルアップロード
 # 複数のファイルを読み込んでから処理する
