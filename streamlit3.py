@@ -35,6 +35,18 @@ if f is not None:
         plt.xlabel('X-axis')  
         plt.ylabel('Y-axis')
         st.pyplot(fig)
+
+def process_a():
+    st.write("Processing A...")
+
+def process_b():
+    st.write("Processing B...")
+
+        st.button("Process A", on_click=process_a)
+        st.button("Process B", on_click=process_b)
+
+
+
     #     plt.ylim(slider2, slider)
     #     plt.xlim(slider4, slider3)
 
