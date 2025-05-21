@@ -39,8 +39,8 @@ if f is not None:
         x=selected_xdata[1:].astype(float)
         y=selected_ydata[1:].astype(float)
    
-        plt.scatter(x, y)
-        plt.title(file.name)
+        plt.scatter(x, y,label=file.name)
+        #plt.title(file.name)
         plt.legend()
 
 plt.xlabel(x_pal)
