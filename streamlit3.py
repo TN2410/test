@@ -43,6 +43,7 @@ if f is not None:
         plt.title(file.name)
 plt.xlabel(x_pal)
 plt.ylabel(y_pal)
+plt.legend()
 st.pyplot(fig)
 
 st.button("Process A", on_click=process_a)
