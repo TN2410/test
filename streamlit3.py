@@ -22,10 +22,11 @@ if f is not None:
 # ファイルがアップロードされた場合
     #フォルダ名とチェックボックスを表示
         selected_data = st.multiselect('列を選択してください', df.columns)
-
         df["Time"]=np.arange(len(df)).astype(float)
         x=df["Time"][1:]
         y=df[selected_data][1:].astype(float)
+        print(x)
+        print(y)
         fig=plt.figure()
         plt.plot(x, y)
     #     plt.ylim(slider2, slider)
