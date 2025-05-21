@@ -25,7 +25,7 @@ fig=plt.figure()
 if f is not None:
     for file in f:
         df = pd.read_csv(file,sep="[\t\0]",index_col=0)
-        st.write("アップロードされたファイル:")
+        st.write("アップロードされたファイル:",file.name)
         #st.write(df)
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
 # ファイルがアップロードされた場合
