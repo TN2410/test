@@ -26,7 +26,6 @@ if f is not None:
 
         df["Time0"]=np.arange(len(df)).astype(float)
         #st.line_chart(selected_data)
-        print(selected_data)
         x=selected_xdata[1:].astype(float)
         y=selected_ydata[1:].astype(float)
    
