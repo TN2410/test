@@ -61,7 +61,7 @@ if f is not None:
         plt.title("testtest")
         plt.xlabel('X-axis')  
         plt.ylabel('Y-axis')
-        if st.checkbox(testtest):
-            st.write('グラフを表示する')
-            st.pyplot(fig)
+        # if st.checkbox(testtest):
+        #     st.write('グラフを表示する')
+        #     st.pyplot(fig)
 
