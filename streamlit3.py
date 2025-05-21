@@ -45,8 +45,9 @@ if f is not None:
         plt.xlabel(x_pal)
         plt.ylabel(y_pal)
         st.pyplot(fig)
-        st.button("Process A", on_click=process_a)
-        st.button("Process B", on_click=process_b)
+
+st.button("Process A", on_click=process_a)
+st.button("Process B", on_click=process_b)
 
     #     plt.ylim(slider2, slider)
     #     plt.xlim(slider4, slider3)
