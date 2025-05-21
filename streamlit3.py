@@ -17,12 +17,13 @@ if f is not None:
     for file in f:
         df = pd.read_csv(file,sep="[\t\0]",index_col=0)
         st.write("アップロードされたファイル:")
-        ##st.write(df)
+        #st.write(df)
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
 # ファイルがアップロードされた場合
     #フォルダ名とチェックボックスを表示
         selected_data = st.multiselect('列を選択してください', df.columns)
         df["Time"]=np.arange(len(df)).astype(float)
+        print(selected_data)
         x=df["Time"][1:]
         y=df[selected_data][1:].astype(float)
         print(x)
