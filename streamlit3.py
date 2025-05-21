@@ -21,7 +21,7 @@ if f is not None:
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
 # ファイルがアップロードされた場合
     #フォルダ名とチェックボックスを表示
-        selected_data = st.multiselect('列を選択してください', df.columns))
+        selected_data = st.multiselect('列を選択してください', df.columns)
 
         df["Time"]=np.arange(len(df)).astype(float)
         x=df["Time"][1:]
