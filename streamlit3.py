@@ -14,12 +14,14 @@ def process_a():
 def process_b():
     st.write("Processing B...")
 
-# ファイルアップロード
 # 複数のファイルを読み込んでから処理する
 
 f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 
 if f is not None:
+
+    x_pal=st.multiselect('x列を選択してください', ["NE","EXT_R"])
+    y_pal=st.multiselect('y列を選択してください', ["NE","EXT_R"])
     for file in f:
         df = pd.read_csv(file,sep="[\t\0]",index_col=0)
         st.write("アップロードされたファイル:")
@@ -27,8 +29,7 @@ if f is not None:
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
 # ファイルがアップロードされた場合
     #フォルダ名とチェックボックスを表示
-        x_pal=st.multiselect('x列を選択してください', df.columns)
-        y_pal=st.multiselect('y列を選択してください', df.columns)
+
 
         selected_xdata = df[x_pal]
         selected_ydata = df[y_pal]
