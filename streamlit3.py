@@ -31,6 +31,7 @@ if f is not None:
         print(y)
         fig=plt.figure()
         plt.plot(x, y)
+        st.pyplot(fig)
     #     plt.ylim(slider2, slider)
     #     plt.xlim(slider4, slider3)
 
