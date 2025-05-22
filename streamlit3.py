@@ -21,9 +21,8 @@ if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding="CP932")
     sample_par = sample_df.iloc[:,5]
     st.write(len(sample_par))
-    sample_par2 = list(filter("", sample_par))
-    
-    #sample_par2 = filter("", sample_par2)
+
+    sample_par2=[x for x in sample_par if x != '']
 
     st.write(len(sample_par2))
     for i in sample_par2:
