@@ -37,6 +37,7 @@ if f is not None:
         if not str(x_pal) in  df.columns and not str(y_pal) in df.columns:
             pass
         else:    
+            st.write(x_pal)
             selected_xdata = df[x_pal]
             selected_ydata = df[y_pal]
             df["Time0"]=np.arange(len(df)).astype(float)
