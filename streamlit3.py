@@ -33,7 +33,7 @@ if f is not None:
 
 # 散布図のプロット
         if dataframes:
-            plt.figure(figsize=(10, 6))
+            fig=plt.figure(figsize=(10, 6))
             # 各データフレームの表示を制御するボタンを作成
             for filename, df in dataframes.items():
                 # ボタンを作成（ファイル名をボタン名として使用）
