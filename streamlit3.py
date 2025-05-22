@@ -22,8 +22,10 @@ if sample_f is not None:
     sample_par = sample_df.iloc[:,5]
     mylist = [str(x) for x in sample_par]
     newlist = [x for x in mylist if x != "nan"]
-    x_pal=st.multiselect('x列を選択してください', newlist)
-    y_pal=st.multiselect('y列を選択してください', newlist)
+    x_pal=st.multiselect('x列を選択してください', newlist).applymap(str)
+
+    y_pal=st.multiselect('y列を選択してください', newlist).applymap(str)
+
     st.write(x_pal)
 f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 fig=plt.figure()
