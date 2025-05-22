@@ -15,6 +15,9 @@ def process_b():
     st.write("Processing B...")
 
 # 複数のファイルを読み込んでから処理する
+
+df_smp=pd.read_csv(r"C:\Users\1219829\Desktop\csv\sample.csv")
+
 x_pal=st.multiselect('x列を選択してください', ["NE","EXT_R","T_WAT_O","P_FuelHP1"])
 y_pal=st.multiselect('y列を選択してください', ["NE","EXT_R","T_WAT_O","P_FuelHP1"])
 
