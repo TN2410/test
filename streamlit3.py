@@ -22,8 +22,8 @@ if sample_f is not None:
     sample_par = sample_df.iloc[:,5]
     st.write(len(sample_par))
     sample_par2 = filter(None, sample_par)
-    sample_par2 = filter("", sample_par2)
-    
+    #sample_par2 = filter("", sample_par2)
+
     st.write(len(sample_par2))
     for i in sample_par2:
         st.button(i)
