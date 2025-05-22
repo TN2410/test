@@ -34,6 +34,7 @@ if f is not None:
         st.write("アップロードされたファイル:",file.name)
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
    #フォルダ名とチェックボックスを表示
+   st.write(df.columns,y_pal)
         if x_pal not in df.columns and y_pal not in df.columns:
             pass
         else:    
