@@ -31,6 +31,7 @@ if sample_f is not None:
     #st.write(len(sample_par2))
     for i in sample_par:
         if i!=None:
+            st.write(i)
             st.button(i)
 
 x_pal=st.multiselect('x列を選択してください', ["NE","EXT_R","T_WAT_O","P_FuelHP1"])
