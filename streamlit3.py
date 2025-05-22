@@ -24,12 +24,12 @@ if sample_f is not None:
     newlist = [x for x in mylist if x != "nan"]
     x_pal=st.multiselect('x列を選択してください', newlist)
     y_pal=st.multiselect('y列を選択してください', newlist)
-f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
+uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if f is not None:
     dataframes = {}
-    for file in f:
-        df = pd.read_csv(file,sep="[\t\0]",index_col=0)
-        dataframes[file.name] = df
+    for uploaded_file in uploaded_files:
+        df = pd.read_csv(uploaded_file,sep="[\t\0]",index_col=0)
+        dataframes[uploaded_file.name] = df
 
 # 散布図のプロット
         if dataframes:
