@@ -23,7 +23,7 @@ if sample_f is not None:
     st.write(sample_par)
     st.write(len(sample_par))
 
-    sample_par2=[x for x in sample_par if x != '']
+    sample_par2=[x for x in sample_par if x != 'None']
 
     st.write(len(sample_par2))
     for i in sample_par2:
