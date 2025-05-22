@@ -21,7 +21,7 @@ if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding="CP932")
     sample_par = sample_df.iloc[:,5]
     sample_par2 = list(filter("", sample_par))
-
+    ptint(sample_par2)
     for i in sample_par2:
         st.button(i)
 
