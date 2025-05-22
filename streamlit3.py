@@ -35,22 +35,22 @@ if f is not None:
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
    #フォルダ名とチェックボックスを表示
 
-        if x_pal not in df.columns and y_pal not in df.columns:
-            pass
-        else:    
-            st.write(x_pal)
-            selected_xdata = df[x_pal]
-            selected_ydata = df[y_pal]
-            df["Time0"]=np.arange(len(df)).astype(float)
-            #st.line_chart(selected_data)
-            x=selected_xdata[1:].astype(float)
-            y=selected_ydata[1:].astype(float)
-    
-            plt.scatter(x, y,label=file.name)
-            #plt.title(file.name)
-            plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-            plt.xlabel(x_pal)
-            plt.ylabel(y_pal)
+        # if x_pal not in df.columns and y_pal not in df.columns:
+        #     pass
+        # else:    
+        st.write(x_pal)
+        selected_xdata = df[x_pal]
+        selected_ydata = df[y_pal]
+        df["Time0"]=np.arange(len(df)).astype(float)
+        #st.line_chart(selected_data)
+        x=selected_xdata[1:].astype(float)
+        y=selected_ydata[1:].astype(float)
+
+        plt.scatter(x, y,label=file.name)
+        #plt.title(file.name)
+        plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
+        plt.xlabel(x_pal)
+        plt.ylabel(y_pal)
     st.pyplot(fig)
 st.button("Process A", on_click=process_a)
 st.button("Process B", on_click=process_b)
