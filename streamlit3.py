@@ -22,6 +22,7 @@ if sample_f is not None:
     sample_par = sample_df.iloc[:,5]
     mylist = [str(x) for x in sample_par]
     newlist = [x for x in mylist if x != "nan"]
+    st.write(newlist)
     for i in newlist:
         st.button(i)
 
