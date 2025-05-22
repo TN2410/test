@@ -23,14 +23,14 @@ if sample_f is not None:
     st.write(sample_par)
     st.write(len(sample_par))
 
-    sample_par2=[x for x in sample_par if x != "None"]
+    #sample_par2=[x for x in sample_par if x != "None"]
     #sample_par2=[a for a in sample_par2 if a != '']
     #sample_par2=[x for x in sample_par2 if math.isnan(x) == False]
 
     st.write(sample_par2)
     st.write(len(sample_par2))
     for i in sample_par2:
-        if i!="NaN":
+        if i!="None":
             st.button(i)
 
 x_pal=st.multiselect('x列を選択してください', ["NE","EXT_R","T_WAT_O","P_FuelHP1"])
