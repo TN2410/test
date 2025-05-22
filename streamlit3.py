@@ -24,6 +24,7 @@ if sample_f is not None:
     st.write(len(sample_par))
 
     sample_par2=[x for x in sample_par if x != "None"]
+    sample_par2=[a for a in sample_par2 if a != '']
     st.write(sample_par2)
 
     st.write(len(sample_par2))
