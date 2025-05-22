@@ -40,15 +40,16 @@ if f is not None:
         selected_ydata = df[y_pal]
         df["Time0"]=np.arange(len(df)).astype(float)
         #st.line_chart(selected_data)
-        x=selected_xdata[1:].astype(float)
-        y=selected_ydata[1:].astype(float)
+      
+        if st.button(file.name, on_click=process_a):
+            x=selected_xdata[1:].astype(float)
+            y=selected_ydata[1:].astype(float)
 
-        plt.scatter(x, y,label=file.name)
-        #plt.title(file.name)
-        plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-        plt.xlabel(x_pal)
-        plt.ylabel(y_pal)
-        st.button(file.name, on_click=process_a)
+            plt.scatter(x, y,label=file.name)
+            #plt.title(file.name)
+            plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
+            plt.xlabel(x_pal)
+            plt.ylabel(y_pal)
     st.pyplot(fig)
 
     #     plt.ylim(slider2, slider)
