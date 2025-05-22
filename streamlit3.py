@@ -21,8 +21,8 @@ if sample_f is not None:
     sample_df = pd.read_csv(sample_f,index_col=0)
     ple_par = sanmpe_df.iloc[:,5]
 
-for i in sample_par:
-    st.button(i)
+    for i in sample_par:
+        st.button(i)
 
 x_pal=st.multiselect('x列を選択してください', ["NE","EXT_R","T_WAT_O","P_FuelHP1"])
 y_pal=st.multiselect('y列を選択してください', ["NE","EXT_R","T_WAT_O","P_FuelHP1"])
