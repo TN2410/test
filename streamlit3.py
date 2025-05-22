@@ -16,9 +16,6 @@ def process_b():
 
 # 複数のファイルを読み込んでから処理する
 
-for j in range(3):
-    check= st.checkbox("test_{}".format(j),value=True)
-
 sample_f = st.file_uploader("txtファイルをアップロードしてください", type="csv")
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding="CP932")
