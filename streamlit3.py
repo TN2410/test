@@ -17,8 +17,10 @@ def process_b():
 # 複数のファイルを読み込んでから処理する
 
 sample_f = st.file_uploader("txtファイルをアップロードしてください", type="csv")
-sample_df = pd.read_csv(sample_f,index_col=0)
-sample_par = sanmpe_df.iloc[:,5]
+if sample_f is not None:
+    sample_df = pd.read_csv(sample_f,index_col=0)
+    ple_par = sanmpe_df.iloc[:,5]
+
 for i in sample_par:
     st.button(i)
 
