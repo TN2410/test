@@ -34,7 +34,9 @@ if f is not None:
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
    #フォルダ名とチェックボックスを表示
         st.write(x_pal)
-        if x_pal in df.columns and y_pal in df.columns:
+        if not x_pal in df.columns and not y_pal in df.columns:
+            pass
+        else:    
             selected_xdata = df[x_pal]
             selected_ydata = df[y_pal]
             df["Time0"]=np.arange(len(df)).astype(float)
@@ -46,9 +48,9 @@ if f is not None:
             #plt.title(file.name)
             plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
 
-plt.xlabel(x_pal)
-plt.ylabel(y_pal)
-st.pyplot(fig)
+    plt.xlabel(x_pal)
+    plt.ylabel(y_pal)
+    st.pyplot(fig)
 st.button("Process A", on_click=process_a)
 st.button("Process B", on_click=process_b)
 
