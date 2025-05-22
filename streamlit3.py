@@ -25,8 +25,8 @@ if sample_f is not None:
     for i in newlist:
         st.button(i)
 
-x_pal=st.multiselect('x列を選択してください', newlist)
-y_pal=st.multiselect('y列を選択してください', newlist)
+    x_pal=st.multiselect('x列を選択してください', newlist)
+    y_pal=st.multiselect('y列を選択してください', newlist)
 
 f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 
