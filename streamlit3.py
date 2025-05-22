@@ -29,7 +29,7 @@ if f is not None:
     dataframes = {}
     for file in f:
         df = pd.read_csv(file,sep="[\t\0]",index_col=0)
-        dataframes[uploaded_file.name] = df
+        dataframes[file.name] = df
 
 # 散布図のプロット
         if dataframes:
