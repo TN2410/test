@@ -16,10 +16,8 @@ def process_b():
 
 # 複数のファイルを読み込んでから処理する
 
-
 for j in range(3):
-    check= st.checkbox(j,vakye=True)
-
+    check= st.checkbox(i,value=True)
 
 sample_f = st.file_uploader("txtファイルをアップロードしてください", type="csv")
 if sample_f is not None:
