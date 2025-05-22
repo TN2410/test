@@ -26,7 +26,6 @@ if sample_f is not None:
 
     y_pal=st.multiselect('y列を選択してください', newlist)
 
-    st.write(x_pal)
 f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 fig=plt.figure()
 if f is not None:
@@ -35,7 +34,6 @@ if f is not None:
         st.write("アップロードされたファイル:",file.name)
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
    #フォルダ名とチェックボックスを表示
-        st.write(x_pal)
         if not str(x_pal) in  df.columns and not str(y_pal) in df.columns:
             pass
         else:    
