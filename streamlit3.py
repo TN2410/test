@@ -24,7 +24,7 @@ if sample_f is not None:
     newlist = [x for x in mylist if x != "nan"]
     x_pal=st.multiselect('x列を選択してください', newlist)
     y_pal=st.multiselect('y列を選択してください', newlist)
-
+    st.write(x_pal)
 f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 fig=plt.figure()
 if f is not None:
@@ -33,7 +33,7 @@ if f is not None:
         st.write("アップロードされたファイル:",file.name)
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
    #フォルダ名とチェックボックスを表示
-        print(x_pal)
+        st.write(x_pal)
         if x_pal in df.columns and y_pal in df.columns:
             selected_xdata = df[x_pal]
             selected_ydata = df[y_pal]
