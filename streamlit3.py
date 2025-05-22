@@ -20,6 +20,7 @@ sample_f = st.file_uploader("txtファイルをアップロードしてくださ
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding="CP932")
     sample_par = sample_df.iloc[:,5]
+    st.write(sample_par)
     st.write(len(sample_par))
 
     sample_par2=[x for x in sample_par if x != '']
