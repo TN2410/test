@@ -26,18 +26,8 @@ if sample_f is not None:
     mylist = [str(x) for x in sample_par]
     newlist = [x for x in mylist if x != "nan"]
 
-
-
-
-    #sample_par2=[x for x in sample_par if x != "None"]
-    #sample_par2=[a for a in sample_par2 if a != '']
-    #sample_par2=[x for x in sample_par2 if math.isnan(x) == False]
-
-    #st.write(sample_par2)
-    #st.write(len(sample_par2))
     for i in newlist:
         if i!="":
-            st.write(i)
             st.button(i)
 
 x_pal=st.multiselect('x列を選択してください', ["NE","EXT_R","T_WAT_O","P_FuelHP1"])
