@@ -16,7 +16,11 @@ def process_b():
 
 # 複数のファイルを読み込んでから処理する
 
-df_smp=pd.read_csv(r"C:\Users\1219829\Desktop\csv\sample.csv")
+sample_f = st.file_uploader("txtファイルをアップロードしてください", type="csv")
+sample_df = pd.read_csv(sample_f,index_col=0)
+sample_par = sanmpe_df.iloc[:,5]
+for i in sample_par:
+    st.button(i)
 
 x_pal=st.multiselect('x列を選択してください', ["NE","EXT_R","T_WAT_O","P_FuelHP1"])
 y_pal=st.multiselect('y列を選択してください', ["NE","EXT_R","T_WAT_O","P_FuelHP1"])
@@ -44,7 +48,6 @@ if f is not None:
         plt.scatter(x, y,label=file.name)
         #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-        st.button(file.name)
 
 plt.xlabel(x_pal)
 plt.ylabel(y_pal)
