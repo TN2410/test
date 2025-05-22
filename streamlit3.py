@@ -30,7 +30,7 @@ if sample_f is not None:
     #st.write(sample_par2)
     #st.write(len(sample_par2))
     for i in sample_par:
-        if i!=None:
+        if i!=nan:
             st.write(i)
             st.button(i)
 
