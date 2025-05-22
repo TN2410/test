@@ -24,6 +24,7 @@ if sample_f is not None:
     newlist = [x for x in mylist if x != "nan"]
     x_pal=st.multiselect('x列を選択してください', newlist)
     y_pal=st.multiselect('y列を選択してください', newlist)
+
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if f is not None:
     dataframes = {}
