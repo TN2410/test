@@ -48,9 +48,8 @@ if f is not None:
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
         plt.xlabel(x_pal)
         plt.ylabel(y_pal)
+        st.button(file.name, on_click=process_a)
     st.pyplot(fig)
-st.button("Process A", on_click=process_a)
-st.button("Process B", on_click=process_b)
 
     #     plt.ylim(slider2, slider)
     #     plt.xlim(slider4, slider3)
