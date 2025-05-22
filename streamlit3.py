@@ -28,7 +28,6 @@ if sample_f is not None:
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}
-    show_data = {}
 
     for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file,sep="[\t\0]",index_col=0)
@@ -40,6 +39,7 @@ if uploaded_files is not None:
             # 各データフレームの表示を制御するボタンを作成
             for filename, df in dataframes.items():
                 # ボタンを作成（ファイル名をボタン名として使用）
+                st.write(filename)
                 show_data = st.checkbox("{} を表示".format(filename), value=True)
                 
                 # ボタンが選択されている場合に散布図をプロット
