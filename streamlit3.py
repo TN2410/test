@@ -25,31 +25,37 @@ if sample_f is not None:
     x_pal=st.multiselect('x列を選択してください', newlist)
     y_pal=st.multiselect('y列を選択してください', newlist)
 f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
-fig=plt.figure()
 if f is not None:
+    dataframes = {}
     for file in f:
         df = pd.read_csv(file,sep="[\t\0]",index_col=0)
-        #st.write("アップロードされたファイル:",file.name)
-#f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
-   #フォルダ名とチェックボックスを表示
+        dataframes[uploaded_file.name] = df
 
-        # if x_pal not in df.columns and y_pal not in df.columns:
-        #     pass
-        # else:    
-        selected_xdata = df[x_pal]
-        selected_ydata = df[y_pal]
-        df["Time0"]=np.arange(len(df)).astype(float)
-        #st.line_chart(selected_data)
-      
-        if st.button(file.name, on_click=process_a):
-            x=selected_xdata[1:].astype(float)
-            y=selected_ydata[1:].astype(float)
+# 散布図のプロット
+        if dataframes:
+            plt.figure(figsize=(10, 6))
+            # 各データフレームの表示を制御するボタンを作成
+            for filename, df in dataframes.items():
+                # ボタンを作成（ファイル名をボタン名として使用）
+                show_data = st.checkbox(f'{filename} を表示', value=True)
+                
+                # ボタンが選択されている場合に散布図をプロット
+                if show_data:
+                    # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
+        
+                    selected_xdata = df[x_pal]
+                    selected_ydata = df[y_pal]
+                    df["Time0"]=np.arange(len(df)).astype(float)
+                    #st.line_chart(selected_data)
+                
+                    x=selected_xdata[1:].astype(float)
+                    y=selected_ydata[1:].astype(float)
 
-            plt.scatter(x, y,label=file.name)
-            #plt.title(file.name)
-            plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-            plt.xlabel(x_pal)
-            plt.ylabel(y_pal)
+                    plt.scatter(x, y,label=filename)
+                    #plt.title(file.name)
+                    plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
+                    plt.xlabel(x_pal)
+                    plt.ylabel(y_pal)
     st.pyplot(fig)
 
     #     plt.ylim(slider2, slider)
