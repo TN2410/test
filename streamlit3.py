@@ -20,9 +20,9 @@ sample_f = st.file_uploader("txtファイルをアップロードしてくださ
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding="CP932")
     sample_par = sample_df.iloc[:,5]
-    sample_par = list(filter(None, sample_par))
+    sample_par2 = list(filter(None, sample_par))
 
-    for i in sample_par:
+    for i in sample_par2:
         st.button(i)
 
 x_pal=st.multiselect('x列を選択してください', ["NE","EXT_R","T_WAT_O","P_FuelHP1"])
