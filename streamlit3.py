@@ -5,11 +5,10 @@ import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly.express as px
 import matplotlib.pyplot as plt
 
-def process_a():
-    st.write("Processing A...")
+# def process_a():
+#     st.write("Processing A...")
 
 # 複数のファイルを読み込んでから処理する
 
