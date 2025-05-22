@@ -47,9 +47,8 @@ if f is not None:
             plt.scatter(x, y,label=file.name)
             #plt.title(file.name)
             plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-
-    plt.xlabel(x_pal)
-    plt.ylabel(y_pal)
+            plt.xlabel(x_pal)
+            plt.ylabel(y_pal)
     st.pyplot(fig)
 st.button("Process A", on_click=process_a)
 st.button("Process B", on_click=process_b)
