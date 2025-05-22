@@ -1,7 +1,7 @@
 #FFT 累積データをフォルダ選択で自動計算する
 
 #%matplotlib inline
-import os,time,gc,math,glob
+import os,time,gc,math,glob,re
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -34,7 +34,7 @@ if f is not None:
         st.write("アップロードされたファイル:",file.name)
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
    #フォルダ名とチェックボックスを表示
-        if not x_pal in  df.columns.apply(tuple) and not y_pal in df.columns.apply(tuple):
+        if not x_pal in  df.columns and not y_pal in df.columns:
             pass
         else:    
             st.write(x_pal)
