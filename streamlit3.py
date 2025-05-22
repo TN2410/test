@@ -18,7 +18,7 @@ def process_b():
 
 
 for j in range(3):
-    check[j]= st.checkbox(j,vakye=True)
+    check= st.checkbox(j,vakye=True)
 
 
 sample_f = st.file_uploader("txtファイルをアップロードしてください", type="csv")
