@@ -22,9 +22,9 @@ if sample_f is not None:
     sample_par = sample_df.iloc[:,5]
     mylist = [str(x) for x in sample_par]
     newlist = [x for x in mylist if x != "nan"]
-    x_pal=st.multiselect('x列を選択してください', newlist).apply(tuple)
+    x_pal=st.multiselect('x列を選択してください', newlist)
 
-    y_pal=st.multiselect('y列を選択してください', newlist).apply(tuple)
+    y_pal=st.multiselect('y列を選択してください', newlist)
 
     st.write(x_pal)
 f = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
@@ -36,7 +36,7 @@ if f is not None:
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
    #フォルダ名とチェックボックスを表示
         st.write(x_pal)
-        if not x_pal in  df.columns and not y_pal in df.columns:
+        if not str(x_pal) in  df.columns and not str(y_pal) in df.columns:
             pass
         else:    
             selected_xdata = df[x_pal]
