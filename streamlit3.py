@@ -26,7 +26,7 @@ if sample_f is not None:
     y_pal=st.multiselect('y列を選択してください', newlist)
 
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
-if f is not None:
+if uploaded_files is not None:
     dataframes = {}
     for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file,sep="[\t\0]",index_col=0)
