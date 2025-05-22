@@ -2,7 +2,7 @@
 
 #%matplotlib inline
 # import os,time,gc,math,glob
- import streamlit as st
+import streamlit as st
 # import pandas as pd
 # import numpy as np
 # import matplotlib.pyplot as plt
@@ -20,7 +20,6 @@ sample_f = st.file_uploader("txtファイルをアップロードしてくださ
 #     newlist = [x for x in mylist if x != "nan"]
 #     x_pal=st.multiselect('x列を選択してください', newlist)
 #     y_pal=st.multiselect('y列を選択してください', newlist)
-
 # uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 # if uploaded_files is not None:
 #     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
