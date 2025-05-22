@@ -34,7 +34,7 @@ if f is not None:
 #f=r"C:\Users\1219829\Desktop\python\streamlit\ff.csv"
    #フォルダ名とチェックボックスを表示
         st.write(x_pal)
-        if x_pal not in df.columns and y_pal not in df.columns:
+        if not x_pal in  df.columns and not y_pal in df.columns:
             pass
         else:    
             selected_xdata = df[x_pal]
