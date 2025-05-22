@@ -18,7 +18,7 @@ def process_b():
 
 sample_f = st.file_uploader("txtファイルをアップロードしてください", type="csv")
 if sample_f is not None:
-    sample_df = pd.read_csv(sample_f)
+    sample_df = pd.read_csv(sample_f,encoding="CP932")
     sample_par = sanmpe_df.iloc[:,5]
 
     for i in sample_par:
