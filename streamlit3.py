@@ -27,39 +27,40 @@ if sample_f is not None:
 
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
-    dataframes = {}
+    dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
 
     for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file,sep="[\t\0]",index_col=0)
         dataframes[uploaded_file.name] = df
+    #保存完了
 
 # 散布図のプロット
-        if dataframes:
-            fig=plt.figure(figsize=(10, 6))
-            # 各データフレームの表示を制御するボタンを作成
-            for filename, df in dataframes.items():
-                # ボタンを作成（ファイル名をボタン名として使用）
-                st.write(dataframes)
-                show_data = st.checkbox("{} を表示".format(filename), value=True)
-                
-                # ボタンが選択されている場合に散布図をプロット
-                if show_data:
-                    # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
-        
-                    selected_xdata = df[x_pal]
-                    selected_ydata = df[y_pal]
-                    df["Time0"]=np.arange(len(df)).astype(float)
-                    #st.line_chart(selected_data)
-                
-                    x=selected_xdata[1:].astype(float)
-                    y=selected_ydata[1:].astype(float)
+    if dataframes:
+        fig=plt.figure(figsize=(10, 6))
+        # 各データフレームの表示を制御するボタンを作成
+        for filename, df in dataframes.items():
+            # ボタンを作成（ファイル名をボタン名として使用）
+            st.write(dataframes)
+            show_data = st.checkbox("{} を表示".format(filename), value=True)
+            
+            # ボタンが選択されている場合に散布図をプロット
+            if show_data:
+                # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
+    
+                selected_xdata = df[x_pal]
+                selected_ydata = df[y_pal]
+                df["Time0"]=np.arange(len(df)).astype(float)
+                #st.line_chart(selected_data)
+            
+                x=selected_xdata[1:].astype(float)
+                y=selected_ydata[1:].astype(float)
 
-                    plt.scatter(x, y,label=filename)
-                    #plt.title(file.name)
-            plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-            plt.xlabel(x_pal)
-            plt.ylabel(y_pal)
-            st.pyplot(fig)
+                plt.scatter(x, y,label=filename)
+                #plt.title(file.name)
+        plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
+        plt.xlabel(x_pal)
+        plt.ylabel(y_pal)
+        st.pyplot(fig)
 
     #     plt.ylim(slider2, slider)
     #     plt.xlim(slider4, slider3)
