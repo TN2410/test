@@ -4,6 +4,8 @@ import pandas as pd
 
 fig=plt.figure()
 
+
+st.write("testtest1")
 # 緯度経度データ（10進数）
 pref_list = [
   {"longitude":135.741667, "latitude":30.789828}, # 熊本県
