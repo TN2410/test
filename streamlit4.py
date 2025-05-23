@@ -1,13 +1,14 @@
 #FFT 累積データをフォルダ選択で自動計算する
 
+
 import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-def process_a():
-    st.write("Processing A...")
+# def process_a():
+#     st.write("Processing A...")
 
 #複数のファイルを読み込んでから処理する
 
