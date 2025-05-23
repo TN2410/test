@@ -1,4 +1,7 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+
+fig=plt.figure()
 
 # 緯度経度データ（10進数）
 pref_list = [
