@@ -5,7 +5,6 @@ import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly.express as px
 import matplotlib.pyplot as plt
 
 #FFT 累積データをstreamlitで表示する
@@ -21,6 +20,7 @@ if f is not None:
 
     df = df.T
     #グラフ用に振幅最大値を算出
+
     amax = df.max().max()#周波数と時間軸のスライダに応じて最大値を出したい
     df['Time'] = np.arange(0,int(len(df)))#時間軸は窓長さに変化する必要あり
     df['Time'] = df['Time'].astype(int)
