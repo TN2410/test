@@ -40,7 +40,7 @@ if uploaded_files is not None:
                 # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
                 selected_xdata = df[x_pal]
                 selected_ydata = df[y_pal]
-                ＃＃df["Time0"]=np.arange(len(df)).astype(float)
+                #df["Time0"]=np.arange(len(df)).astype(float)
                 #st.line_chart(selected_data)
                 x=selected_xdata[1:].astype(float)
                 y=selected_ydata[1:].astype(float)
