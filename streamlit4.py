@@ -4,8 +4,6 @@
 import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd
-import numpy as np
-import plotly.express as px
 import matplotlib.pyplot as plt
 
 #FFT 累積データをstreamlitで表示する
