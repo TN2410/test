@@ -6,7 +6,6 @@ import numpy as np
 
 fig=plt.figure()
 
-
 st.write("testtefddst1")
 # 緯度経度データ（10進数）
 pref_list = [

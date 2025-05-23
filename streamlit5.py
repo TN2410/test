@@ -2,10 +2,8 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 x = list(range(50))
 y = np.random.randn(50)
-
 
 plt.plot(x, y)
 plt.title('Matplotlib and Streamlit')
