@@ -1,15 +1,15 @@
-#FFT 累積データをフォルダ選択で自動計算する
+#FFT 累積データをstreamlitで表示する
+
+#%matplotlib inline
 import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+import numpy as np
 import plotly.express as px
-#import numpy as np
+import matplotlib.pyplot as plt
 
-# def process_a():
-#     st.write("Processing A...")
-
-#複数のファイルを読み込んでから処理する
+#FFT 累積データをstreamlitで表示する
+# ファイルアップロード
 
 sample_f = st.file_uploader("txtファイルをアップロードしてください", type="csv")
 if sample_f is not None:
