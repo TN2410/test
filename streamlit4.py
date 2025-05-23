@@ -1,6 +1,6 @@
 #FFT 累積データをフォルダ選択で自動計算する
 
-#%matplotlib inline
+%matplotlib inline
 import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd
