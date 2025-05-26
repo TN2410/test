@@ -2,7 +2,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-st.pyplot(plt)st.write("test")
+st.write("test")
 
 x = list(range(50))
 y = np.random.randn(50)
@@ -13,4 +13,4 @@ plt.xlabel('X-axis')
 plt.ylabel('Y-axis')
 
 # Streamlitで表示
-st.pyplot(plt)st.write("test")
+st.pyplot(plt)
