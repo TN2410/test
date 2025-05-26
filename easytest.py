@@ -1,4 +1,4 @@
-import pyocr,sys
+import sys
 sys.path.append(r'c:\users\1219829\python\py38\lib\site-packages')
 sys.path.append(r'C:\Users\1219829\python\Py38\Scripts')
 import streamlit as st
