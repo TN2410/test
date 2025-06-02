@@ -1,6 +1,6 @@
 #FFT 累積データをstreamlitで表示する
 
-%matplotlib inline
+%matplotlib inline #これがないとmatplotlibのインポートエラーがでる
 import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd

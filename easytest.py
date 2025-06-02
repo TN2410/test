@@ -1,9 +1,9 @@
+%matplotlib　inline
 import streamlit as st
 import numpy as np
 import matplotlib as plt
 
 st.write("test")
-
 fig=plt.figure()
 
 x = list(range(50))
