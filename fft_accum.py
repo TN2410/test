@@ -43,7 +43,7 @@ if uploaded_files is not None:
                 # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
                 selected_xdata = df.iloc[:,0]
                 if "_Cyl_" in filename:
-                    selected_ydata = df.iloc[:,columns]*2000
+                    selected_ydata = df.iloc[:,columns]*1000
                 else:
                     selected_ydata = df.iloc[:,columns]
                 #df["Time0"]=np.arange(len(df)).astype(float)
