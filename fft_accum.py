@@ -36,8 +36,8 @@ if uploaded_files is not None:
                 plt.scatter(x, y,label=filename)
                 #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-        plt.xlabel(x_pal)
-        plt.ylabel(y_pal)
+        plt.xlabel("周波数_仮")
+        plt.ylabel("仮")
         st.pyplot(fig)
 
 
