@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 st.title("振動とPmax周波数の相関")
 
 uploaded_files = st.file_uploader("accumCSVファイルをアップロードしてください", type="csv",accept_multiple_files=True)
-st.write("check22")
+#st.write("check22")
 
 with st.sidebar:
     st.title("レンジなど調整用")
