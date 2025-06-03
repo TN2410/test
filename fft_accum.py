@@ -41,6 +41,9 @@ if uploaded_files is not None:
         plt.xlabel("周波数_仮")
         plt.ylabel("仮")
         st.pyplot(fig)
+        st.urite(df.iloc[:5,0])
+        st.urite(df.iloc[:5,0])
+
 
 
     #     df = df.T
