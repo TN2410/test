@@ -55,7 +55,7 @@ if uploaded_files is not None:
                 plt.ylim(0, maxamp)
                 plt.xlim(min_freq, max_freq)
                 #plt.title(file.name)
-        plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left",fontsize=10)
+        plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left",fontsize=12)
         plt.xlabel("周波数_仮")
         plt.ylabel("仮")
         st.pyplot(fig)
