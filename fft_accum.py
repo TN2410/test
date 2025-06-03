@@ -5,8 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 f = st.file_uploader("accumCSVファイルをアップロードしてください", type="csv",accept_multiple_files=True)
-
-x_pal=""
+st.write("check")
 
 # ファイルがアップロードされた場合
 if f is not None:
@@ -40,13 +39,6 @@ if f is not None:
         plt.xlabel(x_pal)
         plt.ylabel(y_pal)
         st.pyplot(fig)
-
-
-
-
-
-
-
 
 
     #     df = df.T
