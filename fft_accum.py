@@ -18,6 +18,8 @@ if uploaded_files is not None:
         df=df.astype(float)
         color = st.color_picker('Pick A Color', '#00f900')
 
+columns=100
+
     if dataframes:
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
@@ -28,7 +30,7 @@ if uploaded_files is not None:
             if show_data:
                 # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
                 selected_xdata = df.iloc[:,0]
-                selected_ydata = df.iloc[:,0]
+                selected_ydata = df.iloc[:,columns]
                 #df["Time0"]=np.arange(len(df)).astype(float)
                 #st.line_chart(selected_data)
                 x=selected_xdata[1:].astype(float)
