@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 uploaded_files = st.file_uploader("accumCSVファイルをアップロードしてください", type="csv",accept_multiple_files=True)
-st.write("check")
+st.write("check22")
 
 columns=100
 
@@ -18,8 +18,7 @@ if uploaded_files is not None:
         dataframes[uploaded_file.name] = df
     #　散布図のプロット
         df=df.astype(float)
-        color = st.color_picker('Pick A Color', '#00f900')
-
+        #color = st.color_picker('Pick A Color', '#00f900')
 
     if dataframes:
         fig=plt.figure(figsize=(10, 6))
