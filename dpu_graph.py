@@ -5,12 +5,12 @@
 import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 #FFT 累積データをstreamlitで表示する
 # ファイルアップロード
 
-sample_f = st.file_uploader("txtファイルをアップロードしてください", type="csv")
+sample_f = st.file_uploader("txtファイルをアップロードしてください", type="csv",accept_multiple_files=True)
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding="CP932")
     sample_par = sample_df.iloc[:,5]#DPU用
