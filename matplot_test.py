@@ -1,7 +1,7 @@
 #%matplotlib inline
 import streamlit as st
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 st.write("test")
 fig=plt.figure()
