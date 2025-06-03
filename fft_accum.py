@@ -48,7 +48,7 @@ if uploaded_files is not None:
             # ボタンが選択されている場合に散布図をプロット
             if show_data:
                 # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
-                selected_xdata = df.iloc[:,0]
+                selected_xdata = df.iloc[:,0]*1.2207
                 if "_Cyl_" in filename:
                     selected_ydata = df.iloc[:,columns]*cyl_amp
                 else:
