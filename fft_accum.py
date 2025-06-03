@@ -8,7 +8,7 @@ f = st.file_uploader("accumCSVファイルをアップロードしてくださ�
 
 # ファイルがアップロードされた場合
 if f is not None:
-    df = pd.read_csv(f,index_col=0)#8192までがindex　#カラム名は回転数
+    df = pd.read_csv(f,index_col=0,)#8192までがindex　#カラム名は回転数
     df=df.astype(float)
     color = st.color_picker('Pick A Color', '#00f900')
 

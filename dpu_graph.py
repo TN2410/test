@@ -1,11 +1,10 @@
  
- #FFT 累積データをstreamlitで表示する
-
+#FFT 累積データをstreamlitで表示する
 #%matplotlib inline
 import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 #FFT 累積データをstreamlitで表示する
 # ファイルアップロード
