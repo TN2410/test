@@ -4,11 +4,11 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-f = st.file_uploader("accumCSVファイルをアップロードしてください", type="csv",accept_multiple_files=True)
+uploaded_files = st.file_uploader("accumCSVファイルをアップロードしてください", type="csv",accept_multiple_files=True)
 st.write("check")
 
 # ファイルがアップロードされた場合
-if f is not None:
+if uploaded_files is not None:
     dataframes = {}
 #この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
