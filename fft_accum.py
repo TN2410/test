@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 uploaded_files = st.file_uploader("accumCSVファイルをアップロードしてください", type="csv",accept_multiple_files=True)
 st.write("check")
 
+columns=100
+
 # ファイルがアップロードされた場合
 if uploaded_files is not None:
     dataframes = {}
@@ -18,7 +20,6 @@ if uploaded_files is not None:
         df=df.astype(float)
         color = st.color_picker('Pick A Color', '#00f900')
 
-columns=100
 
     if dataframes:
         fig=plt.figure(figsize=(10, 6))
