@@ -21,8 +21,8 @@ with st.sidebar:
     max_value=5000
     max_amp=100
 
-    min_freq=st.slider("下限周波数", min_value, max_value, min_value, 100)
-    max_freq=st.slider("上限周波数", min_value, max_value, max_value, 100)
+    min_freq=st.slider("下限周波数", min_value, max_value, 1200, 100)
+    max_freq=st.slider("上限周波数", min_value, max_value, 1500, 100)
     maxamp=st.slider("上限AMP", 0, max_amp, 10, 2)
     cyl_amp=st.slider("cyl_amp倍率", 0, 1000, 1000, 100)
 
