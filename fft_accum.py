@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 uploaded_files = st.file_uploader("accumCSVファイルをアップロードしてください", type="csv",accept_multiple_files=True)
 st.write("check22")
 
-columns=100
+columns=st.slider()100
 
 
     #     df["NE"][1:] = df["NE"][1:].astype(int)
@@ -18,7 +18,7 @@ max_value=5000
 max_amp=100
 min_freq=st.slider("下限周波数", min_value, max_value, min_value, 100)
 max_freq=st.slider("上限周波数", min_value, max_value, max_value, 100)
-maxamp=st.slider("範囲", 0, max_value, max_amp, 5)
+maxamp=st.slider("範囲", 0, max_amp, max_amp, 5)
 
 #df_ne=df[df["NE"][1:]<slider]
 
