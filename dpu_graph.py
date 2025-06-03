@@ -1,5 +1,5 @@
  
-#FFT 累積データをstreamlitで表示する
+#dpuデータをstreamlitで表示する
 #%matplotlib inline
 import os,time,gc,math,glob
 import streamlit as st
