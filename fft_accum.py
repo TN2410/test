@@ -8,26 +8,7 @@ st.title("振動とPmax周波数の相関")
 
 uploaded_files = st.file_uploader("accum.CSVファイルをアップロード(複数可)", type="csv",accept_multiple_files=True)
 #st.write("check22")
-
-with st.sidebar:
-    st.title("レンジなど調整用")
-    columns=st.slider("時間", 0, 1000, 50, 1)
-
-
-    #     df["NE"][1:] = df["NE"][1:].astype(int)
-    #     max_value = df["NE"][1:].max()
-    #     min_value = df["NE"][1:].min()
-    min_value=0
-    max_value=5000
-    max_amp=100
-
-    min_freq=st.slider("下限周波数", min_value, max_value, 1200, 100)
-    max_freq=st.slider("上限周波数", min_value, max_value, 1500, 100)
-    maxamp=st.slider("上限AMP", 0, max_amp, 10, 2)
-    cyl_amp=st.slider("cyl_amp倍率", 0, 1000, 1000, 100)
-
 #df_ne=df[df["NE"][1:]<slider]
-
 # ファイルがアップロードされた場合
 if uploaded_files is not None:
     dataframes = {}
@@ -65,7 +46,16 @@ if uploaded_files is not None:
         plt.xlabel("周波数_仮")
         plt.ylabel("仮")
         st.pyplot(fig)
-#        st.write(df.iloc[:5,0])
+with st.sidebar:
+    st.title("レンジなど調整用")
+    columns=st.slider("時間", 0, 1000, 50, 1)
+    min_value=0
+    max_value=5000
+    max_amp=100
+    min_freq=st.slider("下限周波数", min_value, max_value, 1200, 100)
+    max_freq=st.slider("上限周波数", min_value, max_value, 1500, 100)
+    maxamp=st.slider("上限AMP", 0, max_amp, 10, 2)
+    cyl_amp=st.slider("cyl_amp倍率", 0, 1000, 1000, 100)#        st.write(df.iloc[:5,0])
 #        st.write(df.iloc[:5,0])
 
 
