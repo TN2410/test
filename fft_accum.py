@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 
 st.title("振動とPmax周波数の相関")
 
-uploaded_files = st.file_uploader("accum.CSVファイルをアップロード(複数可)", type="csv",accept_multiple_files=True)
+with st.expander("アップロード")
+    uploaded_files = st.file_uploader("accum.CSVファイルをアップロード(複数可)", type="csv",accept_multiple_files=True)
 #st.write("check22")
 #df_ne=df[df["NE"][1:]<slider]
 # ファイルがアップロードされた場合
