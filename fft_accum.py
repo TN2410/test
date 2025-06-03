@@ -16,9 +16,11 @@ columns=st.slider("時間", 0, 1000, 50, 1)
 min_value=0
 max_value=5000
 max_amp=100
+
 min_freq=st.slider("下限周波数", min_value, max_value, min_value, 100)
 max_freq=st.slider("上限周波数", min_value, max_value, max_value, 100)
 maxamp=st.slider("上限AMP", 0, max_amp, 10, 2)
+cyl_amp=st.slider("cyl_amp倍率", 0, 1000, 1000, 100)
 #df_ne=df[df["NE"][1:]<slider]
 
 # ファイルがアップロードされた場合
@@ -43,7 +45,7 @@ if uploaded_files is not None:
                 # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
                 selected_xdata = df.iloc[:,0]
                 if "_Cyl_" in filename:
-                    selected_ydata = df.iloc[:,columns]*1000
+                    selected_ydata = df.iloc[:,columns]*cyl_amp
                 else:
                     selected_ydata = df.iloc[:,columns]
                 #df["Time0"]=np.arange(len(df)).astype(float)
