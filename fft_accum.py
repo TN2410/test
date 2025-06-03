@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-f = st.file_uploader("accumCSVファイルをアップロードしてください", type="csv",accept_multiple_files=True)
+f = st.file_uploader("accumCSVファイルをアップロードしてください", type="csv")
 
 # ファイルがアップロードされた場合
 if f is not None:
