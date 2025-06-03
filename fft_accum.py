@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 uploaded_files = st.file_uploader("accumCSVファイルをアップロードしてください", type="csv",accept_multiple_files=True)
 st.write("check22")
 
-columns=st.slider()
+columns=st.slider("時間", 0, 1000, 50, 1)
 
 
     #     df["NE"][1:] = df["NE"][1:].astype(int)
