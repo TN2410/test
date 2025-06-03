@@ -5,12 +5,12 @@
 import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 #FFT 累積データをstreamlitで表示する
 # ファイルアップロード
 
-sample_f = st.file_uploader("txtファイルをアップロードしてください", type="csv")
+sample_f = st.file_uploader("csvファイルをアップロードしてください", type="csv")
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding="CP932")
     sample_par = sample_df.iloc[:,5]#DPU用
@@ -25,7 +25,6 @@ if uploaded_files is not None:
     for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file,sep="[\t\0]",index_col=0,engine='python')
         dataframes[uploaded_file.name] = df
-    #　保存完了
     #　散布図のプロット
     if dataframes:
         fig=plt.figure(figsize=(10, 6))
