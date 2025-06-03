@@ -44,7 +44,7 @@ if uploaded_files is not None:
             if show_data:
                 # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
                 selected_xdata = df.iloc[:,0]
-                selected_ydata = df.iloc[:,columns]*100
+                selected_ydata = df.iloc[:,columns]
                 #df["Time0"]=np.arange(len(df)).astype(float)
                 #st.line_chart(selected_data)
                 x=selected_xdata[1:].astype(float)
