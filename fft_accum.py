@@ -15,7 +15,7 @@ if f is not None:
         df = pd.read_csv(uploaded_file,index_col=0)
         dataframes[uploaded_file.name] = df
     #　散布図のプロット
-    	df=df.astype(float)
+        df=df.astype(float)
         color = st.color_picker('Pick A Color', '#00f900')
 
     if dataframes:
