@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import japanize_matplotlib
+#import japanize_matplotlib
 
 st.title("振動とPmax周波数の相関")
 
@@ -60,8 +60,8 @@ if uploaded_files is not None:
                 plt.xlim(min_freq, max_freq)
                 #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-        plt.xlabel("周波数_仮")
-        plt.ylabel("仮")
+        plt.xlabel("freq(Hz)")
+        plt.ylabel("G")
         st.pyplot(fig)
 
 #        st.write(df.iloc[:5,0])
