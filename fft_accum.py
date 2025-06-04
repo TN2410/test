@@ -43,7 +43,7 @@ if uploaded_files is not None:
         x=np.arange(len(df.columns)-1).astype(float)
         y=df.columns[1:].astype(float)
         plt.plot(x, y)
-        plt.scatter(columns,y[columns],color="red",s=5)
+        plt.scatter(columns,y[columns],color="red",s=20)
         plt.xlabel("time")
         plt.ylabel("rpm")
         st.pyplot(fig)
