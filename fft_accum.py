@@ -37,7 +37,7 @@ if uploaded_files is not None:
 
     if dataframes:
         with st.sidebar:
-            columns=st.slider("時間", 0, len(df.columns), 6161, 1)
+            columns=st.slider("時間", 0, len(df.columns), 61, 1)
 
         # 時間軸のb場所と回転数を表示
         fig=plt.figure(figsize=(10, 4))
