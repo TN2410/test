@@ -36,18 +36,6 @@ if uploaded_files is not None:
         with st.sidebar:
             columns=st.slider("時間", 0, len(df.columns), 50, 1)
 
-        fig=plt.figure(figsize=(10, 4))
-# 各データフレームの表示を制御するボタンを作成
-        x=np.arange(len(df.columns)-1).astype(float)
-        y=df.columns[1:].astype(float)
-        st.write(x)
-        st.write(y)
-        plt.plot(x, y)
-        plt.scatter(columns,y[columns],color="red")
-        plt.xlabel("time")
-        plt.ylabel("rpm")
-        st.pyplot(fig)
-
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
         for filename, df in dataframes.items():
@@ -75,7 +63,18 @@ if uploaded_files is not None:
         plt.xlabel("freq(Hz)")
         plt.ylabel("G")
         st.pyplot(fig)
+                fig=plt.figure(figsize=(10, 4))
 
+        # 時間軸のb場所と回転数を表示
+        x=np.arange(len(df.columns)-1).astype(float)
+        y=df.columns[1:].astype(float)
+        st.write(x)
+        st.write(y)
+        plt.plot(x, y)
+        plt.scatter(columns,y[columns],color="red",size=10)
+        plt.xlabel("time")
+        plt.ylabel("rpm")
+        st.pyplot(fig)
 #        st.write(df.iloc[:5,0])
 #        st.write(df.iloc[:5,0])
 
