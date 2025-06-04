@@ -8,7 +8,6 @@ st.title("振動とPmax周波数の相関")
 
 with st.sidebar:
     st.title("レンジなど調整用")
-    columns=st.slider("時間", 0, 1000, 50, 1)
     min_value=0
     max_value=5000
     max_amp=100
@@ -33,12 +32,16 @@ if uploaded_files is not None:
         #color = st.color_picker('Pick A Color', '#00f900')
 
     if dataframes:
+        with sidebar:
+            columns=st.slider("時間", 0, len(df.columns], 50, 1)
+
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
         for filename, df in dataframes.items():
             # ボタンを作成（ファイル名をボタン名として使用）
             with st.sidebar:
                 show_data = st.checkbox("{} を表示".format(filename), value=True)
+
             # ボタンが選択されている場合に散布図をプロット
             if show_data:
                 # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
@@ -55,7 +58,7 @@ if uploaded_files is not None:
                 plt.ylim(0, maxamp)
                 plt.xlim(min_freq, max_freq)
                 #plt.title(file.name)
-        plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left",fontsize=12)
+        plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
         plt.xlabel("周波数_仮")
         plt.ylabel("仮")
         st.pyplot(fig)
