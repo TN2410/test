@@ -12,9 +12,10 @@ with st.sidebar:
     min_value=0
     max_value=5000
     max_amp=1000
-    min_freq=st.slider("下限周波数", min_value, max_value, 1200, 100)
-    max_freq=st.slider("上限周波数", min_value, max_value, 1500, 100)
-    maxamp=st.slider("上限AMP", 0, max_amp, 10, 2)
+    min_freq=st.slider("下限周波数", min_value, max_value, 1200, 50)
+    max_freq=st.slider("上限周波数", min_value, max_value, 1500, 50)
+    minamp=st.slider("下限AMP", 0, max_amp, 0, 5)
+    maxamp=st.slider("上限AMP", 0, max_amp, 30, 5)
     cyl_amp=st.slider("cyl_amp倍率", 0, 1000, 1000, 25)
 
 with st.expander("アップロード"):
@@ -68,7 +69,7 @@ if uploaded_files is not None:
                 x=selected_xdata[1:].astype(float)
                 y=selected_ydata[1:].astype(float)
                 plt.plot(x, y,label=filename)
-                plt.ylim(0, maxamp)
+                plt.ylim(minamp, maxamp)
                 plt.xlim(min_freq, max_freq)
                 #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
