@@ -36,6 +36,19 @@ if uploaded_files is not None:
         with st.sidebar:
             columns=st.slider("時間", 0, len(df.columns), 50, 1)
 
+        fig=plt.figure(figsize=(10, 4))
+# 各データフレームの表示を制御するボタンを作成
+        for filename, df in dataframes.items():
+            # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
+            
+            #st.line_chart(selected_data)
+            x=np.arange(len(df.columns)).astype(float)
+            y=df.iloc[0,1:].astype(float)
+            plt.plot(x, y)
+        plt.xlabel("time")
+        plt.ylabel("rpm")
+        st.pyplot(fig)
+
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
         for filename, df in dataframes.items():
