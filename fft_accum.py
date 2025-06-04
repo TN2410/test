@@ -64,18 +64,16 @@ if uploaded_files is not None:
         plt.ylabel("G")
         st.pyplot(fig)
 
-        # 時間軸のb場所と回転数を表示
+    # 時間軸のb場所と回転数を表示
 
-        fig=plt.figure(figsize=(10, 4))
-        x=np.arange(len(df.columns)-1).astype(float)
-        y=df.columns[1:].astype(float)
-        st.write(x)
-        st.write(y)
-        plt.plot(x, y)
-        plt.scatter(columns,y[columns],color="red",size=10)
-        plt.xlabel("time")
-        plt.ylabel("rpm")
-        st.pyplot(fig)
+    fig=plt.figure(figsize=(10, 4))
+    x=np.arange(len(df.columns)-1).astype(float)
+    y=df.columns[1:].astype(float)
+    plt.plot(x, y)
+    plt.scatter(columns,y[columns],color="red",size=10)
+    plt.xlabel("time")
+    plt.ylabel("rpm")
+    st.pyplot(fig)
 #        st.write(df.iloc[:5,0])
 #        st.write(df.iloc[:5,0])
 
