@@ -31,8 +31,14 @@ if uploaded_files is not None:
     #　散布図のプロット
         df=df.astype(float)
         #color = st.color_picker('Pick A Color', '#00f900')
-            # 時間軸のb場所と回転数を表示
 
+
+
+    if dataframes:
+        with st.sidebar:
+            columns=st.slider("時間", 0, len(df.columns), 50, 1)
+
+        # 時間軸のb場所と回転数を表示
         fig=plt.figure(figsize=(10, 4))
         x=np.arange(len(df.columns)-1).astype(float)
         y=df.columns[1:].astype(float)
@@ -41,12 +47,7 @@ if uploaded_files is not None:
         plt.xlabel("time")
         plt.ylabel("rpm")
         st.pyplot(fig)
-
-
-    if dataframes:
-        with st.sidebar:
-            columns=st.slider("時間", 0, len(df.columns), 50, 1)
-
+        
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
         for filename, df in dataframes.items():
