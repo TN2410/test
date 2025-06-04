@@ -31,6 +31,17 @@ if uploaded_files is not None:
     #　散布図のプロット
         df=df.astype(float)
         #color = st.color_picker('Pick A Color', '#00f900')
+            # 時間軸のb場所と回転数を表示
+
+        fig=plt.figure(figsize=(10, 4))
+        x=np.arange(len(df.columns)-1).astype(float)
+        y=df.columns[1:].astype(float)
+        plt.plot(x, y)
+        plt.scatter(columns,y[columns],color="red",size=10)
+        plt.xlabel("time")
+        plt.ylabel("rpm")
+        st.pyplot(fig)
+
 
     if dataframes:
         with st.sidebar:
@@ -63,36 +74,5 @@ if uploaded_files is not None:
         plt.xlabel("freq(Hz)")
         plt.ylabel("G")
         st.pyplot(fig)
-
-    # 時間軸のb場所と回転数を表示
-
-    fig=plt.figure(figsize=(10, 4))
-    x=np.arange(len(df.columns)-1).astype(float)
-    y=df.columns[1:].astype(float)
-    plt.plot(x, y)
-    plt.scatter(columns,y[columns],color="red",size=10)
-    plt.xlabel("time")
-    plt.ylabel("rpm")
-    st.pyplot(fig)
-#        st.write(df.iloc[:5,0])
-#        st.write(df.iloc[:5,0])
-
-
-
-    #     df = df.T
-    # #グラフ用に振幅最大値を算出
-    #     amax = df.max().max()#周波数と時間軸のスライダに応じて最大値を出したい
-    #     df['Time'] = np.arange(0,int(len(df)))#時間軸は窓長さに変化する必要あり
-    #     df['Time'] = df['Time'].astype(int)
-    #     df["NE"] =list(df.index)
-    #     df["NE"] = df["NE"].astype(float)
-    #     #option = st.selectbox('日付',list(range(1, 32)))
-
-    #     slider=st.slider("範囲", 0, len(df), 0, 1)
-    #     slider2=st.slider("下限周波数", 0, 5000, 0, 100)
-    #     slider3=st.slider("上限周波数", 0, 5000, 0, 100)
-
-    #     #指定回転数の色を分ける
-    #     st.scatter_chart(df,x='Time',y="NE",color=(60,0,255))
 
 
