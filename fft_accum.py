@@ -39,9 +39,9 @@ if uploaded_files is not None:
         fig=plt.figure(figsize=(10, 4))
 # 各データフレームの表示を制御するボタンを作成
         x=np.arange(len(df.columns)).astype(float)
-        y=np.arange(len(df.columns)).astype(float)*2
+        #y=np.arange(len(df.columns)).astype(float)*2
 
-        #y=df.columns.T[1:].tolist()
+        y=df.columns[1:].astype(float)
         st.write(x)
         st.write(y)
         plt.plot(x, y)
