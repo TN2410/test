@@ -40,6 +40,8 @@ if uploaded_files is not None:
 # 各データフレームの表示を制御するボタンを作成
         x=np.arange(len(df.columns)).astype(float)
         y=df.iloc[0,1:].astype(float)
+        st.write(x)
+        st.write(y)
         plt.plot(x, y)
         plt.xlabel("time")
         plt.ylabel("rpm")
