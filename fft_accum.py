@@ -33,7 +33,7 @@ if uploaded_files is not None:
 
     if dataframes:
         with sidebar:
-            columns=st.slider("時間", 0, len(df.columns], 50, 1)
+            columns=st.slider("時間", 0, len(df.columns), 50, 1)
 
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
