@@ -12,8 +12,8 @@ with st.sidebar:
     min_value=0
     max_value=5000
     max_amp=1000
-    min_freq=st.slider("下限周波数", min_value, max_value, 1200, 50)
-    max_freq=st.slider("上限周波数", min_value, max_value, 1500, 50)
+    min_freq=st.slider("下限周波数", min_value, max_value, 0, 50)
+    max_freq=st.slider("上限周波数", min_value, max_value, 150, 50)
     minamp=st.slider("下限AMP", 0, max_amp, 0, 5)
     maxamp=st.slider("上限AMP", 0, max_amp, 30, 5)
     cyl_amp=st.slider("cyl_amp倍率", 0, 1000, 1, 25)
@@ -37,7 +37,7 @@ if uploaded_files is not None:
 
     if dataframes:
         with st.sidebar:
-            columns=st.slider("時間", 0, len(df.columns), 50, 1)
+            columns=st.slider("時間", 0, len(df.columns), 6161, 1)
 
         # 時間軸のb場所と回転数を表示
         fig=plt.figure(figsize=(10, 4))
