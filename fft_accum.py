@@ -32,7 +32,7 @@ if uploaded_files is not None:
         #color = st.color_picker('Pick A Color', '#00f900')
 
     if dataframes:
-        with sidebar:
+        with st.sidebar:
             columns=st.slider("時間", 0, len(df.columns), 50, 1)
 
         fig=plt.figure(figsize=(10, 6))
