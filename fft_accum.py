@@ -16,7 +16,7 @@ with st.sidebar:
     max_freq=st.slider("上限周波数", min_value, max_value, 1500, 50)
     minamp=st.slider("下限AMP", 0, max_amp, 0, 5)
     maxamp=st.slider("上限AMP", 0, max_amp, 30, 5)
-    cyl_amp=st.slider("cyl_amp倍率", 0, 1000, 1000, 25)
+    cyl_amp=st.slider("cyl_amp倍率", 0, 1000, 1, 25)
 
 with st.expander("アップロード"):
     uploaded_files = st.file_uploader("accum.CSVファイルをアップロード(複数可)", type="csv",accept_multiple_files=True)
