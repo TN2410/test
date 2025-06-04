@@ -63,9 +63,10 @@ if uploaded_files is not None:
         plt.xlabel("freq(Hz)")
         plt.ylabel("G")
         st.pyplot(fig)
-                fig=plt.figure(figsize=(10, 4))
 
         # 時間軸のb場所と回転数を表示
+
+        fig=plt.figure(figsize=(10, 4))
         x=np.arange(len(df.columns)-1).astype(float)
         y=df.columns[1:].astype(float)
         st.write(x)
