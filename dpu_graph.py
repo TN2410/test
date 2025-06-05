@@ -11,7 +11,8 @@ st.set_page_config(
     layout="wide", 
     initial_sidebar_state="auto")
 
-#FFT 累積データをstreamlitで表示する
+st.title("データ表示")
+
 # ファイルアップロード
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type="csv")
 if sample_f is not None:
