@@ -27,7 +27,7 @@ if uploaded_files is not None:
         dataframes[uploaded_file.name] = df
     #　散布図のプロット
     if dataframes:
-        fig=plt.figure(figsize=(10, 6))
+        fig=plt.figure(figsize=(16, 9)
         # 各データフレームの表示を制御するボタンを作成
         for filename, df in dataframes.items():
             # ボタンを作成（ファイル名をボタン名として使用）
