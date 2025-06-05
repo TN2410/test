@@ -9,15 +9,7 @@ import matplotlib.pyplot as plt
 #FFT 累積データをstreamlitで表示する
 # ファイルアップロード
 
-sample_f = st.file_uploader("csvファイルをアップロードしてください", type="csv")
-if sample_f is not None:
-    sample_df = pd.read_csv(sample_f,encoding="CP932")
-    sample_par = sample_df.iloc[:,5]#DPU用
-    mylist = [str(x) for x in sample_par]
-    newlist = [x for x in mylist if x != "nan"]
-    with st.sidebar:
-        x_pal=st.multiselect('x列を選択してください', newlist)
-        y_pal=st.multiselect('y列を選択してください', newlist)
+
 
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
@@ -58,3 +50,12 @@ if uploaded_files is not None:
     #     slider3=st.slider("範囲", min_value, max_value, max_value, 100)
     #     slider4=st.slider("範囲", min_value, max_value, 0, 100)
     #    df_ne=df[df["NE"][1:]<slider]
+sample_f = st.file_uploader("csvファイルをアップロードしてください", type="csv")
+if sample_f is not None:
+    sample_df = pd.read_csv(sample_f,encoding="CP932")
+    sample_par = sample_df.iloc[:,5]#DPU用
+    mylist = [str(x) for x in sample_par]
+    newlist = [x for x in mylist if x != "nan"]
+    with st.sidebar:
+        x_pal=st.multiselect('x列を選択してください', newlist)
+        y_pal=st.multiselect('y列を選択してください', newlist)
