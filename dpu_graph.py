@@ -31,7 +31,8 @@ if uploaded_files is not None:
         # 各データフレームの表示を制御するボタンを作成
         for filename, df in dataframes.items():
             # ボタンを作成（ファイル名をボタン名として使用）
-            show_data = st.checkbox("{} を表示".format(filename), value=True)
+            with st.sidebar:
+                show_data = st.checkbox("{} を表示".format(filename), value=True)
             # ボタンが選択されている場合に散布図をプロット
             if show_data:
                 # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
