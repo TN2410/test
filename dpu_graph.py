@@ -7,18 +7,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 st.set_page_config(
-    page_title="PLOT", 
-    page_icon=image, 
+    page_title="PLOT",  
     layout="wide", 
-    initial_sidebar_state="auto", 
-    menu_items={
-         'Get Help': 'https://www.google.com',
-         'Report a bug': "https://www.google.com",
-         'About': """
-         # 画像生成風アプリ
-         このアプリは画像生成風アプリで、実際にはキングスライムしか表示しません。
-         """
-     })
+    initial_sidebar_state="auto")
 
 #FFT 累積データをstreamlitで表示する
 # ファイルアップロード
