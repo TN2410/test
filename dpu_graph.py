@@ -36,7 +36,7 @@ if uploaded_files is not None:
         df["Time"][1:] = [datetime.datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
         init_time = df["Time"][1]
         df["Time"][1:] = [time - init_time for time in df["Time"][1:]]
-
+        st.write(df["Time"])
         #datetime1 = datetime.strptime(date_str1, format)
         #datetime2 = datetime.strptime(date_str2, format)
         #delta = datetime2 - datetime1
