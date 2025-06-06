@@ -27,6 +27,10 @@ if uploaded_files is not None:
                 sample_columns = 5
         df = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',skiprows=skiprows,low_memory=False)
         dataframes[uploaded_file.name] = df
+        if "Time" in df.columns:
+            df["Time"][1:] = [datetime.datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
+            init_time = df["Time"][1]
+            df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
 
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type="csv")
 if sample_f is not None:
