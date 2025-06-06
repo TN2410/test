@@ -10,7 +10,17 @@ import matplotlib.pyplot as plt
 # ファイルアップロード
 # windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
 
-uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
+sample_f = st.file_uploader("csvファイルをアップロードしてください", type="csv")
+if sample_f is not None:
+    sample_df = pd.read_csv(sample_f,encoding="CP932")
+    sample_par = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
+    mylist = [str(x) for x in sample_par]
+    newlist = [x for x in mylist if x != "nan"]
+    with st.sidebar:
+        x_pal=st.multiselect('x列を選択してください', newlist)
+        y_pal=st.multiselect('y列を選択してください', newlist)    
+    #　散布図のプロット
+    # uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
@@ -24,8 +34,7 @@ if uploaded_files is not None:
                 skiprows = 0
         df = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',skiprows=skiprows,low_memory=False)
         dataframes[uploaded_file.name] = df
-        
-    #　散布図のプロット
+
     if dataframes:
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
@@ -47,13 +56,3 @@ if uploaded_files is not None:
         plt.xlabel(x_pal)
         plt.ylabel(y_pal)
         st.pyplot(fig)
-
-sample_f = st.file_uploader("csvファイルをアップロードしてください", type="csv")
-if sample_f is not None:
-    sample_df = pd.read_csv(sample_f,encoding="CP932")
-    sample_par = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
-    mylist = [str(x) for x in sample_par]
-    newlist = [x for x in mylist if x != "nan"]
-    with st.sidebar:
-        x_pal=st.multiselect('x列を選択してください', newlist)
-        y_pal=st.multiselect('y列を選択してください', newlist)
