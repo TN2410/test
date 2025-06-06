@@ -14,7 +14,7 @@ st.set_page_config(
 st.title("データ表示")
 
 # ファイルアップロード
-sample_f = st.file_uploader("csvファイルをアップロードしてください", type="csv")
+sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:
     with open(sample_f.name,"r") as file:
         st.write("test")
