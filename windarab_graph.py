@@ -14,10 +14,9 @@ uploaded_files = st.file_uploader("txtファイルをアップロードしてく
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
-        df = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',skiprows=0,low_memory=False)
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
         st.write(uploaded_file)
-        with open(uploaded_file,"wb") as file:
+        with open(uploaded_file.name,"wb") as file:
             first_line = file.readline().strip()  # 最初の1行を読み込み、前後の空白を削除
             if "BOSCH-DARAB" in first_line: 
                 skiprows = 5
