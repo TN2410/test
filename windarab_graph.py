@@ -32,7 +32,7 @@ if uploaded_files is not None:
             init_time = df["Time"][1]
             df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
 
-sample_f = st.file_uploader("csvファイルをアップロードしてください", type="csv")
+sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:
     with open(uploaded_file.name,"wb") as file:
         st.write("test")
