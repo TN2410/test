@@ -13,10 +13,10 @@ st.set_page_config(
 
 st.title("データ表示")
 
-# ファイルアップロード
+# ファイルアップロードS
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:
-    with open(sample_f.name,"r") as file:
+    with open(sample_f.name,"wb") as file:
         st.write("test")
     sample_df = pd.read_csv(sample_f,encoding="CP932")
     sample_par = sample_df.iloc[:,5]#DPU用
