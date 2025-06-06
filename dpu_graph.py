@@ -31,7 +31,7 @@ if uploaded_files is not None:
         df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')#index_col = 0
         dataframes[uploaded_file.name] = df
         # 時間データを秒に換算する 
-        format = "%H:%M:%S.%f"
+        time_format = "%H:%M:%S.%f"
         st.write(df["Time"][1])
         st.write(datetime.datetime.strptime(df["Time"][1],format))
         df["Time"][1:] = [datetime.datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
