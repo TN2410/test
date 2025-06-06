@@ -33,7 +33,7 @@ if uploaded_files is not None:
         # 時間データを秒に換算する 
         format = "%H:%M:%S.%f"
         st.write(df["Time"][1])
-        st.write(datetime.datetime.strptime(df["Time"][1]),format)
+        st.write(datetime.datetime.strptime(df["Time"][1],format))
         df["Time"][1:] = [datetime.datetime.strptime(df["Time"][x] for x in range(1,len(df),format))]
         init_Time = df["Time"][0]
         df["Time"] = [df["Time"][x]-init_Time for x in len(df)]
