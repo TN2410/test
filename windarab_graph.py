@@ -16,7 +16,7 @@ if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
-        with open(uploaded_file.name,"wb") as file:
+        with open(uploaded_file.name,"r") as file:
             first_line = file.readline().strip()  # 最初の1行を読み込み、前後の空白を削除
             if "BOSCH-DARAB" in first_line: 
                 skiprows = 5
@@ -34,7 +34,7 @@ if uploaded_files is not None:
 
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:
-    with open(sample_f.name,"wb") as file:
+    with open(sample_f.name,"r") as file:
         st.write("test")
     sample_par = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
     mylist = [str(x) for x in sample_par]
