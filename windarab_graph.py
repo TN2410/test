@@ -50,5 +50,6 @@ if sample_f is not None:
     sample_par = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
     mylist = [str(x) for x in sample_par]
     newlist = [x for x in mylist if x != "nan"]
-    x_pal=st.multiselect('x列を選択してください', newlist)
-    y_pal=st.multiselect('y列を選択してください', newlist)
+    with st.sidebar:
+        x_pal=st.multiselect('x列を選択してください', newlist)
+        y_pal=st.multiselect('y列を選択してください', newlist)

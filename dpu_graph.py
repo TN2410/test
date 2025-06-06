@@ -1,10 +1,10 @@
- 
-#dpuデータをstreamlitで表示する
+ #dpuデータをstreamlitで表示する
 #%matplotlib inline
 import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import datetime
 
 st.set_page_config(
     page_title="PLOT",  
@@ -24,13 +24,23 @@ if sample_f is not None:
         x_pal=st.multiselect('x列を選択してください', newlist)
         y_pal=st.multiselect('y列を選択してください', newlist)
 
-
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file,sep="[\t\0]",index_col=0,engine='python')
         dataframes[uploaded_file.name] = df
+        # 時間データを秒に換算する 
+        format = "%H:%M:%S"
+        df["Time"] = [datetime.strptime(df["Time"][x] for x in len(df))]
+        init_Time = df["Time"][0]
+        df["Time"] = [df["Time"][x]-init_Time for x in len(df)]
+
+        datetime1 = datetime.strptime(date_str1, format)
+        datetime2 = datetime.strptime(date_str2, format)
+        delta = datetime2 - datetime1
+print(delta.seconds)
+
     #　散布図のプロット
     if dataframes:
         fig=plt.figure(figsize=(16, 9))
@@ -54,6 +64,8 @@ if uploaded_files is not None:
         plt.xlabel(x_pal)
         plt.ylabel(y_pal)
         st.pyplot(fig)
+
+
     #     plt.ylim(slider2, slider)
     #     plt.xlim(slider4, slider3)
     #     df["NE"][1:] = df["NE"][1:].astype(int)

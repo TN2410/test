@@ -3,7 +3,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-#import japanize_matplotlib
+
+st.set_page_config(
+    page_title="PLOT",  
+    layout="wide", 
+    initial_sidebar_state="auto")
 
 st.title("振動とPmax周波数の相関")
 
@@ -20,8 +24,6 @@ with st.sidebar:
 
 with st.expander("アップロード"):
     uploaded_files = st.file_uploader("accum.CSVファイルをアップロード(複数可)", type="csv",accept_multiple_files=True)
-#st.write("check22")
-#df_ne=df[df["NE"][1:]<slider]
 # ファイルがアップロードされた場合
 if uploaded_files is not None:
     dataframes = {}
