@@ -14,7 +14,7 @@ uploaded_files = st.file_uploader("txtファイルをアップロードしてく
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
-        df = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',skiprows=skiprows,low_memory=False)
+        df = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',skiprows=0,low_memory=False)
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
         st.write(uploaded_file)
         with open(uploaded_file, 'r') as file:
