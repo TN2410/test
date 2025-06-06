@@ -10,15 +10,7 @@ import matplotlib.pyplot as plt
 # ファイルアップロード
 # windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
 
-sample_f = st.file_uploader("csvファイルをアップロードしてください", type="csv")
-if sample_f is not None:
-    sample_df = pd.read_csv(sample_f,encoding="CP932")
-    sample_par = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
-    mylist = [str(x) for x in sample_par]
-    newlist = [x for x in mylist if x != "nan"]
-    with st.sidebar:
-        x_pal=st.multiselect('x列を選択してください', newlist)
-        y_pal=st.multiselect('y列を選択してください', newlist)    
+  
     #　散布図のプロット
 
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
@@ -31,10 +23,25 @@ if uploaded_files is not None:
             first_line = file.readline().strip()  # 最初の1行を読み込み、前後の空白を削除
             if "BOSCH-DARAB" in first_line: 
                 skiprows = 5
+                sample_columns = 2
             else:
                 skiprows = 0
+                sample_columns = 5
         df = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',skiprows=skiprows,low_memory=False)
         dataframes[uploaded_file.name] = df
+
+sample_f = st.file_uploader("csvファイルをアップロードしてください", type="csv")
+if sample_f is not None:
+    sample_df = pd.read_csv(sample_f,encoding="CP932")
+    sample_par = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
+    mylist = [str(x) for x in sample_par]
+    newlist = [x for x in mylist if x != "nan"]
+    with st.sidebar:
+        x_pal=st.multiselect('x列を選択してください', newlist)
+        y_pal=st.multiselect('y列を選択してください', newlist)  
+
+
+
 
     if dataframes:
         fig=plt.figure(figsize=(10, 6))
