@@ -11,7 +11,7 @@ import datetime
 # windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
 #　散布図のプロット
 
-uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
+uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type=["txt"],accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
