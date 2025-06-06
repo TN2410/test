@@ -34,7 +34,7 @@ if uploaded_files is not None:
 
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:
-    with open(uploaded_file.name,"wb") as file:
+    with open(sample_f.name,"wb") as file:
         st.write("test")
     sample_par = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
     mylist = [str(x) for x in sample_par]
