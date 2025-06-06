@@ -40,9 +40,6 @@ if sample_f is not None:
         x_pal=st.multiselect('x列を選択してください', newlist)
         y_pal=st.multiselect('y列を選択してください', newlist)  
 
-
-
-
     if dataframes:
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
