@@ -36,10 +36,10 @@ if uploaded_files is not None:
         init_Time = df["Time"][0]
         df["Time"] = [df["Time"][x]-init_Time for x in len(df)]
 
-        datetime1 = datetime.strptime(date_str1, format)
-        datetime2 = datetime.strptime(date_str2, format)
-        delta = datetime2 - datetime1
-print(delta.seconds)
+        #datetime1 = datetime.strptime(date_str1, format)
+        #datetime2 = datetime.strptime(date_str2, format)
+        #delta = datetime2 - datetime1
+        #print(delta.seconds)
 
     #　散布図のプロット
     if dataframes:
