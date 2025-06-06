@@ -23,7 +23,7 @@ if uploaded_files is not None:
                 skiprows = 5
             else:
                 skiprows = 0
-        df = pd.read_csv(uploaded_file.name,sep="\t",encoding ='CP932',skiprows=skiprows,low_memory=False)
+        df = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',skiprows=skiprows,low_memory=False)
         dataframes[uploaded_file.name] = df
         
     #　散布図のプロット
