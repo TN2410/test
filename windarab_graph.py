@@ -34,7 +34,8 @@ if uploaded_files is not None:
 
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type="csv")
 if sample_f is not None:
-    sample_df = pd.read_csv(sample_f,encoding="CP932")
+    with open(uploaded_file,"r") as file:
+        st.write("test")
     sample_par = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
     mylist = [str(x) for x in sample_par]
     newlist = [x for x in mylist if x != "nan"]
