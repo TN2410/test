@@ -6,18 +6,17 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
-
 #FFT 累積データをstreamlitで表示する
 # ファイルアップロード
 # windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
-    #　散布図のプロット
+#　散布図のプロット
 
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
-        with open(uploaded_file.name,"r") as file:
+        with open(uploaded_file,"r") as file:
             first_line = file.readline().strip()  # 最初の1行を読み込み、前後の空白を削除
             if "BOSCH-DARAB" in first_line: 
                 skiprows = 5
