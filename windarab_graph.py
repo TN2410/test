@@ -16,7 +16,7 @@ if uploaded_files is not None:
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
         st.write(uploaded_file)
-        with open(uploaded_file.name,"wb") as file:
+        with open(uploaded_file.name,"r") as file:
             first_line = file.readline().strip()  # 最初の1行を読み込み、前後の空白を削除
             if "BOSCH-DARAB" in first_line: 
                 skiprows = 5
