@@ -34,8 +34,8 @@ if uploaded_files is not None:
         time_format = "%H:%M:%S.%f"
         st.write(df["Time"][1])
         df["Time"][1:] = [datetime.datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
-        init_Time = df["Time"][0]
-        df["Time"] = [df["Time"][x]-init_Time for x in len(df)]
+        init_time = df["Time"][0]
+        df["Time"][1:] = [time - init_time for time in df["Time"][1:]]
 
         #datetime1 = datetime.strptime(date_str1, format)
         #datetime2 = datetime.strptime(date_str2, format)
