@@ -20,7 +20,8 @@ if sample_f is not None:
         x_pal=st.multiselect('x列を選択してください', newlist)
         y_pal=st.multiselect('y列を選択してください', newlist)    
     #　散布図のプロット
-    # uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
+
+uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
