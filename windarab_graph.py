@@ -58,7 +58,7 @@ if sample_f is not None:
             # ボタンが選択されている場合に散布図をプロット
             if show_data:
                 # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
-                st.write(df)
+                st.write(df.columns)
                 elected_xdata = df[x_pal]
                 selected_ydata = df[y_pal]
                 #df["Time0"]=np.arange(len(df)).astype(float)
