@@ -37,7 +37,6 @@ if uploaded_files is not None:
         init_time = df["Time"][1]
         df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
         #print(delta.seconds)
-        st.write(df.columns)
     #　散布図のプロット
     if dataframes:
         fig=plt.figure(figsize=(16, 9))
