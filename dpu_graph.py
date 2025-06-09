@@ -29,7 +29,7 @@ uploaded_files = st.file_uploader("txtファイルをアップロードしてく
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
-        df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')#index_col = 0
+        df = pd.read_csv(uploaded_file,sep="\t\0",engine='python')#index_col = 0
         dataframes[uploaded_file.name] = df
         st.write(df)
         # 時間データを秒に換算する 
