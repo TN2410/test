@@ -30,6 +30,7 @@ if uploaded_files is not None:
     for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')#index_col = 0
         dataframes[uploaded_file.name] = df
+        st.write(df)
         # 時間データを秒に換算する 
         time_format = "%H:%M:%S.%f"
         st.write(df["Time"][1])
