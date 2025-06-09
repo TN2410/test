@@ -5,7 +5,7 @@ import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import datetime
+from datetime import datetime
 #FFT 累積データをstreamlitで表示する
 # ファイルアップロード
 # windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
@@ -29,7 +29,7 @@ if uploaded_files is not None:
         dataframes[uploaded_file.name] = df
         if "Time" in df.columns:
             time_format = "%H:%M:%S.%f"
-            df["Time"][1:] = [datetime.datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
+            df["Time"][1:] = [datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
             init_time = df["Time"][1]
             df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
 
