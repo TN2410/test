@@ -18,12 +18,12 @@ st.set_page_config(
 
 st.title("windarabデータ表示")
 
-uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type=["txt"],accept_multiple_files=True)
+uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
-        df0 = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',low_memory=False,nrows=1)
+        df0 = pd.read_csv(uploaded_file,sep="\t\0",encoding ='CP932',low_memory=False,nrows=1)
         if "BOSCH-DARAB" in df0.columns: 
             skiprows = 5
             sample_columns = 2
