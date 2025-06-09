@@ -4,17 +4,17 @@ import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import datetime
+from datetime import datetime
 
 st.set_page_config(
     page_title="PLOT",  
     layout="wide", 
     initial_sidebar_state="auto")
 
-st.title("データ表示")
+st.title("dpuデータ表示")
 
 # ファイルアップロードS
-sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
+sample_f = st.file_uploader("csvファイルをアップロードしてください", type="csv")
 if sample_f is not None:
     with open(sample_f.name,"r") as file:
         st.write("test")
@@ -65,7 +65,6 @@ if uploaded_files is not None:
         plt.xlabel(x_pal)
         plt.ylabel(y_pal)
         st.pyplot(fig)
-
 
     #     plt.ylim(slider2, slider)
     #     plt.xlim(slider4, slider3)
