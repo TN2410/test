@@ -6,17 +6,14 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
-#FFT 累積データをstreamlitで表示する
-# ファイルアップロード
 # windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
-#　散布図のプロット
 
 st.set_page_config(
     page_title="PLOT",  
     layout="wide", 
     initial_sidebar_state="auto")
 
-st.title("windarabデータ表示")
+st.title("windarab or dpu データ表示")
 
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
@@ -29,7 +26,7 @@ if uploaded_files is not None:
         if "BOSCH-DARAB" in df0.columns: 
             skiprows = 5
             sample_columns = 2
-            df = pd.read_csv(f, sep="\t",encoding ='CP932',skiprows=skiprows,low_memory=False)#windarabは５ dpuはskiprowsなし
+            df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows=skiprows,low_memory=False)#windarabは５ dpuはskiprowsなし
         else:
             skiprows = 0
             sample_columns = 5

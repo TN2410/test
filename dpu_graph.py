@@ -13,7 +13,7 @@ st.set_page_config(
 
 st.title("dpuデータ表示")
 
-# ファイルアップロードS
+# サンプルファイルアップロードし、選択パラメータリストを作成
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding="CP932")
@@ -24,6 +24,7 @@ if sample_f is not None:
         x_pal=st.multiselect('x列を選択してください', newlist)
         y_pal=st.multiselect('y列を選択してください', newlist)
 
+#データファイルをアップロードし、グラフを作成する
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
