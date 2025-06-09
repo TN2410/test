@@ -30,15 +30,14 @@ if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')#index_col = 0
-        df[1:] = df[1:].astype(float)
-        df = df.query("P_CLUTCH < 1")
         dataframes[uploaded_file.name] = df
         # 時間データを秒に換算する 
         time_format = "%H:%M:%S.%f"
         df["Time"][1:] = [datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
         init_time = df["Time"][1]
         df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
-        #print(delta.seconds)
+        df[1:] = df[1:].astype(float)
+        df = df.query("P_CLUTCH < 1")#print(delta.seconds)
     #　散布図のプロット
     if dataframes:
         fig=plt.figure(figsize=(16, 9))
