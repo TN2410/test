@@ -37,7 +37,7 @@ if uploaded_files is not None:
         init_time = df["Time"][1]
         df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
         df[1:] = df[1:].astype(float)
-        df = df[1:].query("P_CLUTCH < 1")#print(delta.seconds)
+#        df = df[1:].query("P_CLUTCH < 1")#print(delta.seconds)
         st.write(df["P_CLUTCH"])
     #　散布図のプロット
     if dataframes:
