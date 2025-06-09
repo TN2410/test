@@ -32,6 +32,7 @@ if uploaded_files is not None:
         else:
             skiprows = 0
             sample_columns = 5
+        st.write("skiprows",skiprows)
         df = pd.read_csv(uploaded_file,sep="[\t]",engine="python",skiprows=skiprows)
         dataframes[uploaded_file.name] = df
         st.write(df)
