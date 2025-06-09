@@ -18,22 +18,19 @@ st.set_page_config(
 
 st.title("windarabデータ表示")
 
-uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
+uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type=["txt"],accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
-        with open(uploaded_file.name,"r") as file:
-            st.write(file.readline())
-            first_line = file.readline().strip()  # 最初の1行を読み込み、前後の空白を削除
-            if "BOSCH-DARAB" in first_line: 
-                skiprows = 5
-                sample_columns = 2
-            else:
-                skiprows = 0
-                sample_columns = 5
-        df = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',skiprows=skiprows,low_memory=False)
+        df = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',low_memory=False)
         dataframes[uploaded_file.name] = df
+        if "BOSCH-DARAB" in df.columns: 
+            df=df.iloc[5:]
+            sample_columns = 2
+        else:
+            sample_columns = 5
+
         if "Time" in df.columns:
             time_format = "%H:%M:%S.%f"
             df["Time"][1:] = [datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
