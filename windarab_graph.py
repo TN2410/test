@@ -18,7 +18,7 @@ st.set_page_config(
 
 st.title("windarabデータ表示")
 
-uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type=["txt"],accept_multiple_files=True)
+uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type=["txt"],accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
@@ -30,7 +30,7 @@ if uploaded_files is not None:
         else:
             skiprows = 0
             sample_columns = 5
-        df = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',low_memory=False,skiprows=skiprows)
+        df = pd.read_csv(uploaded_file,sep="[\t\0]",engine="python",skiprows=skiprows)
         dataframes[uploaded_file.name] = df
         st.write(df)
         if "Time" in df.columns:
