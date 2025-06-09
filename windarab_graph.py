@@ -41,7 +41,7 @@ if uploaded_files is not None:
             df["Time"][1:] = [datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
             init_time = df["Time"][1]
             df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
-        st.write(df.columns)
+        st.write(df["Time"][1:])
 
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:
