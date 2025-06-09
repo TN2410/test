@@ -17,7 +17,7 @@ st.title("dpuデータ表示")
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:
     
-    with open(sample_f, mode='r', encoding='utf-8') as file:
+    with open(sample_f.name, mode='r', encoding='utf-8') as file:
         reader = csv.reader(file)
         header = next(reader)  # 最初の行をヘッダーとして取得
         st.write("ヘッダー:", header)
