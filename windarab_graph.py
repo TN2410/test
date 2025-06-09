@@ -23,15 +23,15 @@ if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
-        df0 = pd.read_csv(uploaded_file.name,sep="\t",encoding ='CP932',low_memory=False,nrows=1)
+        df0 = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',low_memory=False,nrows=1)
         if "BOSCH-DARAB" in df0.columns: 
             skiprows = 5
             sample_columns = 2
         else:
             skiprows = 0
             sample_columns = 5
-        df = pd.read_csv(uploaded_file.name,sep="\t",encoding ='CP932',low_memory=False,skiprows=skiprows)
-        dataframes[uploaded_file.name] = df
+        df = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',low_memory=False,skiprows=skiprows)
+        dataframes[uploaded_file] = df
 
         if "Time" in df.columns:
             time_format = "%H:%M:%S.%f"
