@@ -38,7 +38,7 @@ if uploaded_files is not None:
         init_time = df["Time"][1]
         df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
         #print(delta.seconds)
-
+        st.write(df.columns)
     #　散布図のプロット
     if dataframes:
         fig=plt.figure(figsize=(16, 9))
@@ -49,7 +49,7 @@ if uploaded_files is not None:
                 show_data = st.checkbox("{} を表示".format(filename), value=True)
             # ボタンが選択されている場合に散布図をプロット
             if show_data:
-                # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
+                # x列とy列を指定（ここでは仮に 　'x' と 'y' 列を使用）
                 selected_xdata = df[x_pal]
                 selected_ydata = df[y_pal]
                 #df["Time0"]=np.arange(len(df)).astype(float)
