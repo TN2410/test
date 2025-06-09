@@ -16,12 +16,6 @@ st.title("dpuデータ表示")
 # ファイルアップロードS
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:
-    
-    with open(sample_f, mode='r', encoding='utf-8') as file:
-        reader = csv.reader(file)
-        header = next(reader)  # 最初の行をヘッダーとして取得
-        st.write("ヘッダー:", header)
-    
     sample_df = pd.read_csv(sample_f,encoding="CP932")
     sample_par = sample_df.iloc[:,5]#DPU用
     mylist = [str(x) for x in sample_par]
