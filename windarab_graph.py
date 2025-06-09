@@ -29,15 +29,15 @@ if uploaded_files is not None:
         if "BOSCH-DARAB" in df0.columns: 
             skiprows = 5
             sample_columns = 2
+            df = pd.read_csv(f, sep="\t",encoding ='CP932',skiprows=skiprows,low_memory=False)#windarabは５ dpuはskiprowsなし
         else:
             skiprows = 0
             sample_columns = 5
-        st.write("skiprows",skiprows)
-        df = pd.read_csv(uploaded_file,sep="[\t]",engine="python",skiprows=skiprows)
+            df = pd.read_csv(uploaded_file,sep="[\t]",engine="python")
         dataframes[uploaded_file.name] = df
         st.write(df)
         if "Time" in df.columns:
-            time_format = "%H:%M:%S.%f"
+            time_format = "%H:%M:%S.%f"　
             df["Time"][1:] = [datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
             init_time = df["Time"][1]
             df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
