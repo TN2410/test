@@ -30,7 +30,7 @@ if uploaded_files is not None:
         else:
             skiprows = 0
             sample_columns = 5
-        df = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',low_memory=False,skiprow=skiprows)
+        df = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',low_memory=False,skiprows=skiprows)
         dataframes[uploaded_file.name] = df
 
         if "Time" in df.columns:
