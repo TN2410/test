@@ -40,7 +40,7 @@ if uploaded_files is not None:
         df["Time"] = [(time - init_time).seconds for time in df["Time"]]
         df = df.apply(pd.to_numeric)
         max_value = int(df[th_pal].max())
-        min_value = (df[th_pal].min())
+        min_value = int(df[th_pal].min())
         st.write(max_value,min_value)
         with st.sidebar:
             lower_bound = st.slider("閾値範囲", min_value, max_value, min_value, 1)
