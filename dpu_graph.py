@@ -37,7 +37,7 @@ if uploaded_files is not None:
         init_time = df["Time"][1]
         df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
         df[1:] = df[1:].astype(float)
-        with st.slidbar:
+        with st.sidebar:
             max_value = df[th_pal][1:].max()
             min_value = df[th_pal][1:].min()
             slider1=st.slider("閾値範囲", min_value, max_value, min_value, 1)
