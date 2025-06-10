@@ -24,10 +24,6 @@ if sample_f is not None:
         x_pal=st.multiselect('x列を選択してください', newlist)
         y_pal=st.multiselect('y列を選択してください', newlist)
         th_pal=st.multiselect('閾値パラメータを選択', newlist)
-        max_value = df[th_pal][1:].max()
-        min_value = df[th_pal][1:].min()
-        slider1=st.slider("閾値範囲", min_value, max_value, min_value, 1)
-        slider2=st.slider("閾値範囲", min_value, max_value, max_value, 1)
 
 #データファイルをアップロードし、グラフを作成する
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
@@ -41,6 +37,11 @@ if uploaded_files is not None:
         init_time = df["Time"][1]
         df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
         df[1:] = df[1:].astype(float)
+        with st.slider:
+            max_value = df[th_pal][1:].max()
+            min_value = df[th_pal][1:].min()
+            slider1=st.slider("閾値範囲", min_value, max_value, min_value, 1)
+            slider2=st.slider("閾値範囲", min_value, max_value, max_value, 1)
         df = df[1:].query(slider1 < th_pal < slider2)#print(delta.seconds)
         dataframes[uploaded_file.name] = df
 
