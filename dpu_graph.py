@@ -46,22 +46,22 @@ if uploaded_files is not None:
                 #slider1=st.slider("閾値範囲", min_value, max_value, min_value, 1)
                 #slider2=st.slider("閾値範囲", min_value, max_value, max_value, 1)
             query_string = f"{th_pal} >= @lower_bound & {th_pal} <= @upper_bound"    
-            df = df.query(query_string)
-            dataframes[uploaded_file.name] = df
+            filtered_data = df.query(query_string)
+            dataframes[uploaded_file.name] = filtered_data
 
     #　散布図のプロット
     if dataframes:
         fig=plt.figure(figsize=(16, 9))
         # 各データフレームの表示を制御するボタンを作成
-        for filename, df in dataframes.items():
+        for filename, filtered_data in dataframes.items():
             # ボタンを作成（ファイル名をボタン名として使用）
             with st.sidebar:
                 show_data = st.checkbox("{} を表示".format(filename), value=True)
             # ボタンが選択されている場合に散布図をプロット
             if show_data:
                 # x列とy列を指定（ここでは仮に 　'x' と 'y' 列を使用）
-                selected_xdata = df[x_pal]
-                selected_ydata = df[y_pal]
+                selected_xdata = filtered_data[x_pal]
+                selected_ydata = filtered_data[y_pal]
                 #df["Time0"]=np.arange(len(df)).astype(float)
                 #st.line_chart(selected_data)
                 x=selected_xdata.astype(float)
