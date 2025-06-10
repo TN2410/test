@@ -30,21 +30,22 @@ uploaded_files = st.file_uploader("txtファイルをアップロードしてく
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
-        df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')#index_col = 0
+        df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')
+        df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
         # 時間データを秒に換算する 
         time_format = "%H:%M:%S.%f"
-        df["Time"][1:] = [datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
+        df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
         init_time = df["Time"][1]
-        df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
-        df[1:] = df[1:].astype(float)
-        st.write(df[th_pal][1:])
-        max_value = df[th_pal][1:].max()
-        min_value = df[th_pal][1:].min()
+        df["Time"] = [(time - init_time).seconds for time in df["Time"]]
+        df = df.astype(float)
+        st.write(df[th_pal])
+        max_value = df[th_pal].max()
+        min_value = df[th_pal].min()
         st.write(min_value,max_value)
         with st.sidebar:
             slider1=st.slider("閾値範囲", min_value, max_value, min_value, 1)
             slider2=st.slider("閾値範囲", min_value, max_value, max_value, 1)
-        df = df[1:].query(slider1 < th_pal < slider2)#print(delta.seconds)
+        df = df.query(slider1 < th_pal < slider2)#print(delta.seconds)
         dataframes[uploaded_file.name] = df
 
     #　散布図のプロット
@@ -62,8 +63,8 @@ if uploaded_files is not None:
                 selected_ydata = df[y_pal]
                 #df["Time0"]=np.arange(len(df)).astype(float)
                 #st.line_chart(selected_data)
-                x=selected_xdata[1:].astype(float)
-                y=selected_ydata[1:].astype(float)
+                x=selected_xdata.astype(float)
+                y=selected_ydata.astype(float)
                 plt.scatter(x, y,label=filename)
                 #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
