@@ -40,6 +40,7 @@ if uploaded_files is not None:
         with st.sidebar:
             max_value = df[th_pal][1:].max()
             min_value = df[th_pal][1:].min()
+            st.write(max_value)
             slider1=st.slider("閾値範囲", min_value, max_value, min_value, 1)
             slider2=st.slider("閾値範囲", min_value, max_value, max_value, 1)
         df = df[1:].query(slider1 < th_pal < slider2)#print(delta.seconds)
