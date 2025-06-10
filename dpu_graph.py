@@ -36,24 +36,24 @@ if uploaded_files is not None:
        # upper_bound=st.slider("上限", 0 , 100 , 100 , 1)
         upper_bound = st.sidebar.number_input(f"{selected_column}の上限値を設定してください:", value=100)
 
-for uploaded_file in uploaded_files:
-            df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')
-            df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
-            # 時間データを秒に換算する 
-            time_format = "%H:%M:%S.%f"
-            df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
-            init_time = df["Time"][1]
-            df["Time"] = [(time - init_time).seconds for time in df["Time"]]
-            df = df.apply(pd.to_numeric)
-            max_value = df[th_pal].max()
-            min_value = df[th_pal].min()
-                #slider1=st.slider("閾値範囲", min_value, max_value, min_value, 1)
-                #slider2=st.slider("閾値範囲", min_value, max_value, max_value, 1)
-            query_string = f"{th_pal} >= @lower_bound & {th_pal} <= @upper_bound"    
-            filtered_data = df.query(query_string)
+    for uploaded_file in uploaded_files:
+        df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')
+        df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
+        # 時間データを秒に換算する 
+        time_format = "%H:%M:%S.%f"
+        df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
+        init_time = df["Time"][1]
+        df["Time"] = [(time - init_time).seconds for time in df["Time"]]
+        df = df.apply(pd.to_numeric)
+        max_value = df[th_pal].max()
+        min_value = df[th_pal].min()
+            #slider1=st.slider("閾値範囲", min_value, max_value, min_value, 1)
+            #slider2=st.slider("閾値範囲", min_value, max_value, max_value, 1)
+        query_string = f"{th_pal} >= @lower_bound & {th_pal} <= @upper_bound"    
+        filtered_data = df.query(query_string)
 
-            
-            dataframes[uploaded_file.name] = filtered_data
+        
+        dataframes[uploaded_file.name] = filtered_data
 
     #　散布図のプロット
     if dataframes:
