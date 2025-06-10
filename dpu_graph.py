@@ -39,7 +39,7 @@ if uploaded_files is not None:
         df[1:] = df[1:].astype(float)
         max_value = df[th_pal][1:].max()
         min_value = df[th_pal][1:].min()
-        st.write(max_value)
+        st.write(min_value)
         with st.sidebar:
             slider1=st.slider("閾値範囲", min_value, max_value, min_value, 1)
             slider2=st.slider("閾値範囲", min_value, max_value, max_value, 1)
