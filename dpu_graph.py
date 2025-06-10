@@ -29,7 +29,9 @@ if sample_f is not None:
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
-    for uploaded_file in uploaded_files:
+    with st.sidebar:
+        lower_bound=st.slider("下限", 0 , 100 , 0 , 1)
+        upper_bound=st.slider("上限", 0 , 100 , 100 , 1)for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')
         df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
         # 時間データを秒に換算する 
@@ -42,9 +44,7 @@ if uploaded_files is not None:
         max_value = df[th_pal].max()
         min_value = df[th_pal].min()
         st.write(min_value,max_value)
-        with st.sidebar:
-            lower_bound=st.slider("下限", 0 , 100 , 0 , 1)
-            upper_bound=st.slider("上限", 0 , 100 , 100 , 1)
+
             #slider1=st.slider("閾値範囲", min_value, max_value, min_value, 1)
             #slider2=st.slider("閾値範囲", min_value, max_value, max_value, 1)
         df = df[(df[th_pal] >= lower_bound) & (df[th_pal] <= upper_bound)]
