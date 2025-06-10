@@ -24,15 +24,13 @@ if sample_f is not None:
         x_pal=st.selectbox('x列を選択してください', newlist)
         y_pal=st.selectbox('y列を選択してください', newlist)
         th_pal=st.selectbox('閾値パラメータを選択', newlist)
+        lower_bound = st.number_input(th_pal,'の下限値と')
+        upper_bound = st.number_input(th_pal,'の上限値を入力してください')
 #データファイルをアップロードし、グラフを作成する
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
-    with st.sidebar:
-        lower_bound = st.slider("閾値範囲", 0, 100 , 0 , 1)
-        upper_bound = st.slider("閾値範囲", 0, 100 , 100 , 1)
     for uploaded_file in uploaded_files:
-
         df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')
         df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
         # 時間データを秒に換算する 
