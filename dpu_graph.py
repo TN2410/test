@@ -24,7 +24,7 @@ if sample_f is not None:
         x_pal=st.selectbox('x列を選択してください', newlist)
         y_pal=st.selectbox('y列を選択してください', newlist)
         th_pal=st.selectbox('閾値パラメータを選択', newlist)
-        lower_bound = st.number_input('"f{th_pal}の下限値と')
+        lower_bound = st.number_input('{}の下限値と'.foumat(th_pal))
         upper_bound = st.number_input('の上限値を入力してください')
 #データファイルをアップロードし、グラフを作成する
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
