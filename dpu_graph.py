@@ -28,7 +28,9 @@ if sample_f is not None:
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
-
+    with st.sidebar:
+        lower_bound = st.slider("閾値範囲", 0, 100 , 0 , 1)
+        upper_bound = st.slider("閾値範囲", 0, 100 , 100 , 1)
     for uploaded_file in uploaded_files:
 
         df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')
@@ -39,11 +41,9 @@ if uploaded_files is not None:
         init_time = df["Time"][1]
         df["Time"] = [(time - init_time).seconds for time in df["Time"]]
         df = df.apply(pd.to_numeric)
-        #max_value = int(df[th_pal].max())
-        #min_value = int(df[th_pal].min())
-        with st.sidebar:
-            lower_bound = st.slider("閾値範囲", 0, 100 , 0 , 1)
-            upper_bound = st.slider("閾値範囲", 0, 100 , 100 , 1)
+        max_value = int(df[th_pal].max())
+        min_value = int(df[th_pal].min())
+
         query_string = f"{th_pal} >= @lower_bound & {th_pal} <= @upper_bound"    
         filtered_data = df.query(query_string)
         dataframes[uploaded_file.name] = filtered_data
