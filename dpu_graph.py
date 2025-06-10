@@ -43,11 +43,11 @@ if uploaded_files is not None:
         min_value = df[th_pal].min()
         st.write(min_value,max_value)
         with st.sidebar:
-            slider1=st.slider("閾値範囲", 0,100,0, 1)
-            slider2=st.slider("閾値範囲", 0,100,100, 1)
+            lower_bound=st.slider("閾値範囲", 0,100,0, 1)
+            upper_bound=st.slider("閾値範囲", 0,100,100, 1)
             #slider1=st.slider("閾値範囲", min_value, max_value, min_value, 1)
             #slider2=st.slider("閾値範囲", min_value, max_value, max_value, 1)
-        df = df.query(slider1 < th_pal < slider2)#print(delta.seconds)
+        df[(df[th_pal] >= lower_bound) & (df[th_pal] <= upper_bound)]
         dataframes[uploaded_file.name] = df
 
     #　散布図のプロット
