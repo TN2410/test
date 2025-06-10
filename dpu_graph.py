@@ -24,7 +24,7 @@ if sample_f is not None:
         x_pal=st.multiselect('x列を選択してください', newlist)
         y_pal=st.multiselect('y列を選択してください', newlist)
         th_pal=st.multiselect('閾値パラメータを選択', newlist)
-
+        st.write(th_pal)
 #データファイルをアップロードし、グラフを作成する
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
