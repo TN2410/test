@@ -45,7 +45,8 @@ if uploaded_files is not None:
             min_value = df[th_pal].min()
                 #slider1=st.slider("閾値範囲", min_value, max_value, min_value, 1)
                 #slider2=st.slider("閾値範囲", min_value, max_value, max_value, 1)
-            df = df[(df[th_pal] >= lower_bound) & (df[th_pal] <= upper_bound)]
+            query_string = f"{th_pal} >= @lower_bound & {th_pal} <= @upper_bound"    
+            df = df.query(query_string)
             dataframes[uploaded_file.name] = df
 
     #　散布図のプロット
