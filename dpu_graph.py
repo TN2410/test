@@ -37,6 +37,7 @@ if uploaded_files is not None:
         init_time = df["Time"][1]
         df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
         df[1:] = df[1:].astype(float)
+        st.write(df[th_pal][1:])
         max_value = df[th_pal[1:]].max()
         min_value = df[th_pal[1:]].max()
         st.write(min_value,max_value)
