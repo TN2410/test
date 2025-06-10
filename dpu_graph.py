@@ -30,9 +30,13 @@ uploaded_files = st.file_uploader("txtファイルをアップロードしてく
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     with st.sidebar:
-        lower_bound=st.slider("下限", 0 , 100 , 0 , 1)
-        upper_bound=st.slider("上限", 0 , 100 , 100 , 1)
-        for uploaded_file in uploaded_files:
+        #lower_bound=st.slider("下限", 0 , 100 , 0 , 1)
+        lower_bound = st.sidebar.number_input(f"{selected_column}の下限値を設定してください:", value=0)
+
+       # upper_bound=st.slider("上限", 0 , 100 , 100 , 1)
+        upper_bound = st.sidebar.number_input(f"{selected_column}の上限値を設定してください:", value=100)
+
+for uploaded_file in uploaded_files:
             df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')
             df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
             # 時間データを秒に換算する 
@@ -47,6 +51,8 @@ if uploaded_files is not None:
                 #slider2=st.slider("閾値範囲", min_value, max_value, max_value, 1)
             query_string = f"{th_pal} >= @lower_bound & {th_pal} <= @upper_bound"    
             filtered_data = df.query(query_string)
+
+            
             dataframes[uploaded_file.name] = filtered_data
 
     #　散布図のプロット
