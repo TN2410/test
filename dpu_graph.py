@@ -21,9 +21,9 @@ if sample_f is not None:
     mylist = [str(x) for x in sample_par]
     newlist = [x for x in mylist if x != "nan"]
     with st.sidebar:
-        x_pal=st.multiselect('x列を選択してください', newlist)
-        y_pal=st.multiselect('y列を選択してください', newlist)
-        th_pal=st.multiselect('閾値パラメータを選択', newlist)
+        x_pal=st.selectbox('x列を選択してください', newlist)
+        y_pal=st.selectbox('y列を選択してください', newlist)
+        th_pal=st.selectbox('閾値パラメータを選択', newlist)
         st.write(th_pal)
 #データファイルをアップロードし、グラフを作成する
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
