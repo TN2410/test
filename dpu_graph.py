@@ -41,14 +41,11 @@ if uploaded_files is not None:
             init_time = df["Time"][1]
             df["Time"] = [(time - init_time).seconds for time in df["Time"]]
             df = df.apply(pd.to_numeric)
-            st.write(df[th_pal])
             max_value = df[th_pal].max()
             min_value = df[th_pal].min()
-            st.write(min_value,max_value)
-
                 #slider1=st.slider("閾値範囲", min_value, max_value, min_value, 1)
                 #slider2=st.slider("閾値範囲", min_value, max_value, max_value, 1)
-            ##df = df[(df[th_pal] >= lower_bound) & (df[th_pal] <= upper_bound)]
+            df = df[(df[th_pal] >= lower_bound) & (df[th_pal] <= upper_bound)]
             dataframes[uploaded_file.name] = df
 
     #　散布図のプロット
