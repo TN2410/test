@@ -24,16 +24,13 @@ if sample_f is not None:
         x_pal=st.selectbox('x列を選択してください', newlist)
         y_pal=st.selectbox('y列を選択してください', newlist)
         th_pal=st.selectbox('閾値パラメータを選択', newlist)
-        st.write(th_pal)
 #データファイルをアップロードし、グラフを作成する
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
 
-
     for uploaded_file in uploaded_files:
         with st.sidebar:
-            #lower_bound=st.slider("下限", 0 , 100 , 0 , 1)
             lower_bound = st.sidebar.number_input(f"{th_pal}の下限値を設定してください:", value=0)
             # upper_bound=st.slider("上限", 0 , 100 , 100 , 1)
             upper_bound = st.sidebar.number_input(f"{th_pal}の上限値を設定してください:", value=100)
