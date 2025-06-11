@@ -15,7 +15,7 @@ st.set_page_config(
 
 st.title("windarab or dpu データ表示")
 
-uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt"#,accept_multiple_files=True
+uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True
                                   )
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
