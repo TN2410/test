@@ -21,7 +21,7 @@ if uploaded_files is not None:
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
         df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932",nrows=1)
-        df = pd.read_csv(uploaded_file,encoding ='CP932')
+        df = pd.read_csv(uploaded_file)
         st.write(df0.columns[0])
         if df0.columns.empty:
             st.warning("カラム名取得できず")
