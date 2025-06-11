@@ -25,7 +25,7 @@ if uploaded_files is not None:
         #df = pd.read_csv(uploaded_file,sep="\t",encoding="CP932")
         #st.write(df)
         if "BOSCH-DARAB" in df0.columns[0]: 
-            skiprowsno = 5
+            skiprowsno = -5
             sample_columns = 2
             df = pd.read_csv(uploaded_file,sep="\t",encoding ='CP932',skiprows=skiprowsno
                              #low_memory=False
