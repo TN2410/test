@@ -32,7 +32,7 @@ if uploaded_files is not None:
                              #low_memory=False
                              )#windarabは５ dpuはskiprowsなし
             st.write(df)
-            else:
+        else:
             skiprows = 0
             sample_columns = 5
             df = pd.read_csv(uploaded_file,sep="\t\0",engine="python",encoding="utf-8")
