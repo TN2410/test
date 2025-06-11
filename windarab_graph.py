@@ -21,7 +21,7 @@ if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
-        df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932",nrows=1)
+        df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932",nrows=6)
         #df = pd.read_csv(uploaded_file,sep="\t",encoding="CP932")
         st.write("df01")
         st.write(df0)
@@ -45,7 +45,7 @@ if uploaded_files is not None:
             df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
             st.write(df["Time"][1:])
 
-        st.write(skiprows)
+        st.write(skiprowsno)
 
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:
