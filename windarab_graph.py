@@ -29,7 +29,8 @@ if uploaded_files is not None:
             skiprowsno = 0
             sample_columns = 2
             df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows=skiprowsno,low_memory=False)#windarabは５ dpuはskiprowsなし
-        else:
+            st.write(df)
+            else:
             skiprows = 0
             sample_columns = 5
             df = pd.read_csv(uploaded_file,sep="\t\0",engine="python",encoding="utf-8")
