@@ -21,14 +21,9 @@ if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
-        #df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932",nrows=1)
-        df = pd.read_csv(uploaded_file)
-        st.write(df0.columns[0:3])
-        if df0.columns.empty:
-            st.warning("カラム名取得できず")
-            continue
+        df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932",nrows=1)
         if "BOSCH-DARAB" in df0.columns[0]: 
-            skiprowsno = 0
+            skiprowsno = 5
             sample_columns = 2
             df = pd.read_csv(uploaded_file,encoding ='CP932',#skiprows=skiprowsno
                              #low_memory=False
