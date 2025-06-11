@@ -26,9 +26,9 @@ if uploaded_files is not None:
             st.warning("カラム名取得できず")
             continue
         if "BOSCH-DARAB" in df0.columns[0]: 
-            skiprows = 0
+            skiprowsno = 0
             sample_columns = 2
-            df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows=skiprows,low_memory=False)#windarabは５ dpuはskiprowsなし
+            df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows=skiprowsno,low_memory=False)#windarabは５ dpuはskiprowsなし
         else:
             skiprows = 0
             sample_columns = 5
