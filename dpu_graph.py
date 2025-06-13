@@ -24,6 +24,7 @@ if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file,sep="[\t\0]",index_col=0,engine='python')
+        df = df.query["P_CLUTCH < 1"]
         dataframes[uploaded_file.name] = df
     #　保存完了
     #　散布図のプロット
