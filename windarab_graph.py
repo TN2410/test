@@ -43,7 +43,7 @@ if uploaded_files is not None:
 #        st.write(skiprowsno)
 
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
-sample_columns = 1
+sample_columns = 3
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding ='CP932')
     sample_par = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
