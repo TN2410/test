@@ -28,14 +28,14 @@ if uploaded_files is not None:
         if "BOSCH-DARAB" in df0.columns: 
             skiprowsno = 5
             sample_columns = 2
-            df = pd.read_csv(uploaded_file,sep="\t\0",encoding ='utf-8',skiprows=4,engine = 'python')
+            df = pd.read_csv(uploaded_file,sep="\t\0",encoding ='CP932',skiprows=4,engine = 'python')
                              #,low_memory=False
                              #windarabは５ dpuはskiprowsなし
             st.write(df[:5])
         else:
             skiprows = 0
             sample_columns = 5
-            df = pd.read_csv(uploaded_file,sep="\t\0",encoding ='utf-8',skiprows=4,engine = 'python')
+            df = pd.read_csv(uploaded_file,sep="\t\0",encoding ='CP932',skiprows=4,engine = 'python')
             dataframes[uploaded_file.name] = df
         st.write(df)##########カラム名が表示されない
         if "Time" in df.columns:
