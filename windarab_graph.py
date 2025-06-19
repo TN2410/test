@@ -31,7 +31,7 @@ if uploaded_files is not None:
         else:
             skiprowsno = 0
             #sample_columns = 5
-            #df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows=5)#
+            df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows=5)#
             #dataframes[uploaded_file.name] = df
         st.write(df)##########カラム名が表示されない
         if "Time" in df.columns:
