@@ -22,7 +22,7 @@ if uploaded_files is not None:
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
         #df0 = pd.read_csv(uploaded_file,engine='python')#
-        df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932"、skiprows＝5)
+        df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932",skiprows＝5)
         st.write(df0)
         if "BOSCH-DARAB" in df0.columns[0]: 
             skiprowsno = 5
