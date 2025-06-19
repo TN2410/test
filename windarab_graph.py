@@ -22,17 +22,17 @@ if uploaded_files is not None:
         #df = pd.read_csv(uploaded_file,encoding = "utf-8" , sep = "\t\0",engine='python')#
         #df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932")
         st.write(df.columns)
-        if "BOSCH-DARAB" in df:
-            skiprowsno = 5
-            sample_columns = 2
-            df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows=5)#
-                             #,low_memory=False
-                             #windarabは５ dpuはskiprowsなし
-        else:
-            skiprowsno = 0
-            #sample_columns = 5
-            df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows=5)#
-            #dataframes[uploaded_file.name] = df
+        # if "BOSCH-DARAB" in df:
+        #     skiprowsno = 5
+        #     sample_columns = 2
+        #     df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows=5)#
+        #                      #,low_memory=False
+        #                      #windarabは５ dpuはskiprowsなし
+        # else:
+        #     skiprowsno = 0
+        #     #sample_columns = 5
+        #     df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows=5)#
+        #     #dataframes[uploaded_file.name] = df
         st.write(df)##########カラム名が表示されない
         if "Time" in df.columns:
             time_format = "%H:%M:%S.%f"
