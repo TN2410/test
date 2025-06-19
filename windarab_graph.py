@@ -18,7 +18,8 @@ if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
-        df = pd.read_csv(uploaded_file,encoding = "utf-8" , sep = "\t\0",engine='python')#
+        df = pd.read_CSV(uploaded_file, sep="\t",encoding ='CP932',skiprows=5)#
+        #df = pd.read_csv(uploaded_file,encoding = "utf-8" , sep = "\t\0",engine='python')#
         #df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932")
         st.write(df.columns)
         if "BOSCH-DARAB" in df:
@@ -39,7 +40,6 @@ if uploaded_files is not None:
             init_time = df["Time"][1]
             df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
             st.write(df["Time"][1:])
-
         st.write(skiprowsno)
 
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
