@@ -11,7 +11,6 @@ st.set_page_config(
     page_title="PLOT",  
     layout="wide", 
     initial_sidebar_state="auto")
-
 st.title("windarab or dpu データ表示")
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True
                                   )
@@ -22,8 +21,7 @@ if uploaded_files is not None:
         df = pd.read_csv(uploaded_file,encoding = "utf-8" , sep = "\t\0",engine='python')#
         #df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932")
         st.write(df.columns)
-
-        if "BOSCH-DARAB" in df: 
+        if "BOSCH-DARAB" in df:
             skiprowsno = 5
             sample_columns = 2
             df = pd.read_csv(uploaded_file,encoding = "utf-8" , sep = "\t\0",engine='python')#
