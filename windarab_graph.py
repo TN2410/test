@@ -28,9 +28,9 @@ if uploaded_files is not None:
         if "BOSCH-DARAB" in df0.columns: 
             skiprowsno = 5
             sample_columns = 2
-            df = pd.read_csv(uploaded_file,sep="\t\0",encoding ='utf-8',skiprows=5,engine = 'python'
+            df = pd.read_csv(uploaded_file,sep="\t\0",encoding ='utf-8',skiprows=5,engine = 'python')
                              #,low_memory=False
-                             )#windarabは５ dpuはskiprowsなし
+                             #windarabは５ dpuはskiprowsなし
             st.write(df[:5])
         else:
             skiprows = 0
