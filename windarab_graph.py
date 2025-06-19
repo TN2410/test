@@ -21,8 +21,8 @@ if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
-        #df0 = pd.read_csv(uploaded_file,engine='python')#
-        df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932")
+        df0 = pd.read_csv(uploaded_file,sep = "\t",engine='python')#
+        #df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932")
         st.write(df0)
         if "BOSCH-DARAB" in df0.columns[0]: 
             skiprowsno = 5
