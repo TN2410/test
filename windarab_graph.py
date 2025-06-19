@@ -7,31 +7,28 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
 # windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
-
 st.set_page_config(
     page_title="PLOT",  
     layout="wide", 
     initial_sidebar_state="auto")
 
 st.title("windarab or dpu データ表示")
-
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True
                                   )
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
-        df0 = pd.read_csv(uploaded_file,encoding = "utf-8" , sep = "\t\0",engine='python')#
+        df = pd.read_csv(uploaded_file,encoding = "utf-8" , sep = "\t\0",engine='python')#
         #df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932")
-        st.write(df0.columns)
+        st.write(df.columns)
 
-        if "BOSCH-DARAB" in df0.columns: 
+        if "BOSCH-DARAB" in df: 
             skiprowsno = 5
             sample_columns = 2
             df = pd.read_csv(uploaded_file,encoding = "utf-8" , sep = "\t\0",engine='python')#
                              #,low_memory=False
                              #windarabは５ dpuはskiprowsなし
-            st.write(df[:5])
         else:
             skiprows = 0
             sample_columns = 5
