@@ -44,6 +44,7 @@ if sample_f is not None:
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
+        st.write("testtest")
         df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows,engine="python")
         new_columns=[]
         for rep in df.columns:
