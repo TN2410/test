@@ -12,11 +12,10 @@ st.set_page_config(
     layout="wide", 
     initial_sidebar_state="auto")
 st.title("windarab or dpu データ表示")
-uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True
- 
- 
- specific_string = "BOSCH-DARAB"  # ここに検索したい文字を設定
+uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True 
                                  )
+specific_string = "BOSCH-DARAB"  # ここに検索したい文字を設定
+
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
