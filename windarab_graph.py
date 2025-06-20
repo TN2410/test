@@ -29,11 +29,18 @@ if uploaded_files is not None:
             df = pd.read_csv(uploaded_file,sep="/t/0",skiprows = 5)
             sample_columns = 2   
             st.write(df.columns)#一つのリストとなっている
+
+            df.columns = re.sub(r'
+            $$.*?$$
+            ', '', df.columns)
+
     # 新しいカラム名をデータフレームに適用
             new_columns=[]#以降の文字列がすべて消えてしまう
             for rep in df.columns:
-                 rep = rep[:rep.find("[")]
                  rep = rep.replace(" ","")
+                 rep = rep.replace("","")
+                 rep = rep.replace(" ","")
+
                  new_columns.append(rep)
                  df.columns=new_columns
             st.write(new_columns,"new")
