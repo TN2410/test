@@ -15,7 +15,7 @@ st.set_page_config(
 st.title("windarab or dpu データ表示")
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True 
                                  )
-specific_string = "windarab"  # ここに検索したい文字を設定
+specific_string = "BOSCH"  # ここに検索したい文字を設定
 
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
