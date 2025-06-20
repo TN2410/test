@@ -28,17 +28,17 @@ if uploaded_files is not None:
         if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
             df = pd.read_csv(uploaded_file,skiprows = 5)
             sample_columns = 2   
-            new_column_names = [re.sub(r'$$.*?$$', '', col).strip() for col in df.columns]
 
     # 新しいカラム名をデータフレームに適用
-            df.columns = new_column_names
-            # new_columns=[]
-            # for rep in df.columns:
-            #     rep = rep[:rep.find("[")]
-            #     rep = rep.replace(" ","")
-            #     new_columns.append(rep)
-            #     df.columns=new_columns
+            new_columns=[]
+            for rep in df.columns:
+                 rep = rep[:rep.find("[")]
+                 rep = rep.replace(" ","")
+                 new_columns.append(rep)
+                 df.columns=new_columns
+            st.write(new_columns)
             st.write(df.columns)
+
         else:
             df = pd.read_csv(uploaded_file)
             st.write(df.columns)#
