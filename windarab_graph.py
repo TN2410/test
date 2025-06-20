@@ -44,11 +44,11 @@ if uploaded_files is not None:
             df["Time"][1:] = [datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
             init_time = df["Time"][1]
             df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
-            #st.write(df["Time"][1:])
             st.write("グラフ作成")
-            fig=plt.figure(figsize=(10, 6))
             # 各データフレームの表示を制御するボタンを作成
-    for filename, df in dataframes.items():
+    if dataframes:
+        for filename, df in dataframes.items():
+            fig=plt.figure(figsize=(10, 6))
         # ボタンを作成（ファイル名をボタン名として使用）
         with st.sidebar:
             show_data = st.checkbox("{} を表示".format(filename), value=True)
