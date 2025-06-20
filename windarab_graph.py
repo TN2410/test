@@ -22,6 +22,7 @@ if uploaded_files is not None:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
         initial_lines = pd.read_csv(uploaded_file, nrows=5)
      # ファイルを再度読み込むために、元のファイルポインタを最初に戻す
+        st.write(initial_lines)
         uploaded_file.seek(0)
         if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
 
