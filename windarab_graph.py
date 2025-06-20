@@ -45,7 +45,8 @@ if sample_f is not None:
         st.write(th_pal,"の")
         lower_bound = st.number_input('の下限値と',step=1)
         upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
-    
+
+uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
@@ -68,7 +69,6 @@ if uploaded_files is not None:
         
         max_value = int(df[th_pal].max())
         min_value = int(df[th_pal].min())
-
         query_string = f"{th_pal} >= @lower_bound & {th_pal} <= @upper_bound"    
         filtered_data = df.query(query_string)
         dataframes[uploaded_file.name] = filtered_data
