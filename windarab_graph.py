@@ -22,15 +22,11 @@ if uploaded_files is not None:
      # ファイルを再度読み込むために、元のファイルポインタを最初に戻す
         uploaded_file.seek(0)
         if "BOSCH-DARAB" in initial_lines:
-            content = uploaded_file.read()
-            st.write(content)
-        df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932')#
+            df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows = 5)
+            st.write(df)#
         #df = pd.read_csv(uploaded_file,encoding = "utf-8" , sep = "\t\0",engine='python')#
         #df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932")
         #st.write(df.columns)
-        if "BOSCH-DARAB" in df:
-            skiprowsno = 5
-            st.write(skiprowsno)
         #     sample_columns = 2
         #     df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows=5)#
         #                      #,low_memory=False
