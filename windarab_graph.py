@@ -26,11 +26,11 @@ if uploaded_files is not None:
         st.write(initial_lines)
         uploaded_file.seek(0)
         if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
-            df = pd.read_csv(uploaded_file,skiprows = 5)
+            df = pd.read_csv(uploaded_file,sep="/t/0",skiprows = 5)
             sample_columns = 2   
-            st.write(df.columns)
+            st.write(df.columns)#一つのリストとなっている
     # 新しいカラム名をデータフレームに適用
-            new_columns=[]
+            new_columns=[]#以降の文字列がすべて消えてしまう
             for rep in df.columns:
                  rep = rep[:rep.find("[")]
                  rep = rep.replace(" ","")
