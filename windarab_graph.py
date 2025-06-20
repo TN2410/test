@@ -30,8 +30,6 @@ if uploaded_files is not None:
         else:
             sample_columns = 5
             skiprows = 0
-    st.write(dataframes)
-st.write(dataframes)
             
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:
@@ -69,7 +67,6 @@ if sample_f is not None:
         st.pyplot(fig)
 
 if uploaded_files is not None:
-
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows,engine="python")
@@ -87,6 +84,7 @@ if uploaded_files is not None:
             st.write("グラフ作成")
             # 各データフレームの表示を制御するボタンを作成
     if dataframes:
+        st.write("graph")
         for filename, df in dataframes.items():
             fig=plt.figure(figsize=(10, 6))
         # ボタンを作成（ファイル名をボタン名として使用）
