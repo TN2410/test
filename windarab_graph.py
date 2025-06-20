@@ -6,6 +6,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
+import re
 # windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
 st.set_page_config(
     page_title="PLOT",  
