@@ -32,20 +32,26 @@ if uploaded_files is not None:
             skiprows = 0
             st.write("DPU")
             
-        sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
-        if sample_f is not None:
-            sample_df = pd.read_csv(sample_f,encoding ='CP932')
-            sample_par = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
-            mylist = [str(x) for x in sample_par]
-            newlist = [x for x in mylist if x != "nan"]
-            with st.sidebar:
-                x_pal=st.multiselect('x列を選択してください', newlist)
-                y_pal=st.multiselect('y列を選択してください', newlist) 
-                th_pal=st.selectbox('閾値パラメータを選択', newlist)
-                st.write(th_pal,"の")
-                lower_bound = st.number_input('の下限値と',step=1)
-                upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
+sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
+if sample_f is not None:
+    sample_df = pd.read_csv(sample_f,encoding ='CP932')
+    sample_par = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
+    mylist = [str(x) for x in sample_par]
+    newlist = [x for x in mylist if x != "nan"]
+    with st.sidebar:
+        x_pal=st.multiselect('x列を選択してください', newlist)
+        y_pal=st.multiselect('y列を選択してください', newlist) 
+        th_pal=st.selectbox('閾値パラメータを選択', newlist)
+        st.write(th_pal,"の")
+        lower_bound = st.number_input('の下限値と',step=1)
+        upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
 
+#もう一度読み込んだとしてもひとつしか表示されていないのはなぜ？
+uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True 
+                                 )
+if uploaded_files is not None:
+    dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
+    for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows , engine="python")
         if sample_columns == 5:
             df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
