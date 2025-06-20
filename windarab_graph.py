@@ -48,6 +48,11 @@ if uploaded_files is not None:
         df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows , engine="python")
         if sample_columns == 5:
             df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
+            if "Time" in df.columns:#DPU限定処理
+                time_format = "%H:%M:%S.%f"
+                df["Time"][1:] = [datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
+                init_time = df["Time"][1]
+                df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]     
         else:#windarabはカラム名調整
             new_columns=[]
             for rep in df.columns:
@@ -56,11 +61,6 @@ if uploaded_files is not None:
                 new_columns.append(rep)
             df.columns = new_columns
 
-        if "Time" in df.columns:
-            time_format = "%H:%M:%S.%f"
-            df["Time"][1:] = [datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
-            init_time = df["Time"][1]
-            df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
         dataframes[uploaded_file.name] = df
 
     st.write(dataframes)
