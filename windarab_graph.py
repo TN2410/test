@@ -30,9 +30,7 @@ if uploaded_files is not None:
             sample_columns = 2   
             st.write(df.columns)#一つのリストとなっている
 
-            df.columns = re.sub(r'
-            $$.*?$$
-            ', '', df.columns)
+            df.columns = re.sub(r'$$.*?$$', '', df.columns)
             st.write(new_columns,"new")
             st.write(df.columns,"カラム名")
             st.write("testtest")
