@@ -25,24 +25,13 @@ if uploaded_files is not None:
         st.write(initial_lines)
         uploaded_file.seek(0)
         if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
-
-        #if "BOSCH-DARAB" in initial_lines:
             df = pd.read_csv(uploaded_file,skiprows = 5)
             st.write(df)#
+            sample_columns = 2
         else:
             df = pd.read_csv(uploaded_file)
-            st.write(df)#            #df = pd.read_csv(uploaded_file,encoding = "utf-8" , sep = "\t\0",engine='python')#
-        #df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932")
-        #st.write(df.columns)
-        #     sample_columns = 2
-        #     df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows=5)#
-        #                      #,low_memory=False
-        #                      #windarabは５ dpuはskiprowsなし
-        # else:
-        #     skiprowsno = 0
-        #     #sample_columns = 5
-        #     df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows=5)#
-        #     #dataframes[uploaded_file.name] = df
+            st.write(df)#
+            sample_columns = 5
         if "Time" in df.columns:
             time_format = "%H:%M:%S.%f"
             df["Time"][1:] = [datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
@@ -52,7 +41,6 @@ if uploaded_files is not None:
 #        st.write(skiprowsno)
 
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
-sample_columns = 3
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding ='CP932')
     sample_par = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
