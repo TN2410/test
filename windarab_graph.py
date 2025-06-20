@@ -27,13 +27,8 @@ if uploaded_files is not None:
         uploaded_file.seek(0)
         if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
             df = pd.read_csv(uploaded_file,sep="/t/0",skiprows = 5)
-            sample_columns = 2   
+            sample_columns = 3   
             st.write(df.columns)#一つのリストとなっている
-
-            df.columns = re.sub(r'$$.*?$$', '', df.columns.tolist())
-            st.write(new_columns,"new")
-            st.write(df.columns,"カラム名")
-            st.write("testtest")
 
         else:
             df = pd.read_csv(uploaded_file)
