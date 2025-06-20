@@ -54,7 +54,7 @@ if uploaded_files is not None:
             df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
             if "Time" in df.columns:#DPU限定処理
                 time_format = "%H:%M:%S.%f"
-                df["Time"] = [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
+                df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
                 init_time = df["Time"][1]
                 df["Time"] = [(time - init_time).seconds for time in df["Time"]]
                 df = df.apply(pd.to_numeric)
