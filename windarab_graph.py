@@ -60,6 +60,7 @@ if uploaded_files is not None:
             st.write("グラフ作成")
             # 各データフレームの表示を制御するボタンを作成
 
+    st.write(dataframes)
     if dataframes:
         st.write("グラフ作成")
         fig=plt.figure(figsize=(10, 6))
