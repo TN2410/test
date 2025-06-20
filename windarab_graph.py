@@ -28,14 +28,13 @@ if uploaded_files is not None:
         if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
             df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = 5,engine="python")
             sample_columns = 2   
-            st.write(df.columns)#
             new_columns=[]
             for rep in df.columns:
                 rep = rep[:rep.find("[")]
                 rep = rep.replace(" ","")
                 new_columns.append(rep)
-            st.write(new_columns)
             df.columns=new_columns
+            st.write(df.columns)
         else:
             df = pd.read_csv(uploaded_file)
             st.write(df.columns)#
