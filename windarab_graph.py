@@ -27,7 +27,7 @@ if uploaded_files is not None:
         if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
 
         #if "BOSCH-DARAB" in initial_lines:
-            df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows = 5)
+            df = pd.read_csv(uploaded_file,skiprows = 5)
             st.write(df)#
         #df = pd.read_csv(uploaded_file,encoding = "utf-8" , sep = "\t\0",engine='python')#
         #df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932")
