@@ -44,7 +44,7 @@ if sample_f is not None:
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
-        df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows,engine="python")
+        df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows , engine="python")
         if sample_columns = 5:
             df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
         new_columns=[]
@@ -52,7 +52,10 @@ if uploaded_files is not None:
             rep = rep[:rep.find("[")]
             rep = rep.replace(" ","")
             new_columns.append(rep)
-        df.columns=new_columns
+        st.write(df.columns)
+        df.columns = new_columns
+        st.write(df.columns)
+
         if "Time" in df.columns:
             time_format = "%H:%M:%S.%f"
             df["Time"][1:] = [datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
