@@ -38,6 +38,7 @@ if uploaded_files is not None:
                  df.columns=new_columns
             st.write(new_columns,"new")
             st.write(df.columns,"カラム名")
+            st.write("testtest")
 
         else:
             df = pd.read_csv(uploaded_file)
