@@ -47,8 +47,7 @@ if sample_f is not None:
         upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
 
 #もう一度読み込んだとしてもひとつしか表示されていないのはなぜ？
-uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True 
-                                 )
+uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True)
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
