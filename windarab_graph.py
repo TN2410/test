@@ -34,6 +34,7 @@ if uploaded_files is not None:
                 rep = rep[:rep.find("[")]
                 rep = rep.replace(" ","")
                 new_columns.append(rep)
+            st.write(new_columns)
             df.columns=new_columns
         else:
             df = pd.read_csv(uploaded_file)
