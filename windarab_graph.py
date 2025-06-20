@@ -16,7 +16,6 @@ st.title("windarab or dpu データ表示")
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True 
                                  )
 specific_string = "windarab"  # ここに検索したい文字を設定
-
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
@@ -31,6 +30,8 @@ if uploaded_files is not None:
         else:
             sample_columns = 5
             skiprows = 0
+    st.write(dataframes)
+st.write(dataframes)
             
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:
@@ -68,6 +69,7 @@ if sample_f is not None:
         st.pyplot(fig)
 
 if uploaded_files is not None:
+
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows,engine="python")
