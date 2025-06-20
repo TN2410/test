@@ -19,6 +19,7 @@ if uploaded_files is not None:
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
         initial_lines = pd.read_csv(uploaded_file, nrows=5)
+     # ファイルを再度読み込むために、元のファイルポインタを最初に戻す
         uploaded_file.seek(0)
         if "BOSCH-DARAB" in initial_lines:
             content = uploaded_file.read()
