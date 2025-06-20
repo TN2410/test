@@ -21,7 +21,7 @@ if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
-        initial_lines = pd.read_csv(uploaded_file, nrows=1)
+        initial_lines = pd.read_csv(uploaded_file, nrows=2)
      # ファイルを再度読み込むために、元のファイルポインタを最初に戻す
         st.write(initial_lines)
         uploaded_file.seek(0)
