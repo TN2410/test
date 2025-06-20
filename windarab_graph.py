@@ -26,7 +26,7 @@ if uploaded_files is not None:
         st.write(initial_lines)
         uploaded_file.seek(0)
         if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
-            df = pd.read_csv(uploaded_file,sep="/t/0",skiprows = 5)
+            df = pd.read_csv(uploaded_file,sep="/t/0",skiprows = 5,engine="python")
             sample_columns = 3   
             st.write(df.columns)#一つのリストとなっている
         else:
