@@ -28,7 +28,9 @@ if uploaded_files is not None:
         #if "BOSCH-DARAB" in initial_lines:
             df = pd.read_csv(uploaded_file,skiprows = 5)
             st.write(df)#
-        #df = pd.read_csv(uploaded_file,encoding = "utf-8" , sep = "\t\0",engine='python')#
+        else:
+            df = pd.read_csv(uploaded_file)
+            st.write(df)#            #df = pd.read_csv(uploaded_file,encoding = "utf-8" , sep = "\t\0",engine='python')#
         #df0 = pd.read_csv(uploaded_file,sep="\t",encoding="CP932")
         #st.write(df.columns)
         #     sample_columns = 2
@@ -40,7 +42,6 @@ if uploaded_files is not None:
         #     #sample_columns = 5
         #     df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows=5)#
         #     #dataframes[uploaded_file.name] = df
-        st.write(df)##########カラム名が表示されない
         if "Time" in df.columns:
             time_format = "%H:%M:%S.%f"
             df["Time"][1:] = [datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
