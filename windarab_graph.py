@@ -29,7 +29,6 @@ if uploaded_files is not None:
             df = pd.read_csv(uploaded_file,sep="/t/0",skiprows = 5)
             sample_columns = 3   
             st.write(df.columns)#一つのリストとなっている
-
         else:
             df = pd.read_csv(uploaded_file)
             st.write(df.columns)#
