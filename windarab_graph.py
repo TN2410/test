@@ -45,7 +45,7 @@ if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows , engine="python")
-        if sample_columns = 5:
+        if sample_columns == 5:
             df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
         new_columns=[]
         for rep in df.columns:
