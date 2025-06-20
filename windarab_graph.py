@@ -45,7 +45,7 @@ if sample_f is not None:
         lower_bound = st.number_input('の下限値と',step=1)
         upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
 
-#もう一度読み込んだとしてもひとつしか表示されていないのはなぜ？
+#どれをチェックボックス選択しても最後に読み込んだ一つしか表示されない
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
@@ -82,8 +82,8 @@ if uploaded_files is not None:
             # ボタンが選択されている場合に散布図をプロット
             if show_data:
                 # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
-                selected_xdata = df[x_pal]
-                selected_ydata = df[y_pal]
+                selected_xdata = filtered_data[x_pal]
+                selected_ydata = filtered_data[y_pal]
                 #df["Time0"]=np.arange(len(df)).astype(float)
                 #st.line_chart(selected_data)
                 x=selected_xdata[1:].astype(float)
