@@ -48,26 +48,26 @@ if uploaded_files is not None:
             st.write("グラフ作成")
             fig=plt.figure(figsize=(10, 6))
             # 各データフレームの表示を制御するボタンを作成
-            for filename, df in dataframes.items():
-                # ボタンを作成（ファイル名をボタン名として使用）
-                with st.sidebar:
-                    show_data = st.checkbox("{} を表示".format(filename), value=True)
-                # ボタンが選択されている場合に散布図をプロット
-                if show_data:
-                    # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
-                    st.write(df.columns)
-                    selected_xdata = df[x_pal]
-                    selected_ydata = df[y_pal]
-                    #df["Time0"]=np.arange(len(df)).astype(float)
-                    #st.line_chart(selected_data)
-                    x=selected_xdata[1:].astype(float)
-                    y=selected_ydata[1:].astype(float)
-                    plt.scatter(x, y,label=filename)
-                    #plt.title(file.name)
-            plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-            plt.xlabel(x_pal)
-            plt.ylabel(y_pal)
-            st.pyplot(fig)
+    for filename, df in dataframes.items():
+        # ボタンを作成（ファイル名をボタン名として使用）
+        with st.sidebar:
+            show_data = st.checkbox("{} を表示".format(filename), value=True)
+            # ボタンが選択されている場合に散布図をプロット
+            if show_data:
+                # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
+                st.write(df.columns)
+                selected_xdata = df[x_pal]
+                selected_ydata = df[y_pal]
+                #df["Time0"]=np.arange(len(df)).astype(float)
+                #st.line_chart(selected_data)
+                x=selected_xdata[1:].astype(float)
+                y=selected_ydata[1:].astype(float)
+                plt.scatter(x, y,label=filename)
+                #plt.title(file.name)
+        plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
+        plt.xlabel(x_pal)
+        plt.ylabel(y_pal)
+        st.pyplot(fig)
             
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:
