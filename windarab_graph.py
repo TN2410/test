@@ -28,7 +28,7 @@ if uploaded_files is not None:
         if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
             df = pd.read_csv(uploaded_file,skiprows = 5)
             sample_columns = 2   
-
+            st.write(df.columns)
     # 新しいカラム名をデータフレームに適用
             new_columns=[]
             for rep in df.columns:
