@@ -22,14 +22,15 @@ if uploaded_files is not None:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
         initial_lines = pd.read_csv(uploaded_file, nrows=2)
      # ファイルを再度読み込むために、元のファイルポインタを最初に戻す
-        st.write(initial_lines)
         uploaded_file.seek(0)
         if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
             sample_columns = 2
             skiprows = 5
+            st.write("windarab")
         else:
             sample_columns = 5
             skiprows = 0
+            st.write("DPU")
             
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:
@@ -64,7 +65,6 @@ if uploaded_files is not None:
 
     st.write(dataframes)
     if dataframes:
-        st.write("グラフ作成")
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
         for filename, df in dataframes.items():
