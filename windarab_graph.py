@@ -55,7 +55,9 @@ if sample_f is not None:
     with st.sidebar:
         x_pal=st.multiselect('x列を選択してください', newlist)
         y_pal=st.multiselect('y列を選択してください', newlist)  
+    
     if dataframes:
+        st.write("グラフ作成")
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
         for filename, df in dataframes.items():
