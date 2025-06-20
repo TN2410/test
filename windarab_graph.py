@@ -27,8 +27,14 @@ if uploaded_files is not None:
         uploaded_file.seek(0)
         if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
             df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = 5,engine="python")
-            sample_columns = 3   
-            st.write(df.columns)#一つのリストとなっている
+            sample_columns = 2   
+            st.write(df.columns)#
+            new_columns=[]
+            for rep in df.columns:
+                rep = rep[:rep.find("[")]
+                rep = rep.replace(" ","")
+                new_columns.append(rep)
+            df.columns=new_columns
         else:
             df = pd.read_csv(uploaded_file)
             st.write(df.columns)#
