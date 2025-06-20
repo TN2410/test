@@ -33,6 +33,7 @@ if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')
+        st.write(df.columns)
         df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
         # 時間データを秒に換算する 
         time_format = "%H:%M:%S.%f"
