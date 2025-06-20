@@ -40,7 +40,11 @@ if sample_f is not None:
     newlist = [x for x in mylist if x != "nan"]
     with st.sidebar:
         x_pal=st.multiselect('x列を選択してください', newlist)
-        y_pal=st.multiselect('y列を選択してください', newlist)  
+        y_pal=st.multiselect('y列を選択してください', newlist) 
+        th_pal=st.selectbox('閾値パラメータを選択', newlist)
+        st.write(th_pal,"の")
+        lower_bound = st.number_input('の下限値と',step=1)
+        upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
     
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
@@ -61,21 +65,24 @@ if uploaded_files is not None:
                 rep = rep.replace(" ","")
                 new_columns.append(rep)
             df.columns = new_columns
+        
+        max_value = int(df[th_pal].max())
+        min_value = int(df[th_pal].min())
 
-        dataframes[uploaded_file.name] = df
-
-    st.write(dataframes)
+        query_string = f"{th_pal} >= @lower_bound & {th_pal} <= @upper_bound"    
+        filtered_data = df.query(query_string)
+        dataframes[uploaded_file.name] = filtered_data
+    #st.write(dataframes)
     if dataframes:
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
-        for filename, df in dataframes.items():
+        for filename, filtered_data in dataframes.items():
             # ボタンを作成（ファイル名をボタン名として使用）
             with st.sidebar:
                 show_data = st.checkbox("{} を表示".format(filename), value=True)
             # ボタンが選択されている場合に散布図をプロット
             if show_data:
                 # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
-                st.write(df.columns)
                 selected_xdata = df[x_pal]
                 selected_ydata = df[y_pal]
                 #df["Time0"]=np.arange(len(df)).astype(float)
