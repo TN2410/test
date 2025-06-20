@@ -13,7 +13,10 @@ st.set_page_config(
     initial_sidebar_state="auto")
 st.title("windarab or dpu データ表示")
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True
-                                  )
+ 
+ 
+ specific_string = "BOSCH-DARAB"  # ここに検索したい文字を設定
+                                 )
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
@@ -21,7 +24,9 @@ if uploaded_files is not None:
         initial_lines = pd.read_csv(uploaded_file, nrows=5)
      # ファイルを再度読み込むために、元のファイルポインタを最初に戻す
         uploaded_file.seek(0)
-        if "BOSCH-DARAB" in initial_lines:
+        if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
+
+        #if "BOSCH-DARAB" in initial_lines:
             df = pd.read_csv(uploaded_file, sep="\t",encoding ='CP932',skiprows = 5)
             st.write(df)#
         #df = pd.read_csv(uploaded_file,encoding = "utf-8" , sep = "\t\0",engine='python')#
