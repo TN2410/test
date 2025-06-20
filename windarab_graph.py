@@ -45,7 +45,6 @@ if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows,engine="python")
-        st.write(df)
         new_columns=[]
         for rep in df.columns:
             rep = rep[:rep.find("[")]
@@ -57,8 +56,7 @@ if uploaded_files is not None:
             df["Time"][1:] = [datetime.strptime(time_str, time_format) for time_str in df["Time"][1:]]
             init_time = df["Time"][1]
             df["Time"][1:] = [(time - init_time).seconds for time in df["Time"][1:]]
-            st.write("グラフ作成")
-            # 各データフレームの表示を制御するボタンを作成
+        dataframes[uploaded_file.name] = df
 
     st.write(dataframes)
     if dataframes:
