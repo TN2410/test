@@ -33,16 +33,6 @@ if uploaded_files is not None:
             df.columns = re.sub(r'
             $$.*?$$
             ', '', df.columns)
-
-    # 新しいカラム名をデータフレームに適用
-            new_columns=[]#以降の文字列がすべて消えてしまう
-            for rep in df.columns:
-                 rep = rep.replace(" ","")
-                 rep = rep.replace("","")
-                 rep = rep.replace(" ","")
-
-                 new_columns.append(rep)
-                 df.columns=new_columns
             st.write(new_columns,"new")
             st.write(df.columns,"カラム名")
             st.write("testtest")
