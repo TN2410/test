@@ -66,8 +66,11 @@ if uploaded_files is not None:
                 y=selected_ydata.astype(float)
                 #plt.scatter(x, y,label=filename)
                 plt.bar(filename,len(y))
+                sum_y + = len(y)
                 #plt.title(file.name)
+                
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
+        plt.title("sum = ",sum_y/3600,"時間")
         #plt.xlabel(x_pal)
         #plt.ylabel(y_pal)
         st.pyplot(fig)
