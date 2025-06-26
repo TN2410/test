@@ -68,8 +68,8 @@ if uploaded_files is not None:
                 plt.bar(len(y))
                 #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-        plt.xlabel(x_pal)
-        plt.ylabel(y_pal)
+        #plt.xlabel(x_pal)
+        #plt.ylabel(y_pal)
         st.pyplot(fig)
 
     #     plt.ylim(slider2, slider)
