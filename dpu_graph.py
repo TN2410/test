@@ -59,7 +59,7 @@ if uploaded_files is not None:
             # ボタンが選択されている場合に散布図をプロット
             if show_data:
                 # x列とy列を指定（ここでは仮に 　'x' と 'y' 列を使用）
-                selected_xdata = filtered_data[x_pal]
+                #selected_xdata = filtered_data[x_pal]
                 selected_ydata = filtered_data[y_pal]
                 #df["Time0"]=np.arange(len(df)).astype(float)
                 #st.line_chart(selected_data)
