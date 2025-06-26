@@ -25,11 +25,9 @@ if uploaded_files is not None:
         if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
             sample_columns = 2
             skiprows = 5
-            st.write("windarab")
         else:
             sample_columns = 5
             skiprows = 0
-            st.write("DPU")
             
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 if sample_f is not None:

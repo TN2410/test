@@ -1,4 +1,4 @@
- #dpuデータをstreamlitで表示する
+ #dpuデータを積算時間をstreamlitで表示する
 #%matplotlib inline
 import os,time,gc,math,glob
 import streamlit as st
@@ -64,7 +64,8 @@ if uploaded_files is not None:
                 #st.line_chart(selected_data)
                 x=selected_xdata.astype(float)
                 y=selected_ydata.astype(float)
-                plt.scatter(x, y,label=filename)
+                #plt.scatter(x, y,label=filename)
+                plt.bar(len(y))
                 #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
         plt.xlabel(x_pal)
