@@ -63,7 +63,7 @@ if uploaded_files is not None:
                 selected_ydata = filtered_data[y_pal]
                 #df["Time0"]=np.arange(len(df)).astype(float)
                 #st.line_chart(selected_data)
-                x=selected_xdata.astype(float)
+                #x=selected_xdata.astype(float)
                 y=selected_ydata.astype(float)
                 #plt.scatter(x, y,label=filename)
                 plt.bar(filename,len(y))
