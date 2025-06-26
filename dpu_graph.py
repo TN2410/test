@@ -71,7 +71,7 @@ if uploaded_files is not None:
                 #plt.title(file.name)
                 
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-        plt.title("sum = ",sum_y/3600,"時間")
+        plt.title("sum = " + int(sum_y/3600) + "時間")
         #plt.xlabel(x_pal)
         #plt.ylabel(y_pal)
         st.pyplot(fig)
