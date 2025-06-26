@@ -21,8 +21,8 @@ if sample_f is not None:
     mylist = [str(x) for x in sample_par]
     newlist = [x for x in mylist if x != "nan"]
     with st.sidebar:
-        x_pal=st.selectbox('x列を選択してください', newlist)
-        y_pal=st.selectbox('y列を選択してください', newlist)
+        #x_pal=st.selectbox('x列を選択してください', newlist)
+        y_pal=st.selectbox('積算パラメータを選択してください', newlist)
         th_pal=st.selectbox('閾値パラメータを選択', newlist)
         st.write(th_pal,"の")
         lower_bound = st.number_input('の下限値と',step=1)
@@ -71,7 +71,7 @@ if uploaded_files is not None:
                 #plt.title(file.name)
                 
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-        plt.title("sum = {:.2f} Hr".format(sum_y/3600))
+        plt.title("sum = {:.2f} Hr".format(sum_y/3600),font="Meiryo",fontsize=20)
         #plt.xlabel(x_pal)
         #plt.ylabel(y_pal)
         st.pyplot(fig)
