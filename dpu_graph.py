@@ -71,7 +71,7 @@ if uploaded_files is not None:
                 #plt.title(file.name)
                 
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-        plt.title("sum = {:.2f} Hr".format(sum_y/3600),font="Meiryo",fontsize=20)
+        plt.title("{}_sum = {:.2f} Hr".format(filename,sum_y/3600),font="Meiryo",fontsize=20)
         #plt.xlabel(x_pal)
         #plt.ylabel(y_pal)
         st.pyplot(fig)
