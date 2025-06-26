@@ -65,7 +65,7 @@ if uploaded_files is not None:
                 x=selected_xdata.astype(float)
                 y=selected_ydata.astype(float)
                 #plt.scatter(x, y,label=filename)
-                plt.bar(len(y))
+                plt.bar(1,len(y))
                 #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
         #plt.xlabel(x_pal)
