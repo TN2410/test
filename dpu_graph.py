@@ -65,7 +65,7 @@ if uploaded_files is not None:
         
         max_value = int(df[th_pal].max())
         min_value = int(df[th_pal].min())
-        query_string = f"{th_pal} >= @lower_bound & {th_pal} <= @upper_bound"    
+        query_string = f"{th_pal} >= @lower_bound & {th_pal} < @upper_bound"    
         filtered_data = df.query(query_string)
         dataframes[uploaded_file.name] = filtered_data
     #st.write(dataframes)
@@ -90,6 +90,6 @@ if uploaded_files is not None:
                 plt.bar(x, y)
                 #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-        plt.title("{}_{:.3f}Hr_{}<{}".format(y_pal,sumall/3600,lower_bound,upper_bound),font="20")
+        plt.title("{}_{:.3f}Hr_{}=<　　<{}".format(y_pal,sumall/3600,lower_bound,upper_bound),font="20")
         plt.ylabel("Time(sec)")
         st.pyplot(fig)
