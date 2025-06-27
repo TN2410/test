@@ -74,7 +74,6 @@ if uploaded_files is not None:
         # 各データフレームの表示を制御するボタンを作成
         sumall = 0
         for filename, filtered_data in dataframes.items():
-            st.write(filename)
             # ボタンを作成（ファイル名をボタン名として使用）
             with st.sidebar:
                 show_data = st.checkbox("{} を表示".format(filename), value=True)
@@ -96,6 +95,7 @@ if uploaded_files is not None:
 
                 plt.subplot(1,2,2)
                 plt.scatter(y2,z)
+                plt.xlabel(y_pal)
                 plt.ylabel(th_pal)
                 #plt.title(file.name)
         plt.title("{}_{:.3f}Hr_{}=<　　<{}".format(y_pal,sumall,lower_bound,upper_bound),fontsize="20")
