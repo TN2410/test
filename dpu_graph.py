@@ -83,7 +83,7 @@ if uploaded_files is not None:
                 #df["Time0"]=np.arange(len(df)).astype(float)
                 #st.line_chart(selected_data)
                 y=len(selected_ydata[1:])
-                plt.bar(filename, y)
+                plt.bar("1", y)
                 #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
         plt.title("y_pal",font="20")
