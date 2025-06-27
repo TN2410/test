@@ -92,9 +92,11 @@ if uploaded_files is not None:
                 sumall += sum(selected_ydata[1:].sum())/3600
                 plt.subplot(1,2,1)
                 plt.bar(x, y)
+                plt.ylabel("Time(sec)")
+
                 plt.subplot(1,2,2)
                 plt.scatter(z,y2)
+                plt.ylabel(th_pal)
                 #plt.title(file.name)
         plt.title("{}_{:.3f}Hr_{}=<　　<{}".format(y_pal,sumall,lower_bound,upper_bound),fontsize="20")
-        plt.ylabel("Time(sec)")
         st.pyplot(fig)
