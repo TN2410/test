@@ -63,7 +63,7 @@ def main():
         newlist = [x for x in mylist if x != "nan"]
 
     # ユーザーがCSVファイルをアップロードする
-    uploaded_files = st.file_uploader("CSVファイルをアップロードしてください", type='csv', accept_multiple_files=True)
+    uploaded_files = st.file_uploader("CSVファイルをアップロードしてください", type='txt', accept_multiple_files=True)
 
     # アップロードされたファイルがある場合の処理
     if uploaded_files:
