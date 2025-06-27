@@ -81,9 +81,10 @@ if uploaded_files is not None:
                 # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
                 selected_ydata = filtered_data[y_pal]
                 #df["Time0"]=np.arange(len(df)).astype(float)
+                x = np.arange(len(dataframes))
                 #st.line_chart(selected_data)
                 y=len(selected_ydata[1:])
-                plt.bar("1", y)
+                plt.bar(x, y)
                 #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
         plt.title("y_pal",font="20")
