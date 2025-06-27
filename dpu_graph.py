@@ -19,7 +19,7 @@ def load_data(files):
     """複数のCSVファイルを読み込む関数"""
     all_data = []
     for file in files:
-        df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')
+        df = pd.read_csv(file,sep="[\t\0]",engine='python')
         df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
 #         # 時間データを秒に換算する 
         time_format = "%H:%M:%S.%f"
