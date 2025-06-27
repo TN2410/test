@@ -72,6 +72,7 @@ if uploaded_files is not None:
     if dataframes:
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
+        sumall = 0
         for filename, filtered_data in dataframes.items():
             st.write(filename)
             # ボタンを作成（ファイル名をボタン名として使用）
@@ -85,9 +86,10 @@ if uploaded_files is not None:
                 x = str(filename)
                 #st.line_chart(selected_data)
                 y=len(selected_ydata[1:])
+                sumall += sum(selected_ydata[1:].sum())
                 plt.bar(x, y)
                 #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-        plt.title(y_pal,font="20")
-        plt.ylabel(y_pal)
+        plt.title(y_pal+{}.format(sumall),font="20")
+        plt.ylabel("Time(sec)")
         st.pyplot(fig)
