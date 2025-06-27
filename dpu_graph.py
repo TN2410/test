@@ -82,7 +82,12 @@ def main():
         # データのプレビュー
         st.write("データのプレビュー:")
         st.dataframe(data)
-
+        with st.sidebar:
+            parameter =st.selectbox('積算パラメータを選択してください', newlist)
+            th_pal=st.selectbox('閾値パラメータを選択', newlist)
+            st.write(th_pal,"の")
+            min_threshold = st.number_input('の下限値と',step=1)
+            max_threshold = st.number_input('上限値を入力してください',value=100,step=1)
         # アップロードしたファイルの中から累積したいファイルを選択するチェックボックス
         selected_files = []
         for i, file in enumerate(uploaded_files):
@@ -94,12 +99,7 @@ def main():
             # 選択されたファイルのデータを前処理
             preprocess_data(selected_files)
             # ユーザーによる閾値の設定
-            with st.sidebar:
-                parameter =st.selectbox('積算パラメータを選択してください', newlist)
-                th_pal=st.selectbox('閾値パラメータを選択', newlist)
-                st.write(th_pal,"の")
-                min_threshold = st.number_input('の下限値と',step=1)
-                max_threshold = st.number_input('上限値を入力してください',value=100,step=1)
+
 
             # グラフの描画
             plot_cumulative_time(parameter, min_threshold, max_threshold)
