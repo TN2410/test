@@ -95,7 +95,7 @@ if uploaded_files is not None:
                 plt.ylabel("Time(sec)")
 
                 plt.subplot(1,2,2)
-                plt.scatter(z,y2)
+                plt.scatter(y2,z)
                 plt.ylabel(th_pal)
                 #plt.title(file.name)
         plt.title("{}_{:.3f}Hr_{}=<　　<{}".format(y_pal,sumall,lower_bound,upper_bound),fontsize="20")
