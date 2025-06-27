@@ -86,9 +86,9 @@ if uploaded_files is not None:
                 x = str(filename.replace(".txt",""))
                 #st.line_chart(selected_data)
                 y=len(selected_ydata[1:])
-                sumall += sum(selected_ydata[1:].sum())
+                sumall += sum(selected_ydata[1:].sum())/3600
                 plt.bar(x, y)
                 #plt.title(file.name)
-        plt.title("{}_{:.3f}Hr_{}=<　　<{}".format(y_pal,sumall/3600,lower_bound,upper_bound),font="20")
+        plt.title("{}_{:.3f}Hr_{}=<　　<{}".format(y_pal,sumall,lower_bound,upper_bound),font="20")
         plt.ylabel("Time(sec)")
         st.pyplot(fig)
