@@ -19,8 +19,16 @@ def load_data(files):
     """複数のCSVファイルを読み込む関数"""
     all_data = []
     for file in files:
-        df = pd.read_csv(file)
+        df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')
+        df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
+#         # 時間データを秒に換算する 
+        time_format = "%H:%M:%S.%f"
+        df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
+        init_time = df["Time"][1]
+        df["Time"] = [(time - init_time).seconds for time in df["Time"]]
+        df = df.apply(pd.to_numeric)
         all_data.append(df)
+
     return pd.concat(all_data, ignore_index=True)
 
 def preprocess_data(selected_files):
@@ -102,18 +110,7 @@ if __name__ == '__main__':
     main()
 
 # #データファイルをアップロードし、グラフを作成する
-# uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
-# if uploaded_files is not None:
-#     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
-#     for uploaded_file in uploaded_files:
-#         df = pd.read_csv(uploaded_file,sep="[\t\0]",engine='python')
-#         df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
-#         # 時間データを秒に換算する 
-#         time_format = "%H:%M:%S.%f"
-#         df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
-#         init_time = df["Time"][1]
-#         df["Time"] = [(time - init_time).seconds for time in df["Time"]]
-#         df = df.apply(pd.to_numeric)
+#     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存して
 #         max_value = int(df[th_pal].max())
 #         min_value = int(df[th_pal].min())
 
