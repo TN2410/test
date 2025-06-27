@@ -23,7 +23,7 @@ def load_data(files):
         df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
 #         # 時間データを秒に換算する 
         time_format = "%H:%M:%S.%f"
-        df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
+        df["Time"] = pd.to_datetime(df["Time"], format=time_format)  # 直接datetimeに変換
         init_time = df["Time"][1]
         df["Time"] = [(time - init_time).seconds for time in df["Time"]]
         df = df.apply(pd.to_numeric)
