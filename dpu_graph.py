@@ -11,49 +11,69 @@ st.set_page_config(
     layout="wide", 
     initial_sidebar_state="auto")
 
-#中間データファイルの保存先
-INTERMEDIATE_DATA_FILE = 'intermediate_data.csv'
+# グローバル変数
+data = None  # アップロードされたデータを格納する変数
+selected_files_data = None  # 選択されたファイルのデータを格納する変数
 
-# 複数のCSVファイルを読み込む関数
 def load_data(files):
+    """複数のCSVファイルを読み込む関数"""
     all_data = []
     for file in files:
         df = pd.read_csv(file)
         all_data.append(df)
     return pd.concat(all_data, ignore_index=True)
 
-# 中間データファイルの生成
-def create_intermediate_data(data):
-    # 中間データをCSVファイルとして保存
-    data.to_csv(INTERMEDIATE_DATA_FILE, index=False)
+def preprocess_data(selected_files):
+    """選択されたファイルのデータを前処理する関数"""
+    global selected_files_data
+    selected_files_data = load_data(selected_files)
 
-# 中間データファイルの読み込み
-def load_intermediate_data():
-    return pd.read_csv(INTERMEDIATE_DATA_FILE)
+def plot_cumulative_time(parameter, min_threshold, max_threshold):
+    """累積時間を計算してグラフを描画する関数"""
+    # パラメータに基づいてデータをフィルタリング
+    filtered_data = selected_files_data[
+        (selected_files_data[parameter] >= min_threshold) &
+        (selected_files_data[parameter] <= max_threshold)
+    ]
+    
+    # タイムスタンプを日付型に変換
+    filtered_data['timestamp'] = pd.to_datetime(filtered_data['timestamp'])
+    
+    # 累積時間の計算
+    filtered_data['cumulative_time'] = (filtered_data['timestamp'] - filtered_data['timestamp'].min()).dt.total_seconds()
 
-# 主な処理
+    # グラフの描画
+    plt.figure(figsize=(10, 6))
+    plt.bar(filtered_data['timestamp'], filtered_data['cumulative_time'], width=0.01)
+    plt.title('累積時間棒グラフ')
+    plt.xlabel('時刻')
+    plt.ylabel('累積時間（秒）')
+    plt.xticks(rotation=45)
+    st.pyplot(plt)
+
 def main():
     st.title('パラメータの累積時間棒グラフ')
+
+    # サンプルファイルアップロードし、選択パラメータリストを作成
+    sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
+    if sample_f is not None:
+        sample_df = pd.read_csv(sample_f,encoding="CP932")
+        sample_par = sample_df.iloc[:,5]#DPU用
+        mylist = [str(x) for x in sample_par]
+        newlist = [x for x in mylist if x != "nan"]
 
     # ユーザーがCSVファイルをアップロードする
     uploaded_files = st.file_uploader("CSVファイルをアップロードしてください", type='csv', accept_multiple_files=True)
 
     # アップロードされたファイルがある場合の処理
     if uploaded_files:
-        # 中間データファイルが存在する場合は読み込む
-        if os.path.exists(INTERMEDIATE_DATA_FILE):
-            data = load_intermediate_data()
-        else:
-            # アップロードされた全てのCSVファイルを読み込む
-            data = load_data(uploaded_files)
-            create_intermediate_data(data)
+        # アップロードされたデータを読み込む
+        global data
+        data = load_data(uploaded_files)
 
-        # データの確認
+        # データのプレビュー
         st.write("データのプレビュー:")
         st.dataframe(data)
-
-        # ユーザーが累積したいパラメータをセレクトボックスで選択
-        parameter = st.selectbox('累積したいパラメータを選択', data.columns)
 
         # アップロードしたファイルの中から累積したいファイルを選択するチェックボックス
         selected_files = []
@@ -63,51 +83,24 @@ def main():
 
         # 選択されたファイルがある場合の処理
         if selected_files:
-            # 選択されたファイルのデータを読み込む
-            selected_data = load_data(selected_files)
-
+            # 選択されたファイルのデータを前処理
+            preprocess_data(selected_files)
             # ユーザーによる閾値の設定
-            min_threshold = st.sidebar.slider('閾値の下限', 0, 100, 20)
-            max_threshold = st.sidebar.slider('閾値の上限', 0, 100, 80)
-
-            # 閾値に基づいてデータをフィルタリング
-            filtered_data = selected_data[(selected_data[parameter] >= min_threshold) & (selected_data[parameter] <= max_threshold)]
-
-            # 累積時間の計算
-            filtered_data['timestamp'] = pd.to_datetime(filtered_data['timestamp'])  # タイムスタンプを日付型に変換
-            filtered_data['cumulative_time'] = (filtered_data['timestamp'] - filtered_data['timestamp'].min()).dt.total_seconds()
+            with st.sidebar:
+                parameter =st.selectbox('積算パラメータを選択してください', newlist)
+                th_pal=st.selectbox('閾値パラメータを選択', newlist)
+                st.write(th_pal,"の")
+                min_threshold = st.number_input('の下限値と',step=1)
+                max_threshold = st.number_input('上限値を入力してください',value=100,step=1)
 
             # グラフの描画
-            plt.figure(figsize=(10, 6))
-            plt.bar(filtered_data['timestamp'], filtered_data['cumulative_time'], width=0.01)
-            plt.title('累積時間棒グラフ')
-            plt.xlabel('時刻')
-            plt.ylabel('累積時間（秒）')
-            plt.xticks(rotation=45)
-            st.pyplot(plt)
+            plot_cumulative_time(parameter, min_threshold, max_threshold)
         else:
             st.warning("少なくとも1つのファイルを選択してください。")
 
 if __name__ == '__main__':
     main()
 
-###########################
-# st.title("dpuデータ表示")
-
-# # サンプルファイルアップロードし、選択パラメータリストを作成
-# sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
-# if sample_f is not None:
-#     sample_df = pd.read_csv(sample_f,encoding="CP932")
-#     sample_par = sample_df.iloc[:,5]#DPU用
-#     mylist = [str(x) for x in sample_par]
-#     newlist = [x for x in mylist if x != "nan"]
-#     with st.sidebar:
-#         #x_pal=st.selectbox('x列を選択してください', newlist)
-#         y_pal=st.selectbox('積算パラメータを選択してください', newlist)
-#         th_pal=st.selectbox('閾値パラメータを選択', newlist)
-#         st.write(th_pal,"の")
-#         lower_bound = st.number_input('の下限値と',step=1)
-#         upper_bound = st.number_input('上限値を入力してください',value=100,step=1)
 # #データファイルをアップロードし、グラフを作成する
 # uploaded_files = st.file_uploader("txtファイルをアップロードしてください", type="txt",accept_multiple_files=True)
 # if uploaded_files is not None:
