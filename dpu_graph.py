@@ -90,6 +90,6 @@ if uploaded_files is not None:
                 plt.bar(x, y)
                 #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-        plt.title("{}_{}".format(y_pal,sumall),font="20")
+        plt.title("{}_{f2g}".format(y_pal,sumall/3600),font="20")
         plt.ylabel("Time(sec)")
         st.pyplot(fig)
