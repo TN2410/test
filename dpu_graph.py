@@ -73,6 +73,7 @@ if uploaded_files is not None:
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
         for filename, filtered_data in dataframes.items():
+            st.write(filename)
             # ボタンを作成（ファイル名をボタン名として使用）
             with st.sidebar:
                 show_data = st.checkbox("{} を表示".format(filename), value=True)
