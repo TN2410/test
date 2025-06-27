@@ -82,12 +82,16 @@ if uploaded_files is not None:
             if show_data:
                 # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
                 selected_ydata = filtered_data[y_pal]
+                selected_zdata = filtered_data[th_pal]
                 #df["Time0"]=np.arange(len(df)).astype(float)
                 x = str(filename.replace(".txt",""))
-                #st.line_chart(selected_data)
                 y=len(selected_ydata[1:])
+                y２= selected_ydata[1:]
+                z= selected_zdata[1:]
+
                 sumall += sum(selected_ydata[1:].sum())/3600
                 plt.bar(x, y)
+                plt.scatter(z,y2)
                 #plt.title(file.name)
         plt.title("{}_{:.3f}Hr_{}=<　　<{}".format(y_pal,sumall,lower_bound,upper_bound),fontsize="20")
         plt.ylabel("Time(sec)")
