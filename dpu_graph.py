@@ -81,7 +81,7 @@ if uploaded_files is not None:
                 # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
                 selected_ydata = filtered_data[y_pal]
                 #df["Time0"]=np.arange(len(df)).astype(float)
-                x = str(filename)
+                x = str(dataframes)
                 #st.line_chart(selected_data)
                 y=len(selected_ydata[1:])
                 plt.bar(x, y)
