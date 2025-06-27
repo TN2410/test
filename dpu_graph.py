@@ -98,5 +98,5 @@ if uploaded_files is not None:
                 plt.xlabel(y_pal)
                 plt.ylabel(th_pal)
                 #plt.title(file.name)
-        plt.title("{}_{:.3f}Hr_{}=<　　<{}".format(y_pal,sumall,lower_bound,upper_bound),fontsize="20")
+        plt.title("{}_{:.3f}Hr_{}=<　　<{}".format(y_pal,sumall,lower_bound,upper_bound),fontsize="14")
         st.pyplot(fig)
