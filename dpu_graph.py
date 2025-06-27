@@ -89,12 +89,12 @@ if uploaded_files is not None:
                 z= selected_zdata[1:]
 
                 sumall += sum(selected_ydata[1:].sum())/3600
-                plt.subplot(1,2,1)
+                plt.subplot(1,2,2)
                 plt.bar(x, y)
                 plt.ylabel("Time(sec)")
                 plt.title("{}_{:.3f}Hr_{}=<　　<{}".format(y_pal,sumall,lower_bound,upper_bound),fontsize="10")
 
-                plt.subplot(1,2,2)
+                plt.subplot(1,2,1)
                 plt.scatter(y2,z)
                 plt.xlabel(y_pal)
                 plt.ylabel(th_pal)
