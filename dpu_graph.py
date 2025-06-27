@@ -88,6 +88,6 @@ if uploaded_files is not None:
                 plt.bar(x, y)
                 #plt.title(file.name)
         plt.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
-        plt.title("y_pal",font="20")
+        plt.title(y_pal,font="20")
         plt.ylabel(y_pal)
         st.pyplot(fig)
