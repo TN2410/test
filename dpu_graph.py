@@ -88,6 +88,7 @@ def main():
             st.write(th_pal,"の")
             min_threshold = st.number_input('の下限値と',step=1)
             max_threshold = st.number_input('上限値を入力してください',value=100,step=1)
+
         # アップロードしたファイルの中から累積したいファイルを選択するチェックボックス
         selected_files = []
         for i, file in enumerate(uploaded_files):
@@ -96,6 +97,7 @@ def main():
 
         # 選択されたファイルがある場合の処理
         if selected_files:
+            st.write(selected_files)
             # 選択されたファイルのデータを前処理
             preprocess_data(selected_files)
             # ユーザーによる閾値の設定
