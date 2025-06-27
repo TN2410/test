@@ -94,7 +94,7 @@ if uploaded_files is not None:
                 plt.scatter(y2,z)
                 plt.xlabel(y_pal)
                 plt.ylabel(th_pal)
-                plt.legend()
+                plt.legend(fontsize=10,loc="upper right")
                 
                 plt.subplot(1,2,2)
                 plt.bar(x, y)
