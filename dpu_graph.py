@@ -92,11 +92,11 @@ if uploaded_files is not None:
                 plt.subplot(1,2,1)
                 plt.bar(x, y)
                 plt.ylabel("Time(sec)")
+                plt.title("{}_{:.3f}Hr_{}=<　　<{}".format(y_pal,sumall,lower_bound,upper_bound),fontsize="10")
 
                 plt.subplot(1,2,2)
                 plt.scatter(y2,z)
                 plt.xlabel(y_pal)
                 plt.ylabel(th_pal)
                 #plt.title(file.name)
-        plt.title("{}_{:.3f}Hr_{}=<　　<{}".format(y_pal,sumall,lower_bound,upper_bound),fontsize="10")
         st.pyplot(fig)
