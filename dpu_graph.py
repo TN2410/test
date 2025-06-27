@@ -24,9 +24,9 @@ def load_data(files):
 #         # 時間データを秒に換算する 
         time_format = "%H:%M:%S.%f"
         df["Time"] = pd.to_datetime(df["Time"], format=time_format)  # 直接datetimeに変換
-        init_time = df["Time"][1]
-        df["Time"] = [(time - init_time).seconds for time in df["Time"]]
-        df = df.apply(pd.to_numeric)
+        init_time = df["Time"].iloc[0]
+        df["Time"] = (df["Time"] - init_time).dt.total_seconds()
+        df = df.apply(pd.to_numeric, errors='coerce')
         all_data.append(df)
 
     return pd.concat(all_data, ignore_index=True)
