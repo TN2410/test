@@ -91,7 +91,7 @@ if uploaded_files is not None:
                 sumall += sum(selected_ydata[1:].sum())/3600
 
                 plt.subplot(1,2,1)
-                plt.scatter(y2,z)
+                plt.scatter(z,y2)
                 plt.xlabel(y_pal)
                 plt.ylabel(th_pal)
                 plt.legend(fontsize=10,loc="upper right")
