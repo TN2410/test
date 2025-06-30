@@ -84,16 +84,16 @@ if uploaded_files is not None:
                 selected_zdata = filtered_data[th_pal]
                 #df["Time0"]=np.arange(len(df)).astype(float)
                 x = str(filename.replace(".txt",""))
-                y=len(selected_ydata[1:])
-                y２= selected_ydata[1:]
-                z= selected_zdata[1:]
+                y = len(selected_ydata[1:])
+                y2 = selected_ydata[1:]
+                z = selected_zdata[1:]
                 
                 sumall += sum(selected_ydata[1:].sum())/3600
 
                 plt.subplot(1,2,1)
                 plt.scatter(z,y2)
-                plt.xlabel(y_pal)
-                plt.ylabel(th_pal)
+                plt.ylabel(y_pal)
+                plt.xlabel(th_pal)
                 plt.legend(fontsize=10,loc="upper right")
                 
                 plt.subplot(1,2,2)
