@@ -35,7 +35,7 @@ if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding ='CP932')
     sample = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
     st.write(sample)
-    sample = sample_df.tolist()#DPU用 sample_columns 2 or 5
+    sample = sample_df.to_list()#DPU用 sample_columns 2 or 5
     st.write(sample)
     sample_1 = list(filter('nan', sample))
     sample_par = [item for item in sample_1 if item is not None and item != 'nan' and item != math.nan]
