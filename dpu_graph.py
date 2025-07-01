@@ -33,8 +33,10 @@ sample_f = st.file_uploader("csvファイルをアップロードしてくださ
 #グラフを書く前にsample_fに即した仮データベースファイルを使用したほうが、時間早いと思われる
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding ='CP932')
-    st.write(sample_df)
-    sample = sample_df.iloc[:,sample_columns].tolist()#DPU用 sample_columns 2 or 5
+    sample = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
+    st.write(sample)
+    sample = sample_df.tolist()#DPU用 sample_columns 2 or 5
+    st.write(sample)
     sample_1 = list(filter('nan', sample))
     sample_par = [item for item in sample_1 if item is not None and item != 'nan' and item != math.nan]
     st.write(sample_par)
