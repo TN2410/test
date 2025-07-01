@@ -30,6 +30,7 @@ if uploaded_files is not None:
             skiprows = 0
             
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
+#グラフを書く前にsample_fに即した仮データベースファイルを使用したほうが、時間早いと思われる
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding ='CP932')
     sample_par = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
@@ -49,6 +50,7 @@ if uploaded_files is not None:
         df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows , engine="python")
         if sample_columns == 5:
             df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
+            df = df[sample_par]
             if "Time" in df.columns:#DPU限定処理
                 time_format = "%H:%M:%S.%f"
                 df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
@@ -57,6 +59,7 @@ if uploaded_files is not None:
                 df = df.apply(pd.to_numeric)
         else:#windarabはカラム名調整
             new_columns=[]
+            df = df[sample_par]
             for rep in df.columns:
                 rep = rep[:rep.find("[")]
                 rep = rep.replace(" ","")
