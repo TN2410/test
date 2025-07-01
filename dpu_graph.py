@@ -60,6 +60,7 @@ if uploaded_files is not None:
                 df = df.apply(pd.to_numeric)
         else:#windarabはカラム名調整
             new_columns=[]
+            st.write(sample_par)
             df = df[sample_par]
             for rep in df.columns:
                 rep = rep[:rep.find("[")]
