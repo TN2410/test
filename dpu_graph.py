@@ -35,8 +35,7 @@ if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding ='CP932')
     sample = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
     sample_1 = list(filter(None, sample))
-    sample_par = [x for x in sample_1 if math.isnan(x) == False]
-
+    sample_par = [[s for s in ar if isinstance(s, str)] for ar in sample_1]
     st.write(sample_par)
 
     mylist = [str(x) for x in sample_par]
