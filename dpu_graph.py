@@ -34,8 +34,8 @@ sample_f = st.file_uploader("csvファイルをアップロードしてくださ
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding ='CP932')
     sample = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
-    sample = list(filter(None, sample))
-    sample_par = [x for x in mylist if math.isnan(x) == False]
+    sample_1 = list(filter(None, sample))
+    sample_par = [x for x in sample_1 if math.isnan(x) == False]
 
     st.write(sample_par)
 
