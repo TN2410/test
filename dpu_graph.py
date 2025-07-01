@@ -72,6 +72,7 @@ if uploaded_files is not None:
                 rep = rep.replace(" ","")
                 new_columns.append(rep)
             df.columns = new_columns
+            st.write(df.columns)
             df = df[sample_par]#同じカラム名にする必要あり
         
         max_value = int(df[th_pal].max())
