@@ -88,7 +88,7 @@ if uploaded_files is not None:
                 y2 = selected_ydata[1:]
                 z = selected_zdata[1:]
                 
-                sumall += sum(selected_ydata[1:].sum())/3600
+                sumall += len(selected_ydata[1:])/3600
 
                 plt.subplot(1,2,1)
                 plt.scatter(z,y2)
