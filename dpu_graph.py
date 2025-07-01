@@ -34,10 +34,8 @@ sample_f = st.file_uploader("csvファイルをアップロードしてくださ
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding ='CP932')
     sample = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
-    st.write(sample)
     sample_1 = sample.to_list()#DPU用 sample_columns 2 or 5
-    st.write(sample_1)
-    sample_par = [item for item in sample_1 if item is not None and item != 'NaN' and item != math.nan]
+    sample_par = [x for x in sample_1 if x != "nan"]
     st.write(sample_par)
 
     mylist = [str(x) for x in sample_par]
