@@ -49,13 +49,13 @@ if sample_f is not None:
 
         st.write(x_pal,"の")
         #ここでデータを読んで上下限を設定したい
-        x_lower_bound = st.number_input('の下限値と',step=1)
-        x_upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
+        x_lower_bound = st.number_input('の下限値と',step=1.0)
+        x_upper_bound = st.number_input('上限値を入力してください',value=100.0,step=1.0) 
         
         st.write(y_pal,"の")        
         #ここでデータを読んで上下限を設定したい
-        y_lower_bound = st.number_input('の下限値と',step=1)
-        y_upper_bound = st.number_input('上限値を入力してください',value=200,step=1) 
+        y_lower_bound = st.number_input('の下限値と',step=1.0)
+        y_upper_bound = st.number_input('上限値を入力してください',value=200.0,step=1.0) 
 
 #データを読み込みグラフを作成す
 #まず、サンプルファイルのみ抽出しデータを作成する　その後、表示パラメータ、上下限よりグラフ作成する
