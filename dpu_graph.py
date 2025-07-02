@@ -94,6 +94,8 @@ if uploaded_files is not None:
             if show_data:
             # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
                 selected_ydata = filtered_data[y_pal]
+                selected_zdata = filtered_data[th_pal]
+
                 #df["Time0"]=np.arange(len(df)).astype(float)
                 #st.line_chart(selected_data)
 
