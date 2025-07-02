@@ -37,12 +37,12 @@ if sample_f is not None:
 
     sample_1 = sample.to_list()#DPU用 sample_columns 2 or 5
     sample_1 = [str(x) for x in sample]
+    sample_2 = [x for x in sample_1 if x != "nan"]
 
-    sample_par = [x for x in sample_1 if x != "nan"]
-    st.write(sample_par)
+    sample_par = [col for col in sample_2 if col not in df.columns]
 
-    mylist = [str(x) for x in sample_par]
-    newlist = [x for x in mylist if x != "nan"]
+    newlist = sample_par
+    
     with st.sidebar:
         y_pal=st.multiselect('y列を選択してください', newlist) 
         th_pal=st.selectbox('閾値パラメータを選択', newlist)
