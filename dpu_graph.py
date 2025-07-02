@@ -44,15 +44,19 @@ if sample_f is not None:
     sample_par = sample_2
 
     with st.sidebar:
-        y_pal=st.multiselect('y列を選択してください', sample_par) 
-        th_pal=st.selectbox('閾値パラメータを選択', sample_par)
-        st.write(th_pal,"の")
-
+        x_pal=st.selectbox('x列を選択してください', sample_par) 
+        st.write(x_pal,"の")
         #ここでデータを読んで上下限を設定したい
-        lower_bound = st.number_input('の下限値と',step=1)
-        upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
+        x_lower_bound = st.number_input('の下限値と',step=1)
+        x_upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
+        
+        y_pal=st.selectbox('y列を選択してｋださい', sample_par)
+        st.write(y_pal,"の")
+        #ここでデータを読んで上下限を設定したい
+        y_lower_bound = st.number_input('の下限値と',step=1)
+        y_upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
 
-#データを読み込みグラフを作成すｒ
+#データを読み込みグラフを作成す
 #まず、サンプルファイルのみ抽出しデータを作成する　その後、表示パラメータ、上下限よりグラフ作成する
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
@@ -76,36 +80,30 @@ if uploaded_files is not None:
             df.columns = new_columns
             #df = df[sample_par]#同じカラム名にする必要あり
         
-        max_value = int(df[th_pal].max())
-        min_value = int(df[th_pal].min())
-        query_string = f"{th_pal} >= @lower_bound & {th_pal} < @upper_bound"    
-        filtered_data = df.query(query_string)
-        dataframes[uploaded_file.name] = filtered_data
+
+
+        x_query_string = f"{x_pal} >= @x_lower_bound & {x_pal} < @x_upper_bound"    
+        y_query_string = f"{y_pal} >= @y_lower_bound & {y_pal} < @y_upper_bound"    
+        
+        x_filtered_data = df.query(query_string)
+        y_filtered_data = x_filtered_data.query(query_string)
+
+        dataframes[uploaded_file.name] = y_filtered_data
     #st.write(dataframes)
     if dataframes:
         #fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
         sumall = 0
-        for filename, filtered_data in dataframes.items():
+        for filename, y_filtered_data in dataframes.items():
             # ボタンを作成（ファイル名をボタン名として使用）
             with st.sidebar:
                 show_data = st.checkbox("{} を表示".format(filename), value=True)
             # ボタンが選択されている場合に散布図をプロット
             if show_data:
             # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
-                selected_ydata = filtered_data[y_pal]
-                selected_zdata = filtered_data[th_pal]
-
                 #df["Time0"]=np.arange(len(df)).astype(float)
-                #st.line_chart(selected_data)
-
-                x = str(filename.replace(".txt",""))
-                y = len(selected_ydata[1:])
-                y2 = selected_ydata[1:]
-                z = selected_zdata[1:]
-                
-                sumall += len(selected_ydata[1:])/3600
-
+                #st.line_chart(selected_data)    
+                sumall += len(y_filtered_data[1:])/3600
                 # plt.xlabel(th_pal)
                 # plt.legend(fontsize=10,loc="upper right")
                 # plt.ylabel("Time(sec)")
@@ -120,15 +118,16 @@ if uploaded_files is not None:
                 ax1 = fig.add_subplot(2, 2, 1, projection='3d')
                 ax1.bar3d(x, y, 0, dx=0.4, dy=0.5 , dz=z , shade=True)
                 ax1.set_title("10")
-
                 ax1.set_title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
                 
-                ax2 = fig.add_subplot(2,2,2)
-                ax2.plot_surface(x, y, z, cmap=cm.coolwarm,linewidth=0, antialiased=False)
+                # ax2 = fig.add_subplot(2,2,2)
+                # ax2.plot_surface(x, y, z, cmap=cm.coolwarm,linewidth=0, antialiased=False)
 
-                x3 = fig.add_subplot(2, 2, 3)
+                ax3 = fig.add_subplot(2, 2, 3)
                 ax3.bar(y,z)
-                ax3.set_title("20")
+                ax3.set_title("30")
+
                 ax4 = fig.add_subplot(2, 2, 4)
                 ax4.bar(x,z)
+
         st.pyplot(fig)
