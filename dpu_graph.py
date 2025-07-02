@@ -117,7 +117,7 @@ if uploaded_files is not None:
                 # plt.ylabel("Time(sec)")
                 # plt.title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
                 x = [1,2,3,4,5]
-                y = [1,2,3,4,5]
+                y = [1,2,0,4,5]
                 z = [1,2,3,4,5]
                 
                 # figureを生成
