@@ -102,16 +102,16 @@ if uploaded_files is not None:
                 
                 sumall += len(selected_ydata[1:])/3600
 
-                plt.subplot(1,2,1)
-                plt.scatter(z,y2)
-                plt.ylabel(y_pal)
-                plt.xlabel(th_pal)
-                plt.legend(fontsize=10,loc="upper right")
+                # plt.subplot(1,2,1)
+                # plt.scatter(z,y2)
+                # plt.ylabel(y_pal)
+                # plt.xlabel(th_pal)
+                # plt.legend(fontsize=10,loc="upper right")
                 
-                plt.subplot(1,2,2)
-                plt.bar(x, y)
-                plt.ylabel("Time(sec)")
-                plt.title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
+                # plt.subplot(1,2,2)
+                # plt.bar(x, y)
+                # plt.ylabel("Time(sec)")
+                # plt.title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
 
                 ax = fig.add_subplot(projection='3d')
                 ax.bar(x, y, z, color='blue')
