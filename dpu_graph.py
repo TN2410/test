@@ -49,6 +49,8 @@ if sample_f is not None:
         #ここでデータを読んで上下限を設定したい
         x_lower_bound = st.number_input('の下限値と',step=1)
         st.number_input('の下限値と',step=2)
+        st.number_input('の下限値と',step=2)
+        st.number_input('の下限値と',step=2)
 
         x_upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
         
