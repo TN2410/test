@@ -129,6 +129,6 @@ if uploaded_files is not None:
                 # axesにplot
                 ax.scatter(x, y, z, c='b')
                 ax = fig.add_subplot(1,1,1,projection='3d')
-                ax.scatter(1,1,0, dz=1,color='blue')
+                #ax.scatter(1,1,0, dz=1,color='blue')
 
         st.pyplot(fig)
