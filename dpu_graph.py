@@ -92,50 +92,67 @@ if uploaded_files is not None:
                 y_filtered_data = x_filtered_data.query(y_query_string)
 
                 dataframes[uploaded_file.name,x,y] = len(y_filtered_data)
-                
                 st.write(len(y_filtered_data))
 
 #各条件での累積時間マップを作成
 
     #st.write(dataframes)
     if dataframes:
+        total_counts = {}  # 全ファイルのデータを集約する辞書を初期化
+        
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
-        sumall = 0
-        for filename, x,y in dataframes.items():
+        sumall = pd.datafr
+
+        for (filename,x,y),count in dataframes.items():
             # ボタンを作成（ファイル名をボタン名として使用）
             with st.sidebar:
                 show_data = st.checkbox("{} を表示".format(filename), value=True)
             # ボタンが選択されている場合に散布図をプロット
             if show_data:
-            # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
-                #df["Time0"]=np.arange(len(df)).astype(float)
-                #st.line_chart(selected_data)    
-                
-                st.write(filename,x,y)
+                if (x, y) not in total_counts:
+                    total_counts[(x, y)] = 0
+                total_counts[(x, y)] += count  # 各ファイルのカウントを
 
+            z = int(total_counts[(x,y)]/3600)# x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
+                #df["Time0"]=np.arange(len(df)).astype(float)   
                 # plt.xlabel(th_pal)
                 # plt.legend(fontsize=10,loc="upper right")
-                # plt.ylabel("Time(sec)")
-                # x = [1,2,3,4,5,1,2,3,4,5]
-                # y = [1,1,1,1,1,3,3,3,3,3]
-                # z = [1,1,1,1,1,1,2,3,4,5]
-                
-                
+                # plt.ylabel("Time(sec)")    
                 # axをfigureに設定
-                ax1 = fig.add_subplot(2, 2, 1, projection='3d')
-                ax1.bar3d(x, y, 0, dx=0.4, dy=0.5 , dz=z , shade=True)
-                ax1.set_title("10")
-                ax1.set_title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,x_lower_bound,y_pal,x_upper_bound),fontsize="10")
+
+        # 3Dグラフ用のデータを準備
+        x_positions = []
+        y_positions = []
+        z_values = []
+
+        for (x, y), z in total_counts.items():
+            x_positions.append(x)
+            y_positions.append(y)
+            z_values.append(z)
+
+        # 3Dバーグラフの描画
+        ax1 = fig.add_subplot(1, 1, 1, projection='3d')
+        ax1.bar3d(x_positions, y_positions, [0] * len(z_values), dx=0.4, dy=0.4, dz=z_values, shade=True)
+        ax1.set_title(f"Cumulative Time for {x_pal} and {y_pal}: {sumall:.3f} Hr")
+        ax1.set_xlabel(x_pal)
+        ax1.set_ylabel(y_pal)
+        ax1.set_zlabel("Count")
+    
+
+                # ax1 = fig.add_subplot(2, 2, 1, projection='3d')
+                # ax1.bar3d(x, y, 0, dx=0.4, dy=0.5 , dz=z , shade=True)
+                # ax1.set_title("10")
+                # ax1.set_title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,x_lower_bound,y_pal,x_upper_bound),fontsize="10")
                 
-                # ax2 = fig.add_subplot(2,2,2)
-                # ax2.plot_surface(x, y, z, cmap=cm.coolwarm,linewidth=0, antialiased=False)
+                # # ax2 = fig.add_subplot(2,2,2)
+                # # ax2.plot_surface(x, y, z, cmap=cm.coolwarm,linewidth=0, antialiased=False)
 
-                ax3 = fig.add_subplot(2, 2, 3)
-                ax3.bar(y,z)
-                ax3.set_title("30")
+                # ax3 = fig.add_subplot(2, 2, 3)
+                # ax3.bar(y,z)
+                # ax3.set_title("30")
 
-                ax4 = fig.add_subplot(2, 2, 4)
-                ax4.bar(x,z)
+                # ax4 = fig.add_subplot(2, 2, 4)
+                # ax4.bar(x,z)
 
         st.pyplot(fig)
