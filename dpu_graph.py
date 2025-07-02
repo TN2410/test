@@ -106,8 +106,8 @@ if uploaded_files is not None:
             if show_data:
                 if (x, y) not in total_counts:
                     total_counts[(x, y)] = 0
-                    st.write(dataframes[filename,x,y])
-                total_counts[(x, y)] + = dataframes[filename,x,y]  # 各ファイルのカウントを
+                for (x,y) in dataframes.items():
+                    total_counts[(x, y)] + = dataframes[filename,x,y]  # 各ファイルのカウントを
 
             z = int(total_counts[(x,y)]/3600)# x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
                 #df["Time0"]=np.arange(len(df)).astype(float)   
@@ -133,8 +133,6 @@ if uploaded_files is not None:
         ax1.set_xlabel(x_pal)
         ax1.set_ylabel(y_pal)
         ax1.set_zlabel("Count")
-    
-
                 # ax1 = fig.add_subplot(2, 2, 1, projection='3d')
                 # ax1.bar3d(x, y, 0, dx=0.4, dy=0.5 , dz=z , shade=True)
                 # ax1.set_title("10")
