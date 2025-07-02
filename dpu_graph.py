@@ -107,6 +107,6 @@ if uploaded_files is not None:
                 plt.subplot(1,2,2)
                 plt.bar(x, y)
                 plt.ylabel("Time(sec)")
-                plt.title("{}_{:.3f}Hr_{}=<　　<{}".format(y_pal,sumall,lower_bound,upper_bound),fontsize="10")
+                plt.title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
 
         st.pyplot(fig)
