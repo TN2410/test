@@ -125,8 +125,6 @@ if uploaded_files is not None:
                 
                 # axをfigureに設定
                 ax = fig.add_subplot(1, 1, 1, projection='3d')
-                
-                # axesにplot
                 ax.bar(x, y, z, c='b')
                 #ax.scatter(1,1,0, dz=1,color='blue')
 
