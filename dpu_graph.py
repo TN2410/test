@@ -106,16 +106,9 @@ if uploaded_files is not None:
                 
                 sumall += len(selected_ydata[1:])/3600
 
-                # plt.subplot(1,2,1)
-                # plt.scatter(z,y2)
-                # plt.ylabel(y_pal)
                 # plt.xlabel(th_pal)
                 # plt.legend(fontsize=10,loc="upper right")
-                
-                # plt.subplot(1,2,2)
-                # plt.bar(x, y)
                 # plt.ylabel("Time(sec)")
-                ax1.set_title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
                 x = [1,2,3,4,5,1,2,3,4,5]
                 y = [1,1,1,1,1,3,3,3,3,3]
                 z = [1,1,1,1,1,1,2,3,4,5]
@@ -126,6 +119,9 @@ if uploaded_files is not None:
                 # axをfigureに設定
                 ax1 = fig.add_subplot(2, 2, 1, projection='3d')
                 ax1.bar3d(x, y, 0, dx=0.4, dy=0.5 , dz=z , shade=True)
+                ax1.set_title("10")
+
+                #ax1.set_title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
                 ax2 = fig.add_subplot(2, 2, 3)
                 ax2.bar(y,z)
                 ax3 = fig.add_subplot(2, 2, 4)
