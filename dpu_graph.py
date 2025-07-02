@@ -80,22 +80,17 @@ if uploaded_files is not None:
             df.columns = new_columns
             #df = df[sample_par]#同じカラム名にする必要あり
 
-
 #分割数　10として　3Dマップを作る
-
         for x in range(int(x_lower_bound),int(x_upper_bound),int((x_upper_bound-x_lower_bound)/10)):
             for y in range(int(y_lower_bound),int(y_upper_bound),int((y_upper_bound-y_lower_bound)/10)):
-                st.write(x,y)
                 x_query_string = f"{x_pal} >= {x} & {x_pal} < {x + int((x_upper_bound-x_lower_bound)/10)}"
                 y_query_string = f"{y_pal} >= {y} & {y_pal} < {y + int((y_upper_bound-x_lower_bound)/10)}"
                 x_filtered_data = df.query(x_query_string)
                 y_filtered_data = x_filtered_data.query(y_query_string)
-
                 dataframes[uploaded_file.name,x,y] = len(y_filtered_data)
                 st.write(len(y_filtered_data))
 
 #各条件での累積時間マップを作成
-
     #st.write(dataframes)
     if dataframes:
         total_counts = {}  # 全ファイルのデータを集約する辞書を初期化
