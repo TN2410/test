@@ -121,7 +121,8 @@ if uploaded_files is not None:
                 ax1.bar3d(x, y, 0, dx=0.4, dy=0.5 , dz=z , shade=True)
                 ax1.set_title("10")
 
-                #ax1.set_title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
+                ax1.set_title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
+                ax2.set_title("20")
                 ax2 = fig.add_subplot(2, 2, 3)
                 ax2.bar(y,z)
                 ax3 = fig.add_subplot(2, 2, 4)
