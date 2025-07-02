@@ -44,18 +44,17 @@ if sample_f is not None:
     sample_par = sample_2
 
     with st.sidebar:
-        x_pal=st.selectbox('x列を選択してください', sample_par) 
-        y_pal=st.selectbox('y列を選択してｋださい', sample_par)
-
+        x_pal=st.selectbox('x列を選択してください', sample_par) selectbox
         st.write(x_pal,"の")
         #ここでデータを読んで上下限を設定したい
-        x_lower_bound = st.number_input('xの下限値と',step=1.0)
-        x_upper_bound = st.number_input('xの上限値を入力してください',value=100.0,step=1.0) 
+        x_lower_bound = st.number_input('xの下限値と',step=1)
+        x_upper_bound = st.number_input('xの上限値を入力してください',value=100,step=10) 
         
+        y_pal=st.('y列を選択してｋださい', sample_par)
         st.write(y_pal,"の")        
         #ここでデータを読んで上下限を設定したい
-        y_lower_bound = st.number_input('yの下限値と',step=1.0)
-        y_upper_bound = st.number_input('yの上限値を入力してください',value=200.0,step=1.0) 
+        y_lower_bound = st.number_input('yの下限値と',step=1)
+        y_upper_bound = st.number_input('yの上限値を入力してください',value=200,step=10) 
 
 #データを読み込みグラフを作成す
 #まず、サンプルファイルのみ抽出しデータを作成する　その後、表示パラメータ、上下限よりグラフ作成する
@@ -81,13 +80,20 @@ if uploaded_files is not None:
             df.columns = new_columns
             #df = df[sample_par]#同じカラム名にする必要あり
 
-        x_query_string = f"{x_pal} >= @x_lower_bound & {x_pal} < @x_upper_bound"    
-        y_query_string = f"{y_pal} >= @y_lower_bound & {y_pal} < @y_upper_bound"    
-        
-        x_filtered_data = df.query(x_query_string)
-        y_filtered_data = x_filtered_data.query(y_query_string)
+#分割数　10として　3Dマップを作る
 
-        dataframes[uploaded_file.name] = y_filtered_data
+        for x in range(0,10):
+            for y in range(0:10):
+                x_query_string = f"{x_pal} >= @x_lower_bound & {x_pal} < @x_upper_bound"    
+                y_query_string = f"{y_pal} >= @y_lower_bound & {y_pal} < @y_upper_bound"    
+                
+                x_filtered_data = df.query(x_query_string)
+                y_filtered_data = x_filtered_data.query(y_query_string)
+
+                dataframes[uploaded_file.name,x,y] = len(y_filtered_data)
+
+#各条件での累積時間マップを作成
+
     #st.write(dataframes)
     if dataframes:
         #fig=plt.figure(figsize=(10, 6))
