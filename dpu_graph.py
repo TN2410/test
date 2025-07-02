@@ -64,13 +64,11 @@ if uploaded_files is not None:
                 df = df.apply(pd.to_numeric)
         else:#windarabはカラム名調整
             new_columns=[]
-            st.write(sample_par)
             for rep in df.columns:
                 rep = rep[:rep.find("[")]
                 rep = rep.replace(" ","")
                 new_columns.append(rep)
             df.columns = new_columns
-            st.write(df.columns)
             #df = df[sample_par]#同じカラム名にする必要あり
         
         max_value = int(df[th_pal].max())
