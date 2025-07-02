@@ -118,7 +118,7 @@ if uploaded_files is not None:
                 # plt.title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
                 x = [1,2,3,4,5,1,2,3,4,5]
                 y = [1,1,1,1,1,1,1,1,1,1]
-                z = [1,2,1,2,1,3,3,3,3,3]
+                z = [1,1,1,1,1,1,1,1,1,1]
                 
                 # figureを生成
                 fig = plt.figure()
