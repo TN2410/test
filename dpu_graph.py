@@ -83,7 +83,7 @@ if uploaded_files is not None:
         dataframes[uploaded_file.name] = filtered_data
     #st.write(dataframes)
     if dataframes:
-        fig=plt.figure(figsize=(10, 6))
+        #fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
         sumall = 0
         for filename, filtered_data in dataframes.items():
@@ -116,7 +116,18 @@ if uploaded_files is not None:
                 # plt.bar(x, y)
                 # plt.ylabel("Time(sec)")
                 # plt.title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
-
+                x = np.random.rand(50)
+                y = np.random.rand(50)
+                z = np.random.rand(50)
+                
+                # figureを生成
+                fig = plt.figure()
+                
+                # axをfigureに設定
+                ax = fig.add_subplot(1, 1, 1, projection='3d')
+                
+                # axesにplot
+                ax.scatter(x, y, z, c='b')
                 ax = fig.add_subplot(1,1,1,projection='3d')
                 ax.scatter(1,1,0, dz=1,color='blue')
 
