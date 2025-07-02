@@ -127,6 +127,6 @@ if uploaded_files is not None:
                 ax1 = fig.add_subplot(1, 2, 1, projection='3d')
                 ax1.bar3d(x, y, 0, dx=0.4, dy=0.5 , dz=z , shade=True)
                 ax2 = fig.add_subplot(1, 2, 2)
-                ax2.bar(y)
+                ax2.bar(x,y)
 
         st.pyplot(fig)
