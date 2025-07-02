@@ -117,7 +117,7 @@ if uploaded_files is not None:
                 ax1 = fig.add_subplot(2, 2, 1, projection='3d')
                 ax1.bar3d(x, y, 0, dx=0.4, dy=0.5 , dz=z , shade=True)
                 ax1.set_title("10")
-                ax1.set_title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
+                ax1.set_title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,x_lower_bound,y_pal,x_upper_bound),fontsize="10")
                 
                 # ax2 = fig.add_subplot(2,2,2)
                 # ax2.plot_surface(x, y, z, cmap=cm.coolwarm,linewidth=0, antialiased=False)
