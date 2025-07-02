@@ -88,9 +88,8 @@ if uploaded_files is not None:
                 x_filtered_data = df.query(x_query_string)
                 y_filtered_data = x_filtered_data.query(y_query_string)
                 ####以下に記載できている？
-                dataframes[uploaded_file.name,x,y] = len(y_filtered_data)
+                dataframes[uploaded_file.name][(x,y)] = len(y_filtered_data)
                 st.write(dataframes)
-                st.write(len(y_filtered_data))
 
 #各条件での累積時間マップを作成
     #st.write(dataframes)
