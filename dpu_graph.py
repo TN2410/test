@@ -114,6 +114,6 @@ if uploaded_files is not None:
                 # plt.title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
 
                 ax = fig.add_subplot(projection='3d')
-                ax.bar(x, y, z, color='blue')
+                ax.bar(y, y2, 1, color='blue')
 
         st.pyplot(fig)
