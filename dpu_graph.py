@@ -48,7 +48,6 @@ if sample_f is not None:
         th_pal=st.selectbox('閾値パラメータを選択', sample_par)
         st.write(th_pal,"の")
 
-
         #ここでデータを読んで上下限を設定したい
         lower_bound = st.number_input('の下限値と',step=1)
         upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
@@ -93,7 +92,11 @@ if uploaded_files is not None:
                 show_data = st.checkbox("{} を表示".format(filename), value=True)
             # ボタンが選択されている場合に散布図をプロット
             if show_data:
-                stype(float)
+            # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
+                selected_ydata = filtered_data[y_pal]
+                #df["Time0"]=np.arange(len(df)).astype(float)
+                #st.line_chart(selected_data)
+
                 x = str(filename.replace(".txt",""))
                 y = len(selected_ydata[1:])
                 y2 = selected_ydata[1:]
