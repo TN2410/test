@@ -102,7 +102,6 @@ if uploaded_files is not None:
         
         fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
-        sumall = pd.datafr
 
         for (filename,x,y),count in dataframes.items():
             # ボタンを作成（ファイル名をボタン名として使用）
