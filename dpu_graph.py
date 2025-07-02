@@ -39,13 +39,11 @@ if sample_f is not None:
     sample_1 = [str(x) for x in sample]
     sample_2 = [x for x in sample_1 if x != "nan"]
 
-    sample_par = [col for col in sample_2 if col not in df.columns]
-
-    newlist = sample_par
+    sample_par = sample_2
 
     with st.sidebar:
-        y_pal=st.multiselect('y列を選択してください', newlist) 
-        th_pal=st.selectbox('閾値パラメータを選択', newlist)
+        y_pal=st.multiselect('y列を選択してください', sample_par) 
+        th_pal=st.selectbox('閾値パラメータを選択', sample_par)
         st.write(th_pal,"の")
         lower_bound = st.number_input('の下限値と',step=1)
         upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
