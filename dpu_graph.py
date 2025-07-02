@@ -54,7 +54,7 @@ if sample_f is not None:
         st.write(y_pal,"の")
         #ここでデータを読んで上下限を設定したい
         y_lower_bound = st.number_input('の下限値と',step=1)
-        y_upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
+        y_upper_bound = st.number_input('上限値を入力してください',value=200,step=1) 
 
 #データを読み込みグラフを作成す
 #まず、サンプルファイルのみ抽出しデータを作成する　その後、表示パラメータ、上下限よりグラフ作成する
@@ -79,8 +79,6 @@ if uploaded_files is not None:
                 new_columns.append(rep)
             df.columns = new_columns
             #df = df[sample_par]#同じカラム名にする必要あり
-        
-
 
         x_query_string = f"{x_pal} >= @x_lower_bound & {x_pal} < @x_upper_bound"    
         y_query_string = f"{y_pal} >= @y_lower_bound & {y_pal} < @y_upper_bound"    
