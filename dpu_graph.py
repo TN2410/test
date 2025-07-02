@@ -45,10 +45,14 @@ if sample_f is not None:
         y_pal=st.multiselect('y列を選択してください', sample_par) 
         th_pal=st.selectbox('閾値パラメータを選択', sample_par)
         st.write(th_pal,"の")
+
+
+        #ここでデータを読んで上下限を設定したい
         lower_bound = st.number_input('の下限値と',step=1)
         upper_bound = st.number_input('上限値を入力してください',value=100,step=1) 
 
-#どれをチェックボックス選択しても最後に読み込んだ一つしか表示されない
+#データを読み込みグラフを作成すｒ
+#まず、サンプルファイルのみ抽出しデータを作成する　その後、表示パラメータ、上下限よりグラフ作成する
 if uploaded_files is not None:
     dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for uploaded_file in uploaded_files:
@@ -108,5 +112,8 @@ if uploaded_files is not None:
                 plt.bar(x, y)
                 plt.ylabel("Time(sec)")
                 plt.title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
+
+                ax = fig.add_subplot(projection='3d')
+                ax.bar(x, y, z, color='blue')
 
         st.pyplot(fig)
