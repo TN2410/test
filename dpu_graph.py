@@ -7,6 +7,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
 import re
+from mpl_toolkits.mplot3d import Axes3D
+
 # windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
 st.set_page_config(
     page_title="PLOT",  
@@ -91,10 +93,7 @@ if uploaded_files is not None:
                 show_data = st.checkbox("{} を表示".format(filename), value=True)
             # ボタンが選択されている場合に散布図をプロット
             if show_data:
-                # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
-                selected_ydata = filtered_data[y_pal]
-                selected_zdata = filtered_data[th_pal]
-                #df["Time0"]=np.arange(len(df)).astype(float)
+                stype(float)
                 x = str(filename.replace(".txt",""))
                 y = len(selected_ydata[1:])
                 y2 = selected_ydata[1:]
@@ -113,7 +112,7 @@ if uploaded_files is not None:
                 # plt.ylabel("Time(sec)")
                 # plt.title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
 
-                ax = fig.add_subplot(projection='3d')
-                ax.bar(1,1,0, dz=1,color='blue')
+                ax = fig.add_subplot(1,1,1,projection='3d')
+                ax.scatter(1,1,0, dz=1,color='blue')
 
         st.pyplot(fig)
