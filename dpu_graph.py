@@ -105,13 +105,13 @@ if uploaded_files is not None:
             with st.sidebar:
                 show_data = st.checkbox("{} を表示".format(filename), value=True)
             # ボタンが選択されている場合に散布図をプロット
-            if show_data:
-                if (x, y) not in total_counts:
-                    total_counts[(x, y)] = 0
-                for x,y in range(5):
-                    total_counts[(x, y)] + = dataframes[filename,x,y]  # 各ファイルのカウントを
-                    st.write(total_count)
-            z = int(total_counts[(x,y)]/3600)# x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
+            # if show_data:
+            #     if filename,　(x, y) not in total_counts:
+            #         total_counts[(x, y)] = 0
+            #     #for x,y in range(5):
+            #         total_counts[(x, y)] + = dataframes[filename,x,y]  # 各ファイルのカウントを
+            #         st.write(total_count)
+            # z = int(total_counts[(x,y)]/3600)# x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
                 #df["Time0"]=np.arange(len(df)).astype(float)   
                 # plt.xlabel(th_pal)
                 # plt.legend(fontsize=10,loc="upper right")
