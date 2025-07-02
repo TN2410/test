@@ -125,7 +125,7 @@ if uploaded_files is not None:
                 
                 # axをfigureに設定
                 ax = fig.add_subplot(1, 1, 1, projection='3d')
-                ax.bar(x, y, 0, dx=0.4, dy=0.5 , dz=1 , color='blue')
+                ax.bar3d(x, y, 0, dx=0.4, dy=0.5 , dz=1 , shade=True)
                 #ax.scatter(1,1,0, dz=1,color='blue')
 
         st.pyplot(fig)
