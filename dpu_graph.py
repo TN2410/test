@@ -80,6 +80,7 @@ if uploaded_files is not None:
             df.columns = new_columns
             #df = df[sample_par]#同じカラム名にする必要あり
 
+
 #分割数　10として　3Dマップを作る
 
         for x in range(int(x_lower_bound),int(x_upper_bound),int((x_upper_bound-x_lower_bound)/10)):
@@ -98,10 +99,10 @@ if uploaded_files is not None:
 
     #st.write(dataframes)
     if dataframes:
-        #fig=plt.figure(figsize=(10, 6))
+        fig=plt.figure(figsize=(10, 6))
         # 各データフレームの表示を制御するボタンを作成
         sumall = 0
-        for filename, y_filtered_data in dataframes.items():
+        for filename, x,y in dataframes.items():
             # ボタンを作成（ファイル名をボタン名として使用）
             with st.sidebar:
                 show_data = st.checkbox("{} を表示".format(filename), value=True)
@@ -110,16 +111,16 @@ if uploaded_files is not None:
             # x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
                 #df["Time0"]=np.arange(len(df)).astype(float)
                 #st.line_chart(selected_data)    
-                sumall += len(y_filtered_data[1:])/3600
+                
+                st.write(filename,x,y)
+
                 # plt.xlabel(th_pal)
                 # plt.legend(fontsize=10,loc="upper right")
                 # plt.ylabel("Time(sec)")
-                x = [1,2,3,4,5,1,2,3,4,5]
-                y = [1,1,1,1,1,3,3,3,3,3]
-                z = [1,1,1,1,1,1,2,3,4,5]
+                # x = [1,2,3,4,5,1,2,3,4,5]
+                # y = [1,1,1,1,1,3,3,3,3,3]
+                # z = [1,1,1,1,1,1,2,3,4,5]
                 
-                # figureを生成
-                fig = plt.figure()
                 
                 # axをfigureに設定
                 ax1 = fig.add_subplot(2, 2, 1, projection='3d')
