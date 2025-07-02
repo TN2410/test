@@ -122,9 +122,11 @@ if uploaded_files is not None:
                 ax1.set_title("10")
 
                 ax1.set_title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,lower_bound,th_pal,upper_bound),fontsize="10")
-                ax2 = fig.add_subplot(2, 2, 3)
-                ax2.bar(y,z)
-                ax2.set_title("20")
-                ax3 = fig.add_subplot(2, 2, 4)
-                ax3.bar(x,z)
+                ax2.plot_surface(x,y,z)
+
+                x3 = fig.add_subplot(2, 2, 3)
+                ax3.bar(y,z)
+                ax3.set_title("20")
+                ax4 = fig.add_subplot(2, 2, 4)
+                ax4.bar(x,z)
         st.pyplot(fig)
