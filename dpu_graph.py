@@ -124,8 +124,9 @@ if uploaded_files is not None:
                 fig = plt.figure()
                 
                 # axをfigureに設定
-                ax = fig.add_subplot(1, 1, 1, projection='3d')
-                ax.bar3d(x, y, 0, dx=0.4, dy=0.5 , dz=z , shade=True)
-                #ax.scatter(1,1,0, dz=1,color='blue')
+                ax1 = fig.add_subplot(1, 2, 1, projection='3d')
+                ax1.bar3d(x, y, 0, dx=0.4, dy=0.5 , dz=z , shade=True)
+                ax2 = fig.add_subplot(1, 2, 2)
+                ax2.bar(y)
 
         st.pyplot(fig)
