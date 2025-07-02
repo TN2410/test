@@ -84,8 +84,8 @@ if uploaded_files is not None:
         x_query_string = f"{x_pal} >= @x_lower_bound & {x_pal} < @x_upper_bound"    
         y_query_string = f"{y_pal} >= @y_lower_bound & {y_pal} < @y_upper_bound"    
         
-        x_filtered_data = df.query(query_string)
-        y_filtered_data = x_filtered_data.query(query_string)
+        x_filtered_data = df.query(x_query_string)
+        y_filtered_data = x_filtered_data.query(y_query_string)
 
         dataframes[uploaded_file.name] = y_filtered_data
     #st.write(dataframes)
