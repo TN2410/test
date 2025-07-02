@@ -106,9 +106,9 @@ if uploaded_files is not None:
             if show_data:
                 if (x, y) not in total_counts:
                     total_counts[(x, y)] = 0
-                for (x,y) in dataframes.items():
+                for x,y in dataframes.items():
                     total_counts[(x, y)] + = dataframes[filename,x,y]  # 各ファイルのカウントを
-
+                    st.write(total_count)
             z = int(total_counts[(x,y)]/3600)# x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
                 #df["Time0"]=np.arange(len(df)).astype(float)   
                 # plt.xlabel(th_pal)
