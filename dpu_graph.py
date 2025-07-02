@@ -127,7 +127,7 @@ if uploaded_files is not None:
                 ax = fig.add_subplot(1, 1, 1, projection='3d')
                 
                 # axesにplot
-                ax.scatter(x, y, z, c='b')
+                ax.bar(x, y, z, c='b')
                 #ax.scatter(1,1,0, dz=1,color='blue')
 
         st.pyplot(fig)
