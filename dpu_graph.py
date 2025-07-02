@@ -55,7 +55,7 @@ if uploaded_files is not None:
         df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows , engine="python")
         if sample_columns == 5:
             df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
-            df = df[newlist]
+            df = df[sample_par]
             if "Time" in df.columns:#DPU限定処理
                 time_format = "%H:%M:%S.%f"
                 df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
@@ -71,7 +71,7 @@ if uploaded_files is not None:
                 new_columns.append(rep)
             df.columns = new_columns
             st.write(df.columns)
-            df = df[newlist]#同じカラム名にする必要あり
+            df = df[sample_par]#同じカラム名にする必要あり
         
         max_value = int(df[th_pal].max())
         min_value = int(df[th_pal].min())
