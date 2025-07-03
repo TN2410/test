@@ -118,7 +118,7 @@ if dataframes:
     st.write("累積データ:")
     # 3Dプロットを作成
     fig = plt.figure(figsize=(10, 6))
-    ax1 = fig.add_subplot(1,2,1, projection='3d')
+    ax = fig.add_subplot(1,2,1, projection='3d')
 
     x_values = []
     y_values = []
@@ -131,12 +131,12 @@ if dataframes:
             z_values.append(total_counts[x][y])
 
 
-    ax1.bar3d(x_values, y_values,0, dx=int(span_rpm/3),dy=int(span_kl/3),dz=z_values,shade=True)
-    ax1.set_xlabel(x_pal)
-    ax1.set_ylabel(y_pal)
-    ax1.set_zlabel('Count')
+    ax.bar3d(x_values, y_values,0, dx=int(span_rpm/3),dy=int(span_kl/3),dz=z_values,shade=True)
+    ax.set_xlabel(x_pal)
+    ax.set_ylabel(y_pal)
+    ax.set_zlabel('Count')
     sumall = sum(z_values)/3600
-    ax1.set_title("{:.3f}Hr".format(sumall),fontsize="10")
+    ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
     
     ax2 = fig.add_subplot(1,2,2)
     ax2.scatter(df[x_pal],df[y_pal])
