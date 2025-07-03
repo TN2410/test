@@ -81,7 +81,7 @@ if uploaded_files is not None:
             df.columns = new_columns
             #df = df[sample_par]#同じカラム名にする必要あり
 
-#分割数　10として　3Dマップを作る
+#分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
         z_sum = {}
         x_range = range(int(x_lower_bound), int(x_upper_bound), max(1, int((x_upper_bound - x_lower_bound) / 10)))
         y_range = range(int(y_lower_bound), int(y_upper_bound), max(1, int((y_upper_bound - y_lower_bound) / 10)))
@@ -135,6 +135,24 @@ if uploaded_files is not None:
         ax.set_zlabel('Count')
 
         st.pyplot(fig)
+
+     # ダウンロード用のデータを作成
+        download_data = []
+        for x in total_counts:
+            for y in total_counts[x]:
+                download_data.append([x, y, total_counts[x][y]])
+
+        # CSV形式でデータをダウンロード
+        csv_data = pd.DataFrame(download_data, columns=[x_pal, y_pal, 'Count'])
+        csv_buffer = csv_data.to_csv(index=False).encode('utf-8')
+
+        st.download_button(
+            label="元の数値データをダウンロード",
+            data=csv_buffer,
+            file_name='cumulative_data.csv',
+            mime='text/csv'
+        )
+         # 一時ファイルを作成してプロットを保存
         # z = int(total_counts[(x,y)]/3600)# x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
         # plt.legend(fontsize=10,loc="upper right")
         # ax1.set_title(f"Cumulative Time for {x_pal} and {y_pal}: {sumall:.3f} Hr")
