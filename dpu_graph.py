@@ -82,16 +82,17 @@ if uploaded_files is not None:
 
 #分割数　10として　3Dマップを作る
         z_sum = {}
-        for x in range(int(x_lower_bound),int(x_upper_bound),int((x_upper_bound-x_lower_bound)/10)):
+        x_range = range(int(x_lower_bound), int(x_upper_bound), max(1, int((x_upper_bound - x_lower_bound) / 10)))
+        for x in x_range:
             z_sum[x] = {}    
-            for y in range(int(y_lower_bound),int(y_upper_bound),int((y_upper_bound-y_lower_bound)/10)):
+            y_range = range(int(y_lower_bound), int(y_upper_bound), max(1, int((y_upper_bound - y_lower_bound) / 10)))
+            for y in y_range:
                 x_query_string = f"{x_pal} >= {x} & {x_pal} < {x + int((x_upper_bound-x_lower_bound)/10)}"
                 y_query_string = f"{y_pal} >= {y} & {y_pal} < {y + int((y_upper_bound-x_lower_bound)/10)}"
                 x_filtered_data = df.query(x_query_string)
                 y_filtered_data = x_filtered_data.query(y_query_string)
                 ####以下に記載できている？
                 st.write(len(y_filtered_data))
-                st.write(type(map_2d))
                 z_sum[x][y] = len(y_filtered_data)
 
         dataframes[uploaded_file.name] = z_sum
