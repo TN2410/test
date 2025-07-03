@@ -107,24 +107,13 @@ if dataframes:
                 mask_y = (df[y_pal] >= y) & (df[y_pal] < y + int((y_upper_bound - y_lower_bound) / 10))
                 filtered_data = df[mask_x & mask_y]
                 z_sum[x][y] = len(filtered_data)
+# z_sumを total_counts に追加
+        for x in z_sum:
+            if x not in total_counts:
+                total_counts[x] = {}
+            for y in z_sum[x]:
+                total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
 
-        dataframes[uploaded_file.name] = z_sum
-
-#各条件での累積時間マップを作成
-    #st.write(dataframes)
-    if dataframes:
-        total_counts = {}  # 全ファイルのデータを集約する辞書を初期化
-        for filename in dataframes.keys():
-            with st.sidebar:
-                show_data = st.checkbox(f"{filename} を表示", value=True)
-            if show_data:
-                # ファイルのデータを合計
-                z_sum = dataframes[filename]
-                for x in z_sum:
-                    if x not in total_counts:
-                        total_counts[x] = {}
-                    for y in z_sum[x]:
-                        total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
         # 合計結果を表示
         st.write("累積データ:")
         # 3Dプロットを作成
