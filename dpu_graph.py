@@ -84,18 +84,17 @@ if uploaded_files is not None:
 #分割数　10として　3Dマップを作る
         z_sum = {}
         x_range = range(int(x_lower_bound), int(x_upper_bound), max(1, int((x_upper_bound - x_lower_bound) / 10)))
+        y_range = range(int(y_lower_bound), int(y_upper_bound), max(1, int((y_upper_bound - y_lower_bound) / 10)))
         span_rpm = int((x_upper_bound - x_lower_bound) / 10)
+        span_kl = int((y_upper_bound - y_lower_bound) / 10)
         for x in x_range:
             z_sum[x] = {}    
-            y_range = range(int(y_lower_bound), int(y_upper_bound), max(1, int((y_upper_bound - y_lower_bound) / 10)))
-            span_kl = int((y_upper_bound - y_lower_bound) / 10)
             for y in y_range:
-                x_query_string = f"{x_pal} >= {x} & {x_pal} < {x + int((x_upper_bound-x_lower_bound)/10)}"
-                y_query_string = f"{y_pal} >= {y} & {y_pal} < {y + int((y_upper_bound-x_lower_bound)/10)}"
-                x_filtered_data = df.query(x_query_string)
-                y_filtered_data = x_filtered_data.query(y_query_string)
-                ####以下に記載できている？
-                z_sum[x][y] = len(y_filtered_data)
+                # NumPyを使用してフィルタリング
+                mask_x = (df[x_pal] >= x) & (df[x_pal] < x + int((x_upper_bound - x_lower_bound) / 10))
+                mask_y = (df[y_pal] >= y) & (df[y_pal] < y + int((y_upper_bound - y_lower_bound) / 10))
+                filtered_data = df[mask_x & mask_y]
+                z_sum[x][y] = len(filtered_data)
 
         dataframes[uploaded_file.name] = z_sum
 
@@ -113,10 +112,7 @@ if uploaded_files is not None:
                     if x not in total_counts:
                         total_counts[x] = {}
                     for y in z_sum[x]:
-                        if y not in total_counts[x]:
-                            total_counts[x][y] = 0
-                        total_counts[x][y] += z_sum[x][y]
-
+                        total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
         # 合計結果を表示
         st.write("累積データ:")
         # 3Dプロットを作成
