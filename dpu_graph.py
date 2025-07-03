@@ -30,6 +30,7 @@ if uploaded_files is not None:
         else:
             sample_columns = 5
             skiprows = 0
+        st.write(uploaded_file)
             
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 #グラフを書く前にsample_fに即した仮データベースファイルを使用したほうが、時間早いと思われる
