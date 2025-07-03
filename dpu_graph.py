@@ -72,6 +72,7 @@ if sample_f is not None:
 if dataframes:
     total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for filename,df in dataframes.items():
+        st.write(df.columns)
         if "Time" in df.columns and sample_columns == 5:
             df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
             time_format = "%H:%M:%S.%f"
