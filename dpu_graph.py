@@ -101,44 +101,50 @@ if uploaded_files is not None:
     if dataframes:
         total_counts = {}  # 全ファイルのデータを集約する辞書を初期化
         
-        fig=plt.figure(figsize=(10, 6))
-        # 各データフレームの表示を制御するボタンを作成
-
-        for filename in dataframes.items():
-            # ボタンを作成（ファイル名をボタン名として使用）
+        for filename in dataframes.keys():
             with st.sidebar:
-                show_data = st.checkbox("{} を表示".format(filename), value=True)
-            # ボタンが選択されている場合に散布図をプロット
-            # if show_data:
-            #     if filename,　(x, y) not in total_counts:
-            #         total_counts[(x, y)] = 0
-            #     #for x,y in range(5):
-            #         total_counts[(x, y)] + = dataframes[filename,x,y]  # 各ファイルのカウントを
-            #         st.write(total_count)
-            # z = int(total_counts[(x,y)]/3600)# x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
-                #df["Time0"]=np.arange(len(df)).astype(float)   
-                # plt.xlabel(th_pal)
-                # plt.legend(fontsize=10,loc="upper right")
-                # plt.ylabel("Time(sec)")    
-                # axをfigureに設定
+                show_data = st.checkbox(f"{filename} を表示", value=True)
+            if show_data:
+                # ファイルのデータを合計
+                z_sum = dataframes[filename]
+                for x in z_sum:
+                    if x not in total_counts:
+                        total_counts[x] = {}
+                    for y in z_sum[x]:
+                        if y not in total_counts[x]:
+                            total_counts[x][y] = 0
+                        total_counts[x][y] += z_sum[x][y]
 
-        # 3Dグラフ用のデータを準備
-        x_positions = []
-        y_positions = []
+        # 合計結果を表示
+        st.write("累積データ:")
+        st.write(total_counts)
+
+        # 3Dプロットを作成
+        fig = plt.figure(figsize=(10, 6))
+        ax = fig.add_subplot(111, projection='3d')
+
+        x_values = []
+        y_values = []
         z_values = []
 
-        for (x, y), z in total_counts.items():
-            x_positions.append(x)
-            y_positions.append(y)
-            z_values.append(z)
+        for x in total_counts:
+            for y in total_counts[x]:
+                x_values.append(x)
+                y_values.append(y)
+                z_values.append(total_counts[x][y])
 
-        # 3Dバーグラフの描画
-        ax1 = fig.add_subplot(1, 1, 1, projection='3d')
-        ax1.bar3d(x_positions, y_positions, [0] * len(z_values), dx=0.4, dy=0.4, dz=z_values, shade=True)
-        ax1.set_title(f"Cumulative Time for {x_pal} and {y_pal}: {sumall:.3f} Hr")
-        ax1.set_xlabel(x_pal)
-        ax1.set_ylabel(y_pal)
-        ax1.set_zlabel("Count")
+        ax.scatter(x_values, y_values, z_values)
+        ax.set_xlabel(x_pal)
+        ax.set_ylabel(y_pal)
+        ax.set_zlabel('Count')
+
+        st.pyplot(fig)
+        # z = int(total_counts[(x,y)]/3600)# x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
+        # plt.legend(fontsize=10,loc="upper right")
+        # axをfigureに設定
+
+        # ax1.bar3d(x_positions, y_positions, [0] * len(z_values), dx=0.4, dy=0.4, dz=z_values, shade=True)
+        # ax1.set_title(f"Cumulative Time for {x_pal} and {y_pal}: {sumall:.3f} Hr")
                 # ax1 = fig.add_subplot(2, 2, 1, projection='3d')
                 # ax1.bar3d(x, y, 0, dx=0.4, dy=0.5 , dz=z , shade=True)
                 # ax1.set_title("10")
@@ -153,5 +159,3 @@ if uploaded_files is not None:
 
                 # ax4 = fig.add_subplot(2, 2, 4)
                 # ax4.bar(x,z)
-
-        st.pyplot(fig)
