@@ -83,9 +83,11 @@ if uploaded_files is not None:
 #分割数　10として　3Dマップを作る
         z_sum = {}
         x_range = range(int(x_lower_bound), int(x_upper_bound), max(1, int((x_upper_bound - x_lower_bound) / 10)))
+        span_rpm = int((x_upper_bound - x_lower_bound) / 10)
         for x in x_range:
             z_sum[x] = {}    
             y_range = range(int(y_lower_bound), int(y_upper_bound), max(1, int((y_upper_bound - y_lower_bound) / 10)))
+            span_kl = int((y_upper_bound - y_lower_bound) / 10)
             for y in y_range:
                 x_query_string = f"{x_pal} >= {x} & {x_pal} < {x + int((x_upper_bound-x_lower_bound)/10)}"
                 y_query_string = f"{y_pal} >= {y} & {y_pal} < {y + int((y_upper_bound-x_lower_bound)/10)}"
@@ -100,7 +102,6 @@ if uploaded_files is not None:
     #st.write(dataframes)
     if dataframes:
         total_counts = {}  # 全ファイルのデータを集約する辞書を初期化
-        
         for filename in dataframes.keys():
             with st.sidebar:
                 show_data = st.checkbox(f"{filename} を表示", value=True)
@@ -117,8 +118,6 @@ if uploaded_files is not None:
 
         # 合計結果を表示
         st.write("累積データ:")
-        st.write(total_counts)
-
         # 3Dプロットを作成
         fig = plt.figure(figsize=(10, 6))
         ax = fig.add_subplot(111, projection='3d')
@@ -133,7 +132,7 @@ if uploaded_files is not None:
                 y_values.append(y)
                 z_values.append(total_counts[x][y])
 
-        ax.scatter(x_values, y_values, z_values)
+        ax.bar3d(x_values, y_values,0, dx=int(span_rpm/3),dy=int(span_kl/3),dz=z_values,shade=True)
         ax.set_xlabel(x_pal)
         ax.set_ylabel(y_pal)
         ax.set_zlabel('Count')
@@ -141,13 +140,7 @@ if uploaded_files is not None:
         st.pyplot(fig)
         # z = int(total_counts[(x,y)]/3600)# x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
         # plt.legend(fontsize=10,loc="upper right")
-        # axをfigureに設定
-
-        # ax1.bar3d(x_positions, y_positions, [0] * len(z_values), dx=0.4, dy=0.4, dz=z_values, shade=True)
         # ax1.set_title(f"Cumulative Time for {x_pal} and {y_pal}: {sumall:.3f} Hr")
-                # ax1 = fig.add_subplot(2, 2, 1, projection='3d')
-                # ax1.bar3d(x, y, 0, dx=0.4, dy=0.5 , dz=z , shade=True)
-                # ax1.set_title("10")
                 # ax1.set_title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,x_lower_bound,y_pal,x_upper_bound),fontsize="10")
                 
                 # # ax2 = fig.add_subplot(2,2,2)
