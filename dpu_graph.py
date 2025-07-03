@@ -16,6 +16,11 @@ st.set_page_config(
     layout="wide", 
     initial_sidebar_state="auto")
 st.title("windarab or dpu データ表示")
+
+@st.cache_data
+def load_uploaded_file(uploaded_file, skiprows):
+    return pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
+
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True 
                                  )
 specific_string = "windarab"  # ここに検索したい文字を設定
