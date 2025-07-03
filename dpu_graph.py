@@ -91,7 +91,7 @@ if uploaded_files is not None:
                 y_filtered_data = x_filtered_data.query(y_query_string)
                 ####以下に記載できている？
                 
-                map_2d[x,y] = len(y_filtered_data)
+                map_2d[x][y] = len(y_filtered_data)
 
         dataframes[uploaded_file.name] = map_2d
 
