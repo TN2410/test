@@ -106,6 +106,7 @@ if dataframes:
                 mask_y = (df[y_pal] >= y) & (df[y_pal] < y + int((y_upper_bound - y_lower_bound) / 10))
                 filtered_data = df[mask_x & mask_y]
                 z_sum[x][y] = len(filtered_data)
+
 # z_sumを total_counts に追加
         for x in z_sum:
             if x not in total_counts:
@@ -113,45 +114,45 @@ if dataframes:
             for y in z_sum[x]:
                 total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
 
-        # 合計結果を表示
-        st.write("累積データ:")
-        # 3Dプロットを作成
-        fig = plt.figure(figsize=(10, 6))
-        ax = fig.add_subplot(111, projection='3d')
+    # 合計結果を表示
+    st.write("累積データ:")
+    # 3Dプロットを作成
+    fig = plt.figure(figsize=(10, 6))
+    ax = fig.add_subplot(111, projection='3d')
 
-        x_values = []
-        y_values = []
-        z_values = []
+    x_values = []
+    y_values = []
+    z_values = []
 
-        for x in total_counts:
-            for y in total_counts[x]:
-                x_values.append(x)
-                y_values.append(y)
-                z_values.append(total_counts[x][y])
+    for x in total_counts:
+        for y in total_counts[x]:
+            x_values.append(x)
+            y_values.append(y)
+            z_values.append(total_counts[x][y])
 
-        ax.bar3d(x_values, y_values,0, dx=int(span_rpm/3),dy=int(span_kl/3),dz=z_values,shade=True)
-        ax.set_xlabel(x_pal)
-        ax.set_ylabel(y_pal)
-        ax.set_zlabel('Count')
-        sumall = int(sum(z_values)/3600)
-        ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
-        st.pyplot(fig)
+    ax.bar3d(x_values, y_values,0, dx=int(span_rpm/3),dy=int(span_kl/3),dz=z_values,shade=True)
+    ax.set_xlabel(x_pal)
+    ax.set_ylabel(y_pal)
+    ax.set_zlabel('Count')
+    sumall = int(sum(z_values)/3600)
+    ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
+    st.pyplot(fig)
 
-     # ダウンロード用のデータを作成
-        download_data = []
-        for x in total_counts:
-            for y in total_counts[x]:
-                download_data.app
-        # CSV形式でデータをダウンロード
-        csv_data = pd.DataFrame(download_data, columns=[x_pal, y_pal, 'Count'])
-        csv_buffer = csv_data.to_csv(index=False).encode('utf-8')
+    # ダウンロード用のデータを作成
+    download_data = []
+    for x in total_counts:
+        for y in total_counts[x]:
+            download_data.app
+    # CSV形式でデータをダウンロード
+    csv_data = pd.DataFrame(download_data, columns=[x_pal, y_pal, 'Count'])
+    csv_buffer = csv_data.to_csv(index=False).encode('utf-8')
 
-        st.download_button(
-            label="元の数値データをダウンロード",
-            data=csv_buffer,
-            file_name='cumulative_data.csv',
-            mime='text/csv'
-        )
+    st.download_button(
+        label="元の数値データをダウンロード",
+        data=csv_buffer,
+        file_name='cumulative_data.csv',
+        mime='text/csv'
+    )
          # 一時ファイルを作成してプロットを保存
         # plt.legend(fontsize=10,loc="upper right")
         # ax1.set_title(f"Cumulative Time for {x_pal} and {y_pal}: {sumall:.3f} Hr")
