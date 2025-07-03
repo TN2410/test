@@ -20,6 +20,8 @@ uploaded_files = st.file_uploader("txtファイルをアップロードしてく
                                  )
 specific_string = "windarab"  # ここに検索したい文字を設定
 if uploaded_files is not None:
+    sample_columns, skiprows = None, None
+    dataframes = {}
     for uploaded_file in uploaded_files:
        #ファイルを簡易的に読み込んでwindarabデータを　5行削除する
         initial_lines = pd.read_csv(uploaded_file, nrows=2)
@@ -31,7 +33,10 @@ if uploaded_files is not None:
         else:
             sample_columns = 5
             skiprows = 0
-            
+
+        df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows , engine="python")
+        dataframes[uploaded_file.name] = df
+
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 #グラフを書く前にsample_fに即した仮データベースファイルを使用したほうが、時間早いと思われる
 if sample_f is not None:
@@ -59,19 +64,16 @@ if sample_f is not None:
 
 #データを読み込みグラフを作成す
 #まず、サンプルファイルのみ抽出しデータを作成する　その後、表示パラメータ、上下限よりグラフ作成する
-if uploaded_files is not None:
-    dataframes = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
-    for uploaded_file in uploaded_files:
-        df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows , engine="python")
-        if sample_columns == 5:
+if dataframes:
+    total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
+    for filename,df in dataframes.items():
+        if "Time" in df.columns and sample_columns == 5:
             df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
-            #df = df[sample_par]
-            if "Time" in df.columns:#DPU限定処理
-                time_format = "%H:%M:%S.%f"
-                df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
-                init_time = df["Time"].iloc[0]
-                df["Time"] = [(time - init_time).seconds for time in df["Time"]]
-                df = df.apply(pd.to_numeric, errors='coerce')
+            time_format = "%H:%M:%S.%f"
+            df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
+            init_time = df["Time"].iloc[0]
+            df["Time"] = [(time - init_time).seconds for time in df["Time"]]
+            df = df.apply(pd.to_numeric, errors='coerce')
         else:#windarabはカラム名調整
             new_columns=[]
             for rep in df.columns:
