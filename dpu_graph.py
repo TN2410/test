@@ -81,9 +81,9 @@ if uploaded_files is not None:
             #df = df[sample_par]#同じカラム名にする必要あり
 
 #分割数　10として　3Dマップを作る
-        st.write(uploaded_file.name)
-        map_2d=[]
+        z_sum = {}
         for x in range(int(x_lower_bound),int(x_upper_bound),int((x_upper_bound-x_lower_bound)/10)):
+            z_sum[x] = {}    
             for y in range(int(y_lower_bound),int(y_upper_bound),int((y_upper_bound-y_lower_bound)/10)):
                 x_query_string = f"{x_pal} >= {x} & {x_pal} < {x + int((x_upper_bound-x_lower_bound)/10)}"
                 y_query_string = f"{y_pal} >= {y} & {y_pal} < {y + int((y_upper_bound-x_lower_bound)/10)}"
@@ -92,9 +92,9 @@ if uploaded_files is not None:
                 ####以下に記載できている？
                 st.write(len(y_filtered_data))
                 st.write(type(map_2d))
-                map_2d[x][y] = len(y_filtered_data)
+                z_sum[x][y] = len(y_filtered_data)
 
-        dataframes[uploaded_file.name] = map_2d
+        dataframes[uploaded_file.name] = z_sum
 
 #各条件での累積時間マップを作成
     #st.write(dataframes)
