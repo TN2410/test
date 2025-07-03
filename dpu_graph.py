@@ -118,7 +118,7 @@ if dataframes:
     st.write("累積データ:")
     # 3Dプロットを作成
     fig = plt.figure(figsize=(10, 6))
-    ax = fig.add_subplot(111, projection='3d')
+    ax1 = fig.add_subplot(1,1,2, projection='3d')
 
     x_values = []
     y_values = []
@@ -130,8 +130,6 @@ if dataframes:
             y_values.append(y)
             z_values.append(total_counts[x][y])
 
-
-    ax1 = fig.add_subplot(1,2,1)
 
     ax1.bar3d(x_values, y_values,0, dx=int(span_rpm/3),dy=int(span_kl/3),dz=z_values,shade=True)
     ax1.set_xlabel(x_pal)
@@ -162,12 +160,9 @@ if dataframes:
     )
          # 一時ファイルを作成してプロットを保存
         # plt.legend(fontsize=10,loc="upper right")
-        # ax1.set_title(f"Cumulative Time for {x_pal} and {y_pal}: {sumall:.3f} Hr")
-                
                 
                 # # ax2 = fig.add_subplot(2,2,2)
                 # ax3 = fig.add_subplot(2, 2, 3)
-                # ax3.bar(y,z)
                 # ax3.set_title("30")
                 # ax4 = fig.add_subplot(2, 2, 4)
                 # ax4.bar(x,z)
