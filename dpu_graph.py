@@ -130,12 +130,19 @@ if dataframes:
             y_values.append(y)
             z_values.append(total_counts[x][y])
 
-    ax.bar3d(x_values, y_values,0, dx=int(span_rpm/3),dy=int(span_kl/3),dz=z_values,shade=True)
-    ax.set_xlabel(x_pal)
-    ax.set_ylabel(y_pal)
-    ax.set_zlabel('Count')
+
+    ax1 = fig.add_subplot(1,2,1)
+
+    ax1.bar3d(x_values, y_values,0, dx=int(span_rpm/3),dy=int(span_kl/3),dz=z_values,shade=True)
+    ax1.set_xlabel(x_pal)
+    ax1.set_ylabel(y_pal)
+    ax1.set_zlabel('Count')
     sumall = sum(z_values)/3600
-    ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
+    ax1.set_title("{:.3f}Hr".format(sumall),fontsize="10")
+    
+    ax2 = fig.add_subplot(1,2,2)
+    ax2.scatter(df[x_pal],df[y_pal])
+    
     st.pyplot(fig)
 
     # ダウンロード用のデータを作成
@@ -159,11 +166,8 @@ if dataframes:
                 
                 
                 # # ax2 = fig.add_subplot(2,2,2)
-                # # ax2.plot_surface(x, y, z, cmap=cm.coolwarm,linewidth=0, antialiased=False)
-
                 # ax3 = fig.add_subplot(2, 2, 3)
                 # ax3.bar(y,z)
                 # ax3.set_title("30")
-
                 # ax4 = fig.add_subplot(2, 2, 4)
                 # ax4.bar(x,z)
