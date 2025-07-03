@@ -134,7 +134,7 @@ if dataframes:
     ax.set_xlabel(x_pal)
     ax.set_ylabel(y_pal)
     ax.set_zlabel('Count')
-    sumall = int(sum(z_values)/3600)
+    sumall = sum(z_values)/3600
     ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
     st.pyplot(fig)
 
@@ -142,7 +142,7 @@ if dataframes:
     download_data = []
     for x in total_counts:
         for y in total_counts[x]:
-            download_data.app
+            download_data.append([x, y, total_counts[x][y]])
     # CSV形式でデータをダウンロード
     csv_data = pd.DataFrame(download_data, columns=[x_pal, y_pal, 'Count'])
     csv_buffer = csv_data.to_csv(index=False).encode('utf-8')
