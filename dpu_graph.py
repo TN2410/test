@@ -4,6 +4,7 @@
 import os,time,gc,math,glob
 import streamlit as st
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
 import re
@@ -70,7 +71,7 @@ if uploaded_files is not None:
                 df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
                 init_time = df["Time"].iloc[0]
                 df["Time"] = [(time - init_time).seconds for time in df["Time"]]
-                df = df.apply(pd.to_numeric)
+                df = df.apply(pd.to_numeric, errors='coerce')
         else:#windarabはカラム名調整
             new_columns=[]
             for rep in df.columns:
