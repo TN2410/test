@@ -145,7 +145,7 @@ if dataframes:
         ax.set_xlabel(x_pal)
         ax.set_ylabel(y_pal)
         ax.set_zlabel('Count')
-        sumall = int(z_values.sum()/3600)
+        sumall = int(sum(z_values)/3600)
         ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
         st.pyplot(fig)
 
