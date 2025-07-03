@@ -72,7 +72,6 @@ if sample_f is not None:
 if dataframes:
     total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     for filename, df in dataframes.items():
-        st.write(df)
         # DataFrameが空でないことを確認
         if df.empty:
             st.warning(f"{filename} は空のファイルです。")
