@@ -135,15 +135,15 @@ if dataframes:
         ax.set_xlabel(x_pal)
         ax.set_ylabel(y_pal)
         ax.set_zlabel('Count')
-
+        sumall = int(z_values.sum()/3600)
+        ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
         st.pyplot(fig)
 
      # ダウンロード用のデータを作成
         download_data = []
         for x in total_counts:
             for y in total_counts[x]:
-                download_data.append([x, y, total_counts[x][y]])
-
+                download_data.app
         # CSV形式でデータをダウンロード
         csv_data = pd.DataFrame(download_data, columns=[x_pal, y_pal, 'Count'])
         csv_buffer = csv_data.to_csv(index=False).encode('utf-8')
@@ -155,10 +155,9 @@ if dataframes:
             mime='text/csv'
         )
          # 一時ファイルを作成してプロットを保存
-        # z = int(total_counts[(x,y)]/3600)# x列とy列を指定（ここでは仮に 'x' と 'y' 列を使用）
         # plt.legend(fontsize=10,loc="upper right")
         # ax1.set_title(f"Cumulative Time for {x_pal} and {y_pal}: {sumall:.3f} Hr")
-                # ax1.set_title("{}_{:.3f}Hr_{}=<{}<{}".format(y_pal,sumall,x_lower_bound,y_pal,x_upper_bound),fontsize="10")
+                
                 
                 # # ax2 = fig.add_subplot(2,2,2)
                 # # ax2.plot_surface(x, y, z, cmap=cm.coolwarm,linewidth=0, antialiased=False)
