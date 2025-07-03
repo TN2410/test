@@ -118,7 +118,7 @@ if dataframes:
     st.write("累積データ:")
     # 3Dプロットを作成
     fig = plt.figure(figsize=(10, 6))
-    ax1 = fig.add_subplot(112, projection='3d')
+    ax1 = fig.add_subplot(1,2,1, projection='3d')
 
     x_values = []
     y_values = []
