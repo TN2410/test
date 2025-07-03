@@ -30,7 +30,6 @@ if uploaded_files is not None:
         else:
             sample_columns = 5
             skiprows = 0
-        st.write(uploaded_file.name)
             
 sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 #グラフを書く前にsample_fに即した仮データベースファイルを使用したほうが、時間早いと思われる
@@ -90,7 +89,7 @@ if uploaded_files is not None:
                 x_filtered_data = df.query(x_query_string)
                 y_filtered_data = x_filtered_data.query(y_query_string)
                 ####以下に記載できている？
-                dataframes[uploaded_file][x,y] = len(y_filtered_data)
+                dataframes[uploaded_file.name][(x,y)] = len(y_filtered_data)
                 st.write(dataframes)
 
 #各条件での累積時間マップを作成
