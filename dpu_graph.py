@@ -71,7 +71,12 @@ if sample_f is not None:
 #まず、サンプルファイルのみ抽出しデータを作成する　その後、表示パラメータ、上下限よりグラフ作成する
 if dataframes:
     total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
-    for filename,df in dataframes.items():
+    
+    for filename, df in dataframes.items():
+        # DataFrameが空でないことを確認
+        if df.empty:
+            st.warning(f"{filename} は空のファイルです。")
+            continue    
         if "Time" in df.columns and sample_columns == 5:
             df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
             time_format = "%H:%M:%S.%f"
