@@ -144,11 +144,12 @@ if dataframes:
     ax.set_xlabel(x_pal)
     ax.set_ylabel(y_pal)
     ax.set_zlabel("time(sec)")
-    ax.set_zlabel('Count')
     sumall = sum(z_values)/3600
     ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
 
     ax2.legend(bbox_to_anchor=(0, 1,50,50),loc = "lower left",fontsize = "large")
+    ax2.set_xlabel(x_pal)
+    ax2.set_ylabel(y_pal)
     
     st.pyplot(fig)
 
