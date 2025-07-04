@@ -76,10 +76,10 @@ if dataframes:
     #データ積算とグラフを作成する
     st.write("累積データ:")
     fig = plt.figure(figsize=(10, 6)) 
-    gs = GridSpec(5, 5, figure=fig) 
+    gs = GridSpec(10, 10, figure=fig) 
     # 上段を横一列に使用
     ax = fig.add_subplot(gs[ : , : ], projection='3d' )
-    ax2 = fig.add_subplot(gs[ 4 , 4])
+    ax2 = fig.add_subplot(gs[ 9: , 9:])
     z_sum = {}#チェックボックスにチェックが入っている場合の)#チェックボックスにチェックが入っている場合のみプロットする
     z_sum = {}#チェックボックスにチェックが入っている場合のみ計算する
     for filename, df in dataframes.items():
