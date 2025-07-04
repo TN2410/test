@@ -108,13 +108,15 @@ if dataframes:
             ax2.scatter(df[x_pal],df[y_pal],s = 3) 
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
             
-            x_span = int(x_upper_bound - x_lower_bound)
-            y_span = int(y_upper_bound - y_lower_bound)    
+            div_num = 20
+
+            x_span = int((x_upper_bound - x_lower_bound)/div_num)
+            y_span = int((y_upper_bound - y_lower_bound)/div_num)    
             
-            for xx in range(20):
+            for xx in range(div_num):
                 x = xx * x_span + int(x_lower_bound)
                 z_sum[x] = {}    
-                for yy in range(20):
+                for yy in range(div_num):
                     y = yy * y_span + int(y_lower_bound)
                     # NumPyを使用してフィルタリング
                     mask_x = (df[x_pal] >= x) & (df[x_pal] < x + int((x_upper_bound - x_lower_bound) / 10))
