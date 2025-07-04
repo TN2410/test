@@ -64,6 +64,8 @@ if sample_f is not None:
         #ここでデータを読んで上下限を設定したい
         if x_pal == "NE" or x_pal == "nmot": 
             max_x_value = 8000
+        else:
+            max_x_value = 100
         x_lower_bound = st.number_input('xの下限値と',step=1)
         x_upper_bound = st.number_input('xの上限値を入力してください', value = max_x_value , step=10) 
         
