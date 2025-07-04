@@ -59,7 +59,7 @@ if sample_f is not None:
     sample_par = sample_2
 
     with st.sidebar:
-        x_pal=st.selectbox('x列を選択してください', sample_par)
+        x_pal=st.selectbox('x列を選択してください', sample_par,default="n")
         st.write(x_pal,"の")
         #ここでデータを読んで上下限を設定したい
         x_lower_bound = st.number_input('xの下限値と',step=1)
