@@ -143,20 +143,20 @@ if dataframes:
         
         st.pyplot(fig)
 
-        # ダウンロード用のデータを作成
-        download_data = []
-        for x in total_counts:
-            for y in total_counts[x]:
-                download_data.append([x, y, total_counts[x][y]])
-        # CSV形式でデータをダウンロード
-        csv_data = pd.DataFrame(download_data, columns=[x_pal, y_pal, 'Count'])
-        csv_buffer = csv_data.to_csv(index=False).encode('utf-8')
+    # ダウンロード用のデータを作成
+    download_data = []
+    for x in total_counts:
+        for y in total_counts[x]:
+            download_data.append([x, y, total_counts[x][y]])
+    # CSV形式でデータをダウンロード
+    csv_data = pd.DataFrame(download_data, columns=[x_pal, y_pal, 'Count'])
+    csv_buffer = csv_data.to_csv(index=False).encode('utf-8')
 
-        st.download_button(
-            label="元の数値データをダウンロード",
-            data=csv_buffer,
-            file_name='cumulative_data.csv',
-            mime='text/csv'
-        )
-            # 一時ファイルを作成してプロットを保存
-            # plt.legend(fontsize=10,loc="upper right")
+    st.download_button(
+        label="元の数値データをダウンロード",
+        data=csv_buffer,
+        file_name='cumulative_data.csv',
+        mime='text/csv'
+    )
+        # 一時ファイルを作成してプロットを保存
+        # plt.legend(fontsize=10,loc="upper right")
