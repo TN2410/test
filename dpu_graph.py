@@ -111,10 +111,10 @@ if dataframes:
             x_span = int(x_upper_bound - x_lower_bound)
             y_span = int(y_upper_bound - y_lower_bound)    
             
-            for xx in 20:
+            for xx in range(20):
                 x = xx * x_span + int(x_lower_bound)
                 z_sum[x] = {}    
-                for yy in 20:
+                for yy in range(20):
                     y = yy * y_span + int(y_lower_bound)
                     # NumPyを使用してフィルタリング
                     mask_x = (df[x_pal] >= x) & (df[x_pal] < x + int((x_upper_bound - x_lower_bound) / 10))
