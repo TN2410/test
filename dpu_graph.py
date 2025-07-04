@@ -10,6 +10,8 @@ from datetime import datetime
 import re
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.gridspec import GridSpec
+import plotly.express as px
+
 
 
 # windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
@@ -81,7 +83,6 @@ if dataframes:
     ax = fig.add_subplot(gs[ :9 , :9 ], projection='3d' )
     ax2 = fig.add_subplot(gs[ 7: , 7:])
     z_sum = {}#チェックボックスにチェックが入っている場合の)#チェックボックスにチェックが入っている場合のみプロットする
-    z_sum = {}#チェックボックスにチェックが入っている場合のみ計算する
     for filename, df in dataframes.items():
         with st.sidebar:
             show_data = st.checkbox("{} を表示".format(filename), value=True)        
@@ -169,3 +170,22 @@ if dataframes:
         file_name='cumulative_data.csv',
         mime='text/csv'
     )
+
+
+    # データロード
+    df = px.data.iris()
+
+    # 3D散布図としてデータ準備
+    fig = px.scatter_3d(
+        1,1,1,
+        x="sepal_length",
+        y="sepal_width",
+        z="petal_width",
+        color="species",
+    )
+    # グラフレイアウト設定
+    fig.update_layout(title="3D Point Cloud", width=500, height=500)
+    # マーカーサイズ設定
+    fig.update_traces(marker_size=2)
+    # グラフ表示
+    st.plotly_chart(fig, use_container_width=True)
