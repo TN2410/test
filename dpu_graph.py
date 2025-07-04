@@ -144,7 +144,7 @@ if dataframes:
     sumall = sum(z_values)/3600
     ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
 
-    ax2.legend(bbox_to_anchor=(1.05, 1.0),loc="upper right")
+    ax2.legend(bbox_to_anchor=(1.0, 1.2),loc="upper right")
     
     st.pyplot(fig)
 
