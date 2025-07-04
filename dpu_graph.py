@@ -140,9 +140,10 @@ if dataframes:
             y_values.append(y)
             z_values.append(total_counts[x][y])
 
-    ax.bar3d(x_values, y_values,0, dx=int(x_span/3),dy=int(y_span/3),dz=z_values/3600,shade=True)
+    ax.bar3d(x_values, y_values,0, dx=int(x_span/3),dy=int(y_span/3),dz=z_values,shade=True)
     ax.set_xlabel(x_pal)
     ax.set_ylabel(y_pal)
+    ax.set_zlabel("time(sec)")
     ax.set_zlabel('Count')
     sumall = sum(z_values)/3600
     ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
