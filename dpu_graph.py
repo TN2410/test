@@ -67,96 +67,101 @@ if sample_f is not None:
         y_lower_bound = st.number_input('yの下限値と',step=1)
         y_upper_bound = st.number_input('yの上限値を入力してください',value=200,step=10) 
 
-#データを読み込みグラフを作成す
-#まず、サンプルファイルのみ抽出しデータを作成する　その後、表示パラメータ、上下限よりグラフ作成する
+#データフレームを読み込み累積時間を計算する
 if dataframes:
     total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
-    for filename, df in dataframes.items():
-        # DataFrameが空でないことを確認
-        if df.empty:
-            st.warning(f"{filename} は空のファイルです。")
-            continue    
-        if "Time" in df.columns and sample_columns == 5:
-            df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
-            time_format = "%H:%M:%S.%f"
-            df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
-            init_time = df["Time"].iloc[0]
-            df["Time"] = [(time - init_time).seconds for time in df["Time"]]
-            df = df.apply(pd.to_numeric, errors='coerce')
-        else:#windarabはカラム名調整
-            new_columns=[]
-            for rep in df.columns:
-                rep = rep[:rep.find("[")]
-                rep = rep.replace(" ","")
-                new_columns.append(rep)
-            df.columns = new_columns
-            #df = df[sample_par]#同じカラム名にする必要あり
-
-#分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
-        z_sum = {}
-        x_range = range(int(x_lower_bound), int(x_upper_bound), max(1, int((x_upper_bound - x_lower_bound) / 10)))
-        y_range = range(int(y_lower_bound), int(y_upper_bound), max(1, int((y_upper_bound - y_lower_bound) / 10)))
-        span_rpm = int((x_upper_bound - x_lower_bound) / 10)
-        span_kl = int((y_upper_bound - y_lower_bound) / 10)
-        for x in x_range:
-            z_sum[x] = {}    
-            for y in y_range:
-                # NumPyを使用してフィルタリング
-                mask_x = (df[x_pal] >= x) & (df[x_pal] < x + int((x_upper_bound - x_lower_bound) / 10))
-                mask_y = (df[y_pal] >= y) & (df[y_pal] < y + int((y_upper_bound - y_lower_bound) / 10))
-                filtered_data = df[mask_x & mask_y]
-                z_sum[x][y] = len(filtered_data)
-
-        # z_sumを total_counts に追加
-        for x in z_sum:
-            if x not in total_counts:
-                total_counts[x] = {}
-            for y in z_sum[x]:
-                total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
-
-    # 合計結果を表示
-    st.write("累積データ:")
-    # 3Dプロットを作成
-    fig = plt.figure(figsize=(10, 6))
-    ax = fig.add_subplot(1,2,1, projection='3d')
-
-    x_values = []
-    y_values = []
-    z_values = []
-
-    for x in total_counts:
-        for y in total_counts[x]:
-            x_values.append(x)
-            y_values.append(y)
-            z_values.append(total_counts[x][y])
-
-    ax.bar3d(x_values, y_values,0, dx=int(span_rpm/3),dy=int(span_kl/3),dz=z_values,shade=True)
-    ax.set_xlabel(x_pal)
-    ax.set_ylabel(y_pal)
-    ax.set_zlabel('Count')
-    sumall = sum(z_values)/3600
-    ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
     
-    ax2 = fig.add_subplot(1,2,2)
-    for filename, df in dataframes.items():
-        ax2.scatter(df[x_pal],df[y_pal])
+    ################ここでチェックボックスをいれることで以降の処理を実施する
     
-    st.pyplot(fig)
+    for filename, df in dataframes.items():
+        with st.sidebar:
+            show_data = st.checkbox("{} を表示".format(filename), value=True)
+            # ボタンが選択されている場合に散布図をプロット
+        if show_data:# DataFrameが空でないことを確認
+            if df.empty:
+                st.warning(f"{filename} は空のファイルです。")
+                continue    
+            if "Time" in df.columns and sample_columns == 5:
+                df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
+                time_format = "%H:%M:%S.%f"
+                df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
+                init_time = df["Time"].iloc[0]
+                df["Time"] = [(time - init_time).seconds for time in df["Time"]]
+                df = df.apply(pd.to_numeric, errors='coerce')
+            else:#windarabはカラム名調整
+                new_columns=[]
+                for rep in df.columns:
+                    rep = rep[:rep.find("[")]
+                    rep = rep.replace(" ","")
+                    new_columns.append(rep)
+                df.columns = new_columns
+                #df = df[sample_par]#同じカラム名にする必要あり
 
-    # ダウンロード用のデータを作成
-    download_data = []
-    for x in total_counts:
-        for y in total_counts[x]:
-            download_data.append([x, y, total_counts[x][y]])
-    # CSV形式でデータをダウンロード
-    csv_data = pd.DataFrame(download_data, columns=[x_pal, y_pal, 'Count'])
-    csv_buffer = csv_data.to_csv(index=False).encode('utf-8')
+    #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
+            z_sum = {}
+            x_range = range(int(x_lower_bound), int(x_upper_bound), max(1, int((x_upper_bound - x_lower_bound) / 10)))
+            y_range = range(int(y_lower_bound), int(y_upper_bound), max(1, int((y_upper_bound - y_lower_bound) / 10)))
+            span_rpm = int((x_upper_bound - x_lower_bound) / 10)
+            span_kl = int((y_upper_bound - y_lower_bound) / 10)
+            for x in x_range:
+                z_sum[x] = {}    
+                for y in y_range:
+                    # NumPyを使用してフィルタリング
+                    mask_x = (df[x_pal] >= x) & (df[x_pal] < x + int((x_upper_bound - x_lower_bound) / 10))
+                    mask_y = (df[y_pal] >= y) & (df[y_pal] < y + int((y_upper_bound - y_lower_bound) / 10))
+                    filtered_data = df[mask_x & mask_y]
+                    z_sum[x][y] = len(filtered_data)
 
-    st.download_button(
-        label="元の数値データをダウンロード",
-        data=csv_buffer,
-        file_name='cumulative_data.csv',
-        mime='text/csv'
-    )
-        # 一時ファイルを作成してプロットを保存
-        # plt.legend(fontsize=10,loc="upper right")
+            # z_sumを total_counts に追加
+            for x in z_sum:
+                if x not in total_counts:
+                    total_counts[x] = {}
+                for y in z_sum[x]:
+                    total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
+
+        # 合計結果を表示
+        st.write("累積データ:")
+        # 3Dプロットを作成
+        fig = plt.figure(figsize=(10, 6))
+        ax = fig.add_subplot(1,2,1, projection='3d')
+
+        x_values = []
+        y_values = []
+        z_values = []
+
+        for x in total_counts:
+            for y in total_counts[x]:
+                x_values.append(x)
+                y_values.append(y)
+                z_values.append(total_counts[x][y])
+
+        ax.bar3d(x_values, y_values,0, dx=int(span_rpm/3),dy=int(span_kl/3),dz=z_values,shade=True)
+        ax.set_xlabel(x_pal)
+        ax.set_ylabel(y_pal)
+        ax.set_zlabel('Count')
+        sumall = sum(z_values)/3600
+        ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
+        
+        ax2 = fig.add_subplot(1,2,2)
+        for filename, df in dataframes.items():
+            ax2.scatter(df[x_pal],df[y_pal])
+        
+        st.pyplot(fig)
+
+        # ダウンロード用のデータを作成
+        download_data = []
+        for x in total_counts:
+            for y in total_counts[x]:
+                download_data.append([x, y, total_counts[x][y]])
+        # CSV形式でデータをダウンロード
+        csv_data = pd.DataFrame(download_data, columns=[x_pal, y_pal, 'Count'])
+        csv_buffer = csv_data.to_csv(index=False).encode('utf-8')
+
+        st.download_button(
+            label="元の数値データをダウンロード",
+            data=csv_buffer,
+            file_name='cumulative_data.csv',
+            mime='text/csv'
+        )
+            # 一時ファイルを作成してプロットを保存
+            # plt.legend(fontsize=10,loc="upper right")
