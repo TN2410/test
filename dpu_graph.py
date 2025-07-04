@@ -122,26 +122,26 @@ if dataframes:
                     total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
 
         
-        ax = fig.add_subplot(1,2,1, projection='3d')
+    ax = fig.add_subplot(1,2,1, projection='3d')
 
-        x_values = []
-        y_values = []
-        z_values = []
+    x_values = []
+    y_values = []
+    z_values = []
 
-        for x in total_counts:
-            for y in total_counts[x]:
-                x_values.append(x)
-                y_values.append(y)
-                z_values.append(total_counts[x][y])
+    for x in total_counts:
+        for y in total_counts[x]:
+            x_values.append(x)
+            y_values.append(y)
+            z_values.append(total_counts[x][y])
 
-        ax.bar3d(x_values, y_values,0, dx=int(span_rpm/3),dy=int(span_kl/3),dz=z_values,shade=True)
-        ax.set_xlabel(x_pal)
-        ax.set_ylabel(y_pal)
-        ax.set_zlabel('Count')
-        sumall = sum(z_values)/3600
-        ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
-        
-        st.pyplot(fig)
+    ax.bar3d(x_values, y_values,0, dx=int(span_rpm/3),dy=int(span_kl/3),dz=z_values,shade=True)
+    ax.set_xlabel(x_pal)
+    ax.set_ylabel(y_pal)
+    ax.set_zlabel('Count')
+    sumall = sum(z_values)/3600
+    ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
+    
+    st.pyplot(fig)
 
     # ダウンロード用のデータを作成
     download_data = []
