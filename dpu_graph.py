@@ -137,9 +137,8 @@ if dataframes:
     sumall = sum(z_values)/3600
     ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
     
-    
+    ax2 = fig.add_subplot(1,2,2)
     for filename, df in dataframes.items():
-        ax2 = fig.add_subplot(1,2,2)
         ax2.scatter(df[x_pal],df[y_pal])
     
     st.pyplot(fig)
