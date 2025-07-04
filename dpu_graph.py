@@ -141,7 +141,7 @@ if dataframes:
             y_values.append(y)
             z_values.append(total_counts[x][y])
 
-    ax.bar3d(x_values, y_values,0, dx=int(x_span),dy=int(y_span),dz=z_values,shade=True)
+    ax.bar3d(x_values, y_values,0, dx=div_num , dy=div_num , dz=z_values , shade=True)
     ax.set_xlabel(x_pal)
     ax.set_ylabel(y_pal)
     ax.set_zlabel("time(sec)")
