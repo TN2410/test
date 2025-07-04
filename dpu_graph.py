@@ -74,8 +74,13 @@ if dataframes:
     #データ積算とグラフを作成する
     st.write("累積データ:")
     fig = plt.figure(figsize=(10, 6)) 
-    ax2 = fig.add_subplot(1,2,2)
-    z_sum = {}
+    gs = GridSpec(1, 3, figure=fig) 
+    # 上段を横一列に使用
+    ax = fig.add_subplot(1,2,1, projection='3d', gs[ : , :1] )
+    ax2 = fig.add_subplot(1,2,2, gs[ : , 2: ])
+    ax2 = fig.add_subplot(1,2,2)#チェックボックスにチェックが入っている場合のみプロットする
+    z_sum = {}#チェックボックスにチェックが入っている場合の)#チェックボックスにチェックが入っている場合のみプロットする
+    z_sum = {}#チェックボックスにチェックが入っている場合のみ計算する
     for filename, df in dataframes.items():
         with st.sidebar:
             show_data = st.checkbox("{} を表示".format(filename), value=True)        
@@ -121,9 +126,6 @@ if dataframes:
                 for y in z_sum[x]:
                     total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
 
-        
-    ax = fig.add_subplot(1,2,1, projection='3d')
-
     x_values = []
     y_values = []
     z_values = []
@@ -153,7 +155,7 @@ if dataframes:
     csv_buffer = csv_data.to_csv(index=False).encode('utf-8')
 
     st.download_button(
-        label="元の数値データをダウンロード",
+        label="積算データをダウンロード",
         data=csv_buffer,
         file_name='cumulative_data.csv',
         mime='text/csv'
