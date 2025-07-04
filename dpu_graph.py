@@ -107,7 +107,7 @@ if dataframes:
                 filtered_data = df[mask_x & mask_y]
                 z_sum[x][y] = len(filtered_data)
 
-# z_sumを total_counts に追加
+        # z_sumを total_counts に追加
         for x in z_sum:
             if x not in total_counts:
                 total_counts[x] = {}
@@ -130,7 +130,6 @@ if dataframes:
             y_values.append(y)
             z_values.append(total_counts[x][y])
 
-
     ax.bar3d(x_values, y_values,0, dx=int(span_rpm/3),dy=int(span_kl/3),dz=z_values,shade=True)
     ax.set_xlabel(x_pal)
     ax.set_ylabel(y_pal)
@@ -138,8 +137,10 @@ if dataframes:
     sumall = sum(z_values)/3600
     ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
     
-    ax2 = fig.add_subplot(1,2,2)
-    ax2.scatter(df[x_pal],df[y_pal])
+    
+    for filename, df in dataframes.items():
+        ax2 = fig.add_subplot(1,2,2)
+        ax2.scatter(df[x_pal],df[y_pal])
     
     st.pyplot(fig)
 
@@ -158,11 +159,5 @@ if dataframes:
         file_name='cumulative_data.csv',
         mime='text/csv'
     )
-         # 一時ファイルを作成してプロットを保存
+        # 一時ファイルを作成してプロットを保存
         # plt.legend(fontsize=10,loc="upper right")
-                
-                # # ax2 = fig.add_subplot(2,2,2)
-                # ax3 = fig.add_subplot(2, 2, 3)
-                # ax3.set_title("30")
-                # ax4 = fig.add_subplot(2, 2, 4)
-                # ax4.bar(x,z)
