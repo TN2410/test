@@ -77,7 +77,14 @@ if dataframes:
         with st.sidebar:
             show_data = st.checkbox("{} を表示".format(filename), value=True)
             # ボタンが選択されている場合に散布図をプロット
+        
+        # 合計結果を表示
+        st.write("累積データ:")
+        # 3Dプロットを作成
+        fig = plt.figure(figsize=(10, 6))
+        
         if show_data:# DataFrameが空でないことを確認
+            ax2 = fig.add_subplot(1,2,2)
             if df.empty:
                 st.warning(f"{filename} は空のファイルです。")
                 continue    
@@ -96,7 +103,7 @@ if dataframes:
                     new_columns.append(rep)
                 df.columns = new_columns
                 #df = df[sample_par]#同じカラム名にする必要あり
-
+            ax2.scatter(df[x_pal],df[y_pal])
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
             z_sum = {}
             x_range = range(int(x_lower_bound), int(x_upper_bound), max(1, int((x_upper_bound - x_lower_bound) / 10)))
@@ -119,10 +126,7 @@ if dataframes:
                 for y in z_sum[x]:
                     total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
 
-        # 合計結果を表示
-        st.write("累積データ:")
-        # 3Dプロットを作成
-        fig = plt.figure(figsize=(10, 6))
+        
         ax = fig.add_subplot(1,2,1, projection='3d')
 
         x_values = []
@@ -141,10 +145,6 @@ if dataframes:
         ax.set_zlabel('Count')
         sumall = sum(z_values)/3600
         ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
-        
-        ax2 = fig.add_subplot(1,2,2)
-        for filename, df in dataframes.items():
-            ax2.scatter(df[x_pal],df[y_pal])
         
         st.pyplot(fig)
 
