@@ -108,11 +108,11 @@ if dataframes:
             ax2.scatter(df[x_pal],df[y_pal],s = 3) 
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
             
-            x_range = range(int(x_lower_bound), int(x_upper_bound), max(1, int((x_upper_bound - x_lower_bound) / 20)))
-            y_range = range(int(y_lower_bound), int(y_upper_bound), max(1, int((y_upper_bound - y_lower_bound) / 20)))
-            
-            span_rpm = int((x_upper_bound - x_lower_bound) / 20)
-            span_kl = int((y_upper_bound - y_lower_bound) / 20)
+            x_span = int(x_upper_bound - x_lower_bound)
+            y_span = int(y_upper_bound - y_lower_bound)    
+
+            x_range = range(int(x_lower_bound), int(x_upper_bound), max(1, int(x_span / 20)))
+            y_range = range(int(y_lower_bound), int(y_upper_bound), max(1, int(y_span / 20)))
             
             for x in x_range:
                 z_sum[x] = {}    
@@ -140,7 +140,7 @@ if dataframes:
             y_values.append(y)
             z_values.append(total_counts[x][y])
 
-    ax.bar3d(x_values, y_values,0, dx=int(span_rpm/3),dy=int(span_kl/3),dz=z_values,shade=True)
+    ax.bar3d(x_values, y_values,0, dx=int(x_span/3),dy=int(y_span/3),dz=z_values/3600,shade=True)
     ax.set_xlabel(x_pal)
     ax.set_ylabel(y_pal)
     ax.set_zlabel('Count')
