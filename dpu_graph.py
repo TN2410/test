@@ -107,10 +107,13 @@ if dataframes:
                 #df = df[sample_par]#同じカラム名にする必要あり
             ax2.scatter(df[x_pal],df[y_pal],s = 3) 
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
+            
             x_range = range(int(x_lower_bound), int(x_upper_bound), max(1, int((x_upper_bound - x_lower_bound) / 10)))
             y_range = range(int(y_lower_bound), int(y_upper_bound), max(1, int((y_upper_bound - y_lower_bound) / 10)))
-            span_rpm = int((x_upper_bound - x_lower_bound) / 10)
+            
+            span_rpm = int((x_upper_bound - x_lower_bound) / 20)
             span_kl = int((y_upper_bound - y_lower_bound) / 10)
+            
             for x in x_range:
                 z_sum[x] = {}    
                 for y in y_range:
