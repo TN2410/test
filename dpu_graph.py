@@ -119,8 +119,8 @@ if dataframes:
                 for yy in range(div_num):
                     y = yy * y_span + int(y_lower_bound)
                     # NumPyを使用してフィルタリング
-                    mask_x = (df[x_pal] >= x) & (df[x_pal] < x + int((x_upper_bound - x_lower_bound) / 10))
-                    mask_y = (df[y_pal] >= y) & (df[y_pal] < y + int((y_upper_bound - y_lower_bound) / 10))
+                    mask_x = (df[x_pal] >= x) & (df[x_pal] < x + x_span)
+                    mask_y = (df[y_pal] >= y) & (df[y_pal] < y + y_span)
                     filtered_data = df[mask_x & mask_y]
                     z_sum[x][y] = len(filtered_data)
 
