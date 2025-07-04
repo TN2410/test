@@ -143,6 +143,8 @@ if dataframes:
     ax.set_zlabel('Count')
     sumall = sum(z_values)/3600
     ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
+
+    ax2.legend(fontsize=10,loc="upper right")
     
     st.pyplot(fig)
 
@@ -161,5 +163,3 @@ if dataframes:
         file_name='cumulative_data.csv',
         mime='text/csv'
     )
-        # 一時ファイルを作成してプロットを保存
-        # plt.legend(fontsize=10,loc="upper right")
