@@ -176,7 +176,7 @@ if dataframes:
     df = px.data.iris()
 
     # 3D散布図としてデータ準備
-    fig = px.scatter_3d(
+    fig = px.bar_3d(
         total_counts,
         x="sepal_length",
         y="sepal_width",
