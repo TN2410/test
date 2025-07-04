@@ -15,8 +15,8 @@ import plotly.express as px
 # windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
 st.set_page_config(
     page_title="PLOT",  
-    layout="wide", 
-    initial_sidebar_state="auto")
+    layout="centered", 
+    initial_sidebar_state="expanded")
 st.title("windarab or dpu データ表示")
 
 @st.cache_data
