@@ -59,17 +59,17 @@ if sample_f is not None:
     sample_par = sample_2
 
     with st.sidebar:
-        x_pal=st.selectbox('x列を選択してください', sample_par,default="n")
+        x_pal=st.selectbox('x列を選択してください', sample_par , default="n*")
         st.write(x_pal,"の")
         #ここでデータを読んで上下限を設定したい
         x_lower_bound = st.number_input('xの下限値と',step=1)
-        x_upper_bound = st.number_input('xの上限値を入力してください',value=100,step=10) 
+        x_upper_bound = st.number_input('xの上限値を入力してください', value = 8000 , step=10) 
         
-        y_pal=st.selectbox('y列を選択してｋださい', sample_par)
+        y_pal=st.selectbox('y列を選択してｋださい', sample_par , default="r")
         st.write(y_pal,"の")        
         #ここでデータを読んで上下限を設定したい
         y_lower_bound = st.number_input('yの下限値と',step=1)
-        y_upper_bound = st.number_input('yの上限値を入力してください',value=200,step=10) 
+        y_upper_bound = st.number_input('yの上限値を入力してください', value = 200 , step=10) 
 
 #データフレームを読み込み累積時間を計算する
 if dataframes:
