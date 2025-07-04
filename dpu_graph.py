@@ -112,7 +112,7 @@ if dataframes:
             y_range = range(int(y_lower_bound), int(y_upper_bound), max(1, int((y_upper_bound - y_lower_bound) / 10)))
             
             span_rpm = int((x_upper_bound - x_lower_bound) / 20)
-            span_kl = int((y_upper_bound - y_lower_bound) / 10)
+            span_kl = int((y_upper_bound - y_lower_bound) / 20)
             
             for x in x_range:
                 z_sum[x] = {}    
