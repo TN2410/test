@@ -78,8 +78,8 @@ if dataframes:
     fig = plt.figure(figsize=(10, 6)) 
     gs = GridSpec(3, 3, figure=fig) 
     # 上段を横一列に使用
-    ax = fig.add_subplot(gs[ 0 , : ], projection='3d' )
-    ax2 = fig.add_subplot(gs[ 1: , 0 ])
+    ax = fig.add_subplot(gs[ :1 , : ], projection='3d' )
+    ax2 = fig.add_subplot(gs[ 2 , 2 ])
     z_sum = {}#チェックボックスにチェックが入っている場合の)#チェックボックスにチェックが入っている場合のみプロットする
     z_sum = {}#チェックボックスにチェックが入っている場合のみ計算する
     for filename, df in dataframes.items():
