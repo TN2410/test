@@ -110,8 +110,8 @@ if dataframes:
             
             div_num = 20
 
-            x_span = int((x_upper_bound - x_lower_bound)/div_num)
-            y_span = int((y_upper_bound - y_lower_bound)/div_num)    
+            x_span = (x_upper_bound - x_lower_bound)/div_num
+            y_span = (y_upper_bound - y_lower_bound)/div_num    
             
             for xx in range(div_num):
                 x = xx * x_span + int(x_lower_bound)
