@@ -71,20 +71,16 @@ if sample_f is not None:
 if dataframes:
     total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     
-    ################ここでチェックボックスをいれることで以降の処理を実施する
-    
+    #データ積算とグラフを作成する
+    st.write("累積データ:")
+    fig = plt.figure(figsize=(10, 6)) 
+    ax2 = fig.add_subplot(1,2,2)
+    z_sum = {}
     for filename, df in dataframes.items():
         with st.sidebar:
-            show_data = st.checkbox("{} を表示".format(filename), value=True)
-            # ボタンが選択されている場合に散布図をプロット
-        
+            show_data = st.checkbox("{} を表示".format(filename), value=True)        
         # 合計結果を表示
-        st.write("累積データ:")
-        # 3Dプロットを作成
-        fig = plt.figure(figsize=(10, 6))
-        
         if show_data:# DataFrameが空でないことを確認
-            ax2 = fig.add_subplot(1,2,2)
             if df.empty:
                 st.warning(f"{filename} は空のファイルです。")
                 continue    
@@ -105,7 +101,6 @@ if dataframes:
                 #df = df[sample_par]#同じカラム名にする必要あり
             ax2.scatter(df[x_pal],df[y_pal])
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
-            z_sum = {}
             x_range = range(int(x_lower_bound), int(x_upper_bound), max(1, int((x_upper_bound - x_lower_bound) / 10)))
             y_range = range(int(y_lower_bound), int(y_upper_bound), max(1, int((y_upper_bound - y_lower_bound) / 10)))
             span_rpm = int((x_upper_bound - x_lower_bound) / 10)
