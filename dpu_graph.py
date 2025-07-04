@@ -177,7 +177,7 @@ if dataframes:
 
     # 3D散布図としてデータ準備
     fig = px.scatter_3d(
-        1,1,1,
+        total_counts,
         x="sepal_length",
         y="sepal_width",
         z="petal_width",
