@@ -170,22 +170,3 @@ if dataframes:
         file_name='cumulative_data.csv',
         mime='text/csv'
     )
-
-
-    # データロード
-    df = px.data.iris()
-
-    # 3D散布図としてデータ準備
-    fig = px.bar_3d(
-        total_counts,
-        x="sepal_length",
-        y="sepal_width",
-        z="petal_width",
-        color="species",
-    )
-    # グラフレイアウト設定
-    fig.update_layout(title="3D Point Cloud", width=500, height=500)
-    # マーカーサイズ設定
-    fig.update_traces(marker_size=2)
-    # グラフ表示
-    st.plotly_chart(fig, use_container_width=True)
