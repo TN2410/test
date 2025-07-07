@@ -145,7 +145,9 @@ if dataframes:
             y_values.append(y)
             z_values.append(total_counts[x][y])
 
-    ax.bar3d(x_values, y_values, 0 , dx=x_span/4 , dy=y_span/4 , dz=z_values , shade=True)
+    #ax.bar3d(x_values, y_values, 0 , dx=x_span/4 , dy=y_span/4 , dz=z_values , shade=True)
+    ax.plot_wireframe(x_values, y_values, 0 , z=z_values )
+
     ax.set_xlabel(x_pal)
     ax.set_ylabel(y_pal)
     ax.set_zlabel("time(sec)")
@@ -158,7 +160,6 @@ if dataframes:
     ax2.set_xlabel(x_pal)
     ax2.set_ylabel(y_pal)
 
-    
     st.pyplot(fig)
 
     # ダウンロード用のデータを作成
