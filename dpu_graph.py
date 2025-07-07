@@ -73,7 +73,7 @@ if sample_f is not None:
         y_lower_bound = st.number_input('yの下限値と',step=1)
         y_upper_bound = st.number_input('yの上限値を入力してください', value = 200 , step=10) 
 
-        div_num = st.number_input('分割数',　value = 20)
+        div_num = st.number_input('分割数', value = 20)
 
 
 #データフレームを読み込み累積時間を計算する
