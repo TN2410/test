@@ -67,11 +67,14 @@ if sample_f is not None:
         x_lower_bound = st.number_input('xの下限値と',step=1)
         x_upper_bound = st.number_input('xの上限値を入力してください', value = max_x_value , step=10) 
         
-        y_pal=st.selectbox('y列を選択してｋださい', sample_par )
+        y_pal=st.selectbox('y列を選択してください', sample_par )
         st.write(y_pal,"の")        
         #ここでデータを読んで上下限を設定したい
         y_lower_bound = st.number_input('yの下限値と',step=1)
         y_upper_bound = st.number_input('yの上限値を入力してください', value = 200 , step=10) 
+
+        div_num = st.number_input("分割数",　value = 20)
+
 
 #データフレームを読み込み累積時間を計算する
 if dataframes:
@@ -111,8 +114,6 @@ if dataframes:
             ax2.scatter(df[x_pal],df[y_pal],s = 3) 
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
             
-            div_num = 20
-
             x_span = (x_upper_bound - x_lower_bound)/div_num
             y_span = (y_upper_bound - y_lower_bound)/div_num    
             
