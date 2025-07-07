@@ -145,9 +145,7 @@ if dataframes:
             y_values.append(y)
             z_values.append(total_counts[x][y])
 
-    #ax.bar3d(x_values, y_values, 0 , dx=x_span/4 , dy=y_span/4 , dz=z_values , shade=True)
-    X,Y= np.meshgrid(x_values,y_values)
-    ax.plot_wireframe(X, Y, z_values )
+    ax.bar3d(x_values, y_values, 0 , dx=x_span/4 , dy=y_span/4 , dz=z_values , shade=True)
 
     ax.set_xlabel(x_pal)
     ax.set_ylabel(y_pal)
