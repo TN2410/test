@@ -152,11 +152,12 @@ if dataframes:
     sumall = sum(z_values)/3600
     ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
 
+    ax2.set_xlim(x_lower_bound,x_upper_bound)
+    ax2.set_ylim(y_lower_bound,y_upper_bound)
     ax2.legend(bbox_to_anchor=(0, 1,50,50),loc = "lower left",fontsize = "large")
     ax2.set_xlabel(x_pal)
     ax2.set_ylabel(y_pal)
-    ax2.set_xlim(x_lower_bound,x_upper_bound)
-    ax2.set_ylim(y_lower_bound,y_upper_bound)
+
     
     st.pyplot(fig)
 
