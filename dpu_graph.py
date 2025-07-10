@@ -86,7 +86,7 @@ if st.button("計算を実行"):
         #データ積算とグラフを作成する
         st.write("累積データ:")
         fig = plt.figure(figsize=(10, 6)) 
-        fig = go.figure(figsize=(10, 6))
+        fig = go.Figure(figsize=(10, 6))
         gs = GridSpec(10, 10, figure=fig) 
         # 上段を横一列に使用
         ax = fig.add_subplot(gs[ :9 , :9 ], projection='3d' )
