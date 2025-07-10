@@ -180,11 +180,11 @@ if dataframes:
     # 2D グラフのタイトルと軸ラベルを設定
 
     fig.update_layout(legend=dict(
-    orientation="h",  # 水平に配置
+    orientation="v",  # 水平に配置
     yanchor="bottom",
     y=1.1,  # グラフの上側に配置
     xanchor="center",
-    x=0.5  # 中央に配置
+    x=0.8  # 中央に配置
     ))
 
 
