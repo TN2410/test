@@ -161,7 +161,15 @@ if st.button("計算を実行"):
                 z_values.append(total_counts[x][y])
 
         #ax.bar3d(x_values, y_values, 0 , dx=x_span/4 , dy=y_span/4 , dz=z_values , shade=True)
-        fig.add_trace(go.Bar3d(x=x_values, y=y_values, 0 , dx=x_span/4 , dy=y_span/4 , dz=z_values , shade=True ),row = 1 ,col = 1 )    
+        for i in range(len(x_value)):
+            fig.add_trace(go.Scatter3d(
+                        x=[x_value[i], x_value[i], x_value[i]],
+                        y=[y_value[i], y_value[i], y_value[i]],
+                        z=[0, z_value[i] , 0],
+                        mode='lines',
+                        line=dict(width=6),
+                        name=f'棒 {i+1}'
+                        ),row = 1 ,col = 1 )    
 
         #ax.set_xlabel(x_pal)
         #ax.set_ylabel(y_pal)
