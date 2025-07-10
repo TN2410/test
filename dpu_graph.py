@@ -165,7 +165,7 @@ if dataframes:
                     y=[y_values[i], y_values[i], y_values[i]],
                     z=[0, z_values[i] , 0],
                     mode='lines',
-                    line=dict(width=6,color = "blue", opacity = 0.8),
+                    line=dict(width=6,color = "blue"),
                     showlegend = False
                     ),row = 1 ,col = 1 )    
 
