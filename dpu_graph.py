@@ -177,7 +177,11 @@ if dataframes:
         # height = 600 ,
         # width = 1000 ,
     )
-
+    # 2D グラフのタイトルと軸ラベルを設定
+    fig.update_layout(
+        title_text="{:.3f}Hr".format(sumall),  # 2D グラフのタイトル
+        title_x=0.5,  # タイトルを中央に配置
+    )
 
     fig.update_xaxes(title_text= x_pal, row=1, col=2)
     fig.update_yaxes(title_text= y_pal, row=1, col=2)
