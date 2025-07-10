@@ -117,10 +117,6 @@ if dataframes:
                 df.columns = new_columns
                 #df = df[sample_par]#同じカラム名にする必要あり
             fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='markers', name = filename), row= 1 ,col = 2)    
-
-            fig.update_layout(title_text = '累積値と散布図',
-                template='plotly_white',
-                height = 600)
             #ax2.scatter(df[x_pal],df[y_pal],s = 3,label = filename)
 
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
@@ -168,13 +164,15 @@ if dataframes:
                     ),row = 1 ,col = 1 )    
 
     # 3D散布図の軸ラベル設定
-        fig.update_scene(
+    fig.update_layout(
+        title = "{:.3f}Hr".format(sumall),
+        scene = dict(
             xaxis_title= x_pal,
             yaxis_title= y_pal,
-            zaxis_title= "Time(sec)",
-            row = 1, col = 1
-        )
-
+            zaxis_title= "Time(sec)"
+        ),
+        height = 600
+    )
     # 2D散布図の軸ラベル設定
     fig.update_xaxes(title_text= x_pal, row=1, col=2)
     fig.update_yaxes(title_text= y_pal, row=1, col=2)
