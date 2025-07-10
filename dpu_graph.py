@@ -154,7 +154,7 @@ if dataframes:
     sumall = sum(z_values)/3600
     ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
 
-    ax2.legend(bbox_to_anchor=(1, 1),loc = "lower right",fontsize = 12)
+    ax2.legend(bbox_to_anchor=(1, 1),loc = "lower right",fontsize = 8)
     ax2.set_xlim(x_lower_bound,x_upper_bound)
     ax2.set_ylim(y_lower_bound,y_upper_bound)
     ax2.set_xlabel(x_pal)
