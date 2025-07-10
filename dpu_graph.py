@@ -86,9 +86,9 @@ if dataframes:
     #fig = plt.figure(figsize=(10, 6)) 
     fig = make_subplots(rows = 1 , cols = 2 ,
                 specs=[[{"type": "scatter3d"}, {"type": "scatter"}]], 
-                subplot_titles=("グラフ1", "グラフ2")
+                subplot_titles=("3D累積", "散布図")
                 )
-    gs = GridSpec(10, 10, figure=fig) 
+    #gs = GridSpec(10, 10, figure=fig) 
     # 上段を横一列に使用
     #ax = fig.add_subplot(gs[ :9 , :9 ], projection='3d' )
     #ax2 = fig.add_subplot(gs[ 7: , 7:])
@@ -165,7 +165,8 @@ if dataframes:
                     y=[y_values[i], y_values[i], y_values[i]],
                     z=[0, z_values[i] , 0],
                     mode='lines',
-                    line=dict(width=6),
+                    line=dict(width=6,color = blue, opacity = 0.8),
+                    showlegend = False
                     ),row = 1 ,col = 1 )    
 
     #ax.set_xlabel(x_pal)
