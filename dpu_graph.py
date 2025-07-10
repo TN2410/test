@@ -111,7 +111,9 @@ if dataframes:
                     new_columns.append(rep)
                 df.columns = new_columns
                 #df = df[sample_par]#同じカラム名にする必要あり
-            ax2.scatter(df[x_pal],df[y_pal],s = 3) 
+            ax2.scatter(df[x_pal],df[y_pal],s = 3)
+            ax2.legend(bbox_to_anchor=(0, 0.5),loc = "lower left",fontsize=6)
+ 
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
             
             x_span = (x_upper_bound - x_lower_bound)/x_div_num
@@ -155,7 +157,6 @@ if dataframes:
 
     ax2.set_xlim(x_lower_bound,x_upper_bound)
     ax2.set_ylim(y_lower_bound,y_upper_bound)
-    ax2.legend(bbox_to_anchor=(0, 0),loc = "lower left",fontsize=72)
     ax2.set_xlabel(x_pal)
     ax2.set_ylabel(y_pal)
 
