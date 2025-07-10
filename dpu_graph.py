@@ -169,10 +169,10 @@ if dataframes:
 
     # 3D散布図の軸ラベル設定
     fig.update_scene(
-        row = 1, col = 1,
         xaxis_title= x_pal,
         yaxis_title= y_pal,
-        zaxis_title= "Time(sec)"
+        zaxis_title= "Time(sec)",
+        row = 1, col = 1,
     )
 
     # 2D散布図の軸ラベル設定
