@@ -118,7 +118,7 @@ if st.button("計算を実行"):
                     df.columns = new_columns
                     #df = df[sample_par]#同じカラム名にする必要あり
 #                fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='markers', name='sin(x)', line=dict(color='blue'), row= 1 ,col = 2))    
-                fig.add_trace(go.Scatter(x=[1,2,3], y=[1,3,4], mode='markers', name='sin(x)', line=dict(color='blue'), row= 1 ,col = 2))    
+                fig.add_trace(go.Scatter(x=[1,2,3], y=[1,3,4], mode='markers', name='sin(x)', line=dict(color='blue')), row= 1 ,col = 2)    
 
                 fig.update_layout(title='Sine Wave',
                   xaxis_title='x',
@@ -161,7 +161,7 @@ if st.button("計算を実行"):
                 z_values.append(total_counts[x][y])
 
         #ax.bar3d(x_values, y_values, 0 , dx=x_span/4 , dy=y_span/4 , dz=z_values , shade=True)
-        fig.add_trace(go.Scatter(x=x_values, y=y_values, mode='markers', name='sin(x)', line=dict(color='blue'),row = 1 ,col = 1 ))    
+        fig.add_trace(go.Scatter(x=x_values, y=y_values, mode='markers', name='sin(x)', line=dict(color='blue')),row = 1 ,col = 1 )    
 
         #ax.set_xlabel(x_pal)
         #ax.set_ylabel(y_pal)
