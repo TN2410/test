@@ -157,6 +157,7 @@ if st.button("計算を実行"):
                 z_values.append(total_counts[x][y])
 
         #ax.bar3d(x_values, y_values, 0 , dx=x_span/4 , dy=y_span/4 , dz=z_values , shade=True)
+        fig.add_trace(go.Scatter(x=x_values, y=y_values, mode='lines', name='sin(x)', line=dict(color='blue')))    
 
         #ax.set_xlabel(x_pal)
         #ax.set_ylabel(y_pal)
