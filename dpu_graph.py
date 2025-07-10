@@ -85,6 +85,7 @@ if st.button("計算を実行"):
         #データ積算とグラフを作成する
         st.write("累積データ:")
         fig = plt.figure(figsize=(10, 6)) 
+        fig = go.rigure(figsize=(10, 6))
         gs = GridSpec(10, 10, figure=fig) 
         # 上段を横一列に使用
         ax = fig.add_subplot(gs[ :9 , :9 ], projection='3d' )
@@ -113,6 +114,7 @@ if st.button("計算を実行"):
                         new_columns.append(rep)
                     df.columns = new_columns
                     #df = df[sample_par]#同じカラム名にする必要あり
+                fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='lines', name='sin(x)', line=dict(color='blue')))    
                 ax2.scatter(df[x_pal],df[y_pal],s = 3,label = filename)
     
         #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
