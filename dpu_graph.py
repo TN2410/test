@@ -178,17 +178,14 @@ if dataframes:
     fig.update_xaxes(title_text= x_pal, row=1, col=2)
     fig.update_yaxes(title_text= y_pal, row=1, col=2)
     
-    #ax.set_xlabel(x_pal)
-    #ax.set_ylabel(y_pal)
-    #ax.set_zlabel("time(sec)")
-    sumall = sum(z_values)/3600
-    #ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
+    fig.update_layout(width=1000)
 
+# 左右のグラフの幅を設定（7:3）
+    fig['layout']['xaxis'].update(scaleanchor="y", scaleratio=7/3)  # 3D グラフ（左側）
+    fig['layout']['scene'].update(aspectmode='manual', aspectratio=dict(x=7, y=3, z=1))  # 3D グラフのアスペクト比
     #ax2.legend(bbox_to_anchor=(1, 1),loc = "lower right",fontsize = 8)
     #ax2.set_xlim(x_lower_bound,x_upper_bound)
     #ax2.set_ylim(y_lower_bound,y_upper_bound)
-    #ax2.set_xlabel(x_pal)
-    #ax2.set_ylabel(y_pal)
 
     #st.pyplot(fig)
     st.plotly_chart(fig)
