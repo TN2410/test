@@ -172,7 +172,7 @@ if dataframes:
         xaxis_title= x_pal,
         yaxis_title= y_pal,
         zaxis_title= "Time(sec)",
-        row = 1, col = 1,
+        row = 1, col = 1
     )
 
     # 2D散布図の軸ラベル設定
