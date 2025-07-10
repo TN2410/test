@@ -82,11 +82,10 @@ if dataframes:
     total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     
     #データ積算とグラフを作成する
-    st.write("累積データ:")
     #fig = plt.figure(figsize=(10, 6)) 
     fig = make_subplots(rows = 1 , cols = 2 ,
-                specs=[[{"type": "scatter3d"}, {"type": "scatter"}]], 
-                subplot_titles=("3D累積", "散布図")
+                specs=[[{"type": "scatter3d"}, {"type": "scatter"}]],
+                horizontal_spacing = 0.1 
                 )
     #gs = GridSpec(10, 10, figure=fig) 
     # 上段を横一列に使用
@@ -170,22 +169,30 @@ if dataframes:
         scene = dict(
             xaxis_title= x_pal,
             yaxis_title= y_pal,
-            zaxis_title= "Time(sec)"
+            zaxis_title= "Time(sec)",
+            xaxis=dict(range=[x_lower_bound,x_upper_bound]),  # X 軸の上下限
+            yaxis=dict(range=[y_lower_bound,y_upper_bound]),  # Y 軸の上下限
+           # Z 軸の上下限
         ),
-        height = 600
+        height = 600,
     )
     # 2D散布図の軸ラベル設定
+    fig.update_layout(
+    title_text='散布図',  # 2D グラフのタイトル
+    title_x=0.5,  # タイトルを中央に配置
+    )   
     fig.update_xaxes(title_text= x_pal, row=1, col=2)
     fig.update_yaxes(title_text= y_pal, row=1, col=2)
     
-    fig.update_layout(width=1000)
+    fig.update_xaxes(range=[x_lower_bound,x_upper_bound], row=1, col=2)  # X 軸の上下限
+    fig.update_yaxes(range=[y_lower_bound,y_upper_bound], row=1, col=2)  # Y 軸の上下限
+
+    fig.update_layout(width=1000,)
 
 # 左右のグラフの幅を設定（7:3）
     fig['layout']['xaxis'].update(scaleanchor="y", scaleratio=7/3)  # 3D グラフ（左側）
     fig['layout']['scene'].update(aspectmode='manual', aspectratio=dict(x=7, y=3, z=1))  # 3D グラフのアスペクト比
     #ax2.legend(bbox_to_anchor=(1, 1),loc = "lower right",fontsize = 8)
-    #ax2.set_xlim(x_lower_bound,x_upper_bound)
-    #ax2.set_ylim(y_lower_bound,y_upper_bound)
 
     #st.pyplot(fig)
     st.plotly_chart(fig)
