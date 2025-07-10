@@ -177,11 +177,8 @@ if dataframes:
         height = 600 ,
         width = 1000 ,
     )
-    # 2D散布図の軸ラベル設定
-    fig.update_layout(
-    title_text='散布図',  # 2D グラフのタイトル
-    title_x=0.5,  # タイトルを中央に配置
-    )   
+
+
     fig.update_xaxes(title_text= x_pal, row=1, col=2)
     fig.update_yaxes(title_text= y_pal, row=1, col=2)
     
