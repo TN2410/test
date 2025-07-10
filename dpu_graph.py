@@ -184,7 +184,7 @@ if dataframes:
     yanchor="bottom",
     y=1.1,  # グラフの上側に配置
     xanchor="center",
-    x=0.8  # 中央に配置
+    x=0.7  # 中央に配置
     ))
 
 
