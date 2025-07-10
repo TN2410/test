@@ -155,7 +155,7 @@ if dataframes:
 
     ax2.set_xlim(x_lower_bound,x_upper_bound)
     ax2.set_ylim(y_lower_bound,y_upper_bound)
-    ax2.legend(bbox_to_anchor=(0, 1,50,50),loc = "lower left",font="large")
+    ax2.legend(bbox_to_anchor=(0, 1,50,50),loc = "lower left",fontsize="large")
     ax2.set_xlabel(x_pal)
     ax2.set_ylabel(y_pal)
 
