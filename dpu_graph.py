@@ -11,6 +11,7 @@ import re
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.gridspec import GridSpec
 import plotly.express as px
+import plotly.graph_objects as go
 
 # windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
 st.set_page_config(
