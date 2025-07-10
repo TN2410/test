@@ -171,8 +171,8 @@ if st.button("計算を実行"):
         #ax2.set_xlabel(x_pal)
         #ax2.set_ylabel(y_pal)
 
-        st.pyplot(fig)
-
+        #st.pyplot(fig)
+        st.plotly_chart(fig)
         # ダウンロード用のデータを作成
         download_data = []
         for x in total_counts:
