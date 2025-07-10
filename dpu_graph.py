@@ -179,7 +179,6 @@ if dataframes:
     )
     # 2D グラフのタイトルと軸ラベルを設定
 
-    fig.update_traces(showlegend=True)  # 凡例を表示
     fig.update_layout(legend=dict(
     orientation="h",  # 水平に配置
     yanchor="bottom",
