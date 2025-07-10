@@ -88,7 +88,9 @@ if st.button("計算を実行"):
         st.write("累積データ:")
         #fig = plt.figure(figsize=(10, 6)) 
         fig = make_subplots(rows = 1 , cols = 2 , 
-                    subplot_titles=("グラフ1", "グラフ2"))
+                    subplot_titles=("グラフ1", "グラフ2"),
+                    specs=[[{"type": "bar3d"}, {"type": "scatter"}],
+           [{"type": "box"}, {"type": "pie"}]])
         gs = GridSpec(10, 10, figure=fig) 
         # 上段を横一列に使用
         #ax = fig.add_subplot(gs[ :9 , :9 ], projection='3d' )
@@ -117,14 +119,12 @@ if st.button("計算を実行"):
                         new_columns.append(rep)
                     df.columns = new_columns
                     #df = df[sample_par]#同じカラム名にする必要あり
-                fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='markers', name='sin(x)', line=dict(color='blue')), row= 1 ,col = 2)    
-                #fig.add_trace(go.Scatter(x=[1,2,3], y=[1,3,4], mode='markers', name='sin(x)', line=dict(color='blue')), row= 1 ,col = 2)    
+                fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='markers', name='散布図'), row= 1 ,col = 2)    
 
                 fig.update_layout(title='Sine Wave',
                   xaxis_title='x',
                   yaxis_title='sin(x)',
                   template='plotly_white')
-                fig.show()
                 #ax2.scatter(df[x_pal],df[y_pal],s = 3,label = filename)
     
         #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
@@ -161,7 +161,7 @@ if st.button("計算を実行"):
                 z_values.append(total_counts[x][y])
 
         #ax.bar3d(x_values, y_values, 0 , dx=x_span/4 , dy=y_span/4 , dz=z_values , shade=True)
-        fig.add_trace(go.Scatter(x=x_values, y=y_values, mode='markers', name='sin(x)', line=dict(color='blue')),row = 1 ,col = 1 )    
+        fig.add_trace(go.Bar3d(x=x_values, y=y_values, 0 , dx=x_span/4 , dy=y_span/4 , dz=z_values , shade=True ),row = 1 ,col = 1 )    
 
         #ax.set_xlabel(x_pal)
         #ax.set_ylabel(y_pal)
