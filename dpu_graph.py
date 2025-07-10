@@ -85,7 +85,7 @@ if dataframes:
     #fig = plt.figure(figsize=(10, 6)) 
     fig = make_subplots(rows = 1 , cols = 2 ,
                 specs=[[{"type": "scatter3d"}, {"type": "scatter"}]],
-                horizontal_spacing = 0.5 
+                horizontal_spacing = 0.2 
                 )
     #gs = GridSpec(10, 10, figure=fig) 
     # 上段を横一列に使用
@@ -174,8 +174,8 @@ if dataframes:
             yaxis=dict(range=[y_lower_bound,y_upper_bound]),  # Y 軸の上下限
            # Z 軸の上下限
         ),
-        height = 600 ,
-        width = 1000 ,
+        # height = 600 ,
+        # width = 1000 ,
     )
 
 
