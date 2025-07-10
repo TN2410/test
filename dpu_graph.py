@@ -174,7 +174,8 @@ if dataframes:
             yaxis=dict(range=[y_lower_bound,y_upper_bound]),  # Y 軸の上下限
            # Z 軸の上下限
         ),
-        height = 600,
+        height = 600 ,
+        width = 1000 ,
     )
     # 2D散布図の軸ラベル設定
     fig.update_layout(
@@ -186,8 +187,6 @@ if dataframes:
     
     fig.update_xaxes(range=[x_lower_bound,x_upper_bound], row=1, col=2)  # X 軸の上下限
     fig.update_yaxes(range=[y_lower_bound,y_upper_bound], row=1, col=2)  # Y 軸の上下限
-
-    fig.update_layout(width=1000,)
 
 # 左右のグラフの幅を設定（7:3）
     fig['layout']['xaxis'].update(scaleanchor="y", scaleratio=7/3)  # 3D グラフ（左側）
