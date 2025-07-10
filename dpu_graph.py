@@ -116,12 +116,13 @@ if dataframes:
                     new_columns.append(rep)
                 df.columns = new_columns
                 #df = df[sample_par]#同じカラム名にする必要あり
-            fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='markers', name='散布図'), row= 1 ,col = 2)    
+            fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='markers', name = filename), row= 1 ,col = 2)    
 
-            fig.update_layout(title='Sine Wave',
-                xaxis_title='x',
-                yaxis_title='sin(x)',
-                template='plotly_white')
+            fig.update_layout(title='散布図',
+                xaxis_title= x_pal ,
+                yaxis_title= y_pal ,
+                template='plotly_white',
+                showlegend = True)
             #ax2.scatter(df[x_pal],df[y_pal],s = 3,label = filename)
 
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
@@ -165,7 +166,6 @@ if dataframes:
                     z=[0, z_values[i] , 0],
                     mode='lines',
                     line=dict(width=6),
-                    name=f'棒 {i+1}'
                     ),row = 1 ,col = 1 )    
 
     #ax.set_xlabel(x_pal)
