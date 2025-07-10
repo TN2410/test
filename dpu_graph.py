@@ -85,7 +85,7 @@ if dataframes:
     #fig = plt.figure(figsize=(10, 6)) 
     fig = make_subplots(rows = 1 , cols = 2 ,
                 specs=[[{"type": "scatter3d"}, {"type": "scatter"}]],
-                horizontal_spacing = 0.1 
+                horizontal_spacing = 0.5 
                 )
     #gs = GridSpec(10, 10, figure=fig) 
     # 上段を横一列に使用
@@ -186,9 +186,8 @@ if dataframes:
     fig.update_yaxes(range=[y_lower_bound,y_upper_bound], row=1, col=2)  # Y 軸の上下限
 
 # 左右のグラフの幅を設定（7:3）
-    fig['layout']['xaxis'].update(scaleanchor="y", scaleratio=7/3)  # 3D グラフ（左側）
-    fig['layout']['scene'].update(aspectmode='manual', aspectratio=dict(x=7, y=3, z=1))  # 3D グラフのアスペクト比
-    #ax2.legend(bbox_to_anchor=(1, 1),loc = "lower right",fontsize = 8)
+    # fig['layout']['xaxis'].update(scaleanchor="y", scaleratio=7/3)  # 3D グラフ（左側）
+    # fig['layout']['scene'].update(aspectmode='manual', aspectratio=dict(x=7, y=3, z=1))  # 3D グラフのアスペクト比
 
     #st.pyplot(fig)
     st.plotly_chart(fig)
