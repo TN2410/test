@@ -89,8 +89,7 @@ if st.button("計算を実行"):
         #fig = plt.figure(figsize=(10, 6)) 
         fig = make_subplots(rows = 1 , cols = 2 , 
                     subplot_titles=("グラフ1", "グラフ2"),
-                    specs=[[{"type": "bar3d"}, {"type": "scatter"}],
-           [{"type": "box"}, {"type": "pie"}]])
+                    specs=[{"type": "scatter3d"}, {"type": "scatter"}])
         gs = GridSpec(10, 10, figure=fig) 
         # 上段を横一列に使用
         #ax = fig.add_subplot(gs[ :9 , :9 ], projection='3d' )
