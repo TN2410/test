@@ -89,8 +89,8 @@ if st.button("計算を実行"):
         fig = go.Figure()
         gs = GridSpec(10, 10, figure=fig) 
         # 上段を横一列に使用
-        ax = fig.add_subplot(gs[ :9 , :9 ], projection='3d' )
-        ax2 = fig.add_subplot(gs[ 7: , 7:])
+        #ax = fig.add_subplot(gs[ :9 , :9 ], projection='3d' )
+        #ax2 = fig.add_subplot(gs[ 7: , 7:])
         z_sum = {}#チェックボックスにチェックが入っている場合の)#チェックボックスにチェックが入っている場合のみプロットする
         for filename, df in dataframes.items():
             with st.sidebar:
@@ -116,7 +116,7 @@ if st.button("計算を実行"):
                     df.columns = new_columns
                     #df = df[sample_par]#同じカラム名にする必要あり
                 fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='lines', name='sin(x)', line=dict(color='blue')))    
-                ax2.scatter(df[x_pal],df[y_pal],s = 3,label = filename)
+                #ax2.scatter(df[x_pal],df[y_pal],s = 3,label = filename)
     
         #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
                 
@@ -151,19 +151,19 @@ if st.button("計算を実行"):
                 y_values.append(y)
                 z_values.append(total_counts[x][y])
 
-        ax.bar3d(x_values, y_values, 0 , dx=x_span/4 , dy=y_span/4 , dz=z_values , shade=True)
+        #ax.bar3d(x_values, y_values, 0 , dx=x_span/4 , dy=y_span/4 , dz=z_values , shade=True)
 
-        ax.set_xlabel(x_pal)
-        ax.set_ylabel(y_pal)
-        ax.set_zlabel("time(sec)")
+        #ax.set_xlabel(x_pal)
+        #ax.set_ylabel(y_pal)
+        #ax.set_zlabel("time(sec)")
         sumall = sum(z_values)/3600
-        ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
+        #ax.set_title("{:.3f}Hr".format(sumall),fontsize="10")
 
-        ax2.legend(bbox_to_anchor=(1, 1),loc = "lower right",fontsize = 8)
-        ax2.set_xlim(x_lower_bound,x_upper_bound)
-        ax2.set_ylim(y_lower_bound,y_upper_bound)
-        ax2.set_xlabel(x_pal)
-        ax2.set_ylabel(y_pal)
+        #ax2.legend(bbox_to_anchor=(1, 1),loc = "lower right",fontsize = 8)
+        #ax2.set_xlim(x_lower_bound,x_upper_bound)
+        #ax2.set_ylim(y_lower_bound,y_upper_bound)
+        #ax2.set_xlabel(x_pal)
+        #ax2.set_ylabel(y_pal)
 
         st.pyplot(fig)
 
