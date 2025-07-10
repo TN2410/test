@@ -87,9 +87,9 @@ if st.button("計算を実行"):
         #データ積算とグラフを作成する
         st.write("累積データ:")
         #fig = plt.figure(figsize=(10, 6)) 
-        fig = make_subplots(rows = 1 , cols = 2 , 
-                    subplot_titles=("グラフ1", "グラフ2"),
-                    specs=[[{"type": "scatter3d"}], [{"type": "scatter"}]]
+        fig = make_subplots(rows = 1 , cols = 2 ,
+                    specs=[[{"type": "scatter3d"}], [{"type": "scatter"}]], 
+                    subplot_titles=("グラフ1", "グラフ2")
                     )
         gs = GridSpec(10, 10, figure=fig) 
         # 上段を横一列に使用
