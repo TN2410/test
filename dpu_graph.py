@@ -164,6 +164,7 @@ if dataframes:
                     ),row = 1 ,col = 1 )    
 
     # 3D散布図の軸ラベル設定
+    sumall = sum(z_values)/3600
     fig.update_layout(
         title = "{:.3f}Hr".format(sumall),
         scene = dict(
