@@ -175,8 +175,8 @@ if dataframes:
             yaxis=dict(range=[y_lower_bound,y_upper_bound]),  # Y 軸の上下限
            # Z 軸の上下限
         ),
-        height = 600 ,
-        width = 1200 ,
+        #height = 600 ,
+        #width = 1200 ,
     )
     # 2D グラフのタイトルと軸ラベルを設定
 
