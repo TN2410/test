@@ -114,7 +114,7 @@ if dataframes:
                 df.columns = new_columns
                 #df = df[sample_par]#同じカラム名にする必要あり
             fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
-            mode='markers', name = filename), row= 1 ,col = 2)    
+            mode='markers', name = filename), row= 1 ,col = 1)    
             #ax2.scatter(df[x_pal],df[y_pal],s = 3,label = filename)
 
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
@@ -158,7 +158,7 @@ if dataframes:
             mode='lines',
             line=dict(width=10,color = "blue"),
             showlegend = False
-            ),row = 1 ,col = 1 )    
+            ),row = 1 ,col = 2 )    
 
     # 3D散布図の軸ラベル設定
     sumall = sum(z_values)/3600
@@ -182,21 +182,21 @@ if dataframes:
     yanchor="bottom",
     y=1.05 ,  # グラフの上側に配置
     xanchor="center",
-    x=0.7  # 中央に配置
+    x=0.1  # 左よりに配置
     ))
 
-    fig.update_xaxes(title_text= x_pal, row=1, col=2)
-    fig.update_yaxes(title_text= y_pal, row=1, col=2)
+    fig.update_xaxes(title_text= x_pal, row=1, col=1)
+    fig.update_yaxes(title_text= y_pal, row=1, col=1)
     
-    fig.update_xaxes(range=[x_lower_bound,x_upper_bound], row=1, col=2)  # X 軸の上下限
-    fig.update_yaxes(range=[y_lower_bound,y_upper_bound], row=1, col=2)  # Y 軸の上下限
+    fig.update_xaxes(range=[x_lower_bound,x_upper_bound], row=1, col=1)  # X 軸の上下限
+    fig.update_yaxes(range=[y_lower_bound,y_upper_bound], row=1, col=1)  # Y 軸の上下限
 
 # 左右のグラフの幅を設定（7:3）    
-    fig.update_xaxes(domain=[0, 1], row=1, col=1)  # 3D グラフ（左側）
-    fig.update_xaxes(domain=[0.7, 1], row=1, col=2)  # 2D グラフ（右側）
+    fig.update_xaxes(domain=[0, 0.3], row=1, col=1)  # 3D グラフ（左側）
+    #fig.update_xaxes(domain=[0.7, 1], row=1, col=2)  # 2D グラフ（右側）
 
-    fig.update_yaxes(domain=[0, 1], row=1, col=1)  # 2D グラフ（右側）
-    fig.update_yaxes(domain=[0.7, 1], row=1, col=2)  # 2D グラフ（右側）
+    fig.update_yaxes(domain=[0, 0.3], row=1, col=1)  # 2D グラフ（右側）
+    #fig.update_yaxes(domain=[0.7, 1], row=1, col=2)  # 2D グラフ（右側）
 
     if 'show_graph' not in st.session_state:
         st.session_state.show_graph = False
