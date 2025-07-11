@@ -193,10 +193,10 @@ if dataframes:
 
 # 左右のグラフの幅を設定（7:3）    
     fig.update_xaxes(domain=[0, 0.3], row=1, col=1)  # 3D グラフ（左側）
-    #fig.update_xaxes(domain=[0.7, 1], row=1, col=2)  # 2D グラフ（右側）
+    #fig.update_xaxes(domain=[0.3, 1], row=1, col=2)  # 2D グラフ（右側）
 
-    fig.update_yaxes(domain=[0, 0.3], row=1, col=1)  # 2D グラフ（右側）
-    #fig.update_yaxes(domain=[0.7, 1], row=1, col=2)  # 2D グラフ（右側）
+    # fig.update_yaxes(domain=[0, 0.3], row=1, col=1)  # 2D グラフ（右側）
+    # fig.update_yaxes(domain=[0.3, 1], row=1, col=2)  # 3D グラフ（右側）
 
     if 'show_graph' not in st.session_state:
         st.session_state.show_graph = False
