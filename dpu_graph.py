@@ -150,16 +150,15 @@ if dataframes:
             y_values.append(y)
             z_values.append(total_counts[x][y])
 
-    if st.button("散布図"):
-        for i in range(len(x_values)):
-            fig.add_trace(go.Scatter3d(
-                x=[x_values[i], x_values[i], x_values[i]],
-                y=[y_values[i], y_values[i], y_values[i]],
-                z=[0, z_values[i] , 0],
-                mode='lines',
-                line=dict(width=10,color = "blue"),
-                showlegend = False
-                ),row = 1 ,col = 1 )    
+    for i in range(len(x_values)):
+        fig.add_trace(go.Scatter3d(
+            x=[x_values[i], x_values[i], x_values[i]],
+            y=[y_values[i], y_values[i], y_values[i]],
+            z=[0, z_values[i] , 0],
+            mode='lines',
+            line=dict(width=10,color = "blue"),
+            showlegend = False
+            ),row = 1 ,col = 1 )    
 
     # 3D散布図の軸ラベル設定
     sumall = sum(z_values)/3600
@@ -172,7 +171,7 @@ if dataframes:
             xaxis=dict(range=[x_lower_bound,x_upper_bound]),  # X 軸の上下限
             yaxis=dict(range=[y_lower_bound,y_upper_bound]),  # Y 軸の上下限
            # Z 軸の上下限
-        ),
+        )
         #height = 600 ,
         #width = 1200 ,
     )
