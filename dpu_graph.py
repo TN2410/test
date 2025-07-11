@@ -82,45 +82,44 @@ if dataframes:
     total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     
     #データ積算とグラフを作成する
-    #fig = plt.figure(figsize=(10, 6)) 
     fig = make_subplots(rows = 1 , cols = 2 ,
                 specs=[[{"type": "scatter3d"}, {"type": "scatter"}]],
                 horizontal_spacing = 0.05 
                 )
     #gs = GridSpec(10, 10, figure=fig) 
-    # 上段を横一列に使用
     #ax = fig.add_subplot(gs[ :9 , :9 ], projection='3d' )
     #ax2 = fig.add_subplot(gs[ 7: , 7:])
     z_sum = {}#チェックボックスにチェックが入っている場合の)#チェックボックスにチェックが入っている場合のみプロットする
     #if st.button("散布図"):
-    for filename, df in dataframes.items():
-        with st.sidebar:
-            show_data = st.checkbox("{} を表示".format(filename), value=True)        
-        # 合計結果を表示
-        if show_data:# DataFrameが空でないことを確認
-            if df.empty:
-                st.warning(f"{filename} は空のファイルです。")
-                continue    
-            if "Time" in df.columns and sample_columns == 5:
-                df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
-                time_format = "%H:%M:%S.%f"
-                df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
-                init_time = df["Time"].iloc[0]
-                df["Time"] = [(time - init_time).seconds for time in df["Time"]]
-                df = df.apply(pd.to_numeric, errors='coerce')
-            else:#windarabはカラム名調整
-                new_columns=[]
-                for rep in df.columns:
-                    rep = rep[:rep.find("[")]
-                    rep = rep.replace(" ","")
-                    new_columns.append(rep)
-                df.columns = new_columns
-                #df = df[sample_par]#同じカラム名にする必要あり
-            fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
-            mode='markers', name = filename), row= 1 ,col = 2)    
-            #ax2.scatter(df[x_pal],df[y_pal],s = 3,label = filename)
+    if st.button("散布図"):
+        for filename, df in dataframes.items():
+            with st.sidebar:
+                show_data = st.checkbox("{} を表示".format(filename), value=True)        
+            # 合計結果を表示
+            if show_data:# DataFrameが空でないことを確認
+                if df.empty:
+                    st.warning(f"{filename} は空のファイルです。")
+                    continue    
+                if "Time" in df.columns and sample_columns == 5:
+                    df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
+                    time_format = "%H:%M:%S.%f"
+                    df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
+                    init_time = df["Time"].iloc[0]
+                    df["Time"] = [(time - init_time).seconds for time in df["Time"]]
+                    df = df.apply(pd.to_numeric, errors='coerce')
+                else:#windarabはカラム名調整
+                    new_columns=[]
+                    for rep in df.columns:
+                        rep = rep[:rep.find("[")]
+                        rep = rep.replace(" ","")
+                        new_columns.append(rep)
+                    df.columns = new_columns
+                    #df = df[sample_par]#同じカラム名にする必要あり
+                fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
+                mode='markers', name = filename), row= 1 ,col = 2)    
+                #ax2.scatter(df[x_pal],df[y_pal],s = 3,label = filename)
 
-    #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
+        #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
             
             x_span = (x_upper_bound - x_lower_bound)/x_div_num
             y_span = (y_upper_bound - y_lower_bound)/y_div_num    
