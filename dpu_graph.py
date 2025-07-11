@@ -153,7 +153,7 @@ if dataframes:
             z_values.append(total_counts[x][y])
 
     #ax.bar3d(x_values, y_values, 0 , dx=x_span/4 , dy=y_span/4 , dz=z_values , shade=True)
-    if st.bottun("散布図"):
+    if st.button("散布図"):
         for i in range(len(x_values)):
             fig.add_trace(go.Scatter3d(
                 x=[x_values[i], x_values[i], x_values[i]],
