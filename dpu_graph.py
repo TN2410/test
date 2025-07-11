@@ -114,7 +114,9 @@ if dataframes:
                 df.columns = new_columns
                 #df = df[sample_par]#同じカラム名にする必要あり
             fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
-            mode='markers', name = filename), row= 1 ,col = 1)    
+            mode='markers', name = filename),
+           # row= 1 ,col = 1
+             )    
             #ax2.scatter(df[x_pal],df[y_pal],s = 3,label = filename)
 
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
