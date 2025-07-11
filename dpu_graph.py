@@ -115,7 +115,8 @@ if dataframes:
                     new_columns.append(rep)
                 df.columns = new_columns
                 #df = df[sample_par]#同じカラム名にする必要あり
-            fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='markers', name = filename), row= 1 ,col = 2)    
+            fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
+                mode='markers', name = filename), row= 1 ,col = 2)    
             #ax2.scatter(df[x_pal],df[y_pal],s = 3,label = filename)
 
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
@@ -184,8 +185,8 @@ if dataframes:
     yanchor="bottom",
     y=1.05 ,  # グラフの上側に配置
     xanchor="center",
-    x=0.55  # 中央に配置
-    ))
+    x=0.1  # 中央に配置
+    ) ,row = 1 ,col = 2)
 
     fig.update_xaxes(title_text= x_pal, row=1, col=2)
     fig.update_yaxes(title_text= y_pal, row=1, col=2)
