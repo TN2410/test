@@ -84,7 +84,7 @@ if dataframes:
     #データ積算とグラフを作成する
     fig = make_subplots(rows = 1 , cols = 2 ,
                 specs=[[{"type": "scatter3d"}, {"type": "scatter"}]],
-                horizontal_spacing = 0.05 
+                horizontal_spacing = 0 
                 )
     #gs = GridSpec(10, 10, figure=fig) 
     #ax = fig.add_subplot(gs[ :9 , :9 ], projection='3d' )
