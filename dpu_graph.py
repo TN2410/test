@@ -192,7 +192,7 @@ if dataframes:
     fig.update_yaxes(range=[y_lower_bound,y_upper_bound], row=1, col=2)  # Y 軸の上下限
 
 # 左右のグラフの幅を設定（7:3）
-    # fig['layout']['xaxis'].update(domain=[0,0.7])  # 3D グラフ（左側）
+    fig['layout']['xaxis'].update(domain=[0,0.7])  # 3D グラフ（左側）
     # fig['layout']['xaxis2'].update(domain=[0.7,1])  # 3D グラフのアスペクト比
     
     if 'show_graph' not in st.session_state:
