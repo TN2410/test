@@ -196,9 +196,8 @@ if dataframes:
 # 左右のグラフの幅を設定（7:3）
     # fig['layout']['xaxis'].update(domain=[0,0.7])  # 3D グラフ（左側）
     # fig['layout']['xaxis2'].update(domain=[0.7,1])  # 3D グラフのアスペクト比
-
-    #st.pyplot(fig)
-    st.plotly_chart(fig , use_container_width=True)
+    if st.bottom("グラフ表示"):
+        st.plotly_chart(fig , use_container_width=True)
     # ダウンロード用のデータを作成
     download_data = []
     for x in total_counts:
