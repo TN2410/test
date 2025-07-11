@@ -184,9 +184,8 @@ if dataframes:
     yanchor="bottom",
     y=1.05 ,  # グラフの上側に配置
     xanchor="center",
-    x=0.5  # 中央に配置
+    x=0.55  # 中央に配置
     ))
-
 
     fig.update_xaxes(title_text= x_pal, row=1, col=2)
     fig.update_yaxes(title_text= y_pal, row=1, col=2)
