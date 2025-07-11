@@ -191,10 +191,10 @@ if dataframes:
     fig.update_xaxes(range=[x_lower_bound,x_upper_bound], row=1, col=2)  # X 軸の上下限
     fig.update_yaxes(range=[y_lower_bound,y_upper_bound], row=1, col=2)  # Y 軸の上下限
 
-# 左右のグラフの幅を設定（7:3）
-    fig['layout']['xaxis'].update(domain=[0,0.7])  # 3D グラフ（左側）
-    fig['layout']['xaxis2'].update(domain=[0.7,1])  # 3D グラフのアスペクト比
-    
+# 左右のグラフの幅を設定（7:3）    
+    fig.update_xaxes(domain=[0, 0.7], row=1, col=1)  # 3D グラフ（左側）
+    fig.update_xaxes(domain=[0.7, 1], row=1, col=2)  # 2D グラフ（右側）
+
     if 'show_graph' not in st.session_state:
         st.session_state.show_graph = False
 
