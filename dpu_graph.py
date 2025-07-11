@@ -85,7 +85,7 @@ if dataframes:
     #fig = plt.figure(figsize=(10, 6)) 
     fig = make_subplots(rows = 1 , cols = 2 ,
                 specs=[[{"type": "scatter3d"}, {"type": "scatter"}]],
-                horizontal_spacing = 0.1 
+                horizontal_spacing = 0.05 
                 )
     #gs = GridSpec(10, 10, figure=fig) 
     # 上段を横一列に使用
