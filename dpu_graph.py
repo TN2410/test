@@ -196,7 +196,16 @@ if dataframes:
 # 左右のグラフの幅を設定（7:3）
     # fig['layout']['xaxis'].update(domain=[0,0.7])  # 3D グラフ（左側）
     # fig['layout']['xaxis2'].update(domain=[0.7,1])  # 3D グラフのアスペクト比
-    if st.button("グラフ表示"):
+    
+    if 'show_graph' not in st.session_state:
+        st.session_state.show_graph = False
+
+# ボタンの作成
+    if st.button('グラフを表示/非表示'):
+        st.session_state.show_graph = not st.session_state.show_graph
+
+# グラフの表示
+    if st.session_state.show_graph:
         st.plotly_chart(fig , use_container_width=True)
     # ダウンロード用のデータを作成
     download_data = []
