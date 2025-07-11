@@ -199,7 +199,7 @@ if dataframes:
     # fig['layout']['xaxis2'].update(domain=[0.7,1])  # 3D グラフのアスペクト比
 
     #st.pyplot(fig)
-    st.plotly_chart(fig)
+    st.plotly_chart(fig , use_container_width=True)
     # ダウンロード用のデータを作成
     download_data = []
     for x in total_counts:
