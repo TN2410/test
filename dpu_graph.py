@@ -193,7 +193,7 @@ if dataframes:
 
 # 左右のグラフの幅を設定（7:3）
     fig['layout']['xaxis'].update(domain=[0,0.7])  # 3D グラフ（左側）
-    # fig['layout']['xaxis2'].update(domain=[0.7,1])  # 3D グラフのアスペクト比
+    fig['layout']['xaxis2'].update(domain=[0.7,1])  # 3D グラフのアスペクト比
     
     if 'show_graph' not in st.session_state:
         st.session_state.show_graph = False
