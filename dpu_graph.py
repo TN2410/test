@@ -17,9 +17,9 @@ from plotly.subplots import make_subplots
  #windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
 st.set_page_config(
      page_title="PLOT",  
-     layout="centered", 
+     layout="wide", 
      initial_sidebar_state="expanded")
-st.title("windarab or dpu データ表示")
+st.title("windarab or dpu 積算データ")
 
 @st.cache_data
 def load_uploaded_file(uploaded_file, skiprows):
