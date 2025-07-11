@@ -182,7 +182,7 @@ if dataframes:
     fig.update_layout(legend=dict(
     orientation="v",  # 水平に配置
     yanchor="bottom",
-    y=1.105  # グラフの上側に配置
+    y=1.05  # グラフの上側に配置
     xanchor="center",
     x=0.5  # 中央に配置
     ))
