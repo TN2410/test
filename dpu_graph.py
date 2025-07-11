@@ -14,7 +14,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
- windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
+ #windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
  st.set_page_config(
      page_title="PLOT",  
      layout="centered", 
