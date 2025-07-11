@@ -115,8 +115,9 @@ if dataframes:
                     new_columns.append(rep)
                 df.columns = new_columns
                 #df = df[sample_par]#同じカラム名にする必要あり
-            fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
-                mode='markers', name = filename), row= 1 ,col = 2)    
+                if st.button("散布図"):
+                    fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
+                    mode='markers', name = filename), row= 1 ,col = 2)    
             #ax2.scatter(df[x_pal],df[y_pal],s = 3,label = filename)
 
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
@@ -153,16 +154,15 @@ if dataframes:
             z_values.append(total_counts[x][y])
 
     #ax.bar3d(x_values, y_values, 0 , dx=x_span/4 , dy=y_span/4 , dz=z_values , shade=True)
-    if st.button("散布図"):
-        for i in range(len(x_values)):
-            fig.add_trace(go.Scatter3d(
-                x=[x_values[i], x_values[i], x_values[i]],
-                y=[y_values[i], y_values[i], y_values[i]],
-                z=[0, z_values[i] , 0],
-                mode='lines',
-                line=dict(width=10,color = "blue"),
-                showlegend = False
-                ),row = 1 ,col = 1 )    
+    for i in range(len(x_values)):
+        fig.add_trace(go.Scatter3d(
+            x=[x_values[i], x_values[i], x_values[i]],
+            y=[y_values[i], y_values[i], y_values[i]],
+            z=[0, z_values[i] , 0],
+            mode='lines',
+            line=dict(width=10,color = "blue"),
+            showlegend = False
+            ),row = 1 ,col = 1 )    
 
     # 3D散布図の軸ラベル設定
     sumall = sum(z_values)/3600
