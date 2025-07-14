@@ -108,6 +108,7 @@ if dataframes:
                     new_columns.append(rep)
                 df.columns = new_columns
                 #df = df[sample_par]#同じカラム名にする必要あり
+            st.write(x[pal])
             fig1.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
             mode='markers', name = filename))    
 
@@ -134,80 +135,80 @@ if dataframes:
             for y in z_sum[x]:
                 total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
 
-    x_values = []
-    y_values = []
-    z_values = []
+#     x_values = []
+#     y_values = []
+#     z_values = []
 
-    for x in total_counts:
-        for y in total_counts[x]:
-            x_values.append(x)
-            y_values.append(y)
-            z_values.append(total_counts[x][y])
+#     for x in total_counts:
+#         for y in total_counts[x]:
+#             x_values.append(x)
+#             y_values.append(y)
+#             z_values.append(total_counts[x][y])
 
-    fig2 = go.Figure()
-    for i in range(len(x_values)):
-        fig2.add_trace(go.Scatter3d(
-            x=[x_values[i], x_values[i], x_values[i]],
-            y=[y_values[i], y_values[i], y_values[i]],
-            z=[0, z_values[i] , 0],
-            mode='lines',
-            line=dict(width=10,color = "blue"),
-            showlegend = False
-            ))    
+#     fig2 = go.Figure()
+#     for i in range(len(x_values)):
+#         fig2.add_trace(go.Scatter3d(
+#             x=[x_values[i], x_values[i], x_values[i]],
+#             y=[y_values[i], y_values[i], y_values[i]],
+#             z=[0, z_values[i] , 0],
+#             mode='lines',
+#             line=dict(width=10,color = "blue"),
+#             showlegend = False
+#             ))    
 
-    # 3D散布図の軸ラベル設定
-    sumall = sum(z_values)/3600
-    fig2.update_layout(
-        title = "全 {:.3f} Hr".format(sumall),
-        scene = dict(
-            xaxis_title= x_pal,
-            yaxis_title= y_pal,
-            zaxis_title= "Time(sec)",
-            xaxis=dict(range=[x_lower_bound,x_upper_bound]),  # X 軸の上下限
-            yaxis=dict(range=[y_lower_bound,y_upper_bound]),  # Y 軸の上下限
-           # Z 軸の上下限
-        ),
-        height = 900 ,
-        width = 1200 ,
-    )
-    # 2D グラフのタイトルと軸ラベルを設定
+#     # 3D散布図の軸ラベル設定
+#     sumall = sum(z_values)/3600
+#     fig2.update_layout(
+#         title = "全 {:.3f} Hr".format(sumall),
+#         scene = dict(
+#             xaxis_title= x_pal,
+#             yaxis_title= y_pal,
+#             zaxis_title= "Time(sec)",
+#             xaxis=dict(range=[x_lower_bound,x_upper_bound]),  # X 軸の上下限
+#             yaxis=dict(range=[y_lower_bound,y_upper_bound]),  # Y 軸の上下限
+#            # Z 軸の上下限
+#         ),
+#         height = 900 ,
+#         width = 1200 ,
+#     )
+#     # 2D グラフのタイトルと軸ラベルを設定
 
-    fig1.update_layout(legend=dict(
-    orientation="v",  # 水平に配置
-    yanchor="bottom",
-    y=1.05 ,  # グラフの上側に配置
-    xanchor="center",
-    x=0.1  # 左よりに配置
-    ))
+#     fig1.update_layout(legend=dict(
+#     orientation="v",  # 水平に配置
+#     yanchor="bottom",
+#     y=1.05 ,  # グラフの上側に配置
+#     xanchor="center",
+#     x=0.1  # 左よりに配置
+#     ))
 
-    fig1.update_xaxes(title_text= x_pal, row=1, col=1)
-    fig1.update_yaxes(title_text= y_pal, row=1, col=1)
+#     fig1.update_xaxes(title_text= x_pal, row=1, col=1)
+#     fig1.update_yaxes(title_text= y_pal, row=1, col=1)
     
-    fig2.update_xaxes(range=[x_lower_bound,x_upper_bound], row=1, col=1)  # X 軸の上下限
-    fig2.update_yaxes(range=[y_lower_bound,y_upper_bound], row=1, col=1)  # Y 軸の上下限
+#     fig2.update_xaxes(range=[x_lower_bound,x_upper_bound], row=1, col=1)  # X 軸の上下限
+#     fig2.update_yaxes(range=[y_lower_bound,y_upper_bound], row=1, col=1)  # Y 軸の上下限
 
-    if 'show_graph' not in st.session_state:
-        st.session_state.show_graph = False
+#     if 'show_graph' not in st.session_state:
+#         st.session_state.show_graph = False
 
-# ボタンの作成
-    if st.button('グラフを表示/非表示'):
-        st.session_state.show_graph = not st.session_state.show_graph
+# # ボタンの作成
+#     if st.button('グラフを表示/非表示'):
+#         st.session_state.show_graph = not st.session_state.show_graph
 
-# グラフの表示
-    if st.session_state.show_graph:
-        st.plotly_chart(fig , use_container_width=True)
-    # ダウンロード用のデータを作成
-    download_data = []
-    for x in total_counts:
-        for y in total_counts[x]:
-            download_data.append([x, y, total_counts[x][y]])
-    # CSV形式でデータをダウンロード
-    csv_data = pd.DataFrame(download_data, columns=[x_pal, y_pal, 'Count'])
-    csv_buffer = csv_data.to_csv(index=False).encode('utf-8')
+# # グラフの表示
+#     if st.session_state.show_graph:
+#         st.plotly_chart(fig , use_container_width=True)
+#     # ダウンロード用のデータを作成
+#     download_data = []
+#     for x in total_counts:
+#         for y in total_counts[x]:
+#             download_data.append([x, y, total_counts[x][y]])
+#     # CSV形式でデータをダウンロード
+#     csv_data = pd.DataFrame(download_data, columns=[x_pal, y_pal, 'Count'])
+#     csv_buffer = csv_data.to_csv(index=False).encode('utf-8')
 
-    st.download_button(
-        label="積算データをダウンロード",
-        data=csv_buffer,
-        file_name='cumulative_data.csv',
-        mime='text/csv'
-    )
+#     st.download_button(
+#         label="積算データをダウンロード",
+#         data=csv_buffer,
+#         file_name='cumulative_data.csv',
+#         mime='text/csv'
+#     )
