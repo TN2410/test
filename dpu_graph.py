@@ -29,8 +29,8 @@ st.markdown(
     """
     <style>
     .custom-uploader {
-        width: 400px;  /* アップローダの幅 */
-        height: 200px; /* アップローダの高さ */
+        width: 200px;  /* アップローダの幅 */
+        height: 400px; /* アップローダの高さ */
     }
     .custom-selectbox {
         width: 400px;  /* セレクトボックスの幅 */
