@@ -84,8 +84,8 @@ if dataframes:
     #データ積算とグラフを作成する
 
     z_sum = {}#チェックボックスにチェックが入っている場合の)#チェックボックスにチェックが入っている場合のみプロットする
+    fig1 = go.Figure()
     for filename, df in dataframes.items():
-        fig1 = go.Figure()
         with st.sidebar:
             show_data = st.checkbox("{} を表示".format(filename), value=True)        
         # 合計結果を表示
@@ -183,7 +183,6 @@ if dataframes:
     fig1.update_xaxes(title_text= x_pal)
     fig1.update_yaxes(title_text= y_pal)
     
-
     fig2.update_xaxes(range=[x_lower_bound,x_upper_bound])  # X 軸の上下限
     fig2.update_yaxes(range=[y_lower_bound,y_upper_bound])  # Y 軸の上下限
     if 'show_graph' not in st.session_state:
