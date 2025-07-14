@@ -25,6 +25,21 @@ st.title("windarab or dpu 積算データ")
 def load_uploaded_file(uploaded_file, skiprows):
     return pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
 
+st.markdown(
+    """
+    <style>
+    .custom-uploader {
+        width: 400px;  /* アップローダの幅 */
+        height: 200px; /* アップローダの高さ */
+    }
+    .custom-selectbox {
+        width: 400px;  /* セレクトボックスの幅 */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True 
                                  )
 specific_string = "windarab"  # ここに検索したい文字を設定
