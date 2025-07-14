@@ -82,10 +82,10 @@ if dataframes:
     total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     
     #データ積算とグラフを作成する
-    fig1 = go.Figure()
 
     z_sum = {}#チェックボックスにチェックが入っている場合の)#チェックボックスにチェックが入っている場合のみプロットする
     for filename, df in dataframes.items():
+        fig1 = go.Figure()
         with st.sidebar:
             show_data = st.checkbox("{} を表示".format(filename), value=True)        
         # 合計結果を表示
