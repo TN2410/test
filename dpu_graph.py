@@ -108,7 +108,7 @@ if dataframes:
                     new_columns.append(rep)
                 df.columns = new_columns
                 #df = df[sample_par]#同じカラム名にする必要あり
-            st.write(x[pal])
+            st.write(x_pal)
             fig1.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
             mode='markers', name = filename))    
 
