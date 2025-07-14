@@ -82,7 +82,7 @@ if dataframes:
     total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     
     #データ積算とグラフを作成する
-    fig1 = go.figure()
+    fig1 = go.Figure()
 
     z_sum = {}#チェックボックスにチェックが入っている場合の)#チェックボックスにチェックが入っている場合のみプロットする
     for filename, df in dataframes.items():
@@ -144,7 +144,7 @@ if dataframes:
             y_values.append(y)
             z_values.append(total_counts[x][y])
 
-    fig2 = go.figure()
+    fig2 = go.Figure()
     for i in range(len(x_values)):
         fig2.add_trace(go.Scatter3d(
             x=[x_values[i], x_values[i], x_values[i]],
