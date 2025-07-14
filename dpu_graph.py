@@ -195,7 +195,9 @@ if dataframes:
 
 # グラフの表示
     if st.session_state.show_graph:
-        st.plotly_chart(fig1 , use_container_width=True)
+        st.plotly_chart(fig1 , use_container_width=True)2
+        st.plotly_chart(fig , use_container_width=True)
+
     # ダウンロード用のデータを作成
     download_data = []
     for x in total_counts:
