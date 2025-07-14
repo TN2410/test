@@ -109,7 +109,7 @@ if dataframes:
                 df.columns = new_columns
                 #df = df[sample_par]#同じカラム名にする必要あり
             fig1.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
-            mode='markers', name = filename),row= 1 ,col = 1)    
+            mode='markers', name = filename))    
 
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
         
@@ -153,7 +153,7 @@ if dataframes:
             mode='lines',
             line=dict(width=10,color = "blue"),
             showlegend = False
-            ),row = 1 ,col = 2 )    
+            ))    
 
     # 3D散布図の軸ラベル設定
     sumall = sum(z_values)/3600
