@@ -82,7 +82,7 @@ if dataframes:
     total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     
     #データ積算とグラフを作成する
-    fig = make_subplots(rows = 1 , cols = 2 ,
+    fig = make_subplots(rows = 2 , cols = 1 ,
                 specs=[[{"type": "scatter"}, {"type": "scatter3d"}]],
                 horizontal_spacing = 0 
                 )
@@ -158,7 +158,7 @@ if dataframes:
             mode='lines',
             line=dict(width=10,color = "blue"),
             showlegend = False
-            ),row = 1 ,col = 2 )    
+            ),row = 2 ,col = 1 )    
 
     # 3D散布図の軸ラベル設定
     sumall = sum(z_values)/3600
@@ -192,7 +192,7 @@ if dataframes:
     fig.update_yaxes(range=[y_lower_bound,y_upper_bound], row=1, col=1)  # Y 軸の上下限
 
 # 左右のグラフの幅を設定（7:3）    
-    fig.update_xaxes(domain=[0, 0.3], row=1, col=1)  # 3D グラフ（左側）
+    #fig.update_xaxes(domain=[0, 0.3], row=1, col=1)  # 3D グラフ（左側）
     #fig.update_xaxes(domain=[0.3, 1], row=1, col=2)  # 2D グラフ（右側）
 
     # fig.update_yaxes(domain=[0, 0.3], row=1, col=1)  # 2D グラフ（右側）
