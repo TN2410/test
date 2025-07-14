@@ -182,10 +182,10 @@ if dataframes:
 
     fig1.update_xaxes(title_text= x_pal, row=1, col=1)
     fig1.update_yaxes(title_text= y_pal, row=1, col=1)
-    
-    fig2.update_xaxes(range=[x_lower_bound,x_upper_bound], row=1, col=1)  # X 軸の上下限
-    fig2.update_yaxes(range=[y_lower_bound,y_upper_bound], row=1, col=1)  # Y 軸の上下限
+    _upper_bound], row=1, col=1)  # Y 軸の上下限
 
+    fig2.update_xaxes(range=[x_lower_bound,x_upper_bound], row=1, col=1)  # X 軸の上下限
+    fig2.update_yaxes(range=[y_lower_bound,y
     if 'show_graph' not in st.session_state:
         st.session_state.show_graph = False
 
@@ -195,7 +195,7 @@ if dataframes:
 
 # グラフの表示
     if st.session_state.show_graph:
-        st.plotly_chart(fig , use_container_width=True)
+        st.plotly_chart(fig1 , use_container_width=True)
     # ダウンロード用のデータを作成
     download_data = []
     for x in total_counts:
