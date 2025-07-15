@@ -198,7 +198,7 @@ if dataframes:
     y=1.05 ,  # グラフの上側に配置
     xanchor="center",
     x=0.1 , # 左よりに配置
-    heigyt = 450 ,
+    height = 450 ,
     width = 600
     ))
 
