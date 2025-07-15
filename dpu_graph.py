@@ -216,10 +216,10 @@ if dataframes:
 
     fig.update_layout(legend=dict(
     orientation="v",  # 水平に配置
-    yanchor="bottom",
-    y=0.2 ,  # グラフの上側に配置
+    yanchor="middle",
+    y=0.5 ,  # グラフの上側に配置
     xanchor="right",
-    x=0
+    x=-0.1
      ) , # 左よりに配置
     )
 
