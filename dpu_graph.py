@@ -187,8 +187,8 @@ if dataframes:
             yaxis=dict(range=[y_lower_bound,y_upper_bound]),  # Y 軸の上下限
            # Z 軸の上下限
         ),
-        height = 900 ,
-        width = 1200 ,
+        height = 450 ,
+        width = 600 ,
     )
     # 2D グラフのタイトルと軸ラベルを設定
 
@@ -197,7 +197,9 @@ if dataframes:
     yanchor="bottom",
     y=1.05 ,  # グラフの上側に配置
     xanchor="center",
-    x=0.1  # 左よりに配置
+    x=0.1 , # 左よりに配置
+    heigyt = 450 ,
+    width = 600
     ))
 
     fig1.update_xaxes(title_text= x_pal)
