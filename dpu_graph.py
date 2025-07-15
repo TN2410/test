@@ -231,7 +231,7 @@ if dataframes:
     yanchor="top",
     y=1.0 ,  # グラフの上側に配置
     xanchor="left",
-    x=0.45
+    x=0.42
 
      ) , # 左よりに配置
     )
