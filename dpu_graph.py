@@ -176,8 +176,8 @@ if dataframes:
 
     for i in range(len(x_values)):
         fig.add_trace(go.Scatter3d(
-            x=[x_values[i]+x_span/20, x_values[i]+x_span/20, x_values[i]+x_span/20, x_values[i]+x_span/20, x_values[i]+x_span/20],
-            y=[y_values[i]-y_span/20, y_values[i]-y_span/20, y_values[i]-y_span/20, y_values[i]-y_span/20, y_values[i]-y_span/20],
+            x=[x_values[i]+x_span/30, x_values[i]+x_span/30, x_values[i]+x_span/30, x_values[i]+x_span/30, x_values[i]+x_span/30],
+            y=[y_values[i]-y_span/30, y_values[i]-y_span/30, y_values[i]-y_span/30, y_values[i]-y_span/30, y_values[i]-y_span/30],
             z=[0, z_values[i] ,z_values[i] ,0, 0],
             mode='lines',
             line=dict(width=10,color = 'rgba(0, 0, 0, 0.3)'),
