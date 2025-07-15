@@ -192,7 +192,6 @@ if dataframes:
     #fig['layout']['xaxis'].update(domain=[0, 0.7])  # 1つ目のグラフの幅
     #fig['layout']['xaxis'].update(domain=[0.7, 1])  # 2つ目のグラフの幅 
      
-
     fig.update_layout(
         title = "全 {:.3f} Hr".format(sumall),
         scene = dict(
@@ -216,8 +215,8 @@ if dataframes:
 
     fig.update_layout(legend=dict(
     orientation="v",  # 水平に配置
-    yanchor="bottom",
-    y=0.5 ,  # グラフの上側に配置
+    yanchor="top",
+    y=1.0 ,  # グラフの上側に配置
     xanchor="left",
     x=0.5
 
