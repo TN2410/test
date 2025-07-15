@@ -182,7 +182,7 @@ if dataframes:
             mode='lines',
             line=dict(width=10,color = "blue"),
             showlegend = False
-            )
+            ),
             row=1,
             col=1)    
 
