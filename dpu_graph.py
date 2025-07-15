@@ -210,7 +210,7 @@ if dataframes:
         yaxis=dict(range=[y_lower_bound,y_upper_bound])
         ),
         height = 600 ,
-        width = 800 ,
+        width = 1600 ,
     )
     # 2D グラフのタイトルと軸ラベルを設定
 
