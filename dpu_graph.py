@@ -216,7 +216,7 @@ if dataframes:
 
     fig.update_layout(legend=dict(
     orientation="v",  # 水平に配置
-    yanchor="bottum",
+    yanchor="buttom",
     y=1.05 ,  # グラフの上側に配置
     xanchor="right",
     x=0.5
