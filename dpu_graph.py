@@ -25,21 +25,6 @@ st.title("windarab or dpu 積算データ")
 def load_uploaded_file(uploaded_file, skiprows):
     return pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
 
-st.markdown(
-    """
-    <style>
-    .custom-uploader {
-        width: 200px;  /* アップローダの幅 */
-        height: 400px; /* アップローダの高さ */
-    }
-    .custom-selectbox {
-        width: 400px;  /* セレクトボックスの幅 */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 col1, col2 = st.columns(2)
 
 with col1:
@@ -141,8 +126,7 @@ if dataframes:
             col=2,
             )    
 
-    #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
-        
+    #分割数　10として　3Dマップを作る
             x_span = (x_upper_bound - x_lower_bound)/x_div_num
             y_span = (y_upper_bound - y_lower_bound)/y_div_num    
             
@@ -225,14 +209,12 @@ if dataframes:
         width = 1600 ,
     )
     # 2D グラフのタイトルと軸ラベルを設定
-
     fig.update_layout(legend=dict(
     orientation="v",  # 水平に配置
     yanchor="top",
     y=1.0 ,  # グラフの上側に配置
     xanchor="left",
     x=0.42
-
      ) , # 左よりに配置
     )
 
