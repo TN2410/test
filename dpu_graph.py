@@ -188,9 +188,9 @@ if dataframes:
 
     for i in range(len(x_values)):
         fig.add_trace(go.Scatter3d(
-            x=[x_values[i], x_values[i], x_values[i]],
-            y=[y_values[i], y_values[i], y_values[i]],
-            z=[0, z_values[i] , 0],
+            x=[x_values[i], x_values[i], x_values[i], x_values[i], x_values[i]],
+            y=[y_values[i], y_values[i], y_values[i], y_values[i], y_values[i]],
+            z=[0, z_values[i] , z_values[i] ,0, 0],
             mode='lines',
             line=dict(width=10,color = "blue"),
             showlegend = False
