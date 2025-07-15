@@ -108,7 +108,7 @@ if dataframes:
     rows=1, 
     cols=2, 
     specs=[[{"type": "surface"}, {"type": "scatter"}]],  # 1つ目は2Dプロット、2つ目は3Dプロット
-    subplot_titles=("3D_Scatter", "Scatter Plot"),
+    subplot_titles=("時間頻度", "Scatter Plot"),
     horizontal_spacing=0.1  # グラフ間の水平スペースを調整
     )
 
