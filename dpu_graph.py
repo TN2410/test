@@ -218,7 +218,7 @@ if dataframes:
     orientation="v",  # 水平に配置
     yanchor="bottom",
     y=0.5 ,  # グラフの上側に配置
-    xanchor="center",
+    xanchor="left",
     x=0.4
 
      ) , # 左よりに配置
