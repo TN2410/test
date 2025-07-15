@@ -190,7 +190,7 @@ if dataframes:
     sumall = sum(z_values)/3600
    # 各サブプロットの幅を比率3:7に設定
     #fig['layout']['xaxis'].update(domain=[0, 0.7])  # 1つ目のグラフの幅
-    fig['layout']['xaxis'].update(domain=[0.7, 1])  # 2つ目のグラフの幅 
+    #fig['layout']['xaxis'].update(domain=[0.7, 1])  # 2つ目のグラフの幅 
      
 
     fig.update_layout(
