@@ -212,7 +212,7 @@ if dataframes:
         zaxis_title= "Time(sec)",
         xaxis=dict(range=[x_lower_bound,x_upper_bound]),  # X 軸の上下限
         yaxis=dict(range=[y_lower_bound,y_upper_bound]),
-        camera=dict(eye=dict(x=1.5, y=1.5, z=1.5))  # Y 軸の上下限
+        camera=dict(eye=dict(x=1.5, y=-1.5, z=1.5))  # Y 軸の上下限
            # Z 軸の上下限
         ),
         scene2 = dict(
