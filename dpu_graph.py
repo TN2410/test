@@ -221,8 +221,6 @@ if dataframes:
     xanchor="center",
     x=0.1
      ) , # 左よりに配置
-    height = 450 ,
-    width = 600
     )
 
     # 凡例の設定: 左のグラフにのみ凡例を表示
