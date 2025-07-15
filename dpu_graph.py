@@ -40,7 +40,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True 
+col1, col2 = st.columns(2)
+
+with col1:
+    uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True 
                                  )
 specific_string = "windarab"  # ここに検索したい文字を設定
 if uploaded_files is not None:
@@ -61,7 +64,9 @@ if uploaded_files is not None:
         df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows , engine="python")
         dataframes[uploaded_file.name] = df
 
-sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
+with col2:
+    sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
+
 #グラフを書く前にsample_fに即した仮データベースファイルを使用したほうが、時間早いと思われる
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding ='CP932')
