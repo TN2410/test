@@ -219,8 +219,8 @@ if dataframes:
     yanchor="bottom",
     y=0.5 ,  # グラフの上側に配置
     xanchor="center",
-    x=0.5
-    
+    x=0.4
+
      ) , # 左よりに配置
     )
 
