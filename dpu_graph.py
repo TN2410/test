@@ -180,7 +180,7 @@ if dataframes:
             y=[y_values[i], y_values[i], y_values[i]],
             z=[0, z_values[i] , 0],
             mode='lines',
-            line=dict(width=10,color = 'rgba(0, 0, 0, 0.3)'),
+            line=dict(width=10,color = 'rgba(0, 0, 0, 0.9)'),
             showlegend = False
             ),
             row=1,
