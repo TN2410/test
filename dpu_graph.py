@@ -104,7 +104,14 @@ if dataframes:
     #データ積算とグラフを作成する
 
     z_sum = {}#チェックボックスにチェックが入っている場合の)#チェックボックスにチェックが入っている場合のみプロットする
-    fig1 = go.Figure()
+    fig = make_subplots(
+    rows=1, 
+    cols=2, 
+    specs=[[{"type": "surface"}, {"type": "scatter"}]],  # 1つ目は2Dプロット、2つ目は3Dプロット
+    subplot_titles=("3D_Scatter", "Scatter Plot"),
+    horizontal_spacing=0.1  # グラフ間の水平スペースを調整
+    )
+
     for filename, df in dataframes.items():
         with st.sidebar:
             show_data = st.checkbox("{} を表示".format(filename), value=True)        
@@ -128,8 +135,11 @@ if dataframes:
                     new_columns.append(rep)
                 df.columns = new_columns
                 #df = df[sample_par]#同じカラム名にする必要あり
-            fig1.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
-            mode='markers', name = filename))    
+            fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
+            mode='markers', name = filename),
+            rows=1,
+            col=2,
+            )    
 
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
         
@@ -164,31 +174,43 @@ if dataframes:
             y_values.append(y)
             z_values.append(total_counts[x][y])
 
-    fig2 = go.Figure()
     for i in range(len(x_values)):
-        fig2.add_trace(go.Scatter3d(
+        fig.add_trace(go.Scatter3d(
             x=[x_values[i], x_values[i], x_values[i]],
             y=[y_values[i], y_values[i], y_values[i]],
             z=[0, z_values[i] , 0],
             mode='lines',
             line=dict(width=10,color = "blue"),
             showlegend = False
-            ))    
+            )
+            rows=1,
+            col=1)    
 
     # 3D散布図の軸ラベル設定
     sumall = sum(z_values)/3600
-    fig2.update_layout(
+   # 各サブプロットの幅を比率3:7に設定
+    fig['layout']['xaxis'].update(domain=[0, 0.3])  # 1つ目のグラフの幅
+    fig['layout']['xaxis2'].update(domain=[0.3, 1])  # 2つ目のグラフの幅 
+     
+
+    fig.update_layout(
         title = "全 {:.3f} Hr".format(sumall),
         scene = dict(
-            xaxis_title= x_pal,
-            yaxis_title= y_pal,
-            zaxis_title= "Time(sec)",
-            xaxis=dict(range=[x_lower_bound,x_upper_bound]),  # X 軸の上下限
-            yaxis=dict(range=[y_lower_bound,y_upper_bound]),  # Y 軸の上下限
+        xaxis_title= x_pal,
+        yaxis_title= y_pal,
+        zaxis_title= "Time(sec)",
+        xaxis=dict(range=[x_lower_bound,x_upper_bound]),  # X 軸の上下限
+        yaxis=dict(range=[y_lower_bound,y_upper_bound]),  # Y 軸の上下限
            # Z 軸の上下限
         ),
-        height = 450 ,
-        width = 600 ,
+        scene2 = dict(
+        xaxis_title= x_pal,
+        yaxis_title= y_pal,
+        xaxis=dict(range=[x_lower_bound,x_upper_bound]),  # X 軸の上下限
+        yaxis=dict(range=[y_lower_bound,y_upper_bound])
+        )
+        height = 900 ,
+        width = 1200 ,
     )
     # 2D グラフのタイトルと軸ラベルを設定
 
@@ -203,11 +225,14 @@ if dataframes:
     width = 600
     )
 
-    fig1.update_xaxes(title_text= x_pal)
-    fig1.update_yaxes(title_text= y_pal)
+    # 凡例の設定: 左のグラフにのみ凡例を表示
+    fig.update_layout(
+        showlegend=True,
+    )
+
+    # 右側のグラフの凡例を非表示にする
+    fig['data'][1]['showlegend'] = False  # 2つ目のプロットの凡例を非表示に
     
-    fig2.update_xaxes(range=[x_lower_bound,x_upper_bound])  # X 軸の上下限
-    fig2.update_yaxes(range=[y_lower_bound,y_upper_bound])  # Y 軸の上下限
     if 'show_graph' not in st.session_state:
         st.session_state.show_graph = False
 
