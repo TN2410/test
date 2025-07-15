@@ -240,8 +240,7 @@ if dataframes:
 
 # グラフの表示
     if st.session_state.show_graph:
-        st.plotly_chart(fig1 , use_container_width=False)
-        st.plotly_chart(fig2 , use_container_width=False)
+        st.plotly_chart(fig , use_container_width=False)
 
     # ダウンロード用のデータを作成
     download_data = []
