@@ -209,8 +209,8 @@ if dataframes:
         xaxis=dict(range=[x_lower_bound,x_upper_bound]),  # X 軸の上下限
         yaxis=dict(range=[y_lower_bound,y_upper_bound])
         ),
-        height = 900 ,
-        width = 1200 ,
+        #height = 900 ,
+        #width = 1200 ,
     )
     # 2D グラフのタイトルと軸ラベルを設定
 
@@ -229,7 +229,7 @@ if dataframes:
     )
 
     # 右側のグラフの凡例を非表示にする
-    fig['data'][1]['showlegend'] = False  # 2つ目のプロットの凡例を非表示に
+    #fig['data'][1]['showlegend'] = False  # 2つ目のプロットの凡例を非表示に
     
     if 'show_graph' not in st.session_state:
         st.session_state.show_graph = False
