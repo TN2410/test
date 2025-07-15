@@ -196,7 +196,7 @@ if dataframes:
         zaxis_title= "Time(sec)",
         xaxis=dict(range=[x_lower_bound,x_upper_bound]),  # X 軸の上下限
         yaxis=dict(range=[y_lower_bound,y_upper_bound]),
-        camera=dict(eye=dict(x=1.0, y=-1.0, z=1.0))  # Y 軸の上下限
+        camera=dict(eye=dict(x=1.25, y=-1.25, z=1.25))  # Y 軸の上下限
            # Z 軸の上下限
         ),
         scene2 = dict(
@@ -214,7 +214,7 @@ if dataframes:
     yanchor="top",
     y=1.0 ,  # グラフの上側に配置
     xanchor="left",
-    x=0.42
+    x=0.43
      ) , # 左よりに配置
     )
 
