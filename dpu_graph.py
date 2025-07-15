@@ -189,8 +189,8 @@ if dataframes:
     # 3D散布図の軸ラベル設定
     sumall = sum(z_values)/3600
    # 各サブプロットの幅を比率3:7に設定
-    fig['layout']['xaxis'].update(domain=[0, 0.3])  # 1つ目のグラフの幅
-    fig['layout']['xaxis'].update(domain=[0.3, 1])  # 2つ目のグラフの幅 
+    fig['layout']['xaxis'].update(domain=[0, 0.7])  # 1つ目のグラフの幅
+    #fig['layout']['xaxis2'].update(domain=[0.3, 1])  # 2つ目のグラフの幅 
      
 
     fig.update_layout(
