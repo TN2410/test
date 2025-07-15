@@ -217,9 +217,9 @@ if dataframes:
     fig.update_layout(legend=dict(
     orientation="v",  # 水平に配置
     yanchor="bottom",
-    y=1.05 ,  # グラフの上側に配置
+    y=0.5 ,  # グラフの上側に配置
     xanchor="center",
-    x=0.6
+    x=-0.1
      ) , # 左よりに配置
     )
 
@@ -228,9 +228,7 @@ if dataframes:
         showlegend=True,
     )
 
-    # 右側のグラフの凡例を非表示にする
-    #fig['data'][1]['showlegend'] = False  # 2つ目のプロットの凡例を非表示に
-    
+    # 右側のグラフの凡例を非表示にする    
     if 'show_graph' not in st.session_state:
         st.session_state.show_graph = False
 
