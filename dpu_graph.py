@@ -137,7 +137,7 @@ if dataframes:
                 #df = df[sample_par]#同じカラム名にする必要あり
             fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
             mode='markers', name = filename),
-            rows=1,
+            row=1,
             col=2,
             )    
 
@@ -183,7 +183,7 @@ if dataframes:
             line=dict(width=10,color = "blue"),
             showlegend = False
             )
-            rows=1,
+            row=1,
             col=1)    
 
     # 3D散布図の軸ラベル設定
