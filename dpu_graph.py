@@ -219,7 +219,7 @@ if dataframes:
     yanchor="bottom",
     y=1.05 ,  # グラフの上側に配置
     xanchor="center",
-    x=0.1
+    x=0.6
      ) , # 左よりに配置
     )
 
