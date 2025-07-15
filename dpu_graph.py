@@ -128,26 +128,26 @@ if dataframes:
 
     #分割数　10として　3Dマップを作る 10分割が１以下になる場合の処理追加必要
         
-        x_span = (x_upper_bound - x_lower_bound)/x_div_num
-        y_span = (y_upper_bound - y_lower_bound)/y_div_num    
-        
-        for xx in range(x_div_num):
-            x = xx * x_span + int(x_lower_bound)
-            z_sum[x] = {}    
-            for yy in range(y_div_num):
-                y = yy * y_span + int(y_lower_bound)
-                # NumPyを使用してフィルタリング
-                mask_x = (df[x_pal] >= x) & (df[x_pal] < x + x_span)
-                mask_y = (df[y_pal] >= y) & (df[y_pal] < y + y_span)
-                filtered_data = df[mask_x & mask_y]
-                z_sum[x][y] = len(filtered_data)
+            x_span = (x_upper_bound - x_lower_bound)/x_div_num
+            y_span = (y_upper_bound - y_lower_bound)/y_div_num    
+            
+            for xx in range(x_div_num):
+                x = xx * x_span + int(x_lower_bound)
+                z_sum[x] = {}    
+                for yy in range(y_div_num):
+                    y = yy * y_span + int(y_lower_bound)
+                    # NumPyを使用してフィルタリング
+                    mask_x = (df[x_pal] >= x) & (df[x_pal] < x + x_span)
+                    mask_y = (df[y_pal] >= y) & (df[y_pal] < y + y_span)
+                    filtered_data = df[mask_x & mask_y]
+                    z_sum[x][y] = len(filtered_data)
 
-        # z_sumを total_counts に追加
-        for x in z_sum:
-            if x not in total_counts:
-                total_counts[x] = {}
-            for y in z_sum[x]:
-                total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
+            # z_sumを total_counts に追加
+            for x in z_sum:
+                if x not in total_counts:
+                    total_counts[x] = {}
+                for y in z_sum[x]:
+                    total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
 
     x_values = []
     y_values = []
