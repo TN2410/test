@@ -214,7 +214,7 @@ if dataframes:
     )
     # 2D グラフのタイトルと軸ラベルを設定
 
-    fig1.update_layout(legend=dict(
+    fig.update_layout(legend=dict(
     orientation="v",  # 水平に配置
     yanchor="bottom",
     y=1.05 ,  # グラフの上側に配置
