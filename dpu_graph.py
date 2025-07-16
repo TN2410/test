@@ -198,7 +198,7 @@ if dataframes:
     #fig['layout']['xaxis'].update(domain=[0.7, 1])  # 2つ目のグラフの幅 
      
     fig.update_layout(
-        title = "全 {:.3f} Hr".format(sumall),
+        title = "全 {:.3f} Hr ({} sec)".format(sumall,small*3600),
         scene = dict(
         xaxis_title= x_pal,
         yaxis_title= y_pal,
