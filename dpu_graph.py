@@ -163,7 +163,7 @@ if dataframes:
     for z in z_values:
         # zが0の場合を考慮して、ゼロ除算を防ぐ
         if z_sum != 0:
-            z_values_normalized.append(z / z_sum)
+            z_values_normalized.append(z / z_sum *100)
         else:
             z_values_normalized.append(0)  # ゼロ除算の場合、無次元化された値も0に設定
 
@@ -202,7 +202,7 @@ if dataframes:
         scene = dict(
         xaxis_title= x_pal,
         yaxis_title= y_pal,
-        zaxis_title= "Time(sec)",
+        zaxis_title= "Time(%)",
         xaxis=dict(range=[x_lower_bound,x_upper_bound]),  # X 軸の上下限
         yaxis=dict(range=[y_lower_bound,y_upper_bound]),
         camera=dict(eye=dict(x=1.25, y=-1.25, z=1.25))  # Y 軸の上下限
