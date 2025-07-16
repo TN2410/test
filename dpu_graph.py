@@ -65,7 +65,7 @@ if sample_f is not None:
     sample_par = [x.strip() for x in sample_par]
     sample_par = [str(x) for x in sample_par]
 
-
+    st.write(sample_columns)
     if sample_columns == 2:
         initial_x_value = "NE"
         initial_y_value = "P_Manifold1"
