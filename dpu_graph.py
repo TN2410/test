@@ -63,22 +63,24 @@ if sample_f is not None:
 
     sample_par = sample_2
 
+    if sample_columns = 2:
+        initial_x_value = "NE"
+        initial_x_value = "P_mani1"
+    else:
+        initial_y_value = "nmot"
+        initial_y_value = "kl"
+
+    if initial_x_value and initial_y_value in sample_par:
+        initial_x_index = sample_par.index(initial_x_value)
+        initial_y_index = sample_par.index(initial_y_value)
+
+    else:
+        initial__x_index = 0  # 初期値が見つからない場合は最初の項目を選択
+        initial__y_index = 0  # 初期値が見つからない場合は最初の項目を選択
+
     with st.sidebar:
-        x_pal=st.selectbox('x列を選択してください', sample_par )
-        st.write(x_pal,"の")
-    
-    if sumple_columns = 2:
-        initial_value = "NE"
-    else:
-        initial_value = "nmot"
+        x_pal = st.selectbox('x列を選択してください', sample_par, index=initial_x_index)
 
-    if initial_value in sample_par:
-        initial_index = sample_par.index(initial_value)
-    else:
-        initial_index = 0  # 初期値が見つからない場合は最初の項目を選択
-
-# selectboxを作成し、初期値を指定
-    x_pal = st.selectbox('x列を選択してください', sample_par, index=initial_index)
 
         #ここでデータを読んで上下限を設定したい
         if x_pal == "NE" or x_pal == "nmot": 
@@ -88,7 +90,7 @@ if sample_f is not None:
         x_lower_bound = st.number_input('xの下限値と',step=1)
         x_upper_bound = st.number_input('xの上限値を入力してください', value = max_x_value , step=10) 
         
-        y_pal=st.selectbox('y列を選択してください', sample_par )
+        y_pal=st.selectbox('y列を選択してください', sample_par , index=initial_y_index )
         st.write(y_pal,"の")        
         #ここでデータを読んで上下限を設定したい
         y_lower_bound = st.number_input('yの下限値と',step=1)
