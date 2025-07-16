@@ -62,6 +62,9 @@ if sample_f is not None:
     sample_2 = [x for x in sample_1 if x != "nan"]
 
     sample_par = sample_2
+    sample_par = [x.strip() for x in sample_par]
+    sample_par = [str(x) for x in sample_par]
+
 
     if sample_columns == 2:
         initial_x_value = "NE"
