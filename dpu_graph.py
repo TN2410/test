@@ -65,7 +65,7 @@ if sample_f is not None:
 
     if sample_columns == 2:
         initial_x_value = "NE"
-        initial_y_value = "P_mani1"
+        initial_y_value = "P_Manifold1"
     else:
         initial_x_value = "nmot"
         initial_y_value = "kl"
