@@ -75,8 +75,8 @@ if sample_f is not None:
         initial_y_index = sample_par.index(initial_y_value)
 
     else:
-        initial__x_index = 0  # 初期値が見つからない場合は最初の項目を選択
-        initial__y_index = 0  # 初期値が見つからない場合は最初の項目を選択
+        initial_x_index = 0  # 初期値が見つからない場合は最初の項目を選択
+        initial_y_index = 0  # 初期値が見つからない場合は最初の項目を選択
 
     with st.sidebar:
         x_pal = st.selectbox('x列を選択してください', sample_par, index=initial_x_index)
