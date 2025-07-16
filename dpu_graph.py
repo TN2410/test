@@ -65,9 +65,9 @@ if sample_f is not None:
 
     if sample_columns == 2:
         initial_x_value = "NE"
-        initial_x_value = "P_mani1"
+        initial_y_value = "P_mani1"
     else:
-        initial_y_value = "nmot"
+        initial_x_value = "nmot"
         initial_y_value = "kl"
 
     if initial_x_value in sample_par and initial_y_value in sample_par:
