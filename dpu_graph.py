@@ -172,7 +172,7 @@ if dataframes:
         st.session_state.show_normalized = True  # 初期値として無次元化データを表示
 
 # ボタンを横に並べるためのカラムを作成
-    col3, col4 = st.columns([3,1])
+    col3, col4 = st.columns([1,3])#幅を　1:3
 
     # 無次元化データを切り替えるボタン
     # グラフ表示ボタン
