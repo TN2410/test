@@ -158,11 +158,20 @@ if dataframes:
             y_values.append(y)
             z_values.append(total_counts[x][y])
 
+    z_sum = sum(z_values)
+
+    for z in z_values:
+        # zが0の場合を考慮して、ゼロ除算を防ぐ
+        if z_sum != 0:
+            z_values_normalized.append(z / z_sum)
+        else:
+        z_values_normalized.append(0)  # ゼロ除算の場合、無次元化された値も0に設定
+
     for i in range(len(x_values)):
         fig.add_trace(go.Scatter3d(
             x=[x_values[i]+x_span/100, x_values[i]+x_span/100,x_values[i]+x_span/100, x_values[i]+x_span/100, x_values[i]+x_span/100],
             y=[y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100],
-            z=[0, z_values[i] ,z_values[i] ,0, 0],
+            z=[0, z_values_normalized[i] ,z_values_normalized[i] ,0, 0],
             mode='lines',
             line=dict(width=10,color = 'rgba(0, 0, 0, 0.3)'),
             showlegend = False
@@ -174,7 +183,7 @@ if dataframes:
         fig.add_trace(go.Scatter3d(
             x=[x_values[i], x_values[i], x_values[i], x_values[i], x_values[i]],
             y=[y_values[i], y_values[i], y_values[i], y_values[i], y_values[i]],
-            z=[0, z_values[i] , z_values[i] ,0, 0],
+            z=[0, z_values_normalized[i] , z_values_normalized[i] ,0, 0],
             mode='lines',
             line=dict(width=10,color = "blue"),
             showlegend = False
@@ -212,9 +221,9 @@ if dataframes:
     fig.update_layout(legend=dict(
     orientation="v",  # 水平に配置
     yanchor="top",
-    y=1.0 ,  # グラフの上側に配置
+    y=1.0 ,  # グラの上側に配置
     xanchor="left",
-    x=0.43
+    x=0.42
      ) , # 左よりに配置
     )
 
