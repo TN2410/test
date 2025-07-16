@@ -172,15 +172,15 @@ if dataframes:
         st.session_state.show_normalized = True  # 初期値として無次元化データを表示
 
 # ボタンを横に並べるためのカラムを作成
-    col3, col4 = st.columns(2)
+    col3, col4 = st.columns([3,1])
 
     # 無次元化データを切り替えるボタン
-    with col3:
+    with col4:
         if st.button('時間　⇔　％　切り替え'):
             st.session_state.show_normalized = not st.session_state.show_normalized
 
     # グラフ表示ボタン
-    with col4:
+    with col3:
         if st.button('グラフを表示/非表示'):
             st.session_state.show_graph = not st.session_state.show_graph
 
