@@ -175,14 +175,14 @@ if dataframes:
     col3, col4 = st.columns([3,1])
 
     # 無次元化データを切り替えるボタン
-    with col4:
-        if st.button('時間　⇔　％　切り替え'):
-            st.session_state.show_normalized = not st.session_state.show_normalized
-
     # グラフ表示ボタン
     with col3:
         if st.button('グラフを表示/非表示'):
             st.session_state.show_graph = not st.session_state.show_graph
+            
+    with col4:
+        if st.button('時間　⇔　％　切り替え'):
+            st.session_state.show_normalized = not st.session_state.show_normalized
 
     # 3Dグラフに表示するz_valuesを選択
     if st.session_state.show_normalized:
