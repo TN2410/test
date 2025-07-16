@@ -66,16 +66,14 @@ if sample_f is not None:
     sample_par = [str(x) for x in sample_par]
 
     st.write(sample_columns)
-    if sample_columns == 2:
+    if sample_columns == 5: #WEC
         initial_x_value = "NE"
         initial_y_value = "P_Manifold1"
     else:
         initial_x_value = "nmot"
         initial_y_value = "kl"
 
-    st.write(initial_x_value)
     if initial_x_value in sample_par:#and initial_y_value in sample_par:
-        st.write("check")
         initial_x_index = sample_par.index(initial_x_value)
         initial_y_index = sample_par.index(initial_y_value)
 
