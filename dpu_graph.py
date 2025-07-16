@@ -167,6 +167,23 @@ if dataframes:
         else:
             z_values_normalized.append(0)  # ゼロ除算の場合、無次元化された値も0に設定
 
+    # Streamlitのセッションステートで表示データの管理
+    if 'show_normalized' not in st.session_state:
+        st.session_state.show_normalized = True  # 初期値として無次元化データを表示
+
+    # ボタンの作成
+    if st.button('無次元化データを切り替え'):
+        st.session_state.show_normalized = not st.session_state.show_normalized
+
+    # 3Dグラフに表示するz_valuesを選択
+    if st.session_state.show_normalized:
+        z_to_use = z_values_normalized
+        z_label = "無次元化された時間頻度"
+    else:
+        z_to_use = z_values
+        z_label = "時間頻度"
+
+
     for i in range(len(x_values)):
         fig.add_trace(go.Scatter3d(
             x=[x_values[i]+x_span/100, x_values[i]+x_span/100,x_values[i]+x_span/100, x_values[i]+x_span/100, x_values[i]+x_span/100],
@@ -202,7 +219,7 @@ if dataframes:
         scene = dict(
         xaxis_title= x_pal,
         yaxis_title= y_pal,
-        zaxis_title= "Time(%)",
+        zaxis_title= z_label,
         xaxis=dict(range=[x_lower_bound,x_upper_bound]),  # X 軸の上下限
         yaxis=dict(range=[y_lower_bound,y_upper_bound]),
         camera=dict(eye=dict(x=1.25, y=-1.25, z=1.25))  # Y 軸の上下限
