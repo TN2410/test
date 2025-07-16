@@ -159,7 +159,7 @@ if dataframes:
             z_values.append(total_counts[x][y])
 
     z_sum = sum(z_values)
-
+    z_values_normalized = []
     for z in z_values:
         # zが0の場合を考慮して、ゼロ除算を防ぐ
         if z_sum != 0:
