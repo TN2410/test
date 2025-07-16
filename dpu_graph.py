@@ -261,6 +261,12 @@ if dataframes:
         height = 600 ,
         width = 1600 ,
     )
+
+    fig.update_xaxes(title_text=x_pal, row=1, col=2)
+    fig.update_yaxes(title_text=y_pal, row=1, col=2)
+    fig.update_xaxes(range=[x_lower_bound,x_upper_bound])  # X 軸の上下限
+    fig.update_yaxes(range=[y_lower_bound,y_upper_bound])
+
     # 2D グラフのタイトルと軸ラベルを設定
     fig.update_layout(legend=dict(
     orientation="v",  # 水平に配置
