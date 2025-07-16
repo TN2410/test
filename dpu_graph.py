@@ -63,7 +63,7 @@ if sample_f is not None:
 
     sample_par = sample_2
 
-    if sample_columns = 2:
+    if sample_columns == 2:
         initial_x_value = "NE"
         initial_x_value = "P_mani1"
     else:
