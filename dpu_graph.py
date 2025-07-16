@@ -171,9 +171,18 @@ if dataframes:
     if 'show_normalized' not in st.session_state:
         st.session_state.show_normalized = True  # 初期値として無次元化データを表示
 
-    # ボタンの作成
-    if st.button('無次元化データを切り替え'):
-        st.session_state.show_normalized = not st.session_state.show_normalized
+# ボタンを横に並べるためのカラムを作成
+    col3, col4 = st.columns(2)
+
+    # 無次元化データを切り替えるボタン
+    with col3:
+        if st.button('無次元化データを切り替え'):
+            st.session_state.show_normalized = not st.session_state.show_normalized
+
+    # グラフ表示ボタン
+    with col4:
+        if st.button('グラフを表示/非表示'):
+            st.session_state.show_graph = not st.session_state.show_graph
 
     # 3Dグラフに表示するz_valuesを選択
     if st.session_state.show_normalized:
@@ -252,10 +261,6 @@ if dataframes:
     # 右側のグラフの凡例を非表示にする    
     if 'show_graph' not in st.session_state:
         st.session_state.show_graph = False
-
-# ボタンの作成
-    if st.button('グラフを表示/非表示'):
-        st.session_state.show_graph = not st.session_state.show_graph
 
 # グラフの表示
     if st.session_state.show_graph:
