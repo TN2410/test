@@ -165,7 +165,7 @@ if dataframes:
         if z_sum != 0:
             z_values_normalized.append(z / z_sum)
         else:
-        z_values_normalized.append(0)  # ゼロ除算の場合、無次元化された値も0に設定
+            z_values_normalized.append(0)  # ゼロ除算の場合、無次元化された値も0に設定
 
     for i in range(len(x_values)):
         fig.add_trace(go.Scatter3d(
