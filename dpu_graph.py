@@ -70,6 +70,7 @@ if sample_f is not None:
         initial_x_value = "nmot"
         initial_y_value = "kl"
 
+    st.write(initial_x_value)
     if initial_x_value in sample_par and initial_y_value in sample_par:
         st.write("check")
         initial_x_index = sample_par.index(initial_x_value)
