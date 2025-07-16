@@ -176,7 +176,7 @@ if dataframes:
 
     # 無次元化データを切り替えるボタン
     with col3:
-        if st.button('無次元化データを切り替え'):
+        if st.button('時間　⇔　％　切り替え'):
             st.session_state.show_normalized = not st.session_state.show_normalized
 
     # グラフ表示ボタン
@@ -187,10 +187,10 @@ if dataframes:
     # 3Dグラフに表示するz_valuesを選択
     if st.session_state.show_normalized:
         z_to_use = z_values_normalized
-        z_label = "無次元化された時間頻度"
+        z_label = "時間頻度(%)"
     else:
         z_to_use = z_values
-        z_label = "時間頻度"
+        z_label = "時間(sec)"
 
 
     for i in range(len(x_values)):
