@@ -188,7 +188,7 @@ if dataframes:
         fig.add_trace(go.Scatter3d(
             x=[x_values[i]+x_span/100, x_values[i]+x_span/100,x_values[i]+x_span/100, x_values[i]+x_span/100, x_values[i]+x_span/100],
             y=[y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100],
-            z=[0, z_values_normalized[i] ,z_values_normalized[i] ,0, 0],
+            z=[0, z_to_use[i] ,z_to_use[i] ,0, 0],
             mode='lines',
             line=dict(width=10,color = 'rgba(0, 0, 0, 0.3)'),
             showlegend = False
@@ -200,7 +200,7 @@ if dataframes:
         fig.add_trace(go.Scatter3d(
             x=[x_values[i], x_values[i], x_values[i], x_values[i], x_values[i]],
             y=[y_values[i], y_values[i], y_values[i], y_values[i], y_values[i]],
-            z=[0, z_values_normalized[i] , z_values_normalized[i] ,0, 0],
+            z=[0, z_to_use[i] , z_to_use[i] ,0, 0],
             mode='lines',
             line=dict(width=10,color = "blue"),
             showlegend = False
