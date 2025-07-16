@@ -66,6 +66,20 @@ if sample_f is not None:
     with st.sidebar:
         x_pal=st.selectbox('x列を選択してください', sample_par )
         st.write(x_pal,"の")
+    
+    if sumple_columns = 2:
+        initial_value = "NE"
+    else:
+        initial_value = "nmot"
+
+    if initial_value in sample_par:
+        initial_index = sample_par.index(initial_value)
+    else:
+        initial_index = 0  # 初期値が見つからない場合は最初の項目を選択
+
+# selectboxを作成し、初期値を指定
+    x_pal = st.selectbox('x列を選択してください', sample_par, index=initial_index)
+
         #ここでデータを読んで上下限を設定したい
         if x_pal == "NE" or x_pal == "nmot": 
             max_x_value = 8000
