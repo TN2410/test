@@ -33,8 +33,8 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
     total_counts = {}
     z_sum = {}
     fig = make_subplots(
-        rows=2,
-        cols=1,
+        rows=1,
+        cols=2,
         specs=[[{"type": "surface"}, {"type": "scatter"}]],
         subplot_titles=("時間頻度", "Scatter Plot"),
     )
@@ -57,7 +57,7 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
             df["Time"] = [(time - init_time).seconds for time in df["Time"]]
             df = df.apply(pd.to_numeric, errors='coerce')
 
-        fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='markers', name=filename), row=2, col=1)
+        fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='markers', name=filename), row=1, col=2)
 
         x_span = (x_upper_bound - x_lower_bound) / x_div_num
         y_span = (y_upper_bound - y_lower_bound) / y_div_num
