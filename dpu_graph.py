@@ -141,14 +141,11 @@ if sample_f is not None:
         y_div_num = st.number_input('y軸分割数', value=20)
 
 # グラフの作成
-if 'show_graph' not in st.session_state:
-    st.session_state.show_graph = False
 
-if st.session_state.show_graph:
-    if dataframes:
-        fig1, total_counts1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
-        st.plotly_chart(fig1, use_container_width=False)
+if dataframes:
+    fig1, total_counts1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
+    st.plotly_chart(fig1, use_container_width=False)
 
-    if dataframes2:
-        fig2, total_counts2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
-        st.plotly_chart(fig2, use_container_width=False)
+if dataframes2:
+    fig2, total_counts2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
+    st.plotly_chart(fig2, use_container_width=False)
