@@ -78,7 +78,6 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
         fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='markers', name=filename), row=1, col=2)
 
     # z値の正規化
-    st.write(all_z_values)
     if all_z_values:  # z値が存在する場合
         min_z = min(all_z_values)
         max_z = max(all_z_values)
@@ -89,7 +88,8 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
         # 正規化したz値を使用して3Dグラフを作成
     #else :
     #    normalized_z_values = []
-       
+        st.write(x_value[i])
+
         for i in range(len(normalized_z_values)):
             fig.add_trace(go.Scatter3d(
                 x=[x_values[i] + x_span / 100] * 5,
