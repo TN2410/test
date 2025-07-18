@@ -13,6 +13,7 @@ from matplotlib.gridspec import GridSpec
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from scipy import stats
 
  #windarab と　dpu　ファイルの差を自動検知して、サンプルを変更する
 st.set_page_config(
@@ -185,9 +186,62 @@ if dataframes:
         else:
             z_values_normalized.append(0)  # ゼロ除算の場合、無次元化された値も0に設定
 
-    # Streamlitのセッションステートで表示データの管理
+# もう一つのデータ群の処理を追加
+    # <--- 追加開始
+    uploaded_files2 = st.file_uploader("別のtxtファイルをアップロードしてください", type="txt", accept_multiple_files=True)
+    dataframes2 = {}
+    if uploaded_files2 is not None:
+        for uploaded_file in uploaded_files2:
+            initial_lines = pd.read_csv(uploaded_file, nrows=2)
+            uploaded_file.seek(0)
+            if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
+                sample_columns = 2
+                skiprows = 5
+            else:
+                sample_columns = 5
+                skiprows = 0
+
+            df = pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
+            dataframes2[uploaded_file.name] = df
+
+    total_counts2 = {}
+    for filename, df in dataframes2.items():
+        if df.empty:
+            continue
+        # 同様にZデータを集計
+        z_sum2 = {}
+        for xx in range(x_div_num):
+            x = xx * x_span + int(x_lower_bound)
+            z_sum2[x] = {}
+            for yy in range(y_div_num):
+                y = yy * y_span + int(y_lower_bound)
+                mask_x = (df[x_pal] > x) & (df[x_pal] <= x + x_span)
+                mask_y = (df[y_pal] > y) & (df[y_pal] <= y + y_span)
+                filtered_data = df[mask_x & mask_y]
+                z_sum2[x][y] = len(filtered_data)
+        
+        for x in z_sum2:
+            if x not in total_counts2:
+                total_counts2[x] = {}
+            for y in z_sum2[x]:
+                total_counts2[x][y] = total_counts2.get(x, {}).get(y, 0) + z_sum2[x][y]
+
+    # Zデータの有意差検証
+    # <--- 追加終了
+    z_values2 = []
+    for x in total_counts2:
+        for y in total_counts2[x]:
+            z_values2.append(total_counts2[x][y])
+
+    # t検定
+    if len(z_values) > 0 and len(z_values2) > 0:
+        t_stat, p_value = stats.ttest_ind(z_values, z_values2)
+        st.write(f"t-statistic: {t_stat}, p-value: {p_value}")
+
+        # Streamlitのセッションステートで表示データの管理
     if 'show_normalized' not in st.session_state:
         st.session_state.show_normalized = True  # 初期値として無次元化データを表示
+
 
 # ボタンを横に並べるためのカラムを作成
     col3, col4 = st.columns([1,3])#幅を　1:3
