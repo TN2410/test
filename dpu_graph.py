@@ -24,7 +24,7 @@ def process_files(uploaded_files, specific_string):
     for uploaded_file in uploaded_files:
         initial_lines = pd.read_csv(uploaded_file, nrows=2)
         uploaded_file.seek(0)
-        skiprows = 5 if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any() else 0
+        skiprows = 5 if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any() else 2
         df = pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
         dataframes[uploaded_file.name] = df
     return dataframes, skiprows
