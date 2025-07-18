@@ -40,6 +40,8 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
     )
 
     all_z_values = []  # すべてのz値を保存するリスト
+    x_values = []  # xの値を保存するリスト
+    y_values = []  # yの値を保存するリスト
 
     for filename, df in dataframes.items():
         if df.empty:
@@ -73,6 +75,8 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
                 filtered_data = df[mask_x & mask_y]
                 z_sum[x][y] = len(filtered_data)
                 all_z_values.append(z_sum[x][y])  # z値をリストに追加
+                x_values.append(x)  # xの値を追加
+                y_values.append(y)  # yの値を追加
 
         # スキャッタープロットの追加
         fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='markers', name=filename), row=1, col=2)
@@ -81,15 +85,11 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
     if all_z_values:  # z値が存在する場合
         min_z = min(all_z_values)
         max_z = max(all_z_values)
-        #if (max_z - min_z) !=0:
-        #    normalized_z_values = [(z - min_z) / (max_z - min_z) for z in all_z_values]
+        if (max_z - min_z) !=0:
+            normalized_z_values = [(z - min_z) / (max_z - min_z) for z in all_z_values]
         #else :
-        normalized_z_values = all_z_values
-        # 正規化したz値を使用して3Dグラフを作成
-    #else :
-    #    normalized_z_values = []
-        st.write(x_values)
-
+            normalized_z_values = all_z_values
+        # 正規化したz値を使用して3Dグラフを
         for i in range(len(normalized_z_values)):
             fig.add_trace(go.Scatter3d(
                 x=[x_values[i] + x_span / 100] * 5,
