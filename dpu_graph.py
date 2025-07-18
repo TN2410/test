@@ -22,15 +22,12 @@ def load_uploaded_file(uploaded_file, skiprows):
 def process_files(uploaded_files, specific_string):
     dataframes = {}
     for uploaded_file in uploaded_files:
-        if uploaded_file.name.endswith('.csv'):
-            continue  # csvファイルはスキップ
-
         initial_lines = pd.read_csv(uploaded_file, nrows=2)
         uploaded_file.seek(0)
         skiprows = 5 if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any() else 0
         df = pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
         dataframes[uploaded_file.name] = df
-    return dataframes
+    return dataframes, skiprows
 
 def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num):
     total_counts = {}
