@@ -87,7 +87,7 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
         max_z = max(all_z_values)
         if (max_z - min_z) !=0:
             normalized_z_values = [(z - min_z) / (max_z - min_z) for z in all_z_values]
-        #else :
+        else :
             normalized_z_values = all_z_values
         # 正規化したz値を使用して3Dグラフを
         for i in range(len(normalized_z_values)):
