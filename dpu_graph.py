@@ -128,7 +128,6 @@ if uploaded_files2 is not None:
 # グラフのパラメータ設定
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f, encoding='CP932')
-    sample_df = sample_df.dropna()
 
     # skiprows1を使用してsample_columnsを設定
     sample_columns = 2# if skiprows == 2 else 5  # サンプルカラム数の確認
