@@ -45,6 +45,11 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
             st.warning(f"{filename} は空のファイルです。")
             continue
 
+        # カラム名の存在確認
+        if x_pal not in df.columns or y_pal not in df.columns:
+            st.warning(f"{filename} にはカラム '{x_pal}' または '{y_pal}' が存在しません。")
+            continue
+            
         if "Time" in df.columns:
             df = df.iloc[1:]  # DPUの場合は単位行を除外
             time_format = "%H:%M:%S.%f"
