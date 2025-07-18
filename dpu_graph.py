@@ -86,6 +86,9 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
         else :
             normalized_z_values = all_z_values
         # 正規化したz値を使用して3Dグラフを作成
+    else :
+        normalized_z_values = []
+       
         for i in range(len(normalized_z_values)):
             fig.add_trace(go.Scatter3d(
                 x=[x_values[i] + x_span / 100] * 5,
