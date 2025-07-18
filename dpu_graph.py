@@ -108,7 +108,7 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
                 line=dict(width=10, color="blue"),
                 showlegend=False
             ), row=1, col=1)
-
+    fig.plotly(fig)
     return fig, total_counts
 
 # ファイルのアップロード
