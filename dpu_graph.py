@@ -133,13 +133,13 @@ if sample_f is not None:
     sample_columns = 5 if skiprows == 2 else 2  # サンプルカラム数の確認
     sample_par = sample_df.iloc[1:, sample_columns].tolist()
     st.write(sample_par)
-    sample_par = list(filter(pd.notna, sample_par))
+    sample2_par = list(filter(pd.notna, sample_par))
 
-    st.write(sample_par)
+    st.write(sample2_par)
 
     with st.sidebar:
-        x_pal = st.selectbox('x列を選択してください', sample_par)
-        y_pal = st.selectbox('y列を選択してください', sample_par)
+        x_pal = st.selectbox('x列を選択してください', sample2_par)
+        y_pal = st.selectbox('y列を選択してください', sample2_par)
         x_lower_bound = st.number_input('xの下限値と', step=1)
         x_upper_bound = st.number_input('xの上限値を入力してください', value=100, step=10)
         y_lower_bound = st.number_input('yの下限値と', step=1)
