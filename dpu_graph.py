@@ -125,7 +125,7 @@ if dataframes:
     
     total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     z_sum = {}#チェックボックスにチェックが入っている場合の)#チェックボックスにチェックが入っている場合のみプロットする
-    fig = make_subplots(
+    fig1 = make_subplots(
     rows=1, 
     cols=2, 
     specs=[[{"type": "surface"}, {"type": "scatter"}]],  # 1つ目は2Dプロット、2つ目は3Dプロット
@@ -156,7 +156,7 @@ if dataframes:
                     new_columns.append(rep)
                 df.columns = new_columns
                 #df = df[sample_par]#同じカラム名にする必要あり
-            fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
+            fig1.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
             mode='markers', name = filename),
             row=1,
             col=2,
@@ -241,7 +241,7 @@ if 'show_normalized' not in st.session_state:
 
 ########fig subplot　影付で作成　　マップの作製 
     for i in range(len(x_values)):
-        fig.add_trace(go.Scatter3d(
+        fig1.add_trace(go.Scatter3d(
             x=[x_values[i]+x_span/100, x_values[i]+x_span/100,x_values[i]+x_span/100, x_values[i]+x_span/100, x_values[i]+x_span/100],
             y=[y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100],
             z=[0, z_to_use[i] ,z_to_use[i] ,0, 0],
@@ -253,7 +253,7 @@ if 'show_normalized' not in st.session_state:
             col=1)    
 
     for i in range(len(x_values)):
-        fig.add_trace(go.Scatter3d(
+        fig1.add_trace(go.Scatter3d(
             x=[x_values[i], x_values[i], x_values[i], x_values[i], x_values[i]],
             y=[y_values[i], y_values[i], y_values[i], y_values[i], y_values[i]],
             z=[0, z_to_use[i] , z_to_use[i] ,0, 0],
@@ -267,7 +267,7 @@ if 'show_normalized' not in st.session_state:
     # 3D散布図の軸ラベル設定
     sumall = sum(z_values)/3600
      
-    fig.update_layout(
+    fig1.update_layout(
         title = "全 {:.3f} Hr ({} sec)".format(sumall,int(sumall*3600)),
         scene = dict(
         xaxis_title= x_pal,
@@ -288,9 +288,9 @@ if 'show_normalized' not in st.session_state:
         width = 1600 ,
     )
     # 2D グラフのタイトルと軸ラベルを設定
-    fig.update_xaxes(title_text=x_pal, range=[x_lower_bound,x_upper_bound], row=1, col=2)
-    fig.update_yaxes(title_text=y_pal, range=[y_lower_bound,y_upper_bound], row=1, col=2)
-    fig.update_layout(legend=dict(
+    fig1.update_xaxes(title_text=x_pal, range=[x_lower_bound,x_upper_bound], row=1, col=2)
+    fig1.update_yaxes(title_text=y_pal, range=[y_lower_bound,y_upper_bound], row=1, col=2)
+    fig1.update_layout(legend=dict(
     orientation="v",  # 水平に配置
     yanchor="top",
     y=1.0 ,  # グラの上側に配置
@@ -300,7 +300,7 @@ if 'show_normalized' not in st.session_state:
     )
 
     # 凡例の設定: 左のグラフにのみ凡例を表示
-    fig.update_layout(
+    fig1.update_layout(
         showlegend=True,
     )
 
@@ -310,7 +310,7 @@ if 'show_normalized' not in st.session_state:
 
 # グラフの表示
     if st.session_state.show_graph:
-        st.plotly_chart(fig , use_container_width=False)
+        st.plotly_chart(fig1 , use_container_width=False)
 ####
 # もう一つのデータ群の処理を追加
     # <--- 追加開始
@@ -319,7 +319,7 @@ if dataframes2:
 
     total_counts2 = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     z_sum = {}#チェックボックスにチェックが入っている場合の)#チェックボックスにチェックが入っている場合のみプロットする
-    fig = make_subplots(
+    fig2 = make_subplots(
     rows=1, 
     cols=2, 
     specs=[[{"type": "surface"}, {"type": "scatter"}]],  # 1つ目は2Dプロット、2つ目は3Dプロット
@@ -347,7 +347,7 @@ if dataframes2:
                         new_columns.append(rep)
                     df.columns = new_columns
                     #df = df[sample_par]#同じカラム名にする必要あり
-                fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
+                fig2.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
                 mode='markers', name = filename),
                 row=1,
                 col=2,
@@ -434,7 +434,7 @@ if 'show_normalized' not in st.session_state:
 
 ########fig subplot　影付で作成　　マップの作製 
     for i in range(len(x_values)):
-        fig.add_trace(go.Scatter3d(
+        fig2.add_trace(go.Scatter3d(
             x=[x_values[i]+x_span/100, x_values[i]+x_span/100,x_values[i]+x_span/100, x_values[i]+x_span/100, x_values[i]+x_span/100],
             y=[y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100],
             z=[0, z_to_use[i] ,z_to_use[i] ,0, 0],
@@ -446,7 +446,7 @@ if 'show_normalized' not in st.session_state:
             col=1)    
 
     for i in range(len(x_values)):
-        fig.add_trace(go.Scatter3d(
+        fig2.add_trace(go.Scatter3d(
             x=[x_values[i], x_values[i], x_values[i], x_values[i], x_values[i]],
             y=[y_values[i], y_values[i], y_values[i], y_values[i], y_values[i]],
             z=[0, z_to_use[i] , z_to_use[i] ,0, 0],
@@ -460,7 +460,7 @@ if 'show_normalized' not in st.session_state:
     # 3D散布図の軸ラベル設定
     sumall = sum(z_values)/3600
      
-    fig.update_layout(
+    fig2.update_layout(
         title = "全 {:.3f} Hr ({} sec)".format(sumall,int(sumall*3600)),
         scene = dict(
         xaxis_title= x_pal,
@@ -481,9 +481,9 @@ if 'show_normalized' not in st.session_state:
         width = 1600 ,
     )
     # 2D グラフのタイトルと軸ラベルを設定
-    fig.update_xaxes(title_text=x_pal, range=[x_lower_bound,x_upper_bound], row=1, col=2)
-    fig.update_yaxes(title_text=y_pal, range=[y_lower_bound,y_upper_bound], row=1, col=2)
-    fig.update_layout(legend=dict(
+    fig2.update_xaxes(title_text=x_pal, range=[x_lower_bound,x_upper_bound], row=1, col=2)
+    fig2.update_yaxes(title_text=y_pal, range=[y_lower_bound,y_upper_bound], row=1, col=2)
+    fig2.update_layout(legend=dict(
     orientation="v",  # 水平に配置
     yanchor="top",
     y=1.0 ,  # グラの上側に配置
@@ -493,7 +493,7 @@ if 'show_normalized' not in st.session_state:
     )
 
     # 凡例の設定: 左のグラフにのみ凡例を表示
-    fig.update_layout(
+    fig2.update_layout(
         showlegend=True,
     )
 
@@ -503,7 +503,7 @@ if 'show_normalized' not in st.session_state:
 
 # グラフの表示
     if st.session_state.show_graph:
-        st.plotly_chart(fig , use_container_width=False)
+        st.plotly_chart(fig2 , use_container_width=False)
 
     # ダウンロード用のデータを作成
     download_data = []
