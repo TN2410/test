@@ -32,9 +32,12 @@ with col1:
     uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True)
 with col2:
     uploaded_files2 = st.file_uploader("別のtxtファイルをアップロードしてください", type="txt", accept_multiple_files=True)
-dataframes2 = {} 
-                                 
+with col3:
+    sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])                                 
+
 specific_string = "windarab"  # ここに検索したい文字を設定
+
+##### 比較元ファイルを読み込む
 if uploaded_files is not None:
     sample_columns, skiprows = None, None
     dataframes = {}
@@ -53,10 +56,23 @@ if uploaded_files is not None:
         df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows , engine="python")
         dataframes[uploaded_file.name] = df
 
-with col3:
-    sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
+##### 比較先ファイルを読み込む
+if uploaded_files2 is not None:
+    dataframes2 = {} 
+    for uploaded_file in uploaded_files2:
+        initial_lines = pd.read_csv(uploaded_file, nrows=2)
+        uploaded_file.seek(0)
+        if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
+            sample_columns = 2
+            skiprows = 5
+        else:
+            sample_columns = 5
+            skiprows = 0
 
-#グラフを書く前にsample_fに即した仮データベースファイルを使用したほうが、時間早いと思われる
+        df = pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
+        dataframes2[uploaded_file.name] = df
+
+#グラフのパラメータ、レンジを設定する
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding ='CP932')
     sample = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
@@ -105,11 +121,10 @@ if sample_f is not None:
         x_div_num = st.number_input('x軸分割数', value = 20)
         y_div_num = st.number_input('y軸分割数', value = 20)
 
+###ダウンロードしたファイルからプロットするファイルを選択
 if dataframes:
-    total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     
-    #データ積算とグラフを作成する
-
+    total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
     z_sum = {}#チェックボックスにチェックが入っている場合の)#チェックボックスにチェックが入っている場合のみプロットする
     fig = make_subplots(
     rows=1, 
@@ -192,56 +207,106 @@ if dataframes:
 # もう一つのデータ群の処理を追加
     # <--- 追加開始
 
-if uploaded_files2 is not None:
-    for uploaded_file in uploaded_files2:
-        initial_lines = pd.read_csv(uploaded_file, nrows=2)
-        uploaded_file.seek(0)
-        if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
-            sample_columns = 2
-            skiprows = 5
-        else:
-            sample_columns = 5
-            skiprows = 0
+if dataframes2:
 
-        df = pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
-        dataframes2[uploaded_file.name] = df
-        for uploaded_file in uploaded_files2:
-            initial_lines = pd.read_csv(uploaded_file, nrows=2)
-            uploaded_file.seek(0)
-            if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
-                sample_columns = 2
-                skiprows = 5
-            else:
-                sample_columns = 5
-                skiprows = 0
+    total_counts2 = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
+    z_sum = {}#チェックボックスにチェックが入っている場合の)#チェックボックスにチェックが入っている場合のみプロットする
+    fig = make_subplots(
+    rows=1, 
+    cols=2, 
+    specs=[[{"type": "surface"}, {"type": "scatter"}]],  # 1つ目は2Dプロット、2つ目は3Dプロット
+    subplot_titles=("時間頻度", "Scatter Plot"),
+    horizontal_spacing=0.1  # グラフ間の水平スペースを調整
+    )
+    for filename, df in dataframes2.items():
+        with st.sidebar:
+        if show_data:# DataFrameが空でないことを確認
+            if df.empty:
+                st.warning(f"{filename} は空のファイルです。")
+                continue    
+            if "Time" in df.columns and sample_columns == 5:
+                df = df.iloc[1:]#dpuの場合は単位行があるために除外する 
+                time_format = "%H:%M:%S.%f"
+                df["Time"]= [datetime.strptime(time_str, time_format) for time_str in df["Time"]]
+                init_time = df["Time"].iloc[0]
+                df["Time"] = [(time - init_time).seconds for time in df["Time"]]
+                df = df.apply(pd.to_numeric, errors='coerce')
+            else:#windarabはカラム名調整
+                new_columns=[]
+                for rep in df.columns:
+                    rep = rep[:rep.find("[")]
+                    rep = rep.replace(" ","")
+                    new_columns.append(rep)
+                df.columns = new_columns
+                #df = df[sample_par]#同じカラム名にする必要あり
+            fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], 
+            mode='markers', name = filename),
+            row=1,
+            col=2,
+            )    
 
-            df = pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
-            dataframes2[uploaded_file.name] = df
+    #分割数　10として　3Dマップを作る
+            x_span = (x_upper_bound - x_lower_bound)/x_div_num
+            y_span = (y_upper_bound - y_lower_bound)/y_div_num    
             
-total_counts2 = {}
-for filename, df in dataframes2.items():
-    if df.empty:
-        continue
-    # 同様にZデータを集計
-    z_sum2 = {}
-    for xx in range(x_div_num):
-        x = xx * x_span + int(x_lower_bound)
-        z_sum2[x] = {}
-        for yy in range(y_div_num):
-            y = yy * y_span + int(y_lower_bound)
-            mask_x = (df[x_pal] > x) & (df[x_pal] <= x + x_span)
-            mask_y = (df[y_pal] > y) & (df[y_pal] <= y + y_span)
-            filtered_data = df[mask_x & mask_y]
-            z_sum2[x][y] = len(filtered_data)
-    
-    for x in z_sum2:
-        if x not in total_counts2:
-            total_counts2[x] = {}
-        for y in z_sum2[x]:
-            total_counts2[x][y] = total_counts2.get(x, {}).get(y, 0) + z_sum2[x][y]
+            for xx in range(x_div_num):
+                x = xx * x_span + int(x_lower_bound)
+                z_sum[x] = {}    
+                for yy in range(y_div_num):
+                    y = yy * y_span + int(y_lower_bound)
+                    # NumPyを使用してフィルタリング
+                    mask_x = (df[x_pal] > x) & (df[x_pal] <= x + x_span)
+                    mask_y = (df[y_pal] > y) & (df[y_pal] <= y + y_span)
+                    filtered_data = df[mask_x & mask_y]
+                    z_sum[x][y] = len(filtered_data)
 
-# Zデータの有意差検証
+            # z_sumを total_counts に追加
+            for x in z_sum:
+                if x not in total_counts:
+                    total_counts[x] = {}
+                for y in z_sum[x]:
+                    total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
+
+    x_values = []
+    y_values = []
+    z_values = []
+
+    for x in total_counts:
+        for y in total_counts[x]:
+            x_values.append(x)
+            y_values.append(y)
+            z_values.append(total_counts[x][y])
+
+    z_sum = sum(z_values)
+    z_values_normalized = []
+    for z in z_values:
+        # zが0の場合を考慮して、ゼロ除算を防ぐ
+        if z_sum != 0:
+            z_values_normalized.append(z / z_sum *100)
+        else:
+            z_values_normalized.append(0)  # ゼロ除算の場合、無次元化された値も0に設定
+        z_sum2 = {}
+        for xx in range(x_div_num):
+            x = xx * x_span + int(x_lower_bound)
+            z_sum2[x] = {}
+            for yy in range(y_div_num):
+                y = yy * y_span + int(y_lower_bound)
+                mask_x = (df[x_pal] > x) & (df[x_pal] <= x + x_span)
+                mask_y = (df[y_pal] > y) & (df[y_pal] <= y + y_span)
+                filtered_data = df[mask_x & mask_y]
+                z_sum2[x][y] = len(filtered_data)
+        
+        for x in z_sum2:
+            if x not in total_counts2:
+                total_counts2[x] = {}
+            for y in z_sum2[x]:
+                total_counts2[x][y] = total_counts2.get(x, {}).get(y, 0) + z_sum2[x][y]
+
+    # Zデータの有意差検証
 # <--- 追加終了
+
+
+
 z_values2 = []
 for x in total_counts2:
     for y in total_counts2[x]:
