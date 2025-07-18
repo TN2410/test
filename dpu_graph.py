@@ -183,7 +183,6 @@ if dataframes:
                     total_counts[x] = {}
                 for y in z_sum[x]:
                     total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
-        st.plotly_chart(fig)
 
     x_values = []
     y_values = []
@@ -220,6 +219,7 @@ if dataframes:
                 total_counts[x] = {}
             for y in z_sum[x]:
                 total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
+    st.plotly_chart(fig)
 
 # もう一つのデータ群の処理を追加
     # <--- 追加開始
