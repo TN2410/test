@@ -130,8 +130,9 @@ if uploaded_files2 is not None:
 # グラフのパラメータ設定
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f, encoding='CP932')
-    sample_columns = 2 if sample_df.shape[1] == 2 else 5  # サンプルカラム数の確認
+    sample_columns = 5 if skiprows == 2 else 2  # サンプルカラム数の確認
     sample_par = sample_df.columns.tolist()
+    st.write(sample_par)
 
     with st.sidebar:
         x_pal = st.selectbox('x列を選択してください', sample_par)
