@@ -39,6 +39,8 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
         subplot_titles=("時間頻度", "Scatter Plot"),
     )
 
+    all_z_values = []  # すべてのz値を保存するリスト
+
     for filename, df in dataframes.items():
         if df.empty:
             st.warning(f"{filename} は空のファイルです。")
@@ -57,8 +59,7 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
             df["Time"] = [(time - init_time).seconds for time in df["Time"]]
             df = df.apply(pd.to_numeric, errors='coerce')
 
-        fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='markers', name=filename), row=1, col=2)
-
+        # z_sumの計算
         x_span = (x_upper_bound - x_lower_bound) / x_div_num
         y_span = (y_upper_bound - y_lower_bound) / y_div_num
 
@@ -71,42 +72,36 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
                 mask_y = (df[y_pal] > y) & (df[y_pal] <= y + y_span)
                 filtered_data = df[mask_x & mask_y]
                 z_sum[x][y] = len(filtered_data)
+                all_z_values.append(z_sum[x][y])  # z値をリストに追加
 
-        for x in z_sum:
-            if x not in total_counts:
-                total_counts[x] = {}
-            for y in z_sum[x]:
-                total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
+        # スキャッタープロットの追加
+        fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='markers', name=filename), row=1, col=2)
 
-    x_values = []
-    y_values = []
-    z_values = []
+    # z値の正規化
+    if all_z_values:  # z値が存在する場合
+        min_z = min(all_z_values)
+        max_z = max(all_z_values)
+        normalized_z_values = [(z - min_z) / (max_z - min_z) for z in all_z_values]
 
-    for x in total_counts:
-        for y in total_counts[x]:
-            x_values.append(x)
-            y_values.append(y)
-            z_values.append(total_counts[x][y])
+        # 正規化したz値を使用して3Dグラフを作成
+        for i in range(len(normalized_z_values)):
+            fig.add_trace(go.Scatter3d(
+                x=[x_values[i] + x_span / 100] * 5,
+                y=[y_values[i]] * 5,
+                z=[0, normalized_z_values[i], normalized_z_values[i], 0, 0],
+                mode='lines',
+                line=dict(width=10, color='rgba(0, 0, 0, 0.3)'),
+                showlegend=False
+            ), row=1, col=1)
 
-    # 3Dグラフの作成
-    for i in range(len(x_values)):
-        fig.add_trace(go.Scatter3d(
-            x=[x_values[i] + x_span / 100] * 5,
-            y=[y_values[i]] * 5,
-            z=[0, z_values[i], z_values[i], 0, 0],
-            mode='lines',
-            line=dict(width=10, color='rgba(0, 0, 0, 0.3)'),
-            showlegend=False
-        ), row=1, col=1)
-
-        fig.add_trace(go.Scatter3d(
-            x=[x_values[i]] * 5,
-            y=[y_values[i]] * 5,
-            z=[0, z_values[i], z_values[i], 0, 0],
-            mode='lines',
-            line=dict(width=10, color="blue"),
-            showlegend=False
-        ), row=1, col=1)
+            fig.add_trace(go.Scatter3d(
+                x=[x_values[i]] * 5,
+                y=[y_values[i]] * 5,
+                z=[0, normalized_z_values[i], normalized_z_values[i], 0, 0],
+                mode='lines',
+                line=dict(width=10, color="blue"),
+                showlegend=False
+            ), row=1, col=1)
 
     return fig, total_counts
 
@@ -122,7 +117,6 @@ with col3:
 specific_string = "windarab"
 
 # ファイルの読み込み
-
 if uploaded_files is not None:
     dataframes, skiprows = process_files(uploaded_files, specific_string)
 
@@ -132,8 +126,9 @@ if uploaded_files2 is not None:
 # グラフのパラメータ設定
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f, encoding='CP932')
+    sample_df = sample_df.dropna()
 
-    # skiprows1を使用してsample_columnsを設定
+    # skiprowsを使用してsample_columnsを設定
     sample_columns = 5 if skiprows == 0 else 2  # サンプルカラム数の確認
     sample_par = sample_df.iloc[1:, sample_columns].tolist()
     sample_par = list(filter(pd.notna, sample_par))
@@ -156,3 +151,9 @@ if dataframes:
 if dataframes2:
     fig2, total_counts2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
     st.plotly_chart(fig2)
+
+# 有意差の検出
+if len(total_counts1) > 0 and len(total_counts2) > 0:
+    # 2つの正規化されたzデータの有意差を検出
+    t_statistic, p_value = stats.ttest_ind(normalized_z_values1, normalized_z_values2)
+    st.write(f"t統計量: {t_statistic}, p値: {p_value}")
