@@ -152,13 +152,3 @@ if st.session_state.show_graph:
     if dataframes2:
         fig2, total_counts2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
         st.plotly_chart(fig2, use_container_width=False)
-
-# ダウンロード用のデータを作成
-if dataframes:
-    download_data = []
-    for x in total_counts1:
-        for y in total_counts1[x]:
-            download_data.append([x, y, total_counts1[x][y]])
-    csv_data = pd.DataFrame(download_data, columns=[x_pal, y_pal, 'Count'])
-    csv_buffer = csv_data.to_csv(index=False).encode('utf-8')
-    st.download_button(label="積算データをダウンロード", data=csv_buffer, file_name='cumulative_data.csv', mime='text/csv')
