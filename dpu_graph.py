@@ -129,7 +129,7 @@ if sample_f is not None:
     sample_df = pd.read_csv(sample_f, encoding='CP932')
     sample_df = sample_df.dropna()
 
-    sample_columns = 5 if skiprow == 2 else 2  # サンプルカラム数の確認
+    sample_columns = 5 if skiprows == 2 else 2  # サンプルカラム数の確認
     sample_par = sample_df.iloc[1:,sample_columns].tolist()
     st.write(sample_par)
     sample_par = [x for x in sample_par if pd.notna(x)]  # リスト内包表記を使ってNaNを除外
