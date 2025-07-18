@@ -108,7 +108,7 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
                 line=dict(width=10, color="blue"),
                 showlegend=False
             ), row=1, col=1)
-    return fig, total_counts
+    return fig, total_counts, normalized_z_values
 
 # ファイルのアップロード
 col1, col2, col3 = st.columns([3, 3, 1])
@@ -147,11 +147,11 @@ if sample_f is not None:
 
 # グラフの作成
 if dataframes:
-    fig1, total_counts1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
+    fig1, total_counts1, normalized_z_values1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
     st.plotly_chart(fig1)
 
 if dataframes2:
-    fig2, total_counts2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
+    fig2, total_counts2, normalized_z_values2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
     st.plotly_chart(fig2)
 
 # 有意差の検出
