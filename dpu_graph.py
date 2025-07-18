@@ -143,7 +143,9 @@ if sample_f is not None:
 # グラフの作成
 
 if dataframes:
-    st.plotly_chart(fig1)
+    fig1, total_counts1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
+    st.plotly_chart(fig1, use_container_width=False)
 
 if dataframes2:
-    st.plotly_chart(fig2)
+    fig2, total_counts2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
+    st.plotly_chart(fig2, use_container_width=False)
