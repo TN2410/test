@@ -26,10 +26,13 @@ st.title("windarab or dpu 積算データ")
 def load_uploaded_file(uploaded_file, skiprows):
     return pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
 
-col1, col2 = st.columns(2)
+col1, col2 ,col3 = st.columns(3)
 
 with col1:
-    uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True 
+    uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True
+with col2:
+    uploaded_files2 = st.file_uploader("別のtxtファイルをアップロードしてください", type="txt", accept_multiple_files=True)
+    dataframes2 = {} 
                                  )
 specific_string = "windarab"  # ここに検索したい文字を設定
 if uploaded_files is not None:
@@ -50,7 +53,7 @@ if uploaded_files is not None:
         df = pd.read_csv(uploaded_file , sep="[\t\0]",skiprows = skiprows , engine="python")
         dataframes[uploaded_file.name] = df
 
-with col2:
+with col3:
     sample_f = st.file_uploader("csvファイルをアップロードしてください", type=["csv"])
 
 #グラフを書く前にsample_fに即した仮データベースファイルを使用したほうが、時間早いと思われる
@@ -188,8 +191,7 @@ if dataframes:
 
 # もう一つのデータ群の処理を追加
     # <--- 追加開始
-    uploaded_files2 = st.file_uploader("別のtxtファイルをアップロードしてください", type="txt", accept_multiple_files=True)
-    dataframes2 = {}
+
     if uploaded_files2 is not None:
         for uploaded_file in uploaded_files2:
             initial_lines = pd.read_csv(uploaded_file, nrows=2)
