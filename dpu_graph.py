@@ -195,13 +195,8 @@ if dataframes:
             z_values.append(total_counts[x][y])
 
     z_sum = sum(z_values)
-    z_values_normalized = []
     for z in z_values:
         # zが0の場合を考慮して、ゼロ除算を防ぐ
-        if z_sum != 0:
-            z_values_normalized.append(z / z_sum *100)
-        else:
-            z_values_normalized.append(0)  # ゼロ除算の場合、無次元化された値も0に設定
         
         z_sum = {}
         for xx in range(x_div_num):
@@ -219,8 +214,104 @@ if dataframes:
                 total_counts[x] = {}
             for y in z_sum[x]:
                 total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
-    st.plotly_chart(fig)
 
+if 'show_normalized' not in st.session_state:
+    st.session_state.show_normalized = True  # 初期値として無次元化データを表示
+
+# ボタンを横に並べるためのカラムを作成
+    col3, col4 = st.columns([1,3])#幅を　1:3
+
+    # 無次元化データを切り替えるボタン
+    # グラフ表示ボタン
+    with col3:
+        if st.button('グラフを表示/非表示'):
+            st.session_state.show_graph = not st.session_state.show_graph
+            
+    with col4:
+        if st.button('時間　⇔　％　切り替え'):
+            st.session_state.show_normalized = not st.session_state.show_normalized
+
+    # 3Dグラフに表示するz_valuesを選択
+    if st.session_state.show_normalized:
+        z_to_use = z_values_normalized
+        z_label = "時間頻度(%)"
+    else:
+        z_to_use = z_values
+        z_label = "時間(sec)"
+
+########fig subplot　影付で作成　　マップの作製 
+    for i in range(len(x_values)):
+        fig.add_trace(go.Scatter3d(
+            x=[x_values[i]+x_span/100, x_values[i]+x_span/100,x_values[i]+x_span/100, x_values[i]+x_span/100, x_values[i]+x_span/100],
+            y=[y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100, y_values[i]-y_span/100],
+            z=[0, z_to_use[i] ,z_to_use[i] ,0, 0],
+            mode='lines',
+            line=dict(width=10,color = 'rgba(0, 0, 0, 0.3)'),
+            showlegend = False
+            ),
+            row=1,
+            col=1)    
+
+    for i in range(len(x_values)):
+        fig.add_trace(go.Scatter3d(
+            x=[x_values[i], x_values[i], x_values[i], x_values[i], x_values[i]],
+            y=[y_values[i], y_values[i], y_values[i], y_values[i], y_values[i]],
+            z=[0, z_to_use[i] , z_to_use[i] ,0, 0],
+            mode='lines',
+            line=dict(width=10,color = "blue"),
+            showlegend = False
+            ),
+            row=1,
+            col=1)    
+
+    # 3D散布図の軸ラベル設定
+    sumall = sum(z_values)/3600
+     
+    fig.update_layout(
+        title = "全 {:.3f} Hr ({} sec)".format(sumall,int(sumall*3600)),
+        scene = dict(
+        xaxis_title= x_pal,
+        yaxis_title= y_pal,
+        zaxis_title= z_label,
+        xaxis=dict(range=[x_lower_bound,x_upper_bound]),  # X 軸の上下限
+        yaxis=dict(range=[y_lower_bound,y_upper_bound]),
+        camera=dict(eye=dict(x=1.25, y=-1.25, z=1.25))  # Y 軸の上下限
+           # Z 軸の上下限
+        ),
+        scene2 = dict(
+        xaxis_title= x_pal,
+        yaxis_title= y_pal,
+        xaxis=dict(range=[x_lower_bound,x_upper_bound]),  # X 軸の上下限
+        yaxis=dict(range=[y_lower_bound,y_upper_bound])
+        ),
+        height = 600 ,
+        width = 1600 ,
+    )
+    # 2D グラフのタイトルと軸ラベルを設定
+    fig.update_xaxes(title_text=x_pal, range=[x_lower_bound,x_upper_bound], row=1, col=2)
+    fig.update_yaxes(title_text=y_pal, range=[y_lower_bound,y_upper_bound], row=1, col=2)
+    fig.update_layout(legend=dict(
+    orientation="v",  # 水平に配置
+    yanchor="top",
+    y=1.0 ,  # グラの上側に配置
+    xanchor="left",
+    x=0.42
+     ) , # 左よりに配置
+    )
+
+    # 凡例の設定: 左のグラフにのみ凡例を表示
+    fig.update_layout(
+        showlegend=True,
+    )
+
+    # 右側のグラフの凡例を非表示にする    
+    if 'show_graph' not in st.session_state:
+        st.session_state.show_graph = False
+
+# グラフの表示
+    if st.session_state.show_graph:
+        st.plotly_chart(fig , use_container_width=False)
+####
 # もう一つのデータ群の処理を追加
     # <--- 追加開始
 
@@ -297,12 +388,7 @@ if dataframes2:
     z_sum = sum(z_values)
     z_values_normalized = []
     for z in z_values:
-        # zが0の場合を考慮して、ゼロ除算を防ぐ
-        if z_sum != 0:
-            z_values_normalized.append(z / z_sum *100)
-        else:
-            z_values_normalized.append(0)  # ゼロ除算の場合、無次元化された値も0に設定
-        
+        # zが0の場合を考慮して、ゼロ除算を防ぐ        
         z_sum2 = {}
         for xx in range(x_div_num):
             x = xx * x_span + int(x_lower_bound)
@@ -346,7 +432,7 @@ if 'show_normalized' not in st.session_state:
         z_to_use = z_values
         z_label = "時間(sec)"
 
-########fig subplot　影付で作成 
+########fig subplot　影付で作成　　マップの作製 
     for i in range(len(x_values)):
         fig.add_trace(go.Scatter3d(
             x=[x_values[i]+x_span/100, x_values[i]+x_span/100,x_values[i]+x_span/100, x_values[i]+x_span/100, x_values[i]+x_span/100],
