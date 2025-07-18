@@ -26,7 +26,7 @@ st.title("windarab or dpu 積算データ")
 def load_uploaded_file(uploaded_file, skiprows):
     return pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
 
-col1, col2 ,col3 = st.columns([4:4:1])
+col1, col2 ,col3 = st.columns([4,4,1])
 with col1:
     uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True)
 with col2:
