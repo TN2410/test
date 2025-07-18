@@ -33,7 +33,7 @@ with col1:
 with col2:
     uploaded_files2 = st.file_uploader("別のtxtファイルをアップロードしてください", type="txt", accept_multiple_files=True)
 dataframes2 = {} 
-                                 )
+                                 
 specific_string = "windarab"  # ここに検索したい文字を設定
 if uploaded_files is not None:
     sample_columns, skiprows = None, None
