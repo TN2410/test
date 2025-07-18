@@ -205,7 +205,19 @@ if uploaded_files2 is not None:
 
         df = pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
         dataframes2[uploaded_file.name] = df
+        for uploaded_file in uploaded_files2:
+            initial_lines = pd.read_csv(uploaded_file, nrows=2)
+            uploaded_file.seek(0)
+            if initial_lines.apply(lambda x: x.astype(str).str.contains(specific_string).any(), axis=1).any():
+                sample_columns = 2
+                skiprows = 5
+            else:
+                sample_columns = 5
+                skiprows = 0
 
+            df = pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
+            dataframes2[uploaded_file.name] = df
+            
 total_counts2 = {}
 for filename, df in dataframes2.items():
     if df.empty:
