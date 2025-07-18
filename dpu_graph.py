@@ -27,7 +27,6 @@ def load_uploaded_file(uploaded_file, skiprows):
     return pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
 
 col1, col2 ,col3 = st.columns(3)
-
 with col1:
     uploaded_files = st.file_uploader("txtファイルをアップロードしてください(先)", type="txt",accept_multiple_files=True)
 with col2:
@@ -72,7 +71,7 @@ if uploaded_files2 is not None:
         df = pd.read_csv(uploaded_file, sep="[\t\0]", skiprows=skiprows, engine="python")
         dataframes2[uploaded_file.name] = df
 
-#グラフのパラメータ、レンジを設定する
+#グラフのパラメータ、レンジをサイドバーにて設定する
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f,encoding ='CP932')
     sample = sample_df.iloc[:,sample_columns]#DPU用 sample_columns 2 or 5
@@ -121,7 +120,7 @@ if sample_f is not None:
         x_div_num = st.number_input('x軸分割数', value = 20)
         y_div_num = st.number_input('y軸分割数', value = 20)
 
-###ダウンロードしたファイルからプロットするファイルを選択
+###ダウンロードしたファイルからプロットするファイルをチェックボックスにて選択
 if dataframes:
     
     total_counts = {}#この初期化した辞書型へ読み込んで全ロードデータを保存しておく
@@ -184,6 +183,7 @@ if dataframes:
                     total_counts[x] = {}
                 for y in z_sum[x]:
                     total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
+        st.plotly_chart(fig)
 
     x_values = []
     y_values = []
@@ -203,6 +203,23 @@ if dataframes:
             z_values_normalized.append(z / z_sum *100)
         else:
             z_values_normalized.append(0)  # ゼロ除算の場合、無次元化された値も0に設定
+        
+        z_sum = {}
+        for xx in range(x_div_num):
+            x = xx * x_span + int(x_lower_bound)
+            z_sum[x] = {}
+            for yy in range(y_div_num):
+                y = yy * y_span + int(y_lower_bound)
+                mask_x = (df[x_pal] > x) & (df[x_pal] <= x + x_span)
+                mask_y = (df[y_pal] > y) & (df[y_pal] <= y + y_span)
+                filtered_data = df[mask_x & mask_y]
+                z_sum[x][y] = len(filtered_data)
+        
+        for x in z_sum:
+            if x not in total_counts:
+                total_counts[x] = {}
+            for y in z_sum[x]:
+                total_counts[x][y] = total_counts.get(x, {}).get(y, 0) + z_sum[x][y]
 
 # もう一つのデータ群の処理を追加
     # <--- 追加開始
@@ -285,6 +302,7 @@ if dataframes2:
             z_values_normalized.append(z / z_sum *100)
         else:
             z_values_normalized.append(0)  # ゼロ除算の場合、無次元化された値も0に設定
+        
         z_sum2 = {}
         for xx in range(x_div_num):
             x = xx * x_span + int(x_lower_bound)
@@ -302,15 +320,10 @@ if dataframes2:
             for y in z_sum2[x]:
                 total_counts2[x][y] = total_counts2.get(x, {}).get(y, 0) + z_sum2[x][y]
 
-    # Zデータの有意差検証
 # <--- 追加終了
-
-
-
     # Streamlitのセッションステートで表示データの管理
 if 'show_normalized' not in st.session_state:
     st.session_state.show_normalized = True  # 初期値として無次元化データを表示
-
 
 # ボタンを横に並べるためのカラムを作成
     col3, col4 = st.columns([1,3])#幅を　1:3
@@ -333,7 +346,7 @@ if 'show_normalized' not in st.session_state:
         z_to_use = z_values
         z_label = "時間(sec)"
 
-
+########fig subplot　影付で作成 
     for i in range(len(x_values)):
         fig.add_trace(go.Scatter3d(
             x=[x_values[i]+x_span/100, x_values[i]+x_span/100,x_values[i]+x_span/100, x_values[i]+x_span/100, x_values[i]+x_span/100],
@@ -360,9 +373,6 @@ if 'show_normalized' not in st.session_state:
 
     # 3D散布図の軸ラベル設定
     sumall = sum(z_values)/3600
-   # 各サブプロットの幅を比率3:7に設定
-    #fig['layout']['xaxis'].update(domain=[0, 0.7])  # 1つ目のグラフの幅
-    #fig['layout']['xaxis'].update(domain=[0.7, 1])  # 2つ目のグラフの幅 
      
     fig.update_layout(
         title = "全 {:.3f} Hr ({} sec)".format(sumall,int(sumall*3600)),
