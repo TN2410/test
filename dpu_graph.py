@@ -82,13 +82,13 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
     if all_z_values:  # z値が存在する場合
         min_z = min(all_z_values)
         max_z = max(all_z_values)
-        if (max_z - min_z) !=0:
-            normalized_z_values = [(z - min_z) / (max_z - min_z) for z in all_z_values]
-        else :
-            normalized_z_values = all_z_values
+        #if (max_z - min_z) !=0:
+        #    normalized_z_values = [(z - min_z) / (max_z - min_z) for z in all_z_values]
+        #else :
+        normalized_z_values = all_z_values
         # 正規化したz値を使用して3Dグラフを作成
-    else :
-        normalized_z_values = []
+    #else :
+    #    normalized_z_values = []
        
         for i in range(len(normalized_z_values)):
             fig.add_trace(go.Scatter3d(
@@ -108,7 +108,6 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
                 line=dict(width=10, color="blue"),
                 showlegend=False
             ), row=1, col=1)
-    fig.plotly(fig)
     return fig, total_counts
 
 # ファイルのアップロード
