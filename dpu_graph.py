@@ -307,16 +307,6 @@ if dataframes2:
 
 
 
-z_values2 = []
-for x in total_counts2:
-    for y in total_counts2[x]:
-        z_values2.append(total_counts2[x][y])
-
-# t検定
-if len(z_values) > 0 and len(z_values2) > 0:
-    t_stat, p_value = stats.ttest_ind(z_values, z_values2)
-    st.write(f"t-statistic: {t_stat}, p-value: {p_value}")
-
     # Streamlitのセッションステートで表示データの管理
 if 'show_normalized' not in st.session_state:
     st.session_state.show_normalized = True  # 初期値として無次元化データを表示
