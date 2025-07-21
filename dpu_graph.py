@@ -117,8 +117,10 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
         scene=dict(
             camera=dict(
                 eye=dict(x=1, y=-1, z=1)  # 初期の視点を設定
-            )
-        )
+            ),
+            xaxis_title=x_pal,  # x軸ラベルを設定
+            yaxis_title=y_pal,  # y軸ラベルを設定
+            zaxis_title='頻度'  # z軸ラベルを設定        )
     )
     return fig, total_counts, normalized_z_values
 
