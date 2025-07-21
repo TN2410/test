@@ -121,7 +121,9 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
             xaxis_title=x_pal,  # x軸ラベルを設定
             yaxis_title=y_pal,  # y軸ラベルを設定
             zaxis_title='頻度'  # z軸ラベルを設定
-        )
+        ),
+        xaxis_title=x_pal,  # Scatter Plotのx軸ラベル
+        yaxis_title=y_pal   # Scatter Plotのy軸ラベル
     )
     return fig, total_counts, normalized_z_values
 
