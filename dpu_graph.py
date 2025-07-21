@@ -125,7 +125,7 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
         #xaxis_title=x_pal,  # Scatter Plotのx軸ラベル
         #yaxis_title=y_pal   # Scatter Plotのy軸ラベル
     )
-    return fig, total_counts,_normalized_z_values
+    return fig, total_counts, normalized_z_values
 
 # ファイルのアップロード
 col1, col2, col3 = st.columns([3, 3, 1])
