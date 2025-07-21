@@ -164,8 +164,8 @@ if sample_f is not None:
         initial_y_lower_bound , initial_y_upper_bound = 0 , 2000
 
     with st.sidebar:
-        x_pal = st.selectbox('x列を選択してください', sample_par,index=sample_par.index(initial_x_pal)
-        y_pal = st.selectbox('y列を選択してください', sample_par,index=sample_par.index(initial_y_pal)
+        x_pal = st.selectbox('x列を選択してください', sample_par,index=sample_par.index(initial_x_pal))
+        y_pal = st.selectbox('y列を選択してください', sample_par,index=sample_par.index(initial_y_pal))
         x_lower_bound = st.number_input('xの下限値と', step=1)
         x_upper_bound = st.number_input('xの上限値を入力してください', value=initial_x_upper_bound, step=10)
         y_lower_bound = st.number_input('yの下限値と', step=1)
