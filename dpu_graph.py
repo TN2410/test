@@ -147,6 +147,16 @@ if sample_f is not None:
     sample_columns = 5 if skiprows == 0 else 2  # サンプルカラム数の確認
     sample_par = sample_df.iloc[1:, sample_columns].tolist()
     sample_par = list(filter(pd.notna, sample_par))
+    
+    if skiprows == 0 :
+        x_pal , y_pal = "NE" , "P_Manifold1"
+        x_lower_bound , x_upper_bound = 0 , 8000 
+        y_lower_bound , y_upper_bound = 0 , 200
+    else :
+        x_pal , y_pal = "nmot" , "boost"
+        x_lower_bound , x_upper_bound = 0 , 8000 
+        y_lower_bound , y_upper_bound = 0 , 2000
+
     with st.sidebar:
         x_pal = st.selectbox('x列を選択してください', sample_par)
         y_pal = st.selectbox('y列を選択してください', sample_par)
