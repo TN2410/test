@@ -21,7 +21,7 @@ def load_uploaded_file(uploaded_file, skiprows):
 
 def process_files(uploaded_files, specific_string):
     dataframes = {}
-    skipropw = 0
+    skipropws = 0
     for uploaded_file in uploaded_files:
         initial_lines = pd.read_csv(uploaded_file, nrows=2)
         uploaded_file.seek(0)
