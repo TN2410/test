@@ -153,6 +153,16 @@ if sample_f is not None:
     sample_par = sample_df.iloc[1:, sample_columns].tolist()
     sample_par = list(filter(pd.notna, sample_par))
     
+    #初期表示パラメータを設定
+    if skiprows == 0 :
+        x_pal , y_pal = "NE" , "P_Manifold1"
+        x_lower_bound , x_upper_bound = 0 , 8000 
+        y_lower_bound , y_upper_bound = 0 , 200
+    else :
+        x_pal , y_pal = "nmot" , "pboost"
+        x_lower_bound , x_upper_bound = 0 , 8000 
+        y_lower_bound , y_upper_bound = 0 , 2000
+
     with st.sidebar:
         x_pal = st.selectbox('x列を選択してください', sample_par)
         y_pal = st.selectbox('y列を選択してください', sample_par)
@@ -162,16 +172,6 @@ if sample_f is not None:
         y_upper_bound = st.number_input('yの上限値を入力してください', value=200, step=10)
         x_div_num = st.number_input('x軸分割数', value=20)
         y_div_num = st.number_input('y軸分割数', value=20)
-
-#初期表示パラメータを設定
-if skiprows == 0 :
-    x_pal , y_pal = "NE" , "P_Manifold1"
-    x_lower_bound , x_upper_bound = 0 , 8000 
-    y_lower_bound , y_upper_bound = 0 , 200
-else :
-    x_pal , y_pal = "nmot" , "pboost"
-    x_lower_bound , x_upper_bound = 0 , 8000 
-    y_lower_bound , y_upper_bound = 0 , 2000
 
 # グラフの作成
 if dataframes:
