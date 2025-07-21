@@ -50,8 +50,10 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
             continue
 
         # カラム名の存在確認
+        if skiprows == 5:
+            df.columns = [text.split('[')[0].strip() for text in df.columns]
+        
         if x_pal not in df.columns or y_pal not in df.columns:
-            st.write(df.columns)
             st.warning(f"{filename} にはカラム '{x_pal}' または '{y_pal}' が存在しません。")
             continue
             
