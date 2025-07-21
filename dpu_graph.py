@@ -186,10 +186,5 @@ if dataframes2:
 
 # 有意差の検出
 
-if len(total_counts1) > 0 and len(total_counts2) > 0:
-    # 2つの正規化されたzデータの有意差を検出
     t_statistic, p_value = stats.ttest_ind(normalized_z_values1, normalized_z_values2)
-    st.write(f"t統計量: {t_statistic}, p値: {p_value}")
-else:
-    if len(total_counts1) > 0:
-        st.write("データフレーム1のグラフが表示されましたが、データフレーム2はアップロードされていません。") 
+    st.write(f"t統計量: {t_statistic}, p値: {p_value}
