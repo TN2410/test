@@ -164,7 +164,7 @@ if skiprows == 0 :
     x_lower_bound , x_upper_bound = 0 , 8000 
     y_lower_bound , y_upper_bound = 0 , 200
 else :
-    x_pal , y_pal = "nmot" , "boost"
+    x_pal , y_pal = "nmot" , "pboost"
     x_lower_bound , x_upper_bound = 0 , 8000 
     y_lower_bound , y_upper_bound = 0 , 2000
 
