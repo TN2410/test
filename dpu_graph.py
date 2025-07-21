@@ -174,6 +174,10 @@ if sample_f is not None:
         y_div_num = st.number_input('y軸分割数', value=20)
 
 # グラフの作成
+
+total_counts1 = []  # 初期化
+total_counts2 = []  # 初期化
+
 if dataframes:
     fig1, total_counts1, normalized_z_values1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
     st.plotly_chart(fig1)
