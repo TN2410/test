@@ -125,6 +125,7 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
         #xaxis_title=x_pal,  # Scatter Plotのx軸ラベル
         #yaxis_title=y_pal   # Scatter Plotのy軸ラベル
     )
+    st.write(total_counts)
     return fig, total_counts, normalized_z_values
 
 # ファイルのアップロード
@@ -178,7 +179,6 @@ if sample_f is not None:
 if dataframes:
     fig1, total_counts1, normalized_z_values1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
     st.plotly_chart(fig1)
-    st.write(total_counts1)
 
 if dataframes2:
     fig2, total_counts2, normalized_z_values2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
