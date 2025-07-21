@@ -111,6 +111,13 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
                 line=dict(width=10, color="blue"),
                 showlegend=False
             ), row=1, col=1)
+    fig.update_layout(
+        scene=dict(
+            camera=dict(
+                eye=dict(x=1, y=-1, z=1)  # 初期の視点を設定
+            )
+        )
+    )
     return fig, total_counts, normalized_z_values
 
 # ファイルのアップロード
@@ -135,7 +142,7 @@ if uploaded_files2 is not None:
 if sample_f is not None:
     sample_df = pd.read_csv(sample_f, encoding='CP932')
     # skiprowsを使用してsample_columnsを設定
-    sample_columns = 5 if skiprows == 0 else 3  # サンプルカラム数の確認
+    sample_columns = 5 if skiprows == 0 else 2  # サンプルカラム数の確認
     sample_par = sample_df.iloc[1:, sample_columns].tolist()
     sample_par = list(filter(pd.notna, sample_par))
     with st.sidebar:
