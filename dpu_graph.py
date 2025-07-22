@@ -37,7 +37,7 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
         rows=1,
         cols=2,
         specs=[[{"type": "surface"}, {"type": "scatter"}]],
-        subplot_titles=("時間頻度", "Scatter Plot"),
+        subplot_titles=("時間頻度_{total_Z_value:.2f}", "Scatter Plot"),
     )
 
     all_z_values = []  # すべてのz値を保存するリスト
@@ -72,6 +72,7 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
         for xx in range(x_div_num):
             x = xx * x_span + int(x_lower_bound)
             z_sum[x] = {}
+            
             for yy in range(y_div_num):
                 y = yy * y_span + int(y_lower_bound)
                 mask_x = (df[x_pal] > x) & (df[x_pal] <= x + x_span)
@@ -81,12 +82,15 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
                 all_z_values.append(z_sum[x][y])  # z値をリストに追加
                 x_values.append(x)  # xの値を追加
                 y_values.append(y)  # yの値を追加
-
+        
         # スキャッタープロットの追加
         fig.add_trace(go.Scatter(x=df[x_pal], y=df[y_pal], mode='markers', name=filename), row=1, col=2)
 
+    # z値の合計を計算
+    total_z_value = sum(all_z_values)  # z値の合計を計算
     # z値の正規化
     normalized_z_values = []  # ここで初期化
+    
     if all_z_values:  # z値が存在する場合
         min_z = min(all_z_values)
         max_z = max(all_z_values)
