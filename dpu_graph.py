@@ -124,6 +124,7 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
             ), row=1, col=1)
         
     # y軸の上下限を設定
+    fig.update_xaxes(range=[x_lower_bound, x_upper_bound], row=1, col=2)  # Scatter Plotのy軸の上下限を設定
     fig.update_yaxes(range=[y_lower_bound, y_upper_bound], row=1, col=2)  # Scatter Plotのy軸の上下限を設定
 
     fig.update_layout(
