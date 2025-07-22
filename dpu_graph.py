@@ -42,7 +42,7 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
         rows=1,
         cols=2,
         specs=[[{"type": "surface"}, {"type": "scatter"}]],
-        subplot_titles=("時間頻度_({total_z_value:.2f})", "Scatter Plot"),  # タイトルに合計を追加
+        subplot_titles=("時間頻度", "Scatter Plot"),  # タイトルに合計を追加
     )
     
     for filename, df in dataframes.items():
