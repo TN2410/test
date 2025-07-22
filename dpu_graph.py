@@ -38,6 +38,13 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
     x_values = []  # xの値を保存するリスト
     y_values = []  # yの値を保存するリスト
 
+    fig = make_subplots(
+        rows=1,
+        cols=2,
+        specs=[[{"type": "surface"}, {"type": "scatter"}]],
+        subplot_titles=("時間頻度_({total_z_value:.2f})", "Scatter Plot"),  # タイトルに合計を追加
+    )
+    
     for filename, df in dataframes.items():
         if df.empty:
             st.warning(f"{filename} は空のファイルです。")
@@ -82,13 +89,10 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
 
     # z値の合計を計算
     total_z_value = sum(all_z_values)  # z値の合計を計算
+   
+    # タイトルを更新
+    fig.layout.annotations[0].text = f"時間頻度 (Total Z Value: {total_z_value:.2f})"
 
-    fig = make_subplots(
-        rows=1,
-        cols=2,
-        specs=[[{"type": "surface"}, {"type": "scatter"}]],
-        subplot_titles=("時間頻度_({total_z_value:.2f})", "Scatter Plot"),  # タイトルに合計を追加
-    )
     # z値の正規化
     normalized_z_values = []  # ここで初期化
     
