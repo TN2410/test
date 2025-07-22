@@ -186,4 +186,4 @@ if dataframes2:
 # 有意差の検出
 
     t_statistic, p_value = stats.ttest_ind(normalized_z_values1, normalized_z_values2)
-    st.write(f"t統計量: {t_statistic}, p値: {p_value}")
+    st.write(f"t統計量: {t_statistic:.3f}, p値: {p_value:.3f}")
