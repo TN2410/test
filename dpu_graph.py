@@ -171,7 +171,7 @@ if sample_f is not None:
     if skiprows == 0 :
         initial_x_pal , initial_y_pal = "NE" , "P_Manifold1"
         initial_x_lower_bound , initial_x_upper_bound = 0 , 8000 
-        initial_y_lower_bound , initial_y_upper_bound = 0 , 200
+        initial_y_lower_bound , initial_y_upper_bound = 0 , 250
     else :
         initial_x_pal , initial_y_pal = "nmot" , "pboost"
         initial_x_lower_bound , initial_x_upper_bound = 0 , 8000 
