@@ -33,12 +33,6 @@ def process_files(uploaded_files, specific_string):
 def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num):
     total_counts = {}
     z_sum = {}
-    fig = make_subplots(
-        rows=1,
-        cols=2,
-        specs=[[{"type": "surface"}, {"type": "scatter"}]],
-        subplot_titles=("時間頻度_{total_Z_value:.2f}", "Scatter Plot"),
-    )
 
     all_z_values = []  # すべてのz値を保存するリスト
     x_values = []  # xの値を保存するリスト
@@ -88,6 +82,13 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
 
     # z値の合計を計算
     total_z_value = sum(all_z_values)  # z値の合計を計算
+
+    fig = make_subplots(
+        rows=1,
+        cols=2,
+        specs=[[{"type": "surface"}, {"type": "scatter"}]],
+        subplot_titles=("時間頻度_({total_z_value:.2f})", "Scatter Plot"),  # タイトルに合計を追加
+    )
     # z値の正規化
     normalized_z_values = []  # ここで初期化
     
