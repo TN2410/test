@@ -195,6 +195,10 @@ if dataframes2:
 # 有意差の検出
 
     t_statistic, p_value = stats.ttest_ind(normalized_z_values1, normalized_z_values2)
+    st.write(f"U統計量: {u_statistic:.3f}, p値: {p_value:.3g}")
+    if p_value < 0.05:
+        st.write("有意差あり")
+    u_statistic, p_value = stats.mannwhitneyu(normalized_z_values1, normalized_z_values2, alternative='two-sided')
     st.write(f"t統計量: {t_statistic:.3f}, p値: {p_value:.3g}")
     if p_value < 0.05:
         st.write("有意差あり")
