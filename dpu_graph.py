@@ -30,7 +30,7 @@ def process_files(uploaded_files, specific_string):
         dataframes[uploaded_file.name] = df
     return dataframes, skiprows
 
-def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num):
+def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows):
     total_counts = {}
     z_sum = {}
 
@@ -130,7 +130,7 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
         #xaxis_title=x_pal,  # Scatter Plotのx軸ラベル
         #yaxis_title=y_pal   # Scatter Plotのy軸ラベル
     )
-    return fig, total_counts, normalized_z_values
+    return fig, total_counts, normalized_z_values, total_z_value
 
 # ファイルのアップロード
 col1, col2, col3 = st.columns([3, 3, 1])
@@ -181,11 +181,11 @@ if sample_f is not None:
 # グラフの作成
 
 if dataframes:
-    fig1, total_counts1, normalized_z_values1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
+    fig1, total_counts1, normalized_z_values1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
     st.plotly_chart(fig1)
 
 if dataframes2:
-    fig2, total_counts2, normalized_z_values2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num)
+    fig2, total_counts2, normalized_z_values2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
     st.plotly_chart(fig2)
 
 # 有意差の検出
