@@ -131,8 +131,8 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
             yaxis_title=y_pal,  # y軸ラベルを設定
             zaxis_title='頻度'  # z軸ラベルを設定
         ),
-        #xaxis_title=x_pal,  # Scatter Plotのx軸ラベル
-        #yaxis_title=y_pal   # Scatter Plotのy軸ラベル
+        xaxis_title=x_pal,  # Scatter Plotのx軸ラベル
+        yaxis_title=y_pal   # Scatter Plotのy軸ラベル
     )
     return fig, total_counts, normalized_z_values, total_z_value
 
@@ -175,9 +175,9 @@ if sample_f is not None:
     with st.sidebar:
         x_pal = st.selectbox('x列を選択してください', sample_par,index=sample_par.index(initial_x_pal))
         y_pal = st.selectbox('y列を選択してください', sample_par,index=sample_par.index(initial_y_pal))
-        x_lower_bound = st.number_input('xの下限値と', step=1)
+        x_lower_bound = st.number_input('xの下限値と', value=initial_x_lower_bound, step=1)
         x_upper_bound = st.number_input('xの上限値を入力してください', value=initial_x_upper_bound, step=10)
-        y_lower_bound = st.number_input('yの下限値と', step=1)
+        y_lower_bound = st.number_input('yの下限値と', value=initial_y_lower_bound, step=1)
         y_upper_bound = st.number_input('yの上限値を入力してください', value=initial_y_upper_bound, step=10)
         x_div_num = st.number_input('x軸分割数', value=20)
         y_div_num = st.number_input('y軸分割数', value=20)
