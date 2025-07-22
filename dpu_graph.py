@@ -91,7 +91,7 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
     total_z_value = sum(all_z_values)  # z値の合計を計算
    
     # タイトルを更新
-    fig.layout.annotations[0].text = f"時間頻度 (Total Z Value: {total_z_value/3600:.2f}Hrs)"
+    fig.layout.annotations[0].text = f"時間頻度 (Total: {total_z_value/3600:.2f}Hrs)"
 
     # z値の正規化
     normalized_z_values = []  # ここで初期化
