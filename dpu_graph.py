@@ -129,6 +129,8 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
 
     fig.update_layout(
         scene=dict(
+            xaxis=dict(range=[x_lower_bound, x_upper_bound]),
+            yaxis=dict(range=[y_lower_bound, y_upper_bound]),
             camera=dict(
                 eye=dict(x=1, y=-1, z=1)
             ),
