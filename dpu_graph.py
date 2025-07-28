@@ -188,31 +188,44 @@ if sample_f is not None:
         y_div_num = st.number_input('y軸分割数', value=20)
 
 # グラフの作成
-if dataframes:
-    fig1, z_values1, normalized_z_values1, total_z_value1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
-    st.plotly_chart(fig1)
+# if dataframes:
+#     fig1, z_values1, normalized_z_values1, total_z_value1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
+#     st.plotly_chart(fig1)
 
-if dataframes2:
-    fig2, z_values2, normalized_z_values2, total_z_value2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
-    st.plotly_chart(fig2)
+# if dataframes2:
+#     fig2, z_values2, normalized_z_values2, total_z_value2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
+#     st.plotly_chart(fig2)
 
 ##############################
-#サイドバーにチェックボックスを追加
+# サイドバーにチェックボックスを追加
 with st.sidebar:
     st.header("ファイル選択")
-    selected_files = st.multiselect("累積時間を計算するファイルを選択してください", 
-                                      options=list(dataframes.keys()) + list(dataframes2.keys()))
+    if dataframes:
+        for filename in dataframes.keys():
+            st.checkbox(filename, key=f"file_{filename}")
 
-# # グラフの作成と累積時間の計算
-# if selected_files:
-#     # 選択されたファイルのデータフレームを取得
-#     selected_dataframes = {filename: dataframes.get(filename) or dataframes2.get(filename) for filename in selected_files}
+    if dataframes2:
+        for filename in dataframes2.keys():
+            st.checkbox(filename, key=f"file_{filename}")
+
+# グラフの作成と累積時間の計算
+selected_files = []
+for filename in dataframes.keys():
+    if st.session_state.get(f"file_{filename}", False):
+        selected_files.append(filename)
+
+for filename in dataframes2.keys():
+    if st.session_state.get(f"file_{filename}", False):
+        selected_files.append(filename)
+
+if selected_files:
+    selected_dataframes = {filename: dataframes.get(filename) or dataframes2.get(filename) for filename in selected_files}
     
-#     for filename, df in selected_dataframes.items():
-#         fig, z_values, normalized_z_values, total_z_value = create_fig(
-#             {filename: df}, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows
-#         )
-#         st.plotly_chart(fig)
+    for filename, df in selected_dataframes.items():
+        fig, z_values, normalized_z_values, total_z_value = create_fig(
+            {filename: df}, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows
+        )
+        st.plotly_chart(fig)
 ####################3
 
 # 有意差の検出
