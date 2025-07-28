@@ -215,9 +215,9 @@ for filename in dataframes.keys():
     if st.session_state.get(f"file_{filename}", False):
         selected_files.append(filename)
 
-for filename in dataframes2.keys():
-    if st.session_state.get(f"file_{filename}", False):
-        selected_files2.append(filename)
+for filename2 in dataframes2.keys():
+    if st.session_state.get(f"file_{filename2}", False):
+        selected_files2.append(filename2)
 
 if selected_files:
     selected_dataframes = {filename: dataframes.get(filename) or dataframes2.get(filename) for filename in selected_files}
@@ -229,9 +229,9 @@ if selected_files:
         st.plotly_chart(fig1)
 
 if selected_files2:
-    selected_dataframes = {filename: dataframes.get(filename) or dataframes2.get(filename) for filename in selected_files2}
+    selected_dataframes = {filename: dataframes.get(filename) or dataframes2.get(filename2) for filename2 in selected_files2}
     
-    for filename, df in selected_dataframes.items():
+    for filename2, df in selected_dataframes2.items():
         fig2, z_values2, normalized_z_values2, total_z_value2 = create_fig(
             {filename: df}, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows
         )
