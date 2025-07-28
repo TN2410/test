@@ -197,10 +197,10 @@ if dataframes2:
     st.plotly_chart(fig2)
 
 # 有意差の検出
-if z_values1 and z_values2:
-    # 各z値のリストを作成
-    z_values_1 = list(z_values1.values())
-    z_values_2 = list(z_values2.values())
+if normalized_z_values1 and normalized_z_values2:  # 無次元化されたz値を使用
+    # 各無次元化z値のリストを作成
+    z_values_1 = normalized_z_values1  # 1つ目の無次元化z値
+    z_values_2 = normalized_z_values2  # 2つ目の無次元化z値
 
     # t検定
     t_statistic, p_value_t = stats.ttest_ind(z_values_1, z_values_2)
@@ -213,6 +213,7 @@ if z_values1 and z_values2:
     st.write(f"U統計量: {u_statistic:.3f}, p値: {p_value_u:.3g}")
     if p_value_u < 0.05:
         st.write("有意差あり")
+        
 # CSV出力
 if st.button("CSV出力"):
     output_data = {
