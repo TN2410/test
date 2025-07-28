@@ -197,11 +197,11 @@ if dataframes2:
     st.plotly_chart(fig2)
 
 ##############################
-# サイドバーにチェックボックスを追加
-# with st.sidebar:
-#     st.header("ファイル選択")
-#     selected_files = st.multiselect("累積時間を計算するファイルを選択してください", 
-#                                       options=list(dataframes.keys()) + list(dataframes2.keys()))
+#サイドバーにチェックボックスを追加
+with st.sidebar:
+    st.header("ファイル選択")
+    selected_files = st.multiselect("累積時間を計算するファイルを選択してください", 
+                                      options=list(dataframes.keys()) + list(dataframes2.keys()))
 
 # # グラフの作成と累積時間の計算
 # if selected_files:
