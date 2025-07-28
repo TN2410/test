@@ -98,8 +98,8 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
     if all_z_values:  # z値が存在する場合
         min_z = min(all_z_values)
         max_z = max(all_z_values)
-        if (max_z - min_z) != 0:
-            normalized_z_values = [(z - min_z) / (max_z - min_z) for z in all_z_values]
+        if total_z_value > 0 :
+            normalized_z_values = [ z / total_z_value for z in all_z_values]
         else:
             normalized_z_values = all_z_values
 
@@ -213,3 +213,19 @@ if z_values1 and z_values2:
     st.write(f"U統計量: {u_statistic:.3f}, p値: {p_value_u:.3g}")
     if p_value_u < 0.05:
         st.write("有意差あり")
+# CSV出力
+if st.button("CSV出力"):
+    output_data = {
+        'x': x_values,
+        'y': y_values,
+        'z': all_z_values,
+        'normalized_z': normalized_z_values1  # 1つ目のデータセットの無次元化z値を出力
+    }
+    output_df = pd.DataFrame(output_data)
+    output_csv = output_df.to_csv(index=False)
+    st.download_button(
+        label="CSVをダウンロード",
+        data=output_csv,
+        file_name='output.csv',
+        mime='text/csv'
+    )
