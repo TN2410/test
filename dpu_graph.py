@@ -193,7 +193,7 @@ if dataframes:
     st.plotly_chart(fig1)
 
     # CSV出力ボタン
-    if st.button(f"{uploaded_files.name}のデータをCSV出力"):
+    if st.button("のデータをCSV出力"):
         output_data1 = {
             'x': x_values,  # xの値を出力
             'y': y_values,  # yの値を出力
@@ -214,7 +214,7 @@ if dataframes2:
     st.plotly_chart(fig2)
 
     # CSV出力ボタン
-    if st.button(f"{uploaded_files2.name}のデータをCSV出力"):
+    if st.button("データをCSV出力"):
         output_data2 = {
             'x': x_values,  # xの値を出力
             'y': y_values,  # yの値を出力
