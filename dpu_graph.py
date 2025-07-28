@@ -192,9 +192,39 @@ if dataframes:
     fig1, z_values1, normalized_z_values1, total_z_value1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
     st.plotly_chart(fig1)
 
+    # CSV出力ボタン
+    if st.button(f"{uploaded_files[0].name}のデータをCSV出力"):
+        output_data1 = {
+            'x': normalized_z_values1,  # ここは必要に応じて調整
+            'y': z_values1,  # ここは必要に応じて調整
+        }
+        output_df1 = pd.DataFrame(output_data1)
+        output_csv1 = output_df1.to_csv(index=False)
+        st.download_button(
+            label=f"{uploaded_files[0].name}のCSVをダウンロード",
+            data=output_csv1,
+            file_name=f"{uploaded_files[0].name}.csv",
+            mime='text/csv'
+        )
+
 if dataframes2:
     fig2, z_values2, normalized_z_values2, total_z_value2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
-#     st.plotly_chart(fig2)
+    st.plotly_chart(fig2)
+
+    # CSV出力ボタン
+    if st.button(f"{uploaded_files2[0].name}のデータをCSV出力"):
+        output_data2 = {
+            'x': normalized_z_values2,  # ここは必要に応じて調整
+            'y': z_values2,  # ここは必要に応じて調整
+        }
+        output_df2 = pd.DataFrame(output_data2)
+        output_csv2 = output_df2.to_csv(index=False)
+        st.download_button(
+            label=f"{uploaded_files2[0].name}のCSVをダウンロード",
+            data=output_csv2,
+            file_name=f"{uploaded_files2[0].name}.csv",
+            mime='text/csv'
+        )
 
 # 有意差の検出
 if normalized_z_values1 and normalized_z_values2:  # 無次元化されたz値を使用
@@ -213,20 +243,3 @@ if normalized_z_values1 and normalized_z_values2:  # 無次元化されたz値�
     st.write(f"U統計量: {u_statistic:.3f}, p値: {p_value_u:.3g}")
     if p_value_u < 0.05:
         st.write("有意差あり")
-        
-# CSV出力
-if st.button("CSV出力"):
-    output_data = {
-        'x': x_values,
-        'y': y_values,
-        'z': all_z_values,
-        'normalized_z': normalized_z_values1  # 1つ目のデータセットの無次元化z値を出力
-    }
-    output_df = pd.DataFrame(output_data)
-    output_csv = output_df.to_csv(index=False)
-    st.download_button(
-        label="CSVをダウンロード",
-        data=output_csv,
-        file_name='output.csv',
-        mime='text/csv'
-    )
