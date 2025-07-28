@@ -195,8 +195,10 @@ if dataframes:
     # CSV出力ボタン
     if st.button(f"{uploaded_files[0].name}のデータをCSV出力"):
         output_data1 = {
-            'x': normalized_z_values1,  # ここは必要に応じて調整
-            'y': z_values1,  # ここは必要に応じて調整
+            'x': x_values,  # xの値を出力
+            'y': y_values,  # yの値を出力
+            'z': z_values1,  # 元のz値を出力
+            'normalized_z': normalized_z_values1  # 無次元化されたz値を出力
         }
         output_df1 = pd.DataFrame(output_data1)
         output_csv1 = output_df1.to_csv(index=False)
@@ -214,8 +216,10 @@ if dataframes2:
     # CSV出力ボタン
     if st.button(f"{uploaded_files2[0].name}のデータをCSV出力"):
         output_data2 = {
-            'x': normalized_z_values2,  # ここは必要に応じて調整
-            'y': z_values2,  # ここは必要に応じて調整
+            'x': x_values,  # xの値を出力
+            'y': y_values,  # yの値を出力
+            'z': z_values2,  # 元のz値を出力
+            'normalized_z': normalized_z_values2  # 無次元化されたz値を出力
         }
         output_df2 = pd.DataFrame(output_data2)
         output_csv2 = output_df2.to_csv(index=False)
