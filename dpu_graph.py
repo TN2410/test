@@ -156,10 +156,12 @@ specific_string = "windarab"
 
 # ファイルの読み込み
 dataframes, skiprows = None, 0
-if uploaded_files is not None:
-    dataframes, skiprows = process_files(uploaded_files, specific_string)
-if uploaded_files2 is not None:
-    dataframes2, skiprows = process_files(uploaded_files2, specific_string)
+if uploaded_files:
+    with st.spinner("ファイル処理中..."):
+        dataframes, skiprows = process_files(uploaded_files, specific_string)
+if uploaded_files2:
+    with st.spinner("ファイル処理中..."):
+        dataframes2, skiprows = process_files(uploaded_files2, specific_string)
 
 # グラフのパラメータ設定
 if sample_f is not None:
@@ -189,8 +191,9 @@ if sample_f is not None:
 
 # グラフの作成
 if dataframes:
-    fig1, z_values1, normalized_z_values1, total_z_value1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
-    st.plotly_chart(fig1)
+    with st.spinner("グラフを作成中..."):
+        fig1, z_values1, normalized_z_values1, total_z_value1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
+        st.plotly_chart(fig1)
 
     # CSV出力ボタン
     if st.button("のデータをCSV出力"):
@@ -210,8 +213,9 @@ if dataframes:
         )
 
 if dataframes2:
-    fig2, z_values2, normalized_z_values2, total_z_value2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
-    st.plotly_chart(fig2)
+    with st.spinner("別のグラフを作成中..."):
+        fig2, z_values2, normalized_z_values2, total_z_value2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
+        st.plotly_chart(fig2)
 
     # CSV出力ボタン
     if st.button("データをCSV出力"):
