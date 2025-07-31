@@ -128,8 +128,8 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
     fig.update_yaxes(range=[y_lower_bound, y_upper_bound], row=1, col=2)
 
     fig.update_layout(
-        height = 800,
-        width = 1200,
+        height = 600,
+        width = 1500,
         scene=dict(
             xaxis=dict(range=[x_lower_bound, x_upper_bound]),
             yaxis=dict(range=[y_lower_bound, y_upper_bound]),
