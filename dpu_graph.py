@@ -198,9 +198,6 @@ if dataframes:
         st.plotly_chart(fig1)
 
 # 左側のグラフとダウンローダ
-col1, col2 = st.columns(2)
-with col1:
-    st.plotly_chart(fig1, use_container_width=True)
     # CSV出力ボタン
     if st.button("のデータをCSV出力"):
         output_data1 = {
@@ -224,8 +221,6 @@ if dataframes2:
         st.plotly_chart(fig2)
 
 # 右側のグラフとダウンローダ
-with col2:
-    st.plotly_chart(fig2, use_container_width=True)
     # CSV出力ボタン
     if st.button("データをCSV出力"):
         output_data2 = {
