@@ -197,6 +197,17 @@ if dataframes:
         fig1, z_values1, normalized_z_values1, total_z_value1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
         st.plotly_chart(fig1)
 
+
+    # z_values1 は辞書形式 (x,y) -> z_value なので、DataFrameに変換して表示
+    if z_values1:
+        # 辞書のキー(x,y)を分割してカラムに
+        df_z = pd.DataFrame([
+            {'x': k[0], 'y': k[1], 'z': v} for k, v in z_values1.items()
+        ])
+        st.write("x, y に対する z の値（頻度）")
+        st.dataframe(df_z)
+
+
 # 左側のグラフとダウンローダ
     # CSV出力ボタン
     if st.button("のデータをCSV出力"):
