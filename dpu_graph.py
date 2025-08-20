@@ -230,7 +230,7 @@ if dataframes2:
             'normalized_z': normalized_z_values2  # 無次元化されたz値を出力
         }
         output_df2 = pd.DataFrame(output_data2)
-        st.write(output_df2)
+        st.write("ダウンロード")
         output_csv2 = output_df2.to_csv(index=False)
         st.download_button(
             label=f"{uploaded_files2[0].name}のCSVをダウンロード",
