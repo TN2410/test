@@ -143,7 +143,7 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
         xaxis_title=x_pal,
         yaxis_title=y_pal
     )
-    return fig, z_values_dict, normalized_z_values, total_z_value
+    return fig, z_values_dict, normalized_z_values, total_z_value, x_values, y_values
 
 # ファイルのアップロード
 col1, col2, col3 = st.columns([3, 3, 1])
@@ -194,26 +194,15 @@ if sample_f is not None:
 # グラフの作成
 if dataframes:
     with st.spinner("グラフを作成中..."):
-        fig1, z_values1, normalized_z_values1, total_z_value1 = create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
+        fig1, z_values1, normalized_z_values1, total_z_value1 ,x_values1, y_values1= create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
         st.plotly_chart(fig1)
-
-
-    # z_values1 は辞書形式 (x,y) -> z_value なので、DataFrameに変換して表示
-    if z_values1:
-        # 辞書のキー(x,y)を分割してカラムに
-        df_z = pd.DataFrame([
-            {'x': k[0], 'y': k[1], 'z': v} for k, v in z_values1.items()
-        ])
-        st.write("x, y に対する z の値（頻度）")
-        st.dataframe(df_z)
-
 
 # 左側のグラフとダウンローダ
     # CSV出力ボタン
     if st.button("のデータをCSV出力"):
         output_data1 = {
-            'x': x_values,  # xの値を出力
-            'y': y_values,  # yの値を出力
+            'x': x_values1,  # xの値を出力
+            'y': y_values1,  # yの値を出力
             'z': z_values1,  # 元のz値を出力
             'normalized_z': normalized_z_values1  # 無次元化されたz値を出力
         }
@@ -228,15 +217,15 @@ if dataframes:
 
 if dataframes2:
     with st.spinner("別のグラフを作成中..."):
-        fig2, z_values2, normalized_z_values2, total_z_value2 = create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
+        fig2, z_values2, normalized_z_values2, total_z_value2 ,x_values2, y_values2= create_fig(dataframes2, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_bound, y_upper_bound, x_div_num, y_div_num, skiprows)
         st.plotly_chart(fig2)
 
 # 右側のグラフとダウンローダ
     # CSV出力ボタン
     if st.button("データをCSV出力"):
         output_data2 = {
-            'x': x_values,  # xの値を出力
-            'y': y_values,  # yの値を出力
+            'x': x_values2,  # xの値を出力
+            'y': y_values2,  # yの値を出力
             'z': z_values2,  # 元のz値を出力
             'normalized_z': normalized_z_values2  # 無次元化されたz値を出力
         }
