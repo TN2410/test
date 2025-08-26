@@ -199,21 +199,20 @@ if dataframes:
 
 # 左側のグラフとダウンローダ
     # CSV出力ボタン
-    if st.button("のデータをCSV出力"):
-        output_data1 = {
-            'x': x_values1,  # xの値を出力
-            'y': y_values1,  # yの値を出力
-            'z': all_z_values1,
-            'normalized_z': normalized_z_values1  # 無次元化されたz値を出力
-        }
-        output_df1 = pd.DataFrame(output_data1)
-        output_csv1 = output_df1.to_csv(index=False)
-        st.download_button(
-            label=f"{uploaded_files[0].name}のCSVをダウンロード",
-            data=output_csv1,
-            file_name=f"{uploaded_files[0].name}.csv",
-            mime='text/csv'
-        )
+    output_data1 = {
+        'x': x_values1,  # xの値を出力
+        'y': y_values1,  # yの値を出力
+        'z': all_z_values1,
+        'normalized_z': normalized_z_values1  # 無次元化されたz値を出力
+    }
+    output_df1 = pd.DataFrame(output_data1)
+    output_csv1 = output_df1.to_csv(index=False)
+    st.download_button(
+        label=f"{uploaded_files[0].name}他のCSVをダウンロード",
+        data=output_csv1,
+        file_name=f"{uploaded_files[0].name}.csv",
+        mime='text/csv'
+    )
 
 if dataframes2:
     with st.spinner("別のグラフを作成中..."):
@@ -222,22 +221,21 @@ if dataframes2:
 
 # 右側のグラフとダウンローダ
     # CSV出力ボタン
-    if st.button("データをCSV出力"):
-        output_data2 = {
-            'x': x_values2,  # xの値を出力
-            'y': y_values2,  # yの値を出力
-            'z': all_z_values2,
-            'normalized_z': normalized_z_values2  # 無次元化されたz値を出力
-        }
-        output_df2 = pd.DataFrame(output_data2)
-        st.write("ダウンロード")
-        output_csv2 = output_df2.to_csv(index=False)
-        st.download_button(
-            label=f"{uploaded_files2[0].name}のCSVをダウンロード",
-            data=output_csv2,
-            file_name=f"{uploaded_files2[0].name}.csv",
-            mime='text/csv'
-        )
+    output_data2 = {
+        'x': x_values2,  # xの値を出力
+        'y': y_values2,  # yの値を出力
+        'z': all_z_values2,
+        'normalized_z': normalized_z_values2  # 無次元化されたz値を出力
+    }
+    output_df2 = pd.DataFrame(output_data2)
+    st.write("ダウンロード")
+    output_csv2 = output_df2.to_csv(index=False)
+    st.download_button(
+        label=f"{uploaded_files2[0].name}他のCSVをダウンロード",
+        data=output_csv2,
+        file_name=f"{uploaded_files2[0].name}.csv",
+        mime='text/csv'
+    )
 
 # 有意差の検出
 if normalized_z_values1 and normalized_z_values2:  # 無次元化されたz値を使用
