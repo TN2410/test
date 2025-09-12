@@ -128,17 +128,29 @@ def create_fig(dataframes, x_pal, y_pal, x_lower_bound, x_upper_bound, y_lower_b
     fig.update_yaxes(range=[y_lower_bound, y_upper_bound], row=1, col=2)
 
     fig.update_layout(
-        height = 600,
-        width = 1400,
+        height=600,
+        width=1400,
         scene=dict(
-            xaxis=dict(range=[x_lower_bound, x_upper_bound]),
-            yaxis=dict(range=[y_lower_bound, y_upper_bound]),
+            xaxis=dict(
+                range=[x_lower_bound, x_upper_bound],
+                title=x_pal,
+                titlefont=dict(size=24),   # 軸ラベルのフォントサイズ
+                tickfont=dict(size=18)     # 目盛りのフォントサイズ
+            ),
+            yaxis=dict(
+                range=[y_lower_bound, y_upper_bound],
+                title=y_pal,
+                titlefont=dict(size=24),
+                tickfont=dict(size=18)
+            ),
+            zaxis=dict(
+                title='頻度',
+                titlefont=dict(size=24),
+                tickfont=dict(size=18)
+            ),
             camera=dict(
                 eye=dict(x=1, y=-1, z=1)
-            ),
-            xaxis_title=x_pal,
-            yaxis_title=y_pal,
-            zaxis_title='頻度'
+            )
         ),
         xaxis_title=x_pal,
         yaxis_title=y_pal
