@@ -203,6 +203,9 @@ if sample_f is not None:
         x_div_num = st.number_input('x軸分割数', value=20)
         y_div_num = st.number_input('y軸分割数', value=20)
 
+normalized_z_values1 = []
+normalized_z_values2 = []
+
 # グラフの作成
 if dataframes:
     with st.spinner("グラフを作成中..."):
