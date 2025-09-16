@@ -1,12 +1,11 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+import plotly.express as px  # 変更
 import os
 
 st.title("ドラッグ＆ドロップしたファイルのパラメータ抽出＆ヒストグラム")
 
-# 複数ファイルアップロード対応
 uploaded_files = st.file_uploader("ファイルを複数選択してください", accept_multiple_files=True, type=["txt", "csv"])
 
 parameter = st.text_input("抽出するパラメータ名を入力してください", value="SFTP")
@@ -18,7 +17,6 @@ if uploaded_files and parameter:
 
     for uploaded_file in uploaded_files:
         try:
-            # ファイルをpandasで読み込み（utf-8タブ区切り想定、必要に応じて変更）
             df = pd.read_csv(uploaded_file, sep="\t", encoding='utf-8', low_memory=False)
             if parameter in df.columns:
                 max_val = df[parameter].astype(float).max()
@@ -37,7 +35,6 @@ if uploaded_files and parameter:
         st.write(f"最大値: {maxmax} （ファイル: {maxfile}）")
         st.write(f"データ数: {len(alldata)}")
 
-        # ヒストグラムのパラメータもユーザー入力にできます（例）
         min_val = st.number_input("ヒストグラムの最小値", value=0.0, format="%.3f")
         max_val = st.number_input("ヒストグラムの最大値", value=10.0, format="%.3f")
         bins_num = st.number_input("ビンの数（分割数）", min_value=1, max_value=1000, value=10, step=1)
@@ -45,12 +42,14 @@ if uploaded_files and parameter:
         if min_val >= max_val:
             st.error("最小値は最大値より小さく設定してください。")
         else:
-            bins = np.linspace(min_val, max_val, bins_num + 1)
-            fig, ax = plt.subplots(figsize=(9,5))
-            ax.hist(alldata, bins=bins, alpha=0.5, ec='navy')
-            ax.set_xlim(min_val, max_val)
-            ax.set_ylabel("time(sec)")
-            ax.set_title(f"全{len(alldata)/3600:.4g}時間", fontname="Meiryo")
-            st.pyplot(fig)
+            # 範囲内のデータに絞る
+            filtered_data = alldata[(alldata >= min_val) & (alldata <= max_val)]
+
+            fig = px.histogram(filtered_data, nbins=bins_num, range_x=[min_val, max_val],
+                               labels={'value':'値', 'count':'度数'},
+                               title=f"全{len(filtered_data)/3600:.4g}時間")
+
+            st.plotly_chart(fig, use_container_width=True)
+
 else:
     st.info("左上の「ファイルを選択」から複数ファイルをアップロードしてください。")
