@@ -6,7 +6,7 @@ import numpy as np
 from datetime import datetime
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from scipy import stats
+#from scipy import stats
 
 # Streamlitの設定
 st.set_page_config(
@@ -238,22 +238,22 @@ if dataframes2:
     )
 
 # 有意差の検出
-if normalized_z_values1 and normalized_z_values2:  # 無次元化されたz値を使用
-    # 各無次元化z値のリストを作成
-    z_values_1 = normalized_z_values1  # 1つ目の無次元化z値
-    z_values_2 = normalized_z_values2  # 2つ目の無次元化z値
+# if normalized_z_values1 and normalized_z_values2:  # 無次元化されたz値を使用
+#     # 各無次元化z値のリストを作成
+#     z_values_1 = normalized_z_values1  # 1つ目の無次元化z値
+#     z_values_2 = normalized_z_values2  # 2つ目の無次元化z値
 
-    # t検定
-    t_statistic, p_value_t = stats.ttest_ind(z_values_1, z_values_2)
-    st.write(f"t統計量: {t_statistic:.3f}, p値: {p_value_t:.3g}")
-    if p_value_t < 0.05:
-        st.write("有意差あり")
+#     # t検定
+#     t_statistic, p_value_t = stats.ttest_ind(z_values_1, z_values_2)
+#     st.write(f"t統計量: {t_statistic:.3f}, p値: {p_value_t:.3g}")
+#     if p_value_t < 0.05:
+#         st.write("有意差あり")
 
-    # Mann-Whitney U検定
-    u_statistic, p_value_u = stats.mannwhitneyu(z_values_1, z_values_2, alternative='two-sided')
-    st.write(f"U統計量: {u_statistic:.3f}, p値: {p_value_u:.3g}")
-    if p_value_u < 0.05:
-        st.write("有意差あり")
+#     # Mann-Whitney U検定
+#     u_statistic, p_value_u = stats.mannwhitneyu(z_values_1, z_values_2, alternative='two-sided')
+#     st.write(f"U統計量: {u_statistic:.3f}, p値: {p_value_u:.3g}")
+#     if p_value_u < 0.05:
+#         st.write("有意差あり")
 
 
         
