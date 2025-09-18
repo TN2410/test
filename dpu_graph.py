@@ -6,7 +6,7 @@ import numpy as np
 from datetime import datetime
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-#from scipy import stats
+from scipy import stats
 
 # Streamlitの設定
 st.set_page_config(
