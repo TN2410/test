@@ -1,14 +1,7 @@
-import sys
-print(sys.executable)
-print(sys.path)
-import plotly
-print(plotly.__file__)
-
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
+import matplotlib.pyplot as plt
 
 st.title("ドラッグ＆ドロップしたファイルのパラメータ抽出＆ヒストグラム")
 
@@ -48,37 +41,16 @@ if uploaded_files and parameter:
         if min_val >= max_val:
             st.error("最小値は最大値より小さく設定してください。")
         else:
-            # 範囲内のデータに絞る
             filtered_data = alldata[(alldata >= min_val) & (alldata <= max_val)]
 
-            # ビン境界を計算
-            bins = np.linspace(min_val, max_val, bins_num + 1)
-            counts, bin_edges = np.histogram(filtered_data, bins=bins)
+            fig, ax = plt.subplots()
+            ax.hist(filtered_data, bins=bins_num, range=(min_val, max_val), color='navy', alpha=0.6)
+            ax.set_title(f"全{len(filtered_data)/3600:.4g}時間")
+            ax.set_xlabel(parameter)
+            ax.set_ylabel("time(sec)")
+            plt.grid(True)
 
-            fig = make_subplots(rows=1, cols=1)
-
-            fig.add_trace(
-                go.Bar(
-                    x=bin_edges[:-1],
-                    y=counts,
-                    width=(bin_edges[1] - bin_edges[0]),
-                    marker_color='navy',
-                    opacity=0.6,
-                    name='度数'
-                ),
-                row=1, col=1
-            )
-
-            fig.update_layout(
-                title=f"全{len(filtered_data)/3600:.4g}時間",
-                xaxis_title=parameter,
-                yaxis_title="time(sec)",
-                bargap=0.1,
-                template="plotly_white",
-                font=dict(family="Meiryo", size=14)
-            )
-
-            st.plotly_chart(fig, use_container_width=True)
+            st.pyplot(fig)
 
 else:
     st.info("左上の「ファイルを選択」から複数ファイルをアップロードしてください。")
