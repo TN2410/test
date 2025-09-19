@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-st.title("ドラッグ＆ドロップしたファイルのパラメータ抽出＆ヒストグラム")
+st.title("ヒストグラム")
 
 uploaded_files = st.file_uploader("ファイルを複数選択してください", accept_multiple_files=True, type=["txt", "csv"])
 
