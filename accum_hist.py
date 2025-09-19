@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
-st.title("ヒストグラム")
+st.title("ドラッグ＆ドロップしたファイルのパラメータ抽出＆ヒストグラム")
 
 uploaded_files = st.file_uploader("ファイルを複数選択してください", accept_multiple_files=True, type=["txt", "csv"])
 
@@ -16,14 +16,18 @@ if uploaded_files and parameter:
 
     for uploaded_file in uploaded_files:
         try:
+        # 文字コードやsepは必要に応じて変更してください
             df = pd.read_csv(uploaded_file, sep="\t", encoding='utf-8', low_memory=False)
             if parameter in df.columns:
-                max_val = df[parameter].astype(float).max()
+                # 文字列を数値に変換。変換不可はNaNに
+                df_param = pd.to_numeric(df[parameter], errors='coerce')
+                max_val = df_param.max()
                 if maxmax is None or max_val > maxmax:
                     maxmax = max_val
                     maxfile = uploaded_file.name
-                df_param = df[parameter].astype(float)
                 df_all = pd.concat([df_all, df_param], axis=0)
+            else:
+                st.warning(f"{uploaded_file.name} に列 {parameter} がありません。")
         except Exception as e:
             st.warning(f"{uploaded_file.name} の読み込みでエラー: {e}")
 
@@ -43,14 +47,14 @@ if uploaded_files and parameter:
         else:
             filtered_data = alldata[(alldata >= min_val) & (alldata <= max_val)]
 
-            # fig, ax = plt.subplots()
-            # ax.hist(filtered_data, bins=bins_num, range=(min_val, max_val), color='navy', alpha=0.6)
-            # ax.set_title(f"全{len(filtered_data)/3600:.4g}時間")
-            # ax.set_xlabel(parameter)
-            # ax.set_ylabel("time(sec)")
-            # plt.grid(True)
+            fig, ax = plt.subplots()
+            ax.hist(filtered_data, bins=bins_num, range=(min_val, max_val), color='navy', alpha=0.6)
+            ax.set_title(f"全{len(filtered_data)/3600:.4g}時間")
+            ax.set_xlabel(parameter)
+            ax.set_ylabel("time(sec)")
+            plt.grid(True)
 
-            # st.pyplot(fig)
+            st.pyplot(fig)
 
 else:
     st.info("左上の「ファイルを選択」から複数ファイルをアップロードしてください。")
