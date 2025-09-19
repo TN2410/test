@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 st.title("ドラッグ＆ドロップしたファイルのパラメータ抽出＆ヒストグラム")
 
@@ -47,14 +47,14 @@ if uploaded_files and parameter:
         else:
             filtered_data = alldata[(alldata >= min_val) & (alldata <= max_val)]
 
-            fig, ax = plt.subplots()
-            ax.hist(filtered_data, bins=bins_num, range=(min_val, max_val), color='navy', alpha=0.6)
-            ax.set_title(f"全{len(filtered_data)/3600:.4g}時間")
-            ax.set_xlabel(parameter)
-            ax.set_ylabel("time(sec)")
-            plt.grid(True)
+            # fig, ax = plt.subplots()
+            # ax.hist(filtered_data, bins=bins_num, range=(min_val, max_val), color='navy', alpha=0.6)
+            # ax.set_title(f"全{len(filtered_data)/3600:.4g}時間")
+            # ax.set_xlabel(parameter)
+            # ax.set_ylabel("time(sec)")
+            # plt.grid(True)
 
-            st.pyplot(fig)
+            # st.pyplot(fig)
 
 else:
     st.info("左上の「ファイルを選択」から複数ファイルをアップロードしてください。")
