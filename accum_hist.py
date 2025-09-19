@@ -1,7 +1,18 @@
+import sys
+print(sys.executable)
+print(sys.path)
+import plotly
+print(plotly.__file__)
+
+# 必要なライブラリのインポート
+import os
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly
+from datetime import datetime
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+from scipy import stats
 
 st.title("ドラッグ＆ドロップしたファイルのパラメータ抽出＆ヒストグラム")
 
