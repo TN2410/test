@@ -15,17 +15,15 @@ def detect_file_type(file) -> str:
     except Exception as e:
         return 'unknown'
 
-st.title("データ用ファイル内容で判定しパラメータ選択")
+st.title("複数データファイルの自動判定＆累積パラメータ抽出")
 
-# データ用ファイル（判定対象）アップロード
-data_file = st.file_uploader("データ用ファイルをアップロードしてください", type=["txt", "csv"])
+# 複数のデータ用ファイルアップロード
+data_files = st.file_uploader("複数のデータファイルをアップロードしてください", type=["txt","csv"], accept_multiple_files=True)
 
 # パラメータCSVアップロード
 param_csv_file = st.file_uploader("パラメータCSVファイルをアップロードしてください", type=["csv"])
 
-if data_file and param_csv_file:
-    file_type = detect_file_type(data_file)
-
+if data_files and param_csv_file:
     try:
         param_df = pd.read_csv(param_csv_file, header=None)
     except Exception as e:
@@ -33,8 +31,19 @@ if data_file and param_csv_file:
         param_df = None
 
     if param_df is not None:
+        # すべてのアップロードファイルについて判定し、判定結果を収集
+        file_types = []
+        for f in data_files:
+            ft = detect_file_type(f)
+            file_types.append(ft)
+
+        # すべてのファイルの判定が同一であることを期待する場合はチェック
+        if len(set(file_types)) > 1:
+            st.warning("アップロードされたファイルで判定結果が異なります。処理は最初のファイルの判定を使用します。")
+        file_type = file_types[0]
+
         if file_type == 'windarab':
-            col_idx = 1  # 2列目（0始まり）
+            col_idx = 1  # 2列目
         elif file_type == 'dpu':
             col_idx = 4  # 5列目
         else:
@@ -42,15 +51,65 @@ if data_file and param_csv_file:
             col_idx = None
 
         if col_idx is not None:
-            # 2行目以降のパラメータ文字列を取得
             param_list = param_df.iloc[1:, col_idx].dropna().astype(str).tolist()
             parameter = st.selectbox("抽出するパラメータを選択してください", param_list)
 
-            # ここ以降は選択したパラメータを使った処理を記述
-            st.write(f"判定ファイルタイプ: {file_type}")
-            st.write(f"選択パラメータ: {parameter}")
+            if parameter:
+                # 全ファイルの該当列データを累積
+                all_data = pd.Series(dtype=float)
+                max_val_overall = None
+                max_file_overall = None
 
-            # 例：累積データCSVアップロード・ヒストグラム表示などを続ける
+                for f in data_files:
+                    try:
+                        df = pd.read_csv(f, sep="\t", encoding='utf-8', header=None, low_memory=False)
+                        if col_idx >= len(df.columns):
+                            st.warning(f"{f.name} は期待した列数がありません。")
+                            continue
+                        col_data = df.iloc[:, col_idx]
+                        numeric_data = pd.to_numeric(col_data, errors='coerce').dropna()
+                        if numeric_data.empty:
+                            st.warning(f"{f.name} の指定列に有効なデータがありません。")
+                            continue
+                        max_val = numeric_data.max()
+                        if max_val_overall is None or max_val > max_val_overall:
+                            max_val_overall = max_val
+                            max_file_overall = f.name
+                        all_data = pd.concat([all_data, numeric_data], ignore_index=True)
+                    except Exception as e:
+                        st.warning(f"{f.name} の読み込みエラー: {e}")
 
+                if all_data.empty:
+                    st.warning("有効なデータがありません。")
+                else:
+                    st.write(f"最大値: {max_val_overall} （ファイル: {max_file_overall}）")
+                    st.write(f"データ数: {len(all_data)}")
+
+                    min_val = st.number_input("ヒストグラムの最小値", value=0.0, format="%.3f")
+                    max_val = st.number_input("ヒストグラムの最大値", value=10.0, format="%.3f")
+                    bins_num = st.number_input("ビンの数（分割数）", min_value=1, max_value=1000, value=10, step=1)
+
+                    if min_val >= max_val:
+                        st.error("最小値は最大値より小さく設定してください。")
+                    else:
+                        filtered_data = all_data[(all_data >= min_val) & (all_data <= max_val)]
+
+                        fig = go.Figure(
+                            data=[go.Histogram(
+                                x=filtered_data,
+                                nbinsx=bins_num,
+                                xbins=dict(start=min_val, end=max_val),
+                                marker_color='navy',
+                                opacity=0.6
+                            )]
+                        )
+                        fig.update_layout(
+                            title=f"全{len(filtered_data)/3600:.4g}時間",
+                            xaxis_title=parameter,
+                            yaxis_title="time(sec)",
+                            bargap=0.1,
+                            template="simple_white"
+                        )
+                        st.plotly_chart(fig, use_container_width=True)
 else:
-    st.info("データ用ファイルとパラメータCSVファイルの両方をアップロードしてください。")
+    st.info("データファイル複数とパラメータCSVファイルをアップロードしてください。")
