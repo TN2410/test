@@ -46,4 +46,4 @@ if param_df is not None:
                 xbins=dict(start=min_val, end=max_val),
                 marker_color='navy',
                 opacity=0.6
-            )]
+            )])
