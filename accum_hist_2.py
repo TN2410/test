@@ -94,9 +94,9 @@ if data_files and param_csv_file:
                     if min_val >= max_val:
                         st.error("最小値は最大値より小さく設定してください。")
                     else:
-                        filtered_data = all_data[(all_data >= min_val) & (all_data <= max_val)]
+                        filtered_data = all_data[(all_data >= par_min_val) & (all_data <= par_max_val)]
 
-                        bin_size = (max_val - min_val) / bins_num
+                        bin_size = (par_max_val - par_min_val) / bins_num
 
                         fig = go.Figure(
                             data=[go.Histogram(
