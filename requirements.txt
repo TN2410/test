@@ -1,3 +1,6 @@
+#repuirement20250922
+#python3.11　を使用するため。
+#ローカルは3.12　
 plotly-express==0.4.1
 numpy==1.24.3
 plotly==6.3.0
