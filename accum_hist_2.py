@@ -78,6 +78,7 @@ if data_files and param_csv_file:
                             max_file_overall = f.name
                         # ここで累積
                         all_data = pd.concat([all_data, numeric_data], ignore_index=True)
+                        st.write(len(all_data))
                     except Exception as e:
                         st.warning(f"{f.name} の読み込みエラー: {e}")
 
