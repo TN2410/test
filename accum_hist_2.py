@@ -96,22 +96,24 @@ if data_files and param_csv_file:
                     else:
                         filtered_data = all_data[(all_data >= min_val) & (all_data <= max_val)]
 
+                        bin_size = (max_val - min_val) / bins_num
+
                         fig = go.Figure(
                             data=[go.Histogram(
                                 x=filtered_data,
-                                nbinsx=bins_num,
-                                xbins=dict(start=min_val, end=max_val),
+                                xbins=dict(start=min_val, end=max_val, size=bin_size),
                                 marker_color='navy',
                                 opacity=0.6
                             )]
                         )
+
                         fig.update_layout(
                             title=f"全{len(filtered_data)/3600:.4g}時間",
                             xaxis_title=parameter,
                             yaxis_title="time(sec)",
                             bargap=0.1,
                             template="simple_white"
-                        )
-                        st.plotly_chart(fig, use_container_width=True)
+                        )                       
+
 else:
     st.info("データファイル複数とパラメータCSVファイルをアップロードしてください。")
