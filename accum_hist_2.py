@@ -25,7 +25,7 @@ param_csv_file = st.file_uploader("パラメータCSVファイルをアップロ
 
 if data_files and param_csv_file:
     try:
-        param_df = pd.read_csv(param_csv_file, header=None,encoding="CP932")
+        param_df = pd.read_csv(param_csv_file, header=None, encoding="CP932")
     except Exception as e:
         st.error(f"パラメータCSVの読み込みエラー: {e}")
         param_df = None
@@ -37,13 +37,13 @@ if data_files and param_csv_file:
             ft = detect_file_type(f)
             file_types.append(ft)
 
-        # すべてのファイルの判定が同一であることを期待する場合はチェック
+        # 判定結果が異なる場合は最初のファイルのタイプを使う（警告表示）
         if len(set(file_types)) > 1:
             st.warning("アップロードされたファイルで判定結果が異なります。処理は最初のファイルの判定を使用します。")
         file_type = file_types[0]
 
         if file_type == 'windarab':
-            col_idx = 2  # 2列目
+            col_idx = 2  # 2列目（0始まりのインデックス）
         elif file_type == 'dpu':
             col_idx = 5  # 5列目
         else:
@@ -51,12 +51,13 @@ if data_files and param_csv_file:
             col_idx = None
 
         if col_idx is not None:
-            param_list = param_df.iloc[:, col_idx].dropna().astype(str).tolist()
+            # パラメータリストを該当列の2行目以降から取得（1行目はインデックス0）
+            param_list = param_df.iloc[1:, col_idx].dropna().astype(str).tolist()
             parameter = st.selectbox("抽出するパラメータを選択してください", param_list)
 
             if parameter:
                 # 全ファイルの該当列データを累積
-                all_data = pd.Series(dtype=float)
+                all_data = pd.Series(dtype=float)  # ループ外で初期化
                 max_val_overall = None
                 max_file_overall = None
 
@@ -75,6 +76,7 @@ if data_files and param_csv_file:
                         if max_val_overall is None or max_val > max_val_overall:
                             max_val_overall = max_val
                             max_file_overall = f.name
+                        # ここで累積
                         all_data = pd.concat([all_data, numeric_data], ignore_index=True)
                     except Exception as e:
                         st.warning(f"{f.name} の読み込みエラー: {e}")
