@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
-from potly.subplots import make_subplots
+from pｌotly.subplots import make_subplots
 from scipy import stats
 
 st.title("ドラッグ＆ドロップしたファイルのパラメータ抽出＆ヒストグラム")
