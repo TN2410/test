@@ -91,7 +91,7 @@ if data_files and param_csv_file:
                     par_max_val = st.number_input("ヒストグラムの最大値", value=1000.0, format="%.3f")
                     bins_num = st.number_input("ビンの数（分割数）", min_value=10, max_value=20, value=10, step=1)
 
-                    if min_val >= max_val:
+                    if par_min_val >= par_max_val:
                         st.error("最小値は最大値より小さく設定してください。")
                     else:
                         filtered_data = all_data[(all_data >= par_min_val) & (all_data <= par_max_val)]
