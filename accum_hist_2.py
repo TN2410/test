@@ -43,9 +43,9 @@ if data_files and param_csv_file:
         file_type = file_types[0]
 
         if file_type == 'windarab':
-            col_idx = 1  # 2列目
+            col_idx = 2  # 2列目
         elif file_type == 'dpu':
-            col_idx = 4  # 5列目
+            col_idx = 5  # 5列目
         else:
             st.error("ファイルタイプ判定できません。")
             col_idx = None
