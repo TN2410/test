@@ -78,7 +78,6 @@ if data_files and param_csv_file:
                             max_file_overall = f.name
                         # ここで累積
                         all_data = pd.concat([all_data, numeric_data], ignore_index=True)
-                        st.write(len(all_data))
                     except Exception as e:
                         st.warning(f"{f.name} の読み込みエラー: {e}")
 
@@ -89,8 +88,8 @@ if data_files and param_csv_file:
                     st.write(f"データ数: {len(all_data)}")
 
                     min_val = st.number_input("ヒストグラムの最小値", value=0.0, format="%.3f")
-                    max_val = st.number_input("ヒストグラムの最大値", value=10.0, format="%.3f")
-                    bins_num = st.number_input("ビンの数（分割数）", min_value=1, max_value=1000, value=10, step=1)
+                    max_val = st.number_input("ヒストグラムの最大値", value=1000.0, format="%.3f")
+                    bins_num = st.number_input("ビンの数（分割数）", min_value=10, max_value=20, value=10, step=1)
 
                     if min_val >= max_val:
                         st.error("最小値は最大値より小さく設定してください。")
