@@ -82,7 +82,6 @@ if data_files and param_csv_file:
                 if all_data.empty:
                     st.warning("有効なデータがありません。")
                 else:
-                    st.write(all_data)
                     st.write(f"最大値: {all_data.max()}")
                     st.write(f"データ数: {len(all_data)}")
 
