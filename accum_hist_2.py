@@ -113,7 +113,9 @@ if data_files and param_csv_file:
                             yaxis_title="time(sec)",
                             bargap=0.1,
                             template="simple_white"
-                        )                       
+                        )
+                        st.plotly_chart(fig, use_container_width=True)
+                       
 
 else:
     st.info("データファイル複数とパラメータCSVファイルをアップロードしてください。")
