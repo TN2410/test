@@ -84,6 +84,7 @@ if data_files and param_csv_file:
                 if all_data.empty:
                     st.warning("有効なデータがありません。")
                 else:
+                    st.write(all_data)
                     st.write(f"最大値: {max_val_overall} （ファイル: {max_file_overall}）")
                     st.write(f"データ数: {len(all_data)}")
 
@@ -101,7 +102,7 @@ if data_files and param_csv_file:
                         fig = go.Figure(
                             data=[go.Histogram(
                                 x=filtered_data,
-                                xbins=dict(start=par_min_val, end=par_max_val, size=10),
+                                xbins=dict(start=par_min_val, end=par_max_val, size=bin_size),
                                 marker_color='navy',
                                 opacity=0.6
                             )]
