@@ -2,7 +2,7 @@ import os
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly_graphobjects as go
+import plotly.graph_objects as go
 from potly.subplots import make_subplots
 from scipy import stats
 
