@@ -101,7 +101,7 @@ if data_files and param_csv_file:
                         fig = go.Figure(
                             data=[go.Histogram(
                                 x=filtered_data,
-                                xbins=dict(start=par_min_val, end=par_max_val, size=bin_size),
+                                xbins=dict(start=par_min_val, end=par_max_val, size=10),
                                 marker_color='navy',
                                 opacity=0.6
                             )]
