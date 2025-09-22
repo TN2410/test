@@ -56,28 +56,26 @@ if data_files and param_csv_file:
             parameter = st.selectbox("抽出するパラメータを選択してください", param_list)
 
             if parameter:
-                # 全ファイルの該当列データを累積
-                all_data = pd.Series(dtype=float)  # ループ外で初期化
-                max_val_overall = None
-                max_file_overall = None
+                all_data = pd.Series(dtype=float)  # 累積用
 
                 for f in data_files:
                     try:
-                        df = pd.read_csv(f, sep="\t", encoding='utf-8', header=None, low_memory=False)
-                        if col_idx >= len(df.columns):
-                            st.warning(f"{f.name} は期待した列数がありません。")
+                        # 1行目をヘッダーとして読み込む
+                        df = pd.read_csv(f, sep="\t", encoding='utf-8', header=0, low_memory=False)
+                        
+                        if parameter not in df.columns:
+                            st.warning(f"{f.name} にパラメータ '{parameter}' の列がありません。")
                             continue
-                        col_data = df.iloc[:, col_idx]
-                        numeric_data = pd.to_numeric(col_data, errors='coerce').dropna()
-                        if numeric_data.empty:
-                            st.warning(f"{f.name} の指定列に有効なデータがありません。")
+                        
+                        # 該当列の数値データを取得
+                        col_data = pd.to_numeric(df[parameter], errors='coerce').dropna()
+                        
+                        if col_data.empty:
+                            st.warning(f"{f.name} のパラメータ '{parameter}' に有効なデータがありません。")
                             continue
-                        max_val = numeric_data.max()
-                        if max_val_overall is None or max_val > max_val_overall:
-                            max_val_overall = max_val
-                            max_file_overall = f.name
-                        # ここで累積
-                        all_data = pd.concat([all_data, numeric_data], ignore_index=True)
+
+                        all_data = pd.concat([all_data, col_data], ignore_index=True)
+
                     except Exception as e:
                         st.warning(f"{f.name} の読み込みエラー: {e}")
 
@@ -85,7 +83,7 @@ if data_files and param_csv_file:
                     st.warning("有効なデータがありません。")
                 else:
                     st.write(all_data)
-                    st.write(f"最大値: {max_val_overall} （ファイル: {max_file_overall}）")
+                    st.write(f"最大値: {all_data.max()}")
                     st.write(f"データ数: {len(all_data)}")
 
                     par_min_val = st.number_input("ヒストグラムの最小値", value=0.0, format="%.3f")
