@@ -25,7 +25,7 @@ param_csv_file = st.file_uploader("パラメータCSVファイルをアップロ
 
 if data_files and param_csv_file:
     try:
-        param_df = pd.read_csv(param_csv_file, header=None)
+        param_df = pd.read_csv(param_csv_file, header=None,encoding="CP932")
     except Exception as e:
         st.error(f"パラメータCSVの読み込みエラー: {e}")
         param_df = None
@@ -51,7 +51,7 @@ if data_files and param_csv_file:
             col_idx = None
 
         if col_idx is not None:
-            param_list = param_df.iloc[1:, col_idx].dropna().astype(str).tolist()
+            param_list = param_df.iloc[:, col_idx].dropna().astype(str).tolist()
             parameter = st.selectbox("抽出するパラメータを選択してください", param_list)
 
             if parameter:
