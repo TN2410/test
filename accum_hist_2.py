@@ -44,8 +44,10 @@ if data_files and param_csv_file:
 
         if file_type == 'windarab':
             col_idx = 2  # 2列目（0始まりのインデックス）
+            skiprow = 5
         elif file_type == 'dpu':
             col_idx = 5  # 5列目
+            skiprow = 0
         else:
             st.error("ファイルタイプ判定できません。")
             col_idx = None
@@ -61,7 +63,7 @@ if data_files and param_csv_file:
                 for f in data_files:
                     try:
                         # 1行目をヘッダーとして読み込む
-                        df = pd.read_csv(f, sep="\t", encoding='utf-8', header=0, low_memory=False)
+                        df = pd.read_csv(f, sep="\t", encoding='utf-8', skiprows=skiprow,header=0, low_memory=False)
                         
                         if parameter not in df.columns:
                             st.warning(f"{f.name} にパラメータ '{parameter}' の列がありません。")
