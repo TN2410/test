@@ -15,7 +15,7 @@ def detect_file_type(file) -> str:
     except Exception as e:
         return 'unknown'
 
-st.title("複数データファイルの自動判定＆累積パラメータ抽出")
+st.title("各種パラメータヒストグラム")
 
 # 複数のデータ用ファイルアップロード
 data_files = st.file_uploader("複数のデータファイルをアップロードしてください", type=["txt","csv"], accept_multiple_files=True)
