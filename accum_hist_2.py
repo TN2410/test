@@ -64,7 +64,10 @@ if data_files and param_csv_file:
                     try:
                         # 1行目をヘッダーとして読み込む
                         df = pd.read_csv(f, sep="\t", encoding='utf-8', skiprows=skiprow,header=0, low_memory=False)
-                        
+
+                        if file_type == "windarab":
+                            df.columns = [text.split('[')[0].strip() for text in df.columns]
+
                         if parameter not in df.columns:
                             st.warning(f"{f.name} にパラメータ '{parameter}' の列がありません。")
                             continue
