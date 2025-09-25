@@ -2,7 +2,8 @@
 #python3.11　を使用するため。
 #ローカルは3.12　
 plotly-express==0.4.1
-numpy==1.24.3
+numpy>=1.26.0
+#numpy==1.24.3 より変更
 plotly==6.3.0
 matplotlib<=3.10.1
 japanize_matplotlib==1.1.3
