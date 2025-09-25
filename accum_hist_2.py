@@ -93,6 +93,7 @@ if data_files and param_csv_file:
                     par_min_val = st.number_input("ヒストグラムの最小値", value=0.0, format="%.3f")
                     par_max_val = st.number_input("ヒストグラムの最大値", value=1000.0, format="%.3f")
                     bins_num = st.number_input("ビンの数（分割数）", min_value=10, max_value=50, value=20, step=5)
+                    bins_num = int(bins_num)  # 明示的に整数化
 
                     if par_min_val >= par_max_val:
                         st.error("最小値は最大値より小さく設定してください。")
@@ -111,7 +112,7 @@ if data_files and param_csv_file:
                         )
 
                         fig.update_layout(
-                            title=f"全{len(filtered_data)/3600:.4g}時間",
+                            title=f"全{len(filtered_data)/3600:.4g}時間- ビン数: {bins_num}",
                             xaxis_title=parameter,
                             yaxis_title="time(sec)",
                             bargap=0.1,
