@@ -53,7 +53,17 @@ if data_files and param_csv_file:
             parameters = st.multiselect("抽出するパラメータを選択してください（複数選択可）", param_list)
 
             if parameters:
-                all_data = pd.DataFrame(dtype=float)  # 複数パラメータのデータ格納用
+                st.markdown("### 各パラメータの範囲を設定してください（積算対象の絞り込みに使用）")
+                param_ranges = {}
+                for p in parameters:
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        min_val = st.number_input(f"{p} の最小値", value=0.0, key=f"{p}_min", format="%.3f")
+                    with col2:
+                        max_val = st.number_input(f"{p} の最大値", value=1000.0, key=f"{p}_max", format="%.3f")
+                    param_ranges[p] = (min_val, max_val)
+
+                all_data = pd.DataFrame(dtype=float)
 
                 for f in data_files:
                     try:
@@ -70,10 +80,17 @@ if data_files and param_csv_file:
                         temp_df = pd.DataFrame()
                         for p in parameters:
                             temp_df[p] = pd.to_numeric(df[p], errors='coerce')
-                        temp_df = temp_df.dropna()
+
+                        # 範囲フィルタリング（すべてのパラメータが指定範囲内の行を抽出）
+                        cond = pd.Series(True, index=temp_df.index)
+                        for p in parameters:
+                            min_v, max_v = param_ranges[p]
+                            cond &= (temp_df[p] >= min_v) & (temp_df[p] <= max_v)
+
+                        temp_df = temp_df[cond].dropna()
 
                         if temp_df.empty:
-                            st.warning(f"{f.name} に有効なデータがありません。")
+                            st.warning(f"{f.name} に有効なデータがありません（範囲指定後）。")
                             continue
 
                         all_data = pd.concat([all_data, temp_df], ignore_index=True)
@@ -84,9 +101,9 @@ if data_files and param_csv_file:
                 if all_data.empty:
                     st.warning("有効なデータがありません。")
                 else:
-                    par_min_val = st.number_input("ヒストグラムの最小値", value=0.0, format="%.3f")
-                    par_max_val = st.number_input("ヒストグラムの最大値", value=1000.0, format="%.3f")
-                    bins_num = st.number_input("ビンの数（分割数）", min_value=10, max_value=50, value=20, step=5)
+                    par_min_val = st.number_input("ヒストグラムの最小値", value=0.0, format="%.3f", key="hist_min")
+                    par_max_val = st.number_input("ヒストグラムの最大値", value=1000.0, format="%.3f", key="hist_max")
+                    bins_num = st.number_input("ビンの数（分割数）", min_value=10, max_value=50, value=20, step=5, key="hist_bins")
                     bins_num = int(bins_num)
 
                     if par_min_val >= par_max_val:
