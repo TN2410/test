@@ -18,10 +18,17 @@ def detect_file_type(file) -> str:
 st.title("各種パラメータヒストグラム")
 
 # 複数のデータ用ファイルアップロード
-data_files = st.file_uploader("複数のデータファイルをアップロードしてください", type=["txt","csv"], accept_multiple_files=True)
+data_files = st.file_uploader(
+    "複数のデータファイルをアップロードしてください",
+    type=["txt","csv"],
+    accept_multiple_files=True
+)
 
 # パラメータCSVアップロード
-param_csv_file = st.file_uploader("パラメータCSVファイルをアップロードしてください", type=["csv"])
+param_csv_file = st.file_uploader(
+    "パラメータCSVファイルをアップロードしてください",
+    type=["csv"]
+)
 
 if data_files and param_csv_file:
     try:
@@ -49,121 +56,124 @@ if data_files and param_csv_file:
             col_idx = None
 
         if col_idx is not None:
+            # パラメータリストを取得（文字列化）
             param_list = param_df.iloc[1:, col_idx].dropna().astype(str).tolist()
-            parameters = st.multiselect("抽出するパラメータを選択してください（複数選択可）", param_list)
 
-            if parameters:
-                st.markdown("### 各パラメータの範囲を設定してください（積算対象の絞り込みに使用）")
-                param_ranges = {}
-                for p in parameters:
-                    col1, col2 = st.columns(2)
-                    with col1:
-                        min_val = st.number_input(f"{p} の最小値", value=0.0, key=f"{p}_min", format="%.3f")
-                    with col2:
-                        max_val = st.number_input(f"{p} の最大値", value=1000.0, key=f"{p}_max", format="%.3f")
-                    param_ranges[p] = (min_val, max_val)
+            # メインパラメータAの選択（1つだけ選択）
+            main_param = st.selectbox("ヒストグラムを作成するメインパラメータを1つ選択してください", param_list, index=0)
 
-                all_data = pd.DataFrame(dtype=float)
+            # フィルタ用パラメータBの選択（「なし」も選べる）
+            filter_param = st.selectbox("条件フィルタ用のパラメータを1つ選択してください（なし可）", ["なし"] + param_list, index=0)
 
-                for f in data_files:
-                    try:
-                        df = pd.read_csv(f, sep="\t", encoding='utf-8', skiprows=skiprow, header=0, low_memory=False)
+            st.markdown("### 各パラメータの範囲を設定してください（積算対象の絞り込みに使用）")
 
-                        if file_type == "windarab":
-                            df.columns = [text.split('[')[0].strip() for text in df.columns]
+            param_ranges = {}
 
-                        missing_params = [p for p in parameters if p not in df.columns]
-                        if missing_params:
-                            st.warning(f"{f.name} にパラメータ {missing_params} の列がありません。")
-                            continue
+            # メインパラメータAの範囲入力
+            col1, col2 = st.columns(2)
+            with col1:
+                main_min = st.number_input(f"{main_param} の最小値", value=0.0, key=f"{main_param}_min", format="%.3f")
+            with col2:
+                main_max = st.number_input(f"{main_param} の最大値", value=1000.0, key=f"{main_param}_max", format="%.3f")
+            param_ranges[main_param] = (main_min, main_max)
 
-                        temp_df = pd.DataFrame()
-                        for p in parameters:
-                            temp_df[p] = pd.to_numeric(df[p], errors='coerce')
+            # フィルタパラメータBの範囲入力（選択されていれば）
+            if filter_param != "なし":
+                col1, col2 = st.columns(2)
+                with col1:
+                    filter_min = st.number_input(f"{filter_param} の最小値", value=0.0, key=f"{filter_param}_min", format="%.3f")
+                with col2:
+                    filter_max = st.number_input(f"{filter_param} の最大値", value=1000.0, key=f"{filter_param}_max", format="%.3f")
+                param_ranges[filter_param] = (filter_min, filter_max)
 
-                        # 範囲フィルタリング（すべてのパラメータが指定範囲内の行を抽出）
-                        cond = pd.Series(True, index=temp_df.index)
-                        for p in parameters:
-                            min_v, max_v = param_ranges[p]
-                            cond &= (temp_df[p] >= min_v) & (temp_df[p] <= max_v)
+            all_data = pd.DataFrame(dtype=float)
 
-                        temp_df = temp_df[cond].dropna()
+            # 各ファイルからデータ読み込み・抽出
+            for f in data_files:
+                try:
+                    df = pd.read_csv(f, sep="\t", encoding='utf-8', skiprows=skiprow, header=0, low_memory=False)
 
-                        if temp_df.empty:
-                            st.warning(f"{f.name} に有効なデータがありません（範囲指定後）。")
-                            continue
+                    if file_type == "windarab":
+                        df.columns = [text.split('[')[0].strip() for text in df.columns]
 
-                        all_data = pd.concat([all_data, temp_df], ignore_index=True)
+                    # 必要な列があるかチェック
+                    required_columns = [main_param]
+                    if filter_param != "なし":
+                        required_columns.append(filter_param)
 
-                    except Exception as e:
-                        st.warning(f"{f.name} の読み込みエラー: {e}")
+                    missing_params = [p for p in required_columns if p not in df.columns]
+                    if missing_params:
+                        st.warning(f"{f.name} にパラメータ {missing_params} の列がありません。")
+                        continue
 
-                if all_data.empty:
-                    st.warning("有効なデータがありません。")
+                    temp_df = pd.DataFrame()
+                    for p in required_columns:
+                        temp_df[p] = pd.to_numeric(df[p], errors='coerce')
+
+                    # 範囲フィルタリング（すべてのパラメータが指定範囲内の行を抽出）
+                    cond = pd.Series(True, index=temp_df.index)
+                    for p in required_columns:
+                        min_v, max_v = param_ranges[p]
+                        cond &= (temp_df[p] >= min_v) & (temp_df[p] <= max_v)
+
+                    temp_df = temp_df[cond].dropna()
+
+                    if temp_df.empty:
+                        st.warning(f"{f.name} に有効なデータがありません（範囲指定後）。")
+                        continue
+
+                    all_data = pd.concat([all_data, temp_df], ignore_index=True)
+
+                except Exception as e:
+                    st.warning(f"{f.name} の読み込みエラー: {e}")
+
+            if all_data.empty:
+                st.warning("有効なデータがありません。")
+            else:
+                bins_num = st.number_input("ビンの数（分割数）", min_value=10, max_value=50, value=20, step=5, key="hist_bins")
+
+                if main_min >= main_max:
+                    st.error("最小値は最大値より小さく設定してください。")
                 else:
-                    par_min_val = st.number_input("ヒストグラムの最小値", value=0.0, format="%.3f", key="hist_min")
-                    par_max_val = st.number_input("ヒストグラムの最大値", value=1000.0, format="%.3f", key="hist_max")
-                    bins_num = st.number_input("ビンの数（分割数）", min_value=10, max_value=50, value=20, step=5, key="hist_bins")
-                    bins_num = int(bins_num)
+                    # 表示切替用のsession_state初期化
+                    if "show_filtered" not in st.session_state:
+                        st.session_state.show_filtered = False
 
-                    if par_min_val >= par_max_val:
-                        st.error("最小値は最大値より小さく設定してください。")
+                    # ボタンで切替
+                    if st.button(f"表示切替（現在: {'Bの条件に一致するデータ' if st.session_state.show_filtered and filter_param != 'なし' else '全データ'}）"):
+                        st.session_state.show_filtered = not st.session_state.show_filtered
+
+                    # 表示用データ決定
+                    if st.session_state.show_filtered and filter_param != "なし":
+                        # Bの条件に一致するデータのAのヒストグラム
+                        display_data = all_data[main_param].dropna()
+                        # ただしmain_paramの範囲は常に適用済み
+                        st.write(f"フィルタ条件に合致するデータ数: {len(display_data)}")
                     else:
-                        if len(parameters) == 1:
-                            # 単一パラメータのヒストグラム
-                            param = parameters[0]
-                            filtered_data = all_data[param][(all_data[param] >= par_min_val) & (all_data[param] <= par_max_val)]
+                        # 全データのAのヒストグラム（Aの範囲フィルタは常に適用済み）
+                        display_data = all_data[main_param].dropna()
+                        st.write(f"全データ数: {len(display_data)}")
 
-                            st.write(f"最大値: {filtered_data.max()}")
-                            st.write(f"データ数: {len(filtered_data)}")
-
-                            bin_size = (par_max_val - par_min_val) / bins_num
-
-                            fig = go.Figure(
-                                data=[go.Histogram(
-                                    x=filtered_data,
-                                    xbins=dict(start=par_min_val, end=par_max_val, size=bin_size),
-                                    marker_color='navy',
-                                    opacity=0.6
-                                )]
-                            )
-
-                            fig.update_layout(
-                                title=f"{param} のヒストグラム - 全{len(filtered_data)/3600:.4g}時間 - ビン数: {bins_num}",
-                                xaxis_title=param,
-                                yaxis_title="time(sec)",
-                                bargap=0.1,
-                                template="simple_white"
-                            )
-                            st.plotly_chart(fig, use_container_width=True)
-
-                        else:
-                            # 複数パラメータの積のヒストグラム
-                            product_series = all_data.prod(axis=1)
-                            filtered_data = product_series[(product_series >= par_min_val) & (product_series <= par_max_val)]
-
-                            st.write(f"最大値: {filtered_data.max()}")
-                            st.write(f"データ数: {len(filtered_data)}")
-
-                            bin_size = (par_max_val - par_min_val) / bins_num
-
-                            fig = go.Figure(
-                                data=[go.Histogram(
-                                    x=filtered_data,
-                                    xbins=dict(start=par_min_val, end=par_max_val, size=bin_size),
-                                    marker_color='navy',
-                                    opacity=0.6
-                                )]
-                            )
-
-                            fig.update_layout(
-                                title=f"パラメータ積 ({' × '.join(parameters)}) のヒストグラム - 全{len(filtered_data)/3600:.4g}時間 - ビン数: {bins_num}",
-                                xaxis_title="積の値",
-                                yaxis_title="time(sec)",
-                                bargap=0.1,
-                                template="simple_white"
-                            )
-                            st.plotly_chart(fig, use_container_width=True)
+                    if len(display_data) == 0:
+                        st.warning("表示対象のデータがありません。")
+                    else:
+                        bin_size = (main_max - main_min) / bins_num
+                        fig = go.Figure(
+                            data=[go.Histogram(
+                                x=display_data,
+                                xbins=dict(start=main_min, end=main_max, size=bin_size),
+                                marker_color='navy',
+                                opacity=0.6
+                            )]
+                        )
+                        fig.update_layout(
+                            title=f"{main_param} のヒストグラム - ビン数: {bins_num}",
+                            xaxis_title=main_param,
+                            yaxis_title="time(sec)",
+                            bargap=0.1,
+                            template="simple_white"
+                        )
+                        st.plotly_chart(fig, use_container_width=True)
 
 else:
     st.info("データファイル複数とパラメータCSVファイルをアップロードしてください。")
