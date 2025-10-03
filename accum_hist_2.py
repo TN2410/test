@@ -143,14 +143,18 @@ if data_files and param_csv_file:
                     if st.button(f"表示切替（現在: {'Bの条件に一致するデータ' if st.session_state.show_filtered and filter_param != 'なし' else '全データ'}）"):
                         st.session_state.show_filtered = not st.session_state.show_filtered
 
-                    # 表示用データ決定
                     if st.session_state.show_filtered and filter_param != "なし":
-                        # Bの条件に一致するデータのAのヒストグラム
-                        display_data = all_data[main_param].dropna()
+                        # フィルタ条件に一致するデータのAのヒストグラム
                         # ただしmain_paramの範囲は常に適用済み
-                        st.write(f"フィルタ条件に合致するデータ数: {len(display_data)}")
+                        filtered_cond = (
+                            (all_data[filter_param] >= param_ranges[filter_param][0]) &
+                            (all_data[filter_param] <= param_ranges[filter_param][1])
+                        )
+                        filtered_data = all_data.loc[filtered_cond, main_param].dropna()
+                        st.write(f"フィルタ条件に合致するデータ数: {len(filtered_data)}")
+                        display_data = filtered_data
                     else:
-                        # 全データのAのヒストグラム（Aの範囲フィルタは常に適用済み）
+                        # 全データのAのヒストグラム
                         display_data = all_data[main_param].dropna()
                         st.write(f"全データ数: {len(display_data)}")
 
