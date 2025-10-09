@@ -158,7 +158,7 @@ def main():
             return
 
         # サンプリング周波数計算
-        fs = 1 / np.mean(np.diff(time))
+        fs = 1 / np.mean(np.diff(time)) * 1000
         st.write(f"サンプリング周波数: {fs:.2f} Hz")
 
         # STFTパラメータ調整UI
