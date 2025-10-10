@@ -255,7 +255,13 @@ def main():
         if not signal_cols:
             st.warning("解析したい信号列を少なくとも1つ選択してください")
             return
-
+        
+        height_input = st.number_input(
+            "ピーク検出の高さの閾値 (height) を入力してください（未指定は0）",
+            min_value=0.0,
+            value=0.0,
+            step=0.01
+        )
         for col in signal_cols:
             st.subheader(f"信号列: {col}")
             signal = df[col].values
@@ -268,6 +274,7 @@ def main():
             st.pyplot(fig_spec)
 
             # ピークホールド検出ボタン
+
             if st.button(f"{col} のピークホールド検出実行", key=col):
                 height = None if height_input == 0 else height_input
                 fig_peaks, peak_times = peak_hold_detection(
