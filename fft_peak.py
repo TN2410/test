@@ -4,6 +4,7 @@ import numpy as np
 from scipy.signal import stft, find_peaks
 import matplotlib.pyplot as plt
 import io
+import re
 
 def try_parse_header(file, max_check_lines=10):
     """
