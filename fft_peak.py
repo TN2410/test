@@ -165,6 +165,38 @@ def parse_time_column(series):
 
     return np.array(time_values)
 
+def detect_time_unit_scale(time_series):
+    """
+    時間軸の単位を判別し、秒単位に対するスケールファクターを返す。
+    例）'msec'なら1000、'μsec'や'us'なら1_000_000など。
+
+    time_series: pandas.Series など文字列含む列
+    """
+    # 代表的な単位をまとめる
+    unit_patterns = {
+        's': 1,
+        'sec': 1,
+        'msec': 1e-3,
+        'ms': 1e-3,
+        'usec': 1e-6,
+        'us': 1e-6,
+        'μsec': 1e-6,
+        'ns': 1e-9,
+        'nsec': 1e-9,
+    }
+
+    pattern = re.compile(r"[a-zA-Zμ]+")  # 単位部分を抽出
+
+    # サンプルとして先頭数行から単位を抽出
+    for val in time_series.astype(str).head(10):
+        m = pattern.search(val)
+        if m:
+            unit = m.group(0).lower()
+            if unit in unit_patterns:
+                return unit_patterns[unit]
+    # 単位不明なら秒とみなす
+    return 1
+
 def main():
     st.title("FFTスペクトログラム＆ピークホールド検出（ヘッダー＆列自動検出対応）")
 
@@ -213,18 +245,26 @@ def main():
         time_col = st.selectbox("時間軸の列を選択してください", options=df.columns, index=df.columns.get_loc(time_col_auto) if time_col_auto in df.columns else 0)
         raw_time_series = df[time_col]
 
-        # ここで単位付き・単位なし対応のパース関数を使う
-        time = parse_time_column(raw_time_series)
+        # 1. 時間軸の単位判定用スケール取得
+        scale = detect_time_unit_scale(raw_time_series)
 
-        # nanがある場合は適宜処理（ここでは除去例）
+        # 2. 時間軸の値を秒単位に変換する関数（parse_time_column等）で取得
+        time = parse_time_column(raw_time_series)  # 秒単位で返す想定
+
+        # 3. スケールを掛けて秒に統一（parse_time_columnで秒になってるなら不要）
+        # もしparse_time_columnで単位考慮済なら、このステップは不要
+        # 逆にparse_time_columnが単位考慮していなければここで掛ける
+
+        time = time * scale
+
+        # 4. nan除去など適宜実施
+
         valid_idx = ~np.isnan(time)
         time = time[valid_idx]
 
-        # 時間軸に対応する信号データも同様に抽出
-        # 信号列は後のmultiselectで選択されるため、その時にvalid_idxを使って信号も絞る処理を追加すると良い
+        # 5. 周波数計算（秒単位に統一されているのでそのまま計算可能）
 
-        # サンプリング周波数計算
-        fs = 1 / np.mean(np.diff(time)) 
+        fs = 1 / np.mean(np.diff(time))
         st.write(f"サンプリング周波数: {fs:.2f} Hz")
 
         # STFTパラメータ調整UI
