@@ -269,7 +269,10 @@ def main():
 
             # ピークホールド検出ボタン
             if st.button(f"{col} のピークホールド検出実行", key=col):
-                fig_peaks, peak_times = peak_hold_detection(f, t, np.abs(Zxx), target_freq, freq_tolerance)
+                height = None if height_input == 0 else height_input
+                fig_peaks, peak_times = peak_hold_detection(
+                    f, t, np.abs(Zxx), target_freq, freq_tolerance, height=height
+                )
                 if fig_peaks is not None:
                     st.pyplot(fig_peaks)
                     st.write(f"{col} の検出したピークタイミング（秒）:")
