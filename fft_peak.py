@@ -173,7 +173,7 @@ def main():
             signal = df[col].values
 
             # STFT計算
-            f, t, Zxx = stft(signal, fs=fs, nperseg=nperseg, noverlap=noverlap)
+            f, t, Zxx = stft(signal, fs=fs, window = "hann" ,nperseg=nperseg, noverlap=noverlap)
 
             # スペクトログラム表示
             fig_spec = plot_spectrogram(f, t, Zxx)
