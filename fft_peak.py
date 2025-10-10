@@ -235,14 +235,22 @@ def main():
         freq_tolerance = st.number_input("周波数許容範囲 (±Hz)", min_value=0.1, max_value=10.0, value=1.0, step=0.1)
         
         # 時間軸列を選択済みとして
-        time_col = st.selectbox("時間軸の列を選択してください", options=df.columns, index=0)
-
+        time_col = st.selectbox(
+            "時間軸の列を選択してください",
+            options=df.columns,
+            index=df.columns.get_loc(time_col_auto) if time_col_auto in df.columns else 0,
+            key="time_col_selectbox"  # ユニークなキーを付与
+        )
         # 信号列候補を定義（時間軸列以外の数値型列）
         signal_candidates = [col for col in df.columns if col != time_col and pd.api.types.is_numeric_dtype(df[col])]
 
         st.write(f"信号列候補: {signal_candidates}")
 
-        signal_cols = st.multiselect("解析したい信号列を選択してください (複数可)", options=signal_candidates)
+        signal_cols = st.multiselect(
+            "解析したい信号列を選択してください (複数可)",
+            options=signal_candidates,
+            key="signal_cols_multiselect"
+        )        
         
         if not signal_cols:
             st.warning("解析したい信号列を少なくとも1つ選択してください")
