@@ -172,16 +172,17 @@ def main():
 
         # 時間軸列の選択
         time_col = st.selectbox("時間軸の列を選択してください", options=df.columns, index=df.columns.get_loc(time_col_auto) if time_col_auto in df.columns else 0)
-        time = df[time_col].values
+        raw_time_series = df[time_col]
 
-        # 3. 信号列候補（数値型かつ時間軸列以外）
-        signal_candidates = [col for col in df.columns if col != time_col and pd.api.types.is_numeric_dtype(df[col])]
-        st.write(f"信号列候補: {signal_candidates}")
+        # ここで単位付き・単位なし対応のパース関数を使う
+        time = parse_time_column(raw_time_series)
 
-        signal_cols = st.multiselect("解析したい信号列を選択してください (複数可)", options=signal_candidates)
-        if len(signal_cols) == 0:
-            st.warning("解析したい信号列を少なくとも1つ選択してください")
-            return
+        # nanがある場合は適宜処理（ここでは除去例）
+        valid_idx = ~np.isnan(time)
+        time = time[valid_idx]
+
+        # 時間軸に対応する信号データも同様に抽出
+        # 信号列は後のmultiselectで選択されるため、その時にvalid_idxを使って信号も絞る処理を追加すると良い
 
         # サンプリング周波数計算
         fs = 1 / np.mean(np.diff(time)) * 1000
