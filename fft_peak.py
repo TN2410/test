@@ -233,6 +233,12 @@ def main():
 
         target_freq = st.number_input("ピークホールド検出したい周波数をHzで入力してください", min_value=0.0, max_value=fs/2, value=50.0, step=0.1)
         freq_tolerance = st.number_input("周波数許容範囲 (±Hz)", min_value=0.1, max_value=10.0, value=1.0, step=0.1)
+        
+        signal_cols = st.multiselect("解析したい信号列を選択してください (複数可)", options=signal_candidates)
+        
+        if not signal_cols:
+            st.warning("解析したい信号列を少なくとも1つ選択してください")
+            return
 
         for col in signal_cols:
             st.subheader(f"信号列: {col}")
