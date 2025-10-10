@@ -234,6 +234,14 @@ def main():
         target_freq = st.number_input("ピークホールド検出したい周波数をHzで入力してください", min_value=0.0, max_value=fs/2, value=50.0, step=0.1)
         freq_tolerance = st.number_input("周波数許容範囲 (±Hz)", min_value=0.1, max_value=10.0, value=1.0, step=0.1)
         
+        # 時間軸列を選択済みとして
+        time_col = st.selectbox("時間軸の列を選択してください", options=df.columns, index=0)
+
+        # 信号列候補を定義（時間軸列以外の数値型列）
+        signal_candidates = [col for col in df.columns if col != time_col and pd.api.types.is_numeric_dtype(df[col])]
+
+        st.write(f"信号列候補: {signal_candidates}")
+
         signal_cols = st.multiselect("解析したい信号列を選択してください (複数可)", options=signal_candidates)
         
         if not signal_cols:
