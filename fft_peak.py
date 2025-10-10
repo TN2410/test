@@ -186,6 +186,24 @@ def main():
                     st.pyplot(fig_peaks)
                     st.write(f"{col} の検出したピークタイミング（秒）:")
                     st.write(peak_times)
+            
+            # 信号全体のFFT計算
+            N = len(signal)
+            # FFT実行
+            fft_vals = np.fft.rfft(signal)
+            # 周波数軸生成
+            freqs = np.fft.rfftfreq(N, d=1/fs)
+            # 振幅スペクトル（正規化）
+            amplitude = np.abs(fft_vals) / N * 2  # 両側スペクトルの片側なので2倍。ただし直流成分は2倍しない等の調整も可能。
+
+            # 振幅スペクトルプロット
+            fig_fft, ax_fft = plt.subplots(figsize=(10, 4))
+            ax_fft.plot(freqs, amplitude)
+            ax_fft.set_xlabel('Frequency [Hz]')
+            ax_fft.set_ylabel('Amplitude')
+            ax_fft.set_title(f'FFT振幅スペクトル: {col}')
+            ax_fft.set_xlim(0, fs/2)
+            st.pyplot(fig_fft)
 
 if __name__ == "__main__":
     main()
