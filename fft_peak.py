@@ -224,7 +224,7 @@ def main():
         # 信号列は後のmultiselectで選択されるため、その時にvalid_idxを使って信号も絞る処理を追加すると良い
 
         # サンプリング周波数計算
-        fs = 1 / np.mean(np.diff(time)) * 1000
+        fs = 1 / np.mean(np.diff(time)) 
         st.write(f"サンプリング周波数: {fs:.2f} Hz")
 
         # STFTパラメータ調整UI
@@ -251,7 +251,7 @@ def main():
             options=signal_candidates,
             key="signal_cols_multiselect"
         )        
-        
+
         if not signal_cols:
             st.warning("解析したい信号列を少なくとも1つ選択してください")
             return
