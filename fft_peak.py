@@ -126,6 +126,44 @@ def peak_hold_detection(frequencies, times, spectrogram, target_freq, freq_toler
     ax.legend()
     return fig, peak_times
 
+def parse_time_column(series):
+    """
+    時間軸の文字列シリーズを受け取り、
+    単位付き（例：'0.05msec', '10ms', '0.1 s'）または単位なし数値文字列を
+    秒単位のfloat配列に変換して返す関数。
+    """
+    time_values = []
+    pattern = re.compile(r"^\s*([-+]?[0-9]*[.,]?[0-9]+(?:[eE][-+]?[0-9]+)?)\s*([a-zA-Z]*)\s*$")
+
+    for v in series.astype(str):
+        m = pattern.match(v)
+        if m:
+            val_str = m.group(1).replace(',', '.')  # カンマをドットに置換
+            try:
+                val = float(val_str)
+            except:
+                time_values.append(np.nan)
+                continue
+
+            unit = m.group(2).lower()
+
+            if unit in ['', 's', 'sec', 'second', 'seconds']:
+                factor = 1.0
+            elif unit in ['ms', 'msec', 'millisecond', 'milliseconds']:
+                factor = 1e-3
+            elif unit in ['us', 'usec', 'microsecond', 'microseconds']:
+                factor = 1e-6
+            elif unit in ['ns', 'nanosecond', 'nanoseconds']:
+                factor = 1e-9
+            else:
+                factor = 1.0  # 不明な単位は無変換
+
+            time_values.append(val * factor)
+        else:
+            time_values.append(np.nan)
+
+    return np.array(time_values)
+
 def main():
     st.title("FFTスペクトログラム＆ピークホールド検出（ヘッダー＆列自動検出対応）")
 
